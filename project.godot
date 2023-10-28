@@ -14,9 +14,18 @@ config/name="KingsDuty"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/always_on_top=true
+
 [dotnet]
 
 project/assembly_name="KingsDuty"
+
+[editor]
+
+naming/node_name_num_separator=2
+naming/scene_name_casing=1
 
 [rendering]
 
