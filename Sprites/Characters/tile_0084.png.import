@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqeavqu4pbuox"
-path.s3tc="res://.godot/imported/tile000.png-0d86c329a5e914479ac19cb666259035.s3tc.ctex"
+uid="uid://c13ouktx4lg5x"
+path.s3tc="res://.godot/imported/tile_0084.png-24c7240c0d9b773a0a020abcd7b0cf2a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Sprites/Props/Nature/tile000.png"
-dest_files=["res://.godot/imported/tile000.png-0d86c329a5e914479ac19cb666259035.s3tc.ctex"]
+source_file="res://Sprites/Characters/tile_0084.png"
+dest_files=["res://.godot/imported/tile_0084.png-24c7240c0d9b773a0a020abcd7b0cf2a.s3tc.ctex"]
 
 [params]
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvo7p7xm2wssd"]
+
+[ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="1_ijnap"]
+[ext_resource type="Texture2D" uid="uid://bsococoq13ajh" path="res://Sprites/GroundSprites/grass8.png" id="2_kts25"]
+
+[node name="WorldTile" instance=ExtResource("1_ijnap")]
+texture = ExtResource("2_kts25")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4ykj6khikqpf"]
+
+[ext_resource type="PackedScene" uid="uid://d1gr211yr1vqv" path="res://Subscenes/Nature/Tree.tscn" id="1_keilh"]
+
+[node name="Tree" instance=ExtResource("1_keilh")]
+region_rect = Rect2(64, 0, 64, 128)
+
+[node name="Tree_back" parent="." index="0"]
+region_rect = Rect2(64, 0, 64, 128)

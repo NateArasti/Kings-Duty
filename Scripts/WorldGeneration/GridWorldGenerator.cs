@@ -11,7 +11,7 @@ public partial class GridWorldGenerator : Node3D
 	[Export] private Vector2 m_YGridDirection = new Vector2(1, 1);
 	
 	[ExportGroup("World Filling")]
-	[Export] private PackedScene m_Tree;
+	[Export] private PackedScene[] m_Trees;
 	[Export] private float m_TreeSpawnMinDistance = 5;
 	
 	[ExportGroup("World Generation")]
@@ -68,7 +68,8 @@ public partial class GridWorldGenerator : Node3D
 	
 	private void SpawnTree(Vector2 position)
 	{
-		var instance = m_Tree.Instantiate() as Node3D;
+		var tree = m_Trees[GD.RandRange(0, m_Trees.Length - 1)];
+		var instance = tree.Instantiate() as Node3D;
 		instance.Position = new Vector3(position.Y, 0, position.X);
 		AddChild(instance);
 	}

@@ -14,9 +14,14 @@ config/name="KingsDuty"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+
 [display]
 
 window/size/always_on_top=true
+window/vsync/vsync_mode=0
 
 [dotnet]
 
@@ -26,6 +31,10 @@ project/assembly_name="KingsDuty"
 
 naming/node_name_num_separator=2
 naming/scene_name_casing=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg")
 
 [rendering]
 
