@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwpxrxrso4gxp"]
+
+[ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_rwyfw"]
+[ext_resource type="PackedScene" uid="uid://euso46anedrw" path="res://Subscenes/GroundTile.tscn" id="2_p0rit"]
+[ext_resource type="PackedScene" uid="uid://comabtpwoepss" path="res://Subscenes/RoadTile.tscn" id="3_oiu2s"]
+[ext_resource type="PackedScene" uid="uid://c4qub3mhymosk" path="res://Subscenes/Tree.tscn" id="4_bgi6d"]
+
+[node name="WorldGeneration" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.492424, -0.870356, 0, 0.870356, 0.492424, 1, 2.15245e-08, -3.80445e-08, -3.855, 3.155, 4.785)
+projection = 1
+size = 5.255
+near = 0.001
+far = 100.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.258819, 0.429485, -0.865191, 0, 0.895712, 0.444635, 0.965926, -0.11508, 0.231827, 0, 0, 0)
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.245, 0.52, 0.5)
+visible = false
+light_cull_mask = 4294967293
+shadow_enabled = true
+
+[node name="Ground" type="Node3D" parent="."]
+script = ExtResource("1_rwyfw")
+m_GroundTile = ExtResource("2_p0rit")
+m_RoadTile = ExtResource("3_oiu2s")
+m_StepValue = Vector2(0.5, 0.385)
+m_Tree = ExtResource("4_bgi6d")
+m_TreeSpawnMinDistance = 0.5
+m_GridSize = Vector2(10, 10)
+m_CellSize = 0.5
+m_MinDistance = 3.0

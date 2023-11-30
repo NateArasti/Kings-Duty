@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4qub3mhymosk"]
+
+[ext_resource type="Texture2D" uid="uid://c6f1m7v32561r" path="res://Sprites/Props/Nature/survival.png" id="1_irnpr"]
+
+[node name="Tree" type="Node3D"]
+
+[node name="Tree" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+pixel_size = 0.0125
+billboard = 1
+shaded = true
+alpha_cut = 2
+texture_filter = 4
+render_priority = 1
+texture = ExtResource("1_irnpr")
+region_enabled = true
+region_rect = Rect2(0, 120, 56, 72)
