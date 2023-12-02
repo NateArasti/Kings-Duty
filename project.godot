@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="KingsDuty"
-config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
+run/main_scene="res://Scenes/Main//StartUp.tscn"
+config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -34,7 +35,7 @@ naming/scene_name_casing=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg")
+enabled=PackedStringArray()
 
 [rendering]
 
