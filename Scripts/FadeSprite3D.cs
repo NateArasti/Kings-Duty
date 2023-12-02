@@ -27,7 +27,7 @@ public partial class FadeSprite3D : Sprite3D
 
 	public override void _Process(double delta)
 	{
-		var screenPosition = m_Camera.UnprojectPosition(Position);
+		var screenPosition = m_Camera.UnprojectPosition(GlobalPosition);
 		var targetFadeValue = 0f;
 		if((screenPosition.X - 0.5f * m_ScreenSize.X).InRange(m_FadeCenterRangeX.X, m_FadeCenterRangeX.Y) && 
 			(screenPosition.Y - 0.5f * m_ScreenSize.Y).InRange(m_FadeCenterRangeY.X, m_FadeCenterRangeY.Y))

@@ -22,7 +22,11 @@ public class WorldGenerator
 	public float MinDistance { get; }
 	public float RemoveEdgeChance { get; }
 	
-	private CellType[] m_CurrentChunk;
+	private readonly CellType[] m_ChunkArrayBuffer;
+	private readonly List<Vector2I> m_EdgeCellsBuffer = new();
+	private readonly List<Vector2I> m_RoadCellsBuffer = new();
+	private readonly List<Vector2I> m_PointOfInterestCellsBuffer = new();
+	private readonly List<Vector2I> m_GroundCellsBuffer = new();
 	
 	public WorldGenerator(Vector2 chunkSize, float cellSize, float minDIstance, float removeEdgeChance = 0.25f)
 	{
@@ -32,38 +36,17 @@ public class WorldGenerator
 		MinDistance = minDIstance;
 		RemoveEdgeChance = removeEdgeChance;
 		
-		m_CurrentChunk = new CellType[Width * Height];
+		m_ChunkArrayBuffer = new CellType[Width * Height];
 		ChunkSize = new Vector2(Width, Height) * CellSize;
 	}
 	
-	public CellType[,] GenerateChunk(
+	public Chunk GenerateChunk(
 		IReadOnlyList<Vector2> leftBorderStartPositions = null,
 		IReadOnlyList<Vector2> topBorderStartPositions = null,
 		IReadOnlyList<Vector2> rightBorderStartPositions = null,
 		IReadOnlyList<Vector2> bottomBorderStartPositions = null)
 	{
-		var chunk = GenerateChunkNonAllocation(leftBorderStartPositions, topBorderStartPositions, rightBorderStartPositions, bottomBorderStartPositions);
-		return ConvertOneDimensionChunk(chunk);
-	}
-	
-	private CellType[,] ConvertOneDimensionChunk(CellType[] chunk)
-	{
-		var newChunk = new CellType[Width, Height];
-		for (var i = 0; i < chunk.Length; ++i)
-		{
-			var newChunkIndex = Utility.Get2DIndex(i, Width);
-			newChunk[newChunkIndex.X, newChunkIndex.Y] = chunk[i];
-		}
-		return newChunk;
-	}
-	
-	public CellType[] GenerateChunkNonAllocation(
-		IReadOnlyList<Vector2> leftBorderStartPositions = null,
-		IReadOnlyList<Vector2> topBorderStartPositions = null,
-		IReadOnlyList<Vector2> rightBorderStartPositions = null,
-		IReadOnlyList<Vector2> bottomBorderStartPositions = null)
-	{
-		ClearChunkArray();
+		ClearChunkBuffers();
 
 		var startPositions = GetStartPositions(leftBorderStartPositions, topBorderStartPositions, rightBorderStartPositions, bottomBorderStartPositions);
 		var borderPointsCount = startPositions.Count;
@@ -82,22 +65,36 @@ public class WorldGenerator
 			{
 				var chunkPosition = Utility.GetGridPosition(point, Vector2.Zero, CellSize);
 				chunkPosition = chunkPosition.Clamp(Vector2I.Zero, new Vector2I(Width - 1, Height - 1));
-				m_CurrentChunk[Utility.GetFlatIndex(chunkPosition.X, chunkPosition.Y, Width)] = CellType.Road;
+				var index = Utility.GetFlatIndex(chunkPosition.X, chunkPosition.Y, Width);
+				m_ChunkArrayBuffer[index] = CellType.Road;
+				m_RoadCellsBuffer.Add(chunkPosition);
 			}
 		}
-		for (var i = 0; i < startPositions.Count; ++i)
+		for (var i = 0; i < sampledPositions.Count; ++i)
 		{
-			var chunkPosition = Utility.GetGridPosition(startPositions[i], Vector2.Zero, CellSize);
+			var chunkPosition = Utility.GetGridPosition(sampledPositions[i], Vector2.Zero, CellSize);
 			chunkPosition = chunkPosition.Clamp(Vector2I.Zero, new Vector2I(Width - 1, Height - 1));
-			m_CurrentChunk[Utility.GetFlatIndex(chunkPosition.X, chunkPosition.Y, Width)] = CellType.PointOfInterest;
+			var index = Utility.GetFlatIndex(chunkPosition.X, chunkPosition.Y, Width);
+			m_ChunkArrayBuffer[index] = CellType.PointOfInterest;
+			m_PointOfInterestCellsBuffer.Add(chunkPosition);
+			if (i < borderPointsCount)
+				m_EdgeCellsBuffer.Add(chunkPosition);
 		}
-		for (var i = 0; i < m_CurrentChunk.Length; ++i)
+		for (var i = 0; i < m_ChunkArrayBuffer.Length; ++i)
 		{
-			if(m_CurrentChunk[i] == CellType.Empty)
-				m_CurrentChunk[i] = CellType.Ground;
+			if(m_ChunkArrayBuffer[i] == CellType.Empty)
+			{
+				m_ChunkArrayBuffer[i] = CellType.Ground;
+				var chunkPosition = Utility.Get2DIndex(i, Width);
+				m_GroundCellsBuffer.Add(chunkPosition);
+			}
 		}
 		
-		return m_CurrentChunk;
+		return new(
+			(CellType[])m_ChunkArrayBuffer.Clone(),
+			m_EdgeCellsBuffer.ToArray(),
+			m_PointOfInterestCellsBuffer.ToArray()
+		);
 	}
 
 	private List<Vector2> GetStartPositions(IReadOnlyList<Vector2> leftBorderStartPositions, IReadOnlyList<Vector2> topBorderStartPositions, IReadOnlyList<Vector2> rightBorderStartPositions, IReadOnlyList<Vector2> bottomBorderStartPositions)
@@ -139,11 +136,15 @@ public class WorldGenerator
 		return startPositions;
 	}
 
-	private void ClearChunkArray()
+	private void ClearChunkBuffers()
 	{
-		for (var i = 0; i < m_CurrentChunk.Length; ++i)
+		m_EdgeCellsBuffer.Clear();
+		m_RoadCellsBuffer.Clear();
+		m_GroundCellsBuffer.Clear();
+		m_PointOfInterestCellsBuffer.Clear();
+		for (var i = 0; i < m_ChunkArrayBuffer.Length; ++i)
 		{
-			m_CurrentChunk[i] = CellType.Empty;
+			m_ChunkArrayBuffer[i] = CellType.Empty;
 		}
 	}
 	
@@ -313,6 +314,24 @@ public class WorldGenerator
 		if (point.Y > ChunkSize.Y)
 		{
 			point.Y = 2 * ChunkSize.Y - point.Y;
+		}
+	}
+	
+	public readonly struct Chunk
+	{
+		public IReadOnlyList<CellType> ChunkCells { get; }
+		public IReadOnlyList<Vector2I> EdgeCells { get; }
+		public IReadOnlyList<Vector2I> PointOfInterestCells { get; }
+
+		public Chunk(
+			IReadOnlyList<CellType> chunkCells,
+			IReadOnlyList<Vector2I> edgeCells,
+			IReadOnlyList<Vector2I> pointOfInterestCells
+			)
+		{
+			ChunkCells = chunkCells;
+			EdgeCells = edgeCells;
+			PointOfInterestCells = pointOfInterestCells;
 		}
 	}
 }
