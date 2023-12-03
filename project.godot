@@ -40,3 +40,4 @@ enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/im
 [rendering]
 
 renderer/rendering_method.mobile="gl_compatibility"
+global_illumination/gi/use_half_resolution=true

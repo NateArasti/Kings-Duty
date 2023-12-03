@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4ykj6khikqpf"]
+[gd_scene load_steps=2 format=3 uid="uid://c6malhx7jpr7i"]
 
-[ext_resource type="PackedScene" uid="uid://d1gr211yr1vqv" path="res://Subscenes/Nature/Tree.tscn" id="1_keilh"]
+[ext_resource type="PackedScene" uid="uid://c6segf580silg" path="res://Subscenes/Nature/Tree.tscn" id="1_rrqgs"]
 
-[node name="Tree" instance=ExtResource("1_keilh")]
+[node name="Node3DBillboard" instance=ExtResource("1_rrqgs")]
+
+[node name="Tree" parent="." index="0"]
 region_rect = Rect2(64, 0, 64, 128)
 
-[node name="Tree_back" parent="." index="0"]
+[node name="Tree_back" parent="Tree" index="0"]
 region_rect = Rect2(64, 0, 64, 128)
