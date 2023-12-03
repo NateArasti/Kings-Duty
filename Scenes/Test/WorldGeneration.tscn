@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=14 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_rwyfw"]
 [ext_resource type="PackedScene" uid="uid://bvo7p7xm2wssd" path="res://Subscenes/WorldTiles/GrassTile.tscn" id="2_rla0k"]
 [ext_resource type="PackedScene" uid="uid://bb8wwyjam2y0h" path="res://Subscenes/WorldTiles/DirtTile.tscn" id="3_ff17n"]
-[ext_resource type="PackedScene" uid="uid://c6segf580silg" path="res://Subscenes/Nature/Tree.tscn" id="4_1q2wf"]
-[ext_resource type="PackedScene" uid="uid://c6malhx7jpr7i" path="res://Subscenes/Nature/Tree_NoLeaves.tscn" id="5_6js43"]
+[ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Nature/Tree.tscn" id="4_1q2wf"]
+[ext_resource type="PackedScene" uid="uid://4hsu2a3elj56" path="res://Subscenes/Nature/Tree_NoLeaves.tscn" id="5_6js43"]
+[ext_resource type="PackedScene" uid="uid://cw3o1krgjpyvd" path="res://Subscenes/Character.tscn" id="6_7sokw"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerMovementController.cs" id="6_jc258"]
+[ext_resource type="Texture2D" uid="uid://dopxsd4baj45c" path="res://Sprites/Torch.png" id="8_btr36"]
 
 [sub_resource type="Environment" id="Environment_ihtsx"]
 reflected_light_source = 1
@@ -18,36 +21,59 @@ volumetric_fog_emission_energy = 0.75
 volumetric_fog_length = 10.0
 adjustment_saturation = 0.5
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lwwl5"]
+height = 0.212176
+radius = 0.0603973
+
+[sub_resource type="Animation" id="Animation_wbbaf"]
+resource_name = "Idle"
+loop_mode = 2
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 1, 1, 1.05, 1.05, 1.05)
+
+[sub_resource type="Animation" id="Animation_3xuku"]
+resource_name = "Walk"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.25, 1, 0.05, 0.05, 0, 0.5, 1, 0, 0, 0, 0.75, 1, -0.05, 0.05, 0, 1, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Character/Sprite3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0, 0, -0.087, 0.996, 0.5, 1, 0, 0, 0, 1, 0.75, 1, 0, 0, 0.087, 0.996, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tingm"]
+_data = {
+"Idle": SubResource("Animation_wbbaf"),
+"Walk": SubResource("Animation_3xuku")
+}
+
 [node name="WorldGeneration" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ihtsx")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0.707107, -0.707107, 0, 0.707107, 0.707107, 1, 3.09086e-08, -3.09086e-08, -15, 15, 0)
-projection = 1
-size = 5.0
-near = 0.001
-far = 239.5
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.258819, 0.722318, -0.641303, 0, 0.663926, 0.747798, 0.965926, -0.193544, 0.171837, 0, 0, 0)
 visible = false
-light_energy = 0.0
 shadow_enabled = true
 shadow_bias = 0.5
 shadow_opacity = 0.6
 shadow_blur = 0.1
 sky_mode = 1
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85, 0.5, -0.57)
-light_color = Color(0.878431, 0.47451, 0.129412, 1)
-light_energy = 1.5
-shadow_enabled = true
-shadow_opacity = 0.5
-omni_range = 30.0
-omni_attenuation = 1.5
 
 [node name="Ground" type="Node3D" parent="."]
 script = ExtResource("1_rwyfw")
@@ -59,3 +85,51 @@ m_TreeSpawnMinDistance = 0.75
 m_GridSize = Vector2(10, 10)
 m_CellSize = 0.5
 m_MinDistance = 3.0
+
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("m_VisualsPivot", "m_AnimationPlayer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.095, 0)
+script = ExtResource("6_jc258")
+m_MoveSpeed = 1.25
+m_VisualsPivot = NodePath("Character")
+m_AnimationPlayer = NodePath("AnimationPlayer")
+
+[node name="Character" parent="Player" instance=ExtResource("6_7sokw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Sprite3D" parent="Player/Character" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="Torch" type="Sprite3D" parent="Player/Character/Sprite3D" index="0"]
+transform = Transform3D(0.956305, 0.292372, 0, -0.292372, 0.956305, 0, 0, 0, 1, 0.136, -0.045, 0.001)
+shaded = true
+alpha_cut = 2
+texture_filter = 4
+texture = ExtResource("8_btr36")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Player/Character/Sprite3D/Torch"]
+transform = Transform3D(0.956304, -0.292372, 0, 0.292372, 0.956304, 0, 3.55271e-15, 0, 1, -0.0153373, 0.0570067, 0.037)
+light_color = Color(0.878431, 0.47451, 0.129412, 1)
+light_size = 0.1
+light_specular = 1.0
+light_bake_mode = 0
+shadow_enabled = true
+shadow_reverse_cull_face = true
+shadow_opacity = 0.5
+omni_range = 10.0
+omni_attenuation = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.13222e-05, 0.0519584, 0.0011484)
+shape = SubResource("CylinderShape3D_lwwl5")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(-4.37114e-08, 0.707107, -0.707107, 0, 0.707107, 0.707107, 1, 3.09086e-08, -3.09086e-08, -15, 15, 0)
+projection = 1
+size = 5.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_tingm")
+}
+
+[editable path="Player/Character"]

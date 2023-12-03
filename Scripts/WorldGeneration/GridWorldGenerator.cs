@@ -34,6 +34,7 @@ public partial class GridWorldGenerator : Node3D
 	public override void _Ready()
 	{
 		m_WorldGenerator = new WorldGenerator(m_GridSize, m_CellSize, m_MinDistance);
+		Generate();
 	}
 
 	public override void _Input(InputEvent @event)

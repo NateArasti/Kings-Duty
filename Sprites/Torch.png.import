@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c13ouktx4lg5x"
-path.s3tc="res://.godot/imported/tile_0084.png-24c7240c0d9b773a0a020abcd7b0cf2a.s3tc.ctex"
+uid="uid://dopxsd4baj45c"
+path.s3tc="res://.godot/imported/Torch.png-1c09d1bdebd6a1b0e48eecb32419387a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Sprites/Characters/tile_0084.png"
-dest_files=["res://.godot/imported/tile_0084.png-24c7240c0d9b773a0a020abcd7b0cf2a.s3tc.ctex"]
+source_file="res://Sprites/Torch.png"
+dest_files=["res://.godot/imported/Torch.png-1c09d1bdebd6a1b0e48eecb32419387a.s3tc.ctex"]
 
 [params]
 

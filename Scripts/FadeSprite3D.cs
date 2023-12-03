@@ -4,8 +4,8 @@ public partial class FadeSprite3D : Sprite3D
 {
 	[Export] private float m_FadeSpeed = 5f;
 	[Export] private float m_FadeTargetTransparency = 0.9f;
-	[Export(PropertyHint.Range, "-1000, 1000")] private Vector2 m_FadeCenterRangeX = new Vector2(-300, 300);
-	[Export(PropertyHint.Range, "-1000, 1000")] private Vector2 m_FadeCenterRangeY = new Vector2(50, 200);
+	[Export(PropertyHint.Range, "-1, 1")] private Vector2 m_FadeCenterRangeX = new Vector2(-0.3f, 0.3f);
+	[Export(PropertyHint.Range, "-1, 1")] private Vector2 m_FadeCenterRangeY = new Vector2(0, 0.5f);
 
 	private Viewport m_Viewport;
 	private Camera3D m_Camera;
@@ -27,10 +27,10 @@ public partial class FadeSprite3D : Sprite3D
 
 	public override void _Process(double delta)
 	{
-		var screenPosition = m_Camera.UnprojectPosition(GlobalPosition);
+		var screenPosition = m_Camera.UnprojectPosition(GlobalPosition) / m_ScreenSize;
 		var targetFadeValue = 0f;
-		if((screenPosition.X - 0.5f * m_ScreenSize.X).InRange(m_FadeCenterRangeX.X, m_FadeCenterRangeX.Y) && 
-			(screenPosition.Y - 0.5f * m_ScreenSize.Y).InRange(m_FadeCenterRangeY.X, m_FadeCenterRangeY.Y))
+		if((2 * screenPosition.X - 1).InRange(m_FadeCenterRangeX.X, m_FadeCenterRangeX.Y) && 
+			(2 * screenPosition.Y - 1).InRange(m_FadeCenterRangeY.X, m_FadeCenterRangeY.Y))
 		{
 			targetFadeValue = m_FadeTargetTransparency;
 		}
