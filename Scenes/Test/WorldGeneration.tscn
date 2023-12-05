@@ -75,15 +75,16 @@ shadow_opacity = 0.6
 shadow_blur = 0.1
 sky_mode = 1
 
-[node name="Ground" type="Node3D" parent="."]
+[node name="World" type="Node3D" parent="." node_paths=PackedStringArray("m_Player")]
 script = ExtResource("1_rwyfw")
+m_Player = NodePath("../Player")
+m_MinTimeToGenerateChunk = 1.0
 m_GroundTile = ExtResource("2_rla0k")
 m_RoadTile = ExtResource("3_ff17n")
 m_StepValue = Vector2(0.5, 0.385)
 m_Trees = Array[PackedScene]([ExtResource("4_1q2wf"), ExtResource("5_6js43")])
 m_TreeSpawnMinDistance = 0.75
 m_GridSize = Vector2(10, 10)
-m_CellSize = 0.5
 m_MinDistance = 3.0
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("m_VisualsPivot", "m_AnimationPlayer")]
