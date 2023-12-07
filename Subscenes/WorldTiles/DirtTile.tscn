@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bb8wwyjam2y0h"]
 
 [ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="1_5mj5d"]
-[ext_resource type="Texture2D" uid="uid://cn76oijngw7c7" path="res://Sprites/GroundSprites/dirt4.png" id="2_kgshq"]
+[ext_resource type="Texture2D" uid="uid://bobyw1qicxpkf" path="res://Sprites/GroundSprites/dirt1.png" id="2_p5d4x"]
 
 [node name="WorldTile" instance=ExtResource("1_5mj5d")]
-texture = ExtResource("2_kgshq")
+texture = ExtResource("2_p5d4x")
