@@ -68,3 +68,5 @@ MoveLeft={
 
 renderer/rendering_method.mobile="gl_compatibility"
 global_illumination/gi/use_half_resolution=true
+global_illumination/sdfgi/probe_ray_count=0
+global_illumination/sdfgi/frames_to_update_lights=4

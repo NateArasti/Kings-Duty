@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6f1m7v32561r"
-path.s3tc="res://.godot/imported/survival.png-c10fe4c779716799017a7d2d9eaada88.s3tc.ctex"
+uid="uid://b5sk8m27ddg0r"
+path.s3tc="res://.godot/imported/Tree2.png-72a4949bfeebb683f5fcbbd5b05abba5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Sprites/Props/Nature/survival.png"
-dest_files=["res://.godot/imported/survival.png-c10fe4c779716799017a7d2d9eaada88.s3tc.ctex"]
+source_file="res://Sprites/Props/Nature/Tree2.png"
+dest_files=["res://.godot/imported/Tree2.png-72a4949bfeebb683f5fcbbd5b05abba5.s3tc.ctex"]
 
 [params]
 

@@ -1,13 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=19 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_rwyfw"]
-[ext_resource type="PackedScene" uid="uid://bvo7p7xm2wssd" path="res://Subscenes/WorldTiles/GrassTile.tscn" id="2_rla0k"]
-[ext_resource type="PackedScene" uid="uid://bb8wwyjam2y0h" path="res://Subscenes/WorldTiles/DirtTile.tscn" id="3_ff17n"]
+[ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_kg8g1"]
+[ext_resource type="Texture2D" uid="uid://jeip5slvibhd" path="res://Sprites/GroundSprites/grass1.png" id="3_3ntyo"]
 [ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Nature/Tree.tscn" id="4_1q2wf"]
-[ext_resource type="PackedScene" uid="uid://4hsu2a3elj56" path="res://Subscenes/Nature/Tree_NoLeaves.tscn" id="5_6js43"]
+[ext_resource type="Texture2D" uid="uid://c2sfg0jkj4vm7" path="res://Sprites/GroundSprites/grass5.png" id="4_325oc"]
+[ext_resource type="Texture2D" uid="uid://bsococoq13ajh" path="res://Sprites/GroundSprites/grass8.png" id="5_hgqdf"]
 [ext_resource type="PackedScene" uid="uid://cw3o1krgjpyvd" path="res://Subscenes/Character.tscn" id="6_7sokw"]
+[ext_resource type="Texture2D" uid="uid://46vx14kgnxm5" path="res://Sprites/GroundSprites/grass9.png" id="6_febuo"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerMovementController.cs" id="6_jc258"]
+[ext_resource type="Texture2D" uid="uid://buyiv3osh6a2j" path="res://Sprites/GroundSprites/grass10.png" id="7_5f44p"]
+[ext_resource type="Texture2D" uid="uid://bobyw1qicxpkf" path="res://Sprites/GroundSprites/dirt1.png" id="8_58tkn"]
 [ext_resource type="Texture2D" uid="uid://dopxsd4baj45c" path="res://Sprites/Torch.png" id="8_btr36"]
+[ext_resource type="Texture2D" uid="uid://cn76oijngw7c7" path="res://Sprites/GroundSprites/dirt4.png" id="9_4id5i"]
 
 [sub_resource type="Environment" id="Environment_ihtsx"]
 reflected_light_source = 1
@@ -70,10 +75,11 @@ environment = SubResource("Environment_ihtsx")
 script = ExtResource("1_rwyfw")
 m_Player = NodePath("../Player")
 m_MinTimeToGenerateChunk = 1.0
-m_GroundTile = ExtResource("2_rla0k")
-m_RoadTile = ExtResource("3_ff17n")
+m_WorldTile = ExtResource("2_kg8g1")
+m_GroundTextures = Array[Texture2D]([ExtResource("3_3ntyo"), ExtResource("4_325oc"), ExtResource("5_hgqdf"), ExtResource("6_febuo"), ExtResource("7_5f44p")])
+m_RoadTextures = Array[Texture2D]([ExtResource("8_58tkn"), ExtResource("9_4id5i")])
 m_StepValue = Vector2(0.5, 0.385)
-m_Trees = Array[PackedScene]([ExtResource("4_1q2wf"), ExtResource("5_6js43")])
+m_TreeScene = ExtResource("4_1q2wf")
 m_TreeSpawnMinDistance = 0.8
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("m_VisualsPivot", "m_AnimationPlayer")]

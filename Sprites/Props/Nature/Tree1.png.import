@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkisgqmx4polg"
-path.s3tc="res://.godot/imported/trees-cutted.png-a642b8e6fb2c9f5b84aa96789bf2b728.s3tc.ctex"
+uid="uid://y0o8ojyxy7jl"
+path.s3tc="res://.godot/imported/Tree1.png-6ba3fd44a265dc7fb50e007b46151143.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Sprites/Props/Nature/trees-cutted.png"
-dest_files=["res://.godot/imported/trees-cutted.png-a642b8e6fb2c9f5b84aa96789bf2b728.s3tc.ctex"]
+source_file="res://Sprites/Props/Nature/Tree1.png"
+dest_files=["res://.godot/imported/Tree1.png-6ba3fd44a265dc7fb50e007b46151143.s3tc.ctex"]
 
 [params]
 
