@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=22 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_rwyfw"]
 [ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_kg8g1"]
@@ -11,8 +11,9 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerMovementController.cs" id="6_jc258"]
 [ext_resource type="Texture2D" uid="uid://buyiv3osh6a2j" path="res://Sprites/GroundSprites/grass10.png" id="7_5f44p"]
 [ext_resource type="Texture2D" uid="uid://bobyw1qicxpkf" path="res://Sprites/GroundSprites/dirt1.png" id="8_58tkn"]
-[ext_resource type="Texture2D" uid="uid://dopxsd4baj45c" path="res://Sprites/Torch.png" id="8_btr36"]
+[ext_resource type="Texture2D" uid="uid://dopxsd4baj45c" path="res://Sprites/Props/Torch.png" id="8_btr36"]
 [ext_resource type="Texture2D" uid="uid://cn76oijngw7c7" path="res://Sprites/GroundSprites/dirt4.png" id="9_4id5i"]
+[ext_resource type="Script" path="res://Scripts/NPC/CharacterFollower.cs" id="14_homry"]
 
 [sub_resource type="Environment" id="Environment_ihtsx"]
 reflected_light_source = 1
@@ -65,6 +66,15 @@ _data = {
 "Idle": SubResource("Animation_wbbaf"),
 "Walk": SubResource("Animation_3xuku")
 }
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n3lu7"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sa1yf"]
+height = 0.5
+radius = 0.1
 
 [node name="WorldGeneration" type="Node3D"]
 
@@ -127,5 +137,22 @@ size = 5.0
 libraries = {
 "": SubResource("AnimationLibrary_tingm")
 }
+
+[node name="NPC" type="CharacterBody3D" parent="." node_paths=PackedStringArray("m_FollowNode")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94037, 0.049, 0)
+script = ExtResource("14_homry")
+m_FollowNode = NodePath("../Player")
+m_ObstacleAvoidanceRaysCount = 16
+m_ObstacleAvoidanceMinLength = 0.5
+m_ObstacleAvoidanceMaxLength = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NPC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_n3lu7")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CylinderShape3D_sa1yf")
 
 [editable path="Player/Character"]
