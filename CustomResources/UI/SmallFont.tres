@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bto5vc8ptpgi"]
+
+[ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/BlackOpsOne-Regular.ttf" id="1_p037i"]
+
+[resource]
+font = ExtResource("1_p037i")
+font_size = 18

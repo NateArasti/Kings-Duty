@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://di8eeek7fmgjr"]
+
+[ext_resource type="Texture2D" uid="uid://cxdd2y6fb4a0y" path="res://Sprites/Characters/SimpleGuy.png" id="1_iew24"]
+[ext_resource type="Resource" uid="uid://bacj6qdyr5r76" path="res://CustomResources/Weapons/Melee/Axe.tres" id="2_t7mcf"]
+[ext_resource type="Resource" uid="uid://ddp8evmimi301" path="res://CustomResources/Weapons/Melee/Cleaver.tres" id="3_cc4e2"]
+[ext_resource type="Resource" uid="uid://cep7kl5kkiiuj" path="res://CustomResources/Weapons/Melee/Hammer.tres" id="4_prytn"]
+[ext_resource type="Resource" uid="uid://cx6vuyjitrhnj" path="res://CustomResources/Weapons/Melee/Knife.tres" id="5_l58dd"]
+[ext_resource type="Resource" uid="uid://qhhsufko6oif" path="res://CustomResources/Weapons/Melee/Sword_Short.tres" id="6_cv8wg"]
+[ext_resource type="Script" path="res://Scripts/Characters/Base/MeleeCharacter.cs" id="7_tgmxv"]
+
+[resource]
+script = ExtResource("7_tgmxv")
+m_PossibleWeapons = Array[Resource]([ExtResource("2_t7mcf"), ExtResource("3_cc4e2"), ExtResource("4_prytn"), ExtResource("5_l58dd"), ExtResource("6_cv8wg")])
+m_Type = "Peasent"
+m_AttackSpeed = 1.0
+m_Gender = 2
+m_PossibleSprites = Array[Texture2D]([ExtResource("1_iew24")])
+m_MaxHP = 10
+m_DefaultResistance = 0.0

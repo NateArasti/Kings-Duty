@@ -2,8 +2,9 @@ using Godot;
 
 public partial class CharacterFollower : CharacterBody3D
 {
-	[Export] private Node3D m_FollowNode;
-	[Export] private Vector3 m_FollowOffset;
+	[Export] public Node3D Target { get; set; }
+	[Export] public Vector3 FollowOffset { get; set; }
+	
 	[Export] private float m_FollowSpaceDistance = 0.25f;
 	[Export(PropertyHint.Range, "0.1,10")] private Vector2 m_MoveSpeedGradient = new Vector2(1, 4);
 	[Export] private float m_RotationSpeed = 1;
@@ -34,18 +35,20 @@ public partial class CharacterFollower : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
-		m_IsTargetMoving = m_TargetPreviousPosition != m_FollowNode.GlobalPosition;
+		if (Target == null) return;
+		
+		m_IsTargetMoving = m_TargetPreviousPosition != Target.GlobalPosition;
 		if (m_IsTargetMoving)
 		{
-			m_CurrentTargetDirection = m_FollowNode.GlobalPosition - m_TargetPreviousPosition;
+			m_CurrentTargetDirection = Target.GlobalPosition - m_TargetPreviousPosition;
 			m_CurrentTargetDirection.Y = 0;
 		}
-		m_TargetPreviousPosition = m_FollowNode.GlobalPosition;
+		m_TargetPreviousPosition = Target.GlobalPosition;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		var desiredMoveVector = m_FollowNode.GlobalPosition + GetDynamicOffset() - GlobalPosition;
+		var desiredMoveVector = Target.GlobalPosition + GetDynamicOffset() - GlobalPosition;
 		desiredMoveVector.Y = 0;
 		
 		var distanceToTarget = desiredMoveVector.Length();
@@ -87,6 +90,6 @@ public partial class CharacterFollower : CharacterBody3D
 	private Vector3 GetDynamicOffset()
 	{
 		var angle = Vector3.Right.SignedAngleTo(m_CurrentTargetDirection, Vector3.Up);
-		return m_FollowOffset.Rotated(Vector3.Up, angle);
+		return FollowOffset.Rotated(Vector3.Up, angle);
 	}
 }

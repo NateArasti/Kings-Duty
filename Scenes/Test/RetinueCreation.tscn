@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=3 uid="uid://c8g02yp1nunew"]
+
+[ext_resource type="LabelSettings" uid="uid://dpsuoo76k2bij" path="res://CustomResources/UI/HeaderFont.tres" id="1_csiqm"]
+[ext_resource type="LabelSettings" uid="uid://co6jxguooayye" path="res://CustomResources/UI/RegularFont.tres" id="2_qwyrd"]
+[ext_resource type="PackedScene" uid="uid://c4mhsqaj38qlq" path="res://Subscenes/UI/CharacterChoosePanel.tscn" id="3_b47ya"]
+[ext_resource type="Script" path="res://Scripts/UI/RandomCharactersGenerator.cs" id="3_m4clw"]
+[ext_resource type="Resource" uid="uid://dfta0lmjs318e" path="res://CustomResources/Characters/Melee/Berserk+.tres" id="4_3fm3a"]
+[ext_resource type="Resource" uid="uid://df8tse30mk5cs" path="res://CustomResources/Characters/Melee/Berserk.tres" id="5_t4eti"]
+[ext_resource type="Resource" uid="uid://ypowivlh4xan" path="res://CustomResources/Characters/Melee/Blacksmith.tres" id="6_dpfpt"]
+[ext_resource type="Resource" uid="uid://bysi3jbrr6y58" path="res://CustomResources/Characters/Melee/Knight++.tres" id="7_n7hg8"]
+[ext_resource type="Resource" uid="uid://cscensepx6myl" path="res://CustomResources/Characters/Melee/Knight+.tres" id="8_8xiow"]
+[ext_resource type="Resource" uid="uid://cjlsmqqndh7a2" path="res://CustomResources/Characters/Melee/Knight.tres" id="9_ccv51"]
+[ext_resource type="Resource" uid="uid://cp36hgh1xvntf" path="res://CustomResources/Characters/Melee/Rogue.tres" id="10_e278s"]
+[ext_resource type="Resource" uid="uid://di8eeek7fmgjr" path="res://CustomResources/Characters/Melee/Peasent.tres" id="11_a5y6r"]
+
+[node name="RetinueCreation" type="Control" node_paths=PackedStringArray("m_CharacterPanels", "m_CharactersCoundown")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_m4clw")
+m_CharactersDatas = Array[Resource]([ExtResource("4_3fm3a"), ExtResource("5_t4eti"), ExtResource("6_dpfpt"), ExtResource("7_n7hg8"), ExtResource("8_8xiow"), ExtResource("9_ccv51"), ExtResource("10_e278s"), ExtResource("11_a5y6r")])
+m_CharacterPanels = [NodePath("CharactersChoose/Character_1"), NodePath("CharactersChoose/Character_2"), NodePath("CharactersChoose/Character_3")]
+m_CharactersCoundown = NodePath("Header/Countdown")
+
+[node name="BackPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.2
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Choose your ally..."
+label_settings = ExtResource("1_csiqm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Countdown" type="Label" parent="Header"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -132.0
+offset_top = 15.0
+offset_right = -4.0
+offset_bottom = 79.0
+grow_horizontal = 0
+text = "0/0"
+label_settings = ExtResource("2_qwyrd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharactersChoose" type="HBoxContainer" parent="." node_paths=PackedStringArray("m_CharacterPanels", "m_CharactersCoundown")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 100
+alignment = 1
+script = ExtResource("3_m4clw")
+m_CharactersDatas = Array[Resource]([ExtResource("4_3fm3a"), ExtResource("5_t4eti"), ExtResource("6_dpfpt"), ExtResource("7_n7hg8"), ExtResource("8_8xiow"), ExtResource("9_ccv51"), ExtResource("10_e278s"), ExtResource("11_a5y6r")])
+m_CharacterPanels = [NodePath("Character_1"), NodePath("Character_2"), NodePath("Character_3")]
+m_CharactersCoundown = NodePath("../Header/Countdown")
+
+[node name="Character_1" parent="CharactersChoose" instance=ExtResource("3_b47ya")]
+layout_mode = 2
+
+[node name="Character_2" parent="CharactersChoose" instance=ExtResource("3_b47ya")]
+layout_mode = 2
+
+[node name="Character_3" parent="CharactersChoose" instance=ExtResource("3_b47ya")]
+layout_mode = 2

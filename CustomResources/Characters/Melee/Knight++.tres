@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://bysi3jbrr6y58"]
+
+[ext_resource type="Texture2D" uid="uid://cc8g4o4pkmm3k" path="res://Sprites/Characters/Knight_Big.png" id="1_kboin"]
+[ext_resource type="Resource" uid="uid://ddp8evmimi301" path="res://CustomResources/Weapons/Melee/Cleaver.tres" id="5_1hmhx"]
+[ext_resource type="Resource" uid="uid://bsqdtp4o7f13a" path="res://CustomResources/Weapons/Melee/Sword_Big.tres" id="8_55f54"]
+[ext_resource type="Resource" uid="uid://bh3wk6xs2r1b5" path="res://CustomResources/Weapons/Melee/Sword_Golden.tres" id="9_7hi4l"]
+[ext_resource type="Resource" uid="uid://qhhsufko6oif" path="res://CustomResources/Weapons/Melee/Sword_Short.tres" id="10_oja6r"]
+[ext_resource type="Script" path="res://Scripts/Characters/Base/MeleeCharacter.cs" id="11_l5uxq"]
+
+[resource]
+script = ExtResource("11_l5uxq")
+m_PossibleWeapons = Array[Resource]([ExtResource("5_1hmhx"), ExtResource("8_55f54"), ExtResource("9_7hi4l"), ExtResource("10_oja6r")])
+m_Type = "Knight"
+m_AttackSpeed = 1.0
+m_Gender = 2
+m_PossibleSprites = Array[Texture2D]([ExtResource("1_kboin")])
+m_MaxHP = 10
+m_DefaultResistance = 0.0

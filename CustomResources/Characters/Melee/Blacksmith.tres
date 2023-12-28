@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=11 format=3 uid="uid://ypowivlh4xan"]
+
+[ext_resource type="Texture2D" uid="uid://dejuf15se5htd" path="res://Sprites/Characters/Blacksmith.png" id="1_gyfju"]
+[ext_resource type="Resource" uid="uid://bacj6qdyr5r76" path="res://CustomResources/Weapons/Melee/Axe.tres" id="5_g6daw"]
+[ext_resource type="Resource" uid="uid://clnpwjoopxyvt" path="res://CustomResources/Weapons/Melee/Axe_Super.tres" id="6_3m4yd"]
+[ext_resource type="Resource" uid="uid://ddp8evmimi301" path="res://CustomResources/Weapons/Melee/Cleaver.tres" id="7_60ckk"]
+[ext_resource type="Resource" uid="uid://cep7kl5kkiiuj" path="res://CustomResources/Weapons/Melee/Hammer.tres" id="8_pkj35"]
+[ext_resource type="Resource" uid="uid://cx6vuyjitrhnj" path="res://CustomResources/Weapons/Melee/Knife.tres" id="9_hemie"]
+[ext_resource type="Resource" uid="uid://bsqdtp4o7f13a" path="res://CustomResources/Weapons/Melee/Sword_Big.tres" id="10_71reo"]
+[ext_resource type="Resource" uid="uid://bh3wk6xs2r1b5" path="res://CustomResources/Weapons/Melee/Sword_Golden.tres" id="11_qvnwq"]
+[ext_resource type="Resource" uid="uid://qhhsufko6oif" path="res://CustomResources/Weapons/Melee/Sword_Short.tres" id="12_iu3kd"]
+[ext_resource type="Script" path="res://Scripts/Characters/Base/MeleeCharacter.cs" id="13_jf1bo"]
+
+[resource]
+script = ExtResource("13_jf1bo")
+m_PossibleWeapons = Array[Resource]([ExtResource("5_g6daw"), ExtResource("6_3m4yd"), ExtResource("7_60ckk"), ExtResource("8_pkj35"), ExtResource("9_hemie"), ExtResource("10_71reo"), ExtResource("11_qvnwq"), ExtResource("12_iu3kd")])
+m_Type = "Blacksmith"
+m_AttackSpeed = 1.0
+m_Gender = 2
+m_PossibleSprites = Array[Texture2D]([ExtResource("1_gyfju")])
+m_MaxHP = 10
+m_DefaultResistance = 0.0

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://clnpwjoopxyvt"]
+
+[ext_resource type="Texture2D" uid="uid://bw75yt6oivwb4" path="res://Sprites/Weapons/Axe_Super.png" id="1_5mud8"]
+[ext_resource type="Script" path="res://Scripts/Characters/Weapons/MeleeWeapon.cs" id="2_e8552"]
+
+[resource]
+resource_name = "Axe+"
+script = ExtResource("2_e8552")
+Sprite = ExtResource("1_5mud8")

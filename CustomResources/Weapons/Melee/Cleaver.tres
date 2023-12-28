@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://ddp8evmimi301"]
+
+[ext_resource type="Texture2D" uid="uid://epiguhb6hw7r" path="res://Sprites/Weapons/Cleaver.png" id="1_3lnpu"]
+[ext_resource type="Script" path="res://Scripts/Characters/Weapons/MeleeWeapon.cs" id="2_o3gkn"]
+
+[resource]
+resource_name = "Cleaver"
+script = ExtResource("2_o3gkn")
+Sprite = ExtResource("1_3lnpu")

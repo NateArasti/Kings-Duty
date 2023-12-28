@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cep7kl5kkiiuj"]
+
+[ext_resource type="Texture2D" uid="uid://dxebawd1liv5s" path="res://Sprites/Weapons/Hammer.png" id="1_dro53"]
+[ext_resource type="Script" path="res://Scripts/Characters/Weapons/MeleeWeapon.cs" id="2_ooa5n"]
+
+[resource]
+resource_name = "Hammer"
+script = ExtResource("2_ooa5n")
+Sprite = ExtResource("1_dro53")

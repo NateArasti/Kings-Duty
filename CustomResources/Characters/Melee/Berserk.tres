@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://df8tse30mk5cs"]
+
+[ext_resource type="Texture2D" uid="uid://dn2nm4h67v5rk" path="res://Sprites/Characters/Berserk.png" id="1_e4r47"]
+[ext_resource type="Resource" uid="uid://bacj6qdyr5r76" path="res://CustomResources/Weapons/Melee/Axe.tres" id="2_ycpro"]
+[ext_resource type="Resource" uid="uid://clnpwjoopxyvt" path="res://CustomResources/Weapons/Melee/Axe_Super.tres" id="3_nhfbu"]
+[ext_resource type="Resource" uid="uid://ddp8evmimi301" path="res://CustomResources/Weapons/Melee/Cleaver.tres" id="4_gsfc8"]
+[ext_resource type="Resource" uid="uid://cep7kl5kkiiuj" path="res://CustomResources/Weapons/Melee/Hammer.tres" id="5_2t54b"]
+[ext_resource type="Script" path="res://Scripts/Characters/Base/MeleeCharacter.cs" id="6_kubfu"]
+
+[resource]
+script = ExtResource("6_kubfu")
+m_PossibleWeapons = Array[Resource]([ExtResource("2_ycpro"), ExtResource("3_nhfbu"), ExtResource("4_gsfc8"), ExtResource("5_2t54b")])
+m_Type = "Berserk"
+m_AttackSpeed = 1.0
+m_Gender = 2
+m_PossibleSprites = Array[Texture2D]([ExtResource("1_e4r47")])
+m_MaxHP = 10
+m_DefaultResistance = 0.0

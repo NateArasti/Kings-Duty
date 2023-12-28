@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cx6vuyjitrhnj"]
+
+[ext_resource type="Texture2D" uid="uid://berss365jrai4" path="res://Sprites/Weapons/Knife.png" id="1_1ql8i"]
+[ext_resource type="Script" path="res://Scripts/Characters/Weapons/MeleeWeapon.cs" id="2_cfubj"]
+
+[resource]
+resource_name = "Knife"
+script = ExtResource("2_cfubj")
+Sprite = ExtResource("1_1ql8i")

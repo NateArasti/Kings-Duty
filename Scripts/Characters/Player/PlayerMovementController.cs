@@ -29,6 +29,8 @@ public partial class PlayerMovementController : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
+		GlobalPosition = new Vector3(GlobalPosition.X, 0, GlobalPosition.Z);
+		
 		var moveVector = Vector2.Zero;
 		if (Input.IsActionPressed(m_MoveUpActionName))
 		{
@@ -65,7 +67,7 @@ public partial class PlayerMovementController : CharacterBody3D
 		
 		void toggleLoop(Node3D pivot)
 		{
-			foreach (Node3D node in pivot.GetChildren().Cast<Node3D>())
+			foreach (Node3D node in pivot.GetChildren())
 			{
 				var position = node.Position;
 				position.X *= -1;

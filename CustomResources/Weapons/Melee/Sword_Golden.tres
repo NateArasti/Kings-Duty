@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bh3wk6xs2r1b5"]
+
+[ext_resource type="Texture2D" uid="uid://kenyxlsic34m" path="res://Sprites/Weapons/Sword_Golden.png" id="1_poomu"]
+[ext_resource type="Script" path="res://Scripts/Characters/Weapons/MeleeWeapon.cs" id="2_gh6k1"]
+
+[resource]
+resource_name = "Sword++"
+script = ExtResource("2_gh6k1")
+Sprite = ExtResource("1_poomu")

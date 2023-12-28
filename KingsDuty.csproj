@@ -3,4 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="RandomFriendlyNameGenerator" Version="1.0.7" />
+  </ItemGroup>
 </Project>

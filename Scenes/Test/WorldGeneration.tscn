@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=16 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_rwyfw"]
 [ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_kg8g1"]
@@ -6,14 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Nature/Tree.tscn" id="4_1q2wf"]
 [ext_resource type="Texture2D" uid="uid://c2sfg0jkj4vm7" path="res://Sprites/GroundSprites/grass5.png" id="4_325oc"]
 [ext_resource type="Texture2D" uid="uid://bsococoq13ajh" path="res://Sprites/GroundSprites/grass8.png" id="5_hgqdf"]
-[ext_resource type="PackedScene" uid="uid://cw3o1krgjpyvd" path="res://Subscenes/Character.tscn" id="6_7sokw"]
 [ext_resource type="Texture2D" uid="uid://46vx14kgnxm5" path="res://Sprites/GroundSprites/grass9.png" id="6_febuo"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerMovementController.cs" id="6_jc258"]
 [ext_resource type="Texture2D" uid="uid://buyiv3osh6a2j" path="res://Sprites/GroundSprites/grass10.png" id="7_5f44p"]
 [ext_resource type="Texture2D" uid="uid://bobyw1qicxpkf" path="res://Sprites/GroundSprites/dirt1.png" id="8_58tkn"]
-[ext_resource type="Texture2D" uid="uid://dopxsd4baj45c" path="res://Sprites/Props/Torch.png" id="8_btr36"]
 [ext_resource type="Texture2D" uid="uid://cn76oijngw7c7" path="res://Sprites/GroundSprites/dirt4.png" id="9_4id5i"]
-[ext_resource type="Script" path="res://Scripts/NPC/CharacterFollower.cs" id="14_homry"]
+[ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player.tscn" id="11_h7ex2"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/RetinueController.cs" id="12_i57bt"]
+[ext_resource type="PackedScene" uid="uid://c8g02yp1nunew" path="res://Scenes/Test/RetinueCreation.tscn" id="12_p7q5c"]
+[ext_resource type="PackedScene" uid="uid://d2dfq4aekx133" path="res://Subscenes/Characters/NPC_Ally.tscn" id="13_pp20x"]
 
 [sub_resource type="Environment" id="Environment_ihtsx"]
 reflected_light_source = 1
@@ -26,55 +26,6 @@ volumetric_fog_emission = Color(0.243137, 0.0196078, 0.247059, 1)
 volumetric_fog_emission_energy = 0.75
 volumetric_fog_length = 10.0
 adjustment_saturation = 0.5
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_lwwl5"]
-height = 0.212176
-radius = 0.0603973
-
-[sub_resource type="Animation" id="Animation_wbbaf"]
-resource_name = "Idle"
-loop_mode = 2
-tracks/0/type = "scale_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Character")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 1, 1, 1.05, 1.05, 1.05)
-
-[sub_resource type="Animation" id="Animation_3xuku"]
-resource_name = "Walk"
-loop_mode = 1
-step = 0.05
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Character")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.25, 1, 0.05, 0.05, 0, 0.5, 1, 0, 0, 0, 0.75, 1, -0.05, 0.05, 0, 1, 1, 0, 0, 0)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Character/Sprite3D")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0, 0, -0.087, 0.996, 0.5, 1, 0, 0, 0, 1, 0.75, 1, 0, 0, 0.087, 0.996, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tingm"]
-_data = {
-"Idle": SubResource("Animation_wbbaf"),
-"Walk": SubResource("Animation_3xuku")
-}
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_n3lu7"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.5
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_sa1yf"]
-height = 0.5
-radius = 0.1
 
 [node name="WorldGeneration" type="Node3D"]
 
@@ -92,67 +43,14 @@ m_StepValue = Vector2(0.5, 0.385)
 m_TreeScene = ExtResource("4_1q2wf")
 m_TreeSpawnMinDistance = 0.8
 
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("m_VisualsPivot", "m_AnimationPlayer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.095, 0)
-script = ExtResource("6_jc258")
-m_MoveSpeed = 1.25
-m_VisualsPivot = NodePath("Character")
-m_AnimationPlayer = NodePath("AnimationPlayer")
+[node name="Player" parent="." instance=ExtResource("11_h7ex2")]
 
-[node name="Character" parent="Player" instance=ExtResource("6_7sokw")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+[node name="RetinueController" type="Node" parent="." node_paths=PackedStringArray("m_Player", "m_CharacterGenerator")]
+script = ExtResource("12_i57bt")
+m_Player = NodePath("../Player")
+m_CharacterGenerator = NodePath("../RetinueCreation")
+m_AllyScene = ExtResource("13_pp20x")
+m_StartRetinueCount = 2
 
-[node name="Sprite3D" parent="Player/Character" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-
-[node name="Torch" type="Sprite3D" parent="Player/Character/Sprite3D" index="0"]
-transform = Transform3D(0.956305, 0.292372, 0, -0.292372, 0.956305, 0, 0, 0, 1, 0.136, -0.045, 0.001)
-shaded = true
-alpha_cut = 2
-texture_filter = 4
-texture = ExtResource("8_btr36")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Player/Character/Sprite3D/Torch"]
-transform = Transform3D(0.956304, -0.292372, 0, 0.292372, 0.956304, 0, 3.55271e-15, 0, 1, -0.0153373, 0.0570067, 0.037)
-light_color = Color(0.878431, 0.47451, 0.129412, 1)
-light_size = 0.1
-light_specular = 1.0
-light_bake_mode = 0
-shadow_enabled = true
-shadow_reverse_cull_face = true
-shadow_opacity = 0.5
-omni_range = 10.0
-omni_attenuation = 1.5
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.13222e-05, 0.0519584, 0.0011484)
-shape = SubResource("CylinderShape3D_lwwl5")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(-4.37114e-08, 0.707107, -0.707107, 0, 0.707107, 0.707107, 1, 3.09086e-08, -3.09086e-08, -15, 15, 0)
-projection = 1
-size = 5.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-libraries = {
-"": SubResource("AnimationLibrary_tingm")
-}
-
-[node name="NPC" type="CharacterBody3D" parent="." node_paths=PackedStringArray("m_FollowNode")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94037, 0.049, 0)
-script = ExtResource("14_homry")
-m_FollowNode = NodePath("../Player")
-m_ObstacleAvoidanceRaysCount = 16
-m_ObstacleAvoidanceMinLength = 0.5
-m_ObstacleAvoidanceMaxLength = 1.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NPC"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-mesh = SubResource("CylinderMesh_n3lu7")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-shape = SubResource("CylinderShape3D_sa1yf")
-
-[editable path="Player/Character"]
+[node name="RetinueCreation" parent="." instance=ExtResource("12_p7q5c")]
+visible = false
