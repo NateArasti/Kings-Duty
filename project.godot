@@ -21,6 +21,7 @@ DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [display]
 
+window/size/always_on_top=true
 window/vsync/vsync_mode=0
 
 [dotnet]

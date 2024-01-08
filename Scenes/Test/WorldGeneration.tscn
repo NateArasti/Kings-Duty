@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=19 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_rwyfw"]
 [ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_kg8g1"]
@@ -13,24 +13,29 @@
 [ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player.tscn" id="11_h7ex2"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/RetinueController.cs" id="12_i57bt"]
 [ext_resource type="PackedScene" uid="uid://c8g02yp1nunew" path="res://Scenes/Test/RetinueCreation.tscn" id="12_p7q5c"]
+[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="12_rjgte"]
 [ext_resource type="PackedScene" uid="uid://d2dfq4aekx133" path="res://Subscenes/Characters/NPC_Ally.tscn" id="13_pp20x"]
 
-[sub_resource type="Environment" id="Environment_ihtsx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tqkkh"]
+shader = ExtResource("12_rjgte")
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.2
+shader_parameter/outer_radius = 1.2
+
+[sub_resource type="Environment" id="Environment_ua30k"]
+background_mode = 1
+ambient_light_energy = 0.01
 reflected_light_source = 1
-ssao_radius = 0.01
-sdfgi_enabled = true
 sdfgi_read_sky_light = false
-sdfgi_y_scale = 0
-volumetric_fog_enabled = true
-volumetric_fog_emission = Color(0.243137, 0.0196078, 0.247059, 1)
-volumetric_fog_emission_energy = 0.75
-volumetric_fog_length = 10.0
-adjustment_saturation = 0.5
+fog_light_color = Color(0, 0, 0, 1)
+adjustment_brightness = 0.8
+adjustment_contrast = 1.1
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qynxp"]
+auto_exposure_scale = 0.06
+dof_blur_far_distance = 8040.33
 
 [node name="WorldGeneration" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ihtsx")
 
 [node name="World" type="Node3D" parent="." node_paths=PackedStringArray("m_Player")]
 script = ExtResource("1_rwyfw")
@@ -45,6 +50,16 @@ m_TreeSpawnMinDistance = 0.8
 
 [node name="Player" parent="." instance=ExtResource("11_h7ex2")]
 
+[node name="PostProcessing" type="CanvasLayer" parent="Player/Camera3D" index="0"]
+
+[node name="Vignette" type="ColorRect" parent="Player/Camera3D/PostProcessing"]
+material = SubResource("ShaderMaterial_tqkkh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="RetinueController" type="Node" parent="." node_paths=PackedStringArray("m_Player", "m_CharacterGenerator")]
 script = ExtResource("12_i57bt")
 m_Player = NodePath("../Player")
@@ -54,3 +69,18 @@ m_StartRetinueCount = 2
 
 [node name="RetinueCreation" parent="." instance=ExtResource("12_p7q5c")]
 visible = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0201397, 0.28061, -0.959611, -4.65661e-10, 0.959805, 0.280667, 0.999797, -0.00565255, 0.0193302, 0, 0, 0)
+light_color = Color(0.247059, 0.247059, 0.247059, 1)
+shadow_bias = 0.01
+shadow_normal_bias = 1.0
+shadow_reverse_cull_face = true
+shadow_opacity = 0.75
+directional_shadow_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ua30k")
+camera_attributes = SubResource("CameraAttributesPractical_qynxp")
+
+[editable path="Player"]
