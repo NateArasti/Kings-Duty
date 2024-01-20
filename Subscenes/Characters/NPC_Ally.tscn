@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2dfq4aekx133"]
+[gd_scene load_steps=6 format=3 uid="uid://d2dfq4aekx133"]
 
 [ext_resource type="PackedScene" uid="uid://c6bfb044jd67f" path="res://Subscenes/Characters/Character.tscn" id="1_n45ue"]
 [ext_resource type="Script" path="res://Scripts/Characters/Allies/AllyNPC.cs" id="2_jmdla"]
+[ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_cnemw"]
+[ext_resource type="Texture2D" uid="uid://cxdd2y6fb4a0y" path="res://Sprites/Characters/SimpleGuy.png" id="4_6q5vy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6mqme"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("3_cnemw")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/source_texture = ExtResource("4_6q5vy")
 
 [node name="Ally" node_paths=PackedStringArray("m_Visuals", "HealthSystem", "m_VisualsPivot", "m_AnimationPlayer") instance=ExtResource("1_n45ue")]
 script = ExtResource("2_jmdla")
@@ -14,3 +24,6 @@ StrictOffsetFollow = false
 m_ObstacleAvoidanceRaysCount = 16
 m_ObstacleAvoidanceMinLength = 0.25
 m_ObstacleAvoidanceMaxLength = 1.0
+
+[node name="Body" parent="CharacterVisuals/BillboardPivot" index="0"]
+material_overlay = SubResource("ShaderMaterial_6mqme")

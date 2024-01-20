@@ -8,9 +8,9 @@
 [resource]
 script = ExtResource("10_ayery")
 m_PossibleWeapons = Array[Resource]([ExtResource("6_lu1pi"), ExtResource("9_48umk")])
-m_Type = "Rogue"
-m_AttackSpeed = 1.0
+Type = "Rogue"
+m_AttackSpeedRange = Vector2(2, 3)
 m_Gender = 2
 m_PossibleSprites = Array[Texture2D]([ExtResource("1_qu4e6")])
-m_MaxHP = 10
-m_DefaultResistance = 0.0
+m_MaxHPRange = Vector2i(5, 10)
+m_DefaultResistanceRange = Vector2(0, 0)

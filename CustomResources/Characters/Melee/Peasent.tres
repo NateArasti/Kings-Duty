@@ -11,9 +11,9 @@
 [resource]
 script = ExtResource("7_tgmxv")
 m_PossibleWeapons = Array[Resource]([ExtResource("2_t7mcf"), ExtResource("3_cc4e2"), ExtResource("4_prytn"), ExtResource("5_l58dd"), ExtResource("6_cv8wg")])
-m_Type = "Peasent"
-m_AttackSpeed = 1.0
+Type = "Peasent"
+m_AttackSpeedRange = Vector2(0.5, 0.7)
 m_Gender = 2
 m_PossibleSprites = Array[Texture2D]([ExtResource("1_iew24")])
-m_MaxHP = 10
-m_DefaultResistance = 0.0
+m_MaxHPRange = Vector2i(7, 9)
+m_DefaultResistanceRange = Vector2(0, 0)

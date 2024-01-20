@@ -49,12 +49,15 @@ public partial class AllyNPC : FightNPC
 	public void SetCharacterData(Character character)
 	{
 		var fightCharacter = character as FightCharacter;
+		var weapon = fightCharacter?.Weapon;
 		if (fightCharacter != null)
 		{
 			HealthSystem.MaxHealth = fightCharacter.MaxHP;
 			HealthSystem.CurrentHealth = fightCharacter.MaxHP;
+			AttackCooldown = weapon.AttackCooldown * fightCharacter.AttackSpeed;
+			AttackRange = weapon.AttackRange;
+			AttackDamage = weapon.AttackDamage;
 		}
-		var weapon = fightCharacter?.Weapon;
 		m_Visuals.SetVisuals(character.Sprite, weapon.Sprite);
 	}
 	

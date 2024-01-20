@@ -2,10 +2,9 @@ using Godot;
 
 public partial  class FightCharacter : Character
 {
-	[Export] private string m_Type = "None";
-	[Export] private float m_AttackSpeed = 1;
-
-	public string Type { get; private set; }
+	[Export] public string Type { get; private set; } = "None";
+	[Export] private Vector2 m_AttackSpeedRange = new Vector2(0.9f, 1.1f);
+	
 	public float AttackSpeed { get; private set; }
 	
 	public virtual Weapon Weapon => null;
@@ -21,7 +20,7 @@ public partial  class FightCharacter : Character
 	{
 		base.FillCharacterInstance(character);
 		var fightCharacter = character as FightCharacter;
-		fightCharacter.Type = m_Type;
-		fightCharacter.AttackSpeed = m_AttackSpeed;
+		fightCharacter.Type = Type;
+		fightCharacter.AttackSpeed = (float)GD.RandRange(m_AttackSpeedRange.X, m_AttackSpeedRange.Y);
 	}
 }

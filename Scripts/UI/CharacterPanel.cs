@@ -11,8 +11,11 @@ public partial class CharacterPanel : Node
 	[ExportGroup("Data labels")]
 	[Export] private Label m_TypeLabel;
 	[Export] private Label m_HealthLabel;
+	[Export] private Label m_AttackSpeedLabel;
 	[Export] private Label m_ResistanceLabel;
-	[Export] private Label m_WeaponLabel;
+	[Export] private Label m_WeaponNameLabel;
+	[Export] private Label m_WeaponDamageLabel;
+	[Export] private Label m_WeaponAttackCooldownLabel;
 	
 	public Character Character { get; private set; }
 	
@@ -23,31 +26,28 @@ public partial class CharacterPanel : Node
 		m_MainRect.Texture = Character.Sprite;
 		
 		m_HealthLabel.Text = $"Max HP: {character.MaxHP}";
+		
 		m_ResistanceLabel.Text = $"Resistance: {character.DefaultResistance}%";
+		
+		Weapon weapon = null;
 		
 		if(character is FightCharacter fightCharacter)
 		{
 			m_TypeLabel.Text = $"Type: {fightCharacter.Type}";
+			m_AttackSpeedLabel.Text = $"Attack Speed: {fightCharacter.AttackSpeed:0.00}";
+			weapon = fightCharacter.Weapon;
 		}
 		else
 		{
 			m_TypeLabel.Text = $"Type: None";			
 		}
 		
-		Weapon weapon = null;
-		if(character is MeleeCharacter meleeCharacter)
-		{
-			weapon = meleeCharacter.Weapon;
-		}
-		else if (character is RangeCharacter rangeCharacter)
-		{
-			weapon = rangeCharacter.Weapon;
-		}
-		
 		if (weapon != null)
 		{
 			m_WeaponRect.Texture = weapon.Sprite;
-			m_WeaponLabel.Text = $"Type: {weapon.ResourceName}";
+			m_WeaponNameLabel.Text = $"Type: {weapon.ResourceName}";
+			m_WeaponDamageLabel.Text = $"Damage: {weapon.AttackDamage}";
+			m_WeaponAttackCooldownLabel.Text = $"Cooldown: {weapon.AttackCooldown:0.00}";
 		}
 	}
 	
