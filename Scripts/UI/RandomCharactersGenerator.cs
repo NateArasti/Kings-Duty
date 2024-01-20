@@ -18,8 +18,7 @@ public partial class RandomCharactersGenerator : Control
 	{
 		for (var i = 0; i < m_CharacterPanels.Length; ++i)
 		{
-			var j = i;
-			m_CharacterPanels[i].OnCharacterChosen += () => ChooseCharacter(j);
+			m_CharacterPanels[i].OnCharacterChosen = ChooseCharacter;
 		}
 		SetRandomCharacters();
 	}
@@ -33,9 +32,9 @@ public partial class RandomCharactersGenerator : Control
 		Show();
 	}
 
-	private void ChooseCharacter(int i)
+	private void ChooseCharacter(Character character)
 	{
-		m_GeneratedCharacters.Enqueue(m_CharacterPanels[i].Character);
+		m_GeneratedCharacters.Enqueue(character);
 		if (m_GeneratedCharacters.Count == m_CharactersToCreateCount)
 		{
 			OnCharactersCreated?.Invoke(m_GeneratedCharacters);

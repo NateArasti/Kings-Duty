@@ -2,7 +2,7 @@ using Godot;
 
 public partial class CharacterPanel : Node
 {
-	public event System.Action OnCharacterChosen;
+	public System.Action<Character> OnCharacterChosen;
 	
 	[Export] private Label m_NameLabel;
 	[Export] private TextureRect m_MainRect;
@@ -53,6 +53,6 @@ public partial class CharacterPanel : Node
 	
 	public void ChooseCharacter()
 	{
-		OnCharacterChosen?.Invoke();
+		OnCharacterChosen?.Invoke(Character);
 	}
 }

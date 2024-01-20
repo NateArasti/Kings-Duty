@@ -204,4 +204,4 @@ text = "Choose"
 
 [connection signal="mouse_entered" from="MainPart/ToggleInfo" to="MainPart/InfoPanel" method="show"]
 [connection signal="mouse_exited" from="MainPart/ToggleInfo" to="MainPart/InfoPanel" method="hide"]
-[connection signal="pressed" from="ChooseButton" to="." method="ChooseCharacter"]
+[connection signal="button_up" from="ChooseButton" to="." method="ChooseCharacter"]

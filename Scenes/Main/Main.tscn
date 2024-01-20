@@ -71,7 +71,7 @@ process_mode = 3
 script = ExtResource("13_exdnn")
 m_CharacterGenerator = NodePath("RetinueCreation")
 m_AllyScene = ExtResource("14_hl5t6")
-m_StartRetinueCount = 2
+m_StartRetinueCount = 3
 
 [node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]
 process_mode = 2
