@@ -43,7 +43,7 @@ public partial class RandomCharactersGenerator : Control
 		}
 		else
 		{
-			m_CharactersCoundown.Text = $"{m_GeneratedCharacters.Count}/{m_CharactersToCreateCount}";
+			m_CharactersCoundown.Text = $"{m_GeneratedCharacters.Count + 1}/{m_CharactersToCreateCount}";
 			SetRandomCharacters();			
 		}
 	}
