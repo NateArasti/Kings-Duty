@@ -2,12 +2,10 @@ using Godot;
 
 public partial class CharacterFollower : CharacterBody3D
 {
-	[Export] public Node3D Target { get; set; }
+	[Export] public Node3D FollowTarget { get; set; }
 	[Export] public Vector3 FollowOffset { get; set; }
+	[Export] public bool StrictOffsetFollow { get; set; } = true;
 	
-	[Export] private float m_FollowSpaceDistance = 0.25f;
-	[Export(PropertyHint.Range, "0.1,10")] private Vector2 m_MoveSpeedGradient = new Vector2(1, 4);
-	[Export] private float m_RotationSpeed = 1;
 	[Export] private int m_ObstacleAvoidanceRaysCount = 8;
 	[Export] private float m_ObstacleAvoidanceMinLength = 1;
 	[Export] private float m_ObstacleAvoidanceMaxLength = 1.5f;
@@ -18,9 +16,24 @@ public partial class CharacterFollower : CharacterBody3D
 	private Vector3 m_CurrentTargetDirection;
 	
 	private bool m_IsTargetMoving;
+	
+	protected readonly FollowSettings SimpleFollowSettings = new()
+	{
+		FollowSpaceDistance = 0.5f,
+		MoveSpeedGradient = new Vector2(1.3f, 3),
+		RotationSpeed = 2,
+	};
+	
+	protected bool LaggingTarget { get; private set; }
 
+	public FollowSettings Settings { get; set; }
+	
 	public override void _Ready()
 	{
+		base._Ready();
+		
+		Settings = SimpleFollowSettings;
+		
 		m_Rays = new RayCast3D[m_ObstacleAvoidanceRaysCount];
 		for (var i = 0; i < m_ObstacleAvoidanceRaysCount; ++i)
 		{
@@ -35,26 +48,31 @@ public partial class CharacterFollower : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
-		if (Target == null) return;
+		base._Process(delta);
+		if (FollowTarget == null) return;
 		
-		m_IsTargetMoving = m_TargetPreviousPosition != Target.GlobalPosition;
+		m_IsTargetMoving = m_TargetPreviousPosition != FollowTarget.GlobalPosition;
 		if (m_IsTargetMoving)
 		{
-			m_CurrentTargetDirection = Target.GlobalPosition - m_TargetPreviousPosition;
+			m_CurrentTargetDirection = FollowTarget.GlobalPosition - m_TargetPreviousPosition;
 			m_CurrentTargetDirection.Y = 0;
 		}
-		m_TargetPreviousPosition = Target.GlobalPosition;
+		m_TargetPreviousPosition = FollowTarget.GlobalPosition;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		var desiredMoveVector = Target.GlobalPosition + GetDynamicOffset() - GlobalPosition;
+		base._PhysicsProcess(delta);
+		if (FollowTarget == null) return;
+		
+		var desiredMoveVector = FollowTarget.GlobalPosition + GetDynamicOffset() - GlobalPosition;
 		desiredMoveVector.Y = 0;
 		
 		var distanceToTarget = desiredMoveVector.Length();
-		if(distanceToTarget < m_FollowSpaceDistance)
+		LaggingTarget = distanceToTarget > Settings.FollowSpaceDistance;
+		if (!LaggingTarget)
 		{
-			Velocity = Velocity.Lerp(Vector3.Zero, 2 * m_RotationSpeed * (float) delta);
+			Velocity = Velocity.Lerp(Vector3.Zero, 2 * Settings.RotationSpeed * (float) delta);
 		}
 		else
 		{
@@ -80,8 +98,8 @@ public partial class CharacterFollower : CharacterBody3D
 				}
 			}
 			var moveSpeedGrade = Mathf.Clamp(distanceToTarget / (2 * m_ObstacleAvoidanceMaxLength), 0, 1);
-			var dynamicMoveSpeed = m_MoveSpeedGradient.X + moveSpeedGrade * (m_MoveSpeedGradient.Y - m_MoveSpeedGradient.X);
-			Velocity = Velocity.Lerp(mostAwailableMoveVector.MoveVector.Normalized() * dynamicMoveSpeed, m_RotationSpeed * (float)delta);
+			var dynamicMoveSpeed = Settings.MoveSpeedGradient.X + moveSpeedGrade * (Settings.MoveSpeedGradient.Y - Settings.MoveSpeedGradient.X);
+			Velocity = Velocity.Lerp(mostAwailableMoveVector.MoveVector.Normalized() * dynamicMoveSpeed, Settings.RotationSpeed * (float)delta);
 		}
 		
 		MoveAndSlide();
@@ -89,7 +107,21 @@ public partial class CharacterFollower : CharacterBody3D
 	
 	private Vector3 GetDynamicOffset()
 	{
-		var angle = Vector3.Right.SignedAngleTo(m_CurrentTargetDirection, Vector3.Up);
-		return FollowOffset.Rotated(Vector3.Up, angle);
+		if (StrictOffsetFollow)
+		{
+			var angle = Vector3.Right.SignedAngleTo(m_CurrentTargetDirection, Vector3.Up);
+			return FollowOffset.Rotated(Vector3.Up, angle);			
+		}
+		
+		return FollowOffset;
+	}
+	
+	public struct FollowSettings
+	{
+		public float FollowSpaceDistance = 0.25f;
+		public Vector2 MoveSpeedGradient = new Vector2(1, 4);
+		public float RotationSpeed = 1;
+
+		public FollowSettings() { }
 	}
 }

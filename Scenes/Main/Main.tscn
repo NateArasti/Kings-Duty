@@ -1,0 +1,83 @@
+[gd_scene load_steps=20 format=3 uid="uid://dwpxrxrso4gxp"]
+
+[ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_fljgg"]
+[ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_r07sy"]
+[ext_resource type="Texture2D" uid="uid://jeip5slvibhd" path="res://Sprites/GroundSprites/grass1.png" id="3_aqul3"]
+[ext_resource type="Texture2D" uid="uid://c2sfg0jkj4vm7" path="res://Sprites/GroundSprites/grass5.png" id="4_vf3m5"]
+[ext_resource type="Texture2D" uid="uid://bsococoq13ajh" path="res://Sprites/GroundSprites/grass8.png" id="5_07180"]
+[ext_resource type="Texture2D" uid="uid://46vx14kgnxm5" path="res://Sprites/GroundSprites/grass9.png" id="6_75mh7"]
+[ext_resource type="Texture2D" uid="uid://buyiv3osh6a2j" path="res://Sprites/GroundSprites/grass10.png" id="7_ukdxv"]
+[ext_resource type="Texture2D" uid="uid://bobyw1qicxpkf" path="res://Sprites/GroundSprites/dirt1.png" id="8_cqcl8"]
+[ext_resource type="Texture2D" uid="uid://cn76oijngw7c7" path="res://Sprites/GroundSprites/dirt4.png" id="9_mjx4q"]
+[ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Nature/Tree.tscn" id="10_hurmi"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerGlobalController.cs" id="11_laj72"]
+[ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player.tscn" id="12_vltxi"]
+[ext_resource type="Script" path="res://Scripts/Characters/Allies/RetinueController.cs" id="13_exdnn"]
+[ext_resource type="PackedScene" uid="uid://d2dfq4aekx133" path="res://Subscenes/Characters/NPC_Ally.tscn" id="14_hl5t6"]
+[ext_resource type="PackedScene" uid="uid://c8g02yp1nunew" path="res://Scenes/Test/RetinueCreation.tscn" id="15_y3ogn"]
+[ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemiesController.cs" id="16_i2cei"]
+[ext_resource type="PackedScene" uid="uid://c4njyn1latrwg" path="res://Subscenes/Characters/NPC_Enemy.tscn" id="17_ppqr3"]
+
+[sub_resource type="Environment" id="Environment_ua30k"]
+background_mode = 1
+ambient_light_energy = 0.01
+reflected_light_source = 1
+sdfgi_read_sky_light = false
+fog_light_color = Color(0, 0, 0, 1)
+adjustment_brightness = 0.8
+adjustment_contrast = 1.1
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qynxp"]
+auto_exposure_scale = 0.06
+dof_blur_far_distance = 8040.33
+
+[node name="Main" type="Node"]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="World" type="Node3D" parent="Environment" node_paths=PackedStringArray("m_Player")]
+script = ExtResource("1_fljgg")
+m_Player = NodePath("../../PlayerGlobalController/Player")
+m_MinTimeToGenerateChunk = 1.0
+m_WorldTile = ExtResource("2_r07sy")
+m_GroundTextures = Array[Texture2D]([ExtResource("3_aqul3"), ExtResource("4_vf3m5"), ExtResource("5_07180"), ExtResource("6_75mh7"), ExtResource("7_ukdxv")])
+m_RoadTextures = Array[Texture2D]([ExtResource("8_cqcl8"), ExtResource("9_mjx4q")])
+m_StepValue = Vector2(0.5, 0.385)
+m_SpawnNature = false
+m_TreeScene = ExtResource("10_hurmi")
+m_TreeSpawnMinDistance = 0.8
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.0201397, 0.28061, -0.959611, -4.65661e-10, 0.959805, 0.280667, 0.999797, -0.00565255, 0.0193302, 0, 0, 0)
+light_color = Color(0.247059, 0.247059, 0.247059, 1)
+shadow_bias = 0.01
+shadow_normal_bias = 1.0
+shadow_reverse_cull_face = true
+shadow_opacity = 0.75
+directional_shadow_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_ua30k")
+camera_attributes = SubResource("CameraAttributesPractical_qynxp")
+
+[node name="PlayerGlobalController" type="Node" parent="." node_paths=PackedStringArray("Player")]
+script = ExtResource("11_laj72")
+Player = NodePath("Player")
+
+[node name="Player" parent="PlayerGlobalController" instance=ExtResource("12_vltxi")]
+
+[node name="RetinueController" type="Node" parent="." node_paths=PackedStringArray("m_CharacterGenerator")]
+process_mode = 3
+script = ExtResource("13_exdnn")
+m_CharacterGenerator = NodePath("RetinueCreation")
+m_AllyScene = ExtResource("14_hl5t6")
+m_StartRetinueCount = 2
+
+[node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]
+process_mode = 2
+visible = false
+
+[node name="EnemiesController" type="Node" parent="."]
+script = ExtResource("16_i2cei")
+m_SpawnOffset = Vector3(0, 0, -5)
+m_EnemyScene = ExtResource("17_ppqr3")

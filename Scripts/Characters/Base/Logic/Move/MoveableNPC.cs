@@ -1,28 +1,36 @@
 using Godot;
 
-public partial class AllyCharacter : CharacterFollower
+public partial class MoveableNPC : CharacterFollower
 {
-	[Export] private CharacterVisuals m_Visuals;
+	[Export] private Node3D m_VisualsPivot;
 	
 	[ExportGroup("Animations")]
-	[Export] private AnimationPlayer m_AnimationPlayer;
+	[Export] protected AnimationPlayer m_AnimationPlayer;
 	[Export] private string m_IDLEAnimationName = "Idle";
 	[Export] private string m_WalkAnimationName = "Walk";
 	
 	private bool m_Walking;
 	private bool m_LookRight = true;
 	
-	public void SetCharacterData(Character character)
+	public bool LookAtTarget { get; set; }
+
+	public override void _Ready()
 	{
-		var weapon = (character as FightCharacter)?.Weapon;
-		m_Visuals.SetVisuals(character.Sprite, weapon.Sprite);
+		base._Ready();
+		ResetWalkAnimationState();
 	}
 
 	public override void _Process(double delta)
 	{
-		if ((Velocity.Z > 0 && !m_LookRight) || (Velocity.Z < 0 && m_LookRight))
+		base._Process(delta);
+		if (LookAtTarget)
 		{
-			ToggleLook();
+			var targetLook = FollowTarget.GlobalPosition.Z > GlobalPosition.Z;
+			if (m_LookRight != targetLook) ToggleLook();
+		}
+		else if((Velocity.Z > 0 && !m_LookRight) || (Velocity.Z < 0 && m_LookRight))
+		{
+			ToggleLook();			
 		}
 		
 		HandleAnimation();
@@ -31,7 +39,7 @@ public partial class AllyCharacter : CharacterFollower
 	private void ToggleLook()
 	{
 		m_LookRight = !m_LookRight;
-		toggleLoop(m_Visuals);
+		toggleLoop(m_VisualsPivot);
 		
 		void toggleLoop(Node3D pivot)
 		{
@@ -55,7 +63,7 @@ public partial class AllyCharacter : CharacterFollower
 		}
 	}
 	
-	private void HandleAnimation()
+	protected virtual void HandleAnimation()
 	{
 		if (!m_Walking && Velocity.LengthSquared() > 0.05f)
 		{
@@ -69,5 +77,11 @@ public partial class AllyCharacter : CharacterFollower
 			m_AnimationPlayer.Play(m_IDLEAnimationName);
 			m_Walking = false;
 		}
+	}
+	
+	protected void ResetWalkAnimationState()
+	{
+		m_AnimationPlayer.Stop();
+		m_Walking = false;
 	}
 }

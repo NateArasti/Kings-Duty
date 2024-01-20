@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bsqdtp4o7f13a" path="res://CustomResources/Weapons/Melee/Sword_Big.tres" id="8_oaqwk"]
 [ext_resource type="Resource" uid="uid://bh3wk6xs2r1b5" path="res://CustomResources/Weapons/Melee/Sword_Golden.tres" id="9_tclb3"]
 [ext_resource type="Resource" uid="uid://qhhsufko6oif" path="res://CustomResources/Weapons/Melee/Sword_Short.tres" id="10_umo7w"]
-[ext_resource type="Script" path="res://Scripts/Characters/Base/MeleeCharacter.cs" id="11_mfarb"]
+[ext_resource type="Script" path="res://Scripts/Characters/Base/Data/MeleeCharacter.cs" id="11_mfarb"]
 
 [resource]
 script = ExtResource("11_mfarb")

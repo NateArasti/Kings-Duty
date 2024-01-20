@@ -1,9 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4mhsqaj38qlq"]
+[gd_scene load_steps=7 format=3 uid="uid://c4mhsqaj38qlq"]
 
 [ext_resource type="Script" path="res://Scripts/UI/CharacterPanel.cs" id="1_1usn2"]
 [ext_resource type="LabelSettings" uid="uid://co6jxguooayye" path="res://CustomResources/UI/RegularFont.tres" id="1_m7467"]
-[ext_resource type="Texture2D" uid="uid://bpsidfyyd24l" path="res://Sprites/Characters/SimpleGuy.png" id="2_ympqj"]
-[ext_resource type="Texture2D" uid="uid://dsim0vtpqp005" path="res://Sprites/Weapons/Sword_Short.png" id="3_mgb03"]
 [ext_resource type="LabelSettings" uid="uid://bto5vc8ptpgi" path="res://CustomResources/UI/SmallFont.tres" id="4_8h60i"]
 [ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/BlackOpsOne-Regular.ttf" id="5_m1ftp"]
 
@@ -65,7 +63,6 @@ anchor_right = 0.9
 anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_ympqj")
 stretch_mode = 5
 
 [node name="Weapon" type="TextureRect" parent="MainPart/MainSprite"]
@@ -75,7 +72,6 @@ offset_top = 104.0
 offset_right = 276.0
 offset_bottom = 220.0
 rotation = 0.436332
-texture = ExtResource("3_mgb03")
 flip_h = true
 
 [node name="InfoPanel" type="Panel" parent="MainPart"]

@@ -1,7 +1,6 @@
-using System.Linq;
 using Godot;
 
-public partial class PlayerMovementController : CharacterBody3D
+public partial class PlayerMovementController : CharacterBody3D, IHittable
 {
 	[Export] private float m_MoveSpeed = 2;
 	[Export] private Node3D m_VisualsPivot;
@@ -20,11 +19,22 @@ public partial class PlayerMovementController : CharacterBody3D
 	
 	private bool m_Walking;
 
+	[Export] public HealthSystem HealthSystem { get; private set; }
+
 	public override void _Ready()
 	{
 		m_AnimationPlayer.Stop();
 		m_AnimationPlayer.Play(m_IDLEAnimationName);
 		m_Walking = false;
+		
+		HealthSystem.MaxHealth = 1;
+		HealthSystem.CurrentHealth = 1;
+		HealthSystem.OnDeath += OnPlayerDeath;
+	}
+
+	private void OnPlayerDeath()
+	{
+		GetTree().Paused = true;
 	}
 
 	public override void _Process(double delta)

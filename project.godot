@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="KingsDuty"
-run/main_scene="res://Scenes/Main/StartUp.tscn"
+run/main_scene="res://Scenes/Main/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 

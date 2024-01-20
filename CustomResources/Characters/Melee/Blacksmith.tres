@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://bsqdtp4o7f13a" path="res://CustomResources/Weapons/Melee/Sword_Big.tres" id="10_71reo"]
 [ext_resource type="Resource" uid="uid://bh3wk6xs2r1b5" path="res://CustomResources/Weapons/Melee/Sword_Golden.tres" id="11_qvnwq"]
 [ext_resource type="Resource" uid="uid://qhhsufko6oif" path="res://CustomResources/Weapons/Melee/Sword_Short.tres" id="12_iu3kd"]
-[ext_resource type="Script" path="res://Scripts/Characters/Base/MeleeCharacter.cs" id="13_jf1bo"]
+[ext_resource type="Script" path="res://Scripts/Characters/Base/Data/MeleeCharacter.cs" id="13_jf1bo"]
 
 [resource]
 script = ExtResource("13_jf1bo")

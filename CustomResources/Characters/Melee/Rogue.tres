@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dn25mwal844y0" path="res://Sprites/Characters/Rogue.png" id="1_qu4e6"]
 [ext_resource type="Resource" uid="uid://cx6vuyjitrhnj" path="res://CustomResources/Weapons/Melee/Knife.tres" id="6_lu1pi"]
 [ext_resource type="Resource" uid="uid://qhhsufko6oif" path="res://CustomResources/Weapons/Melee/Sword_Short.tres" id="9_48umk"]
-[ext_resource type="Script" path="res://Scripts/Characters/Base/MeleeCharacter.cs" id="10_ayery"]
+[ext_resource type="Script" path="res://Scripts/Characters/Base/Data/MeleeCharacter.cs" id="10_ayery"]
 
 [resource]
 script = ExtResource("10_ayery")

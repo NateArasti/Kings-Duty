@@ -1,15 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2dfq4aekx133"]
 
 [ext_resource type="PackedScene" uid="uid://c6bfb044jd67f" path="res://Subscenes/Characters/Character.tscn" id="1_n45ue"]
-[ext_resource type="Script" path="res://Scripts/Characters/NPC/AllyCharacter.cs" id="2_ook8x"]
+[ext_resource type="Script" path="res://Scripts/Characters/Allies/AllyNPC.cs" id="2_jmdla"]
 
-[node name="Character" node_paths=PackedStringArray("m_Visuals", "m_AnimationPlayer") instance=ExtResource("1_n45ue")]
-script = ExtResource("2_ook8x")
+[node name="Ally" node_paths=PackedStringArray("m_Visuals", "HealthSystem", "m_VisualsPivot", "m_AnimationPlayer") instance=ExtResource("1_n45ue")]
+script = ExtResource("2_jmdla")
 m_Visuals = NodePath("CharacterVisuals")
+AttackVisionRange = 4.0
+HealthSystem = NodePath("HealthSystem")
+m_VisualsPivot = NodePath("CharacterVisuals")
 m_AnimationPlayer = NodePath("AnimationPlayer")
-m_FollowSpaceDistance = 0.5
-m_MoveSpeedGradient = Vector2(1.3, 3)
-m_RotationSpeed = 2.0
+StrictOffsetFollow = false
 m_ObstacleAvoidanceRaysCount = 16
 m_ObstacleAvoidanceMinLength = 0.25
 m_ObstacleAvoidanceMaxLength = 1.0
