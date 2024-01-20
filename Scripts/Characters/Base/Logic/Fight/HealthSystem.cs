@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class HealthSystem : Node
@@ -13,10 +14,20 @@ public partial class HealthSystem : Node
 	public void TakeDamage(int damageCount)
 	{
 		CurrentHealth -= damageCount;
-		m_BodySprite.Modulate = Colors.White.Lerp(Colors.Red, (MaxHealth - CurrentHealth) / (float)MaxHealth);
 		if (CurrentHealth <= 0)
 		{
 			OnDeath?.Invoke();
 		}
+		else
+		{
+			ShowHitEffect();			
+		}
+	}
+	
+	private async void ShowHitEffect()
+	{
+		(m_BodySprite.MaterialOverlay as ShaderMaterial).SetShaderParameter("active", true);
+		await Task.Delay(100);
+		(m_BodySprite.MaterialOverlay as ShaderMaterial).SetShaderParameter("active", false);
 	}
 }
