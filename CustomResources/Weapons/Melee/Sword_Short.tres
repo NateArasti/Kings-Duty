@@ -8,5 +8,5 @@ resource_name = "Sword"
 script = ExtResource("2_b45ef")
 AttackDamage = 4
 AttackCooldown = 1.25
-AttackRange = 0.25
+AttackRange = 0.4
 Sprite = ExtResource("1_ok3pg")

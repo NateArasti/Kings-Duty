@@ -8,5 +8,5 @@ resource_name = "Axe"
 script = ExtResource("2_r70nf")
 AttackDamage = 6
 AttackCooldown = 2.0
-AttackRange = 0.25
+AttackRange = 0.45
 Sprite = ExtResource("1_uqtb0")
