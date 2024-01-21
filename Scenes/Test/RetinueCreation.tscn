@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://di8eeek7fmgjr" path="res://CustomResources/Characters/Melee/Peasent.tres" id="11_a5y6r"]
 
 [node name="RetinueCreation" type="Control" node_paths=PackedStringArray("m_CharacterPanels", "m_CharactersCoundown")]
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

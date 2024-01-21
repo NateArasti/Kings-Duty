@@ -25,7 +25,7 @@ public partial class CharacterPanel : Node
 		m_NameLabel.Text = Character.Name;
 		m_MainRect.Texture = Character.Sprite;
 		
-		m_HealthLabel.Text = $"Max HP: {character.MaxHP}";
+		m_HealthLabel.Text = $"Health: {character.MaxHP}";
 		
 		m_ResistanceLabel.Text = $"Resistance: {character.DefaultResistance}%";
 		

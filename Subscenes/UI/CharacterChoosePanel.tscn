@@ -115,8 +115,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="Space" type="Control" parent="MainPart/InfoPanel/MarginContainer/Data"]
-custom_minimum_size = Vector2(0, 16)
+[node name="Space" type="HSeparator" parent="MainPart/InfoPanel/MarginContainer/Data"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="Type" type="Label" parent="MainPart/InfoPanel/MarginContainer/Data"]
@@ -143,8 +143,8 @@ layout_mode = 2
 label_settings = ExtResource("4_8h60i")
 vertical_alignment = 1
 
-[node name="Space_2" type="Control" parent="MainPart/InfoPanel/MarginContainer/Data"]
-custom_minimum_size = Vector2(0, 16)
+[node name="Space_2" type="HSeparator" parent="MainPart/InfoPanel/MarginContainer/Data"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="-----Weapon-----" type="Label" parent="MainPart/InfoPanel/MarginContainer/Data"]
@@ -157,8 +157,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="Space_3" type="Control" parent="MainPart/InfoPanel/MarginContainer/Data"]
-custom_minimum_size = Vector2(0, 16)
+[node name="Space_3" type="HSeparator" parent="MainPart/InfoPanel/MarginContainer/Data"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="WeaponType" type="Label" parent="MainPart/InfoPanel/MarginContainer/Data"]
@@ -182,8 +182,8 @@ text = "Cooldown: 0"
 label_settings = ExtResource("4_8h60i")
 vertical_alignment = 1
 
-[node name="Space_4" type="Control" parent="MainPart/InfoPanel/MarginContainer/Data"]
-custom_minimum_size = Vector2(0, 16)
+[node name="Space_4" type="HSeparator" parent="MainPart/InfoPanel/MarginContainer/Data"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="ToggleInfo" type="Control" parent="MainPart"]
