@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=22 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_fljgg"]
 [ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_r07sy"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://c8g02yp1nunew" path="res://Scenes/Test/RetinueCreation.tscn" id="15_y3ogn"]
 [ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemiesController.cs" id="16_i2cei"]
 [ext_resource type="PackedScene" uid="uid://c4njyn1latrwg" path="res://Subscenes/Characters/NPC_Enemy.tscn" id="17_ppqr3"]
+[ext_resource type="Script" path="res://Scripts/GlobalTimer.cs" id="18_sllsu"]
+[ext_resource type="LabelSettings" uid="uid://bto5vc8ptpgi" path="res://CustomResources/UI/SmallFont.tres" id="19_aob7p"]
 
 [sub_resource type="Environment" id="Environment_ua30k"]
 background_mode = 1
@@ -79,5 +81,17 @@ visible = false
 
 [node name="EnemiesController" type="Node" parent="."]
 script = ExtResource("16_i2cei")
-m_SpawnOffset = Vector3(0, 0, -5)
+m_SpawnRange = 5.0
 m_EnemyScene = ExtResource("17_ppqr3")
+
+[node name="GlobalTimer" type="Node" parent="." node_paths=PackedStringArray("m_TimerLabel")]
+script = ExtResource("18_sllsu")
+m_TimerLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="GlobalTimer"]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 94.0
+offset_bottom = 46.0
+text = "00:00"
+label_settings = ExtResource("19_aob7p")

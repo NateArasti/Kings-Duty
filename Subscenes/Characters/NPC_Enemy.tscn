@@ -16,7 +16,11 @@ shader_parameter/source_texture = ExtResource("4_jhl5a")
 
 [node name="Enemy" node_paths=PackedStringArray("HealthSystem", "m_VisualsPivot", "m_AnimationPlayer") instance=ExtResource("1_ppofu")]
 script = ExtResource("2_yn7wj")
-MaxHP = 50
+MaxHP = 3
+AttackStayInRange = 1.0
+AttackVisionRange = 50000.0
+AttackDamage = 1
+AttackRange = 0.25
 HealthSystem = NodePath("HealthSystem")
 m_VisualsPivot = NodePath("CharacterVisuals")
 m_AnimationPlayer = NodePath("AnimationPlayer")
