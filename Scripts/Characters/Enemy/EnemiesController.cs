@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
 public partial class EnemiesController : Node
 {
 	public static EnemiesController Instance { get; private set; }
+	
+	public event Action OnEnemyDeath;
 	
 	[Export] private float m_SpawnRange;
 	[Export] private int m_WaveBaseValue = 2;
@@ -17,6 +20,8 @@ public partial class EnemiesController : Node
 
 	private readonly HashSet<EnemyNPC> m_CurrentEnemies = new();
 
+	public int KilledEnemeiesCount { get; private set; 
+	}
 	public IReadOnlyCollection<EnemyNPC> CurrentEnemies => m_CurrentEnemies;
 
 	public override void _Ready()
@@ -60,7 +65,7 @@ public partial class EnemiesController : Node
 	private void SpawnEnemyInstance()
 	{
 		var enemy = m_EnemyScene.Instantiate<EnemyNPC>();
-		enemy.HealthSystem.OnDeath += () => m_CurrentEnemies.Remove(enemy);
+		enemy.HealthSystem.OnDeath += () => KillEnemy(enemy);
 		var spawnOffset = RandomExtensions.RandomPointOnUnitCircle() * m_SpawnRange;
 		enemy.Position = PlayerGlobalController.Instance.Player.GlobalPosition + new Vector3(spawnOffset.X, 0, spawnOffset.Y);
 		AddChild(enemy);
@@ -69,7 +74,10 @@ public partial class EnemiesController : Node
 	
 	private void KillEnemy(EnemyNPC instance)
 	{
+		KilledEnemeiesCount++;
 		m_CurrentEnemies.Remove(instance);
 		instance.QueueFree();
+		
+		OnEnemyDeath?.Invoke();
 	}
 }

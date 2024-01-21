@@ -74,6 +74,7 @@ height = 0.25
 radius = 0.075
 
 [node name="Character" type="CharacterBody3D"]
+process_mode = 1
 
 [node name="CharacterVisuals" type="Node3D" parent="." node_paths=PackedStringArray("m_BodySprite", "m_MainHandObjectSprite")]
 script = ExtResource("1_1x2fp")

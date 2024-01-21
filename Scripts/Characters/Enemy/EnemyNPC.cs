@@ -17,7 +17,11 @@ public partial class EnemyNPC : FightNPC
 		if (AttackFollowTarget) HandleAttackOffset();
 	}
 
-	private void HandleAttackOffset()
+    protected override void OnDeath()
+    {
+    }
+
+    private void HandleAttackOffset()
 	{
 		var direction = (GlobalPosition - FollowTarget.GlobalPosition).Normalized();
 		

@@ -34,7 +34,7 @@ public partial class PlayerMovementController : CharacterBody3D, IHittable
 
 	private void OnPlayerDeath()
 	{
-		GetTree().Paused = true;
+		// GetTree().Paused = true;
 	}
 
 	public override void _Process(double delta)

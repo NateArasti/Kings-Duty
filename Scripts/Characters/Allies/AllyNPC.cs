@@ -54,7 +54,7 @@ public partial class AllyNPC : FightNPC
 		{
 			HealthSystem.MaxHealth = fightCharacter.MaxHP;
 			HealthSystem.CurrentHealth = fightCharacter.MaxHP;
-			AttackCooldown = weapon.AttackCooldown * fightCharacter.AttackSpeed;
+			AttackCooldown = Mathf.Max(0.1f, weapon.AttackCooldown / fightCharacter.AttackSpeed);
 			AttackRange = weapon.AttackRange;
 			AttackDamage = weapon.AttackDamage;
 		}

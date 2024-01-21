@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=25 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_fljgg"]
 [ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_r07sy"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c4njyn1latrwg" path="res://Subscenes/Characters/NPC_Enemy.tscn" id="17_ppqr3"]
 [ext_resource type="Script" path="res://Scripts/GlobalTimer.cs" id="18_sllsu"]
 [ext_resource type="LabelSettings" uid="uid://bto5vc8ptpgi" path="res://CustomResources/UI/SmallFont.tres" id="19_aob7p"]
+[ext_resource type="Script" path="res://Scripts/Progression.cs" id="20_b01o2"]
 
 [sub_resource type="Environment" id="Environment_ua30k"]
 background_mode = 1
@@ -33,6 +34,12 @@ adjustment_contrast = 1.1
 auto_exposure_scale = 0.06
 dof_blur_far_distance = 8040.33
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bovkp"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6k35"]
+bg_color = Color(0.247059, 0.32549, 0.87451, 1)
+
 [node name="Main" type="Node"]
 
 [node name="Environment" type="Node" parent="."]
@@ -45,7 +52,6 @@ m_WorldTile = ExtResource("2_r07sy")
 m_GroundTextures = Array[Texture2D]([ExtResource("3_aqul3"), ExtResource("4_vf3m5"), ExtResource("5_07180"), ExtResource("6_75mh7"), ExtResource("7_ukdxv")])
 m_RoadTextures = Array[Texture2D]([ExtResource("8_cqcl8"), ExtResource("9_mjx4q")])
 m_StepValue = Vector2(0.5, 0.385)
-m_SpawnNature = false
 m_TreeScene = ExtResource("10_hurmi")
 m_TreeSpawnMinDistance = 0.8
 
@@ -67,6 +73,7 @@ script = ExtResource("11_laj72")
 Player = NodePath("Player")
 
 [node name="Player" parent="PlayerGlobalController" instance=ExtResource("12_vltxi")]
+process_mode = 0
 
 [node name="RetinueController" type="Node" parent="." node_paths=PackedStringArray("m_CharacterGenerator")]
 process_mode = 3
@@ -76,7 +83,6 @@ m_AllyScene = ExtResource("14_hl5t6")
 m_StartRetinueCount = 3
 
 [node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]
-process_mode = 2
 visible = false
 
 [node name="EnemiesController" type="Node" parent="."]
@@ -95,3 +101,23 @@ offset_right = 94.0
 offset_bottom = 46.0
 text = "00:00"
 label_settings = ExtResource("19_aob7p")
+
+[node name="Progression" type="Node" parent="." node_paths=PackedStringArray("m_CurrentProgress")]
+script = ExtResource("20_b01o2")
+m_CurrentProgress = NodePath("ProgressBar")
+m_BaseEnemyKillsPerLevel = 10
+
+[node name="ProgressBar" type="ProgressBar" parent="Progression"]
+custom_minimum_size = Vector2(0, 16)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_bovkp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g6k35")
+max_value = 1.0
+value = 1.0
+show_percentage = false
