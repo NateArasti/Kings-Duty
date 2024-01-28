@@ -5,6 +5,7 @@ public partial class PlayerMovementController : CharacterBody3D, IHittable
 	[Export] private float m_MoveSpeed = 2;
 	[Export] private Node3D m_VisualsPivot;
 	[Export] private bool m_LookRight = true;
+	[Export] private Control m_DeathScreen;
 	
 	[ExportGroup("Animations")]
 	[Export] private AnimationPlayer m_AnimationPlayer;
@@ -34,7 +35,8 @@ public partial class PlayerMovementController : CharacterBody3D, IHittable
 
 	private void OnPlayerDeath()
 	{
-		// GetTree().Paused = true;
+		GetTree().Paused = true;
+		m_DeathScreen.Visible = true;
 	}
 
 	public override void _Process(double delta)
