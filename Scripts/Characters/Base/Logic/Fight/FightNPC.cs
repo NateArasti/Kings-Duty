@@ -92,7 +92,8 @@ public abstract partial class FightNPC : MoveableNPC, IHittable
 	{
 		InAttack = true;
 		m_AnimationPlayer.Stop();
-		m_AnimationPlayer.Play(m_MeleeAttackAnimaitonName);
+		var directionSuffix = LookRight ? 'R' : 'L';
+		m_AnimationPlayer.Play($"{m_MeleeAttackAnimaitonName}_{directionSuffix}");
 		m_AnimationPlayer.AnimationFinished += FinishAttack;
 	}
 

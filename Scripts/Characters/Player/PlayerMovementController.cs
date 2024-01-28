@@ -102,7 +102,8 @@ public partial class PlayerMovementController : CharacterBody3D, IHittable
 		if (!m_Walking && Velocity.LengthSquared() > 0)
 		{
 			m_AnimationPlayer.Stop();
-			m_AnimationPlayer.Play(m_WalkAnimationName);
+			var directionSuffix = m_LookRight ? 'R' : 'L';
+			m_AnimationPlayer.Play($"{m_WalkAnimationName}_{directionSuffix}");
 			m_Walking = true;
 		}
 		else if(m_Walking && Velocity.LengthSquared() == 0)

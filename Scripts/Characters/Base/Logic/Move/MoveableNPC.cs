@@ -10,8 +10,9 @@ public partial class MoveableNPC : CharacterFollower
 	[Export] private string m_WalkAnimationName = "Walk";
 	
 	private bool m_Walking;
-	private bool m_LookRight = true;
 	
+	protected bool LookRight { get; private set; } = true;
+		
 	public bool LookAtTarget { get; set; }
 
 	public override void _Ready()
@@ -26,9 +27,9 @@ public partial class MoveableNPC : CharacterFollower
 		if (LookAtTarget)
 		{
 			var targetLook = FollowTarget.GlobalPosition.Z > GlobalPosition.Z;
-			if (m_LookRight != targetLook) ToggleLook();
+			if (LookRight != targetLook) ToggleLook();
 		}
-		else if((Velocity.Z > 0 && !m_LookRight) || (Velocity.Z < 0 && m_LookRight))
+		else if((Velocity.Z > 0 && !LookRight) || (Velocity.Z < 0 && LookRight))
 		{
 			ToggleLook();			
 		}
@@ -38,7 +39,7 @@ public partial class MoveableNPC : CharacterFollower
 	
 	private void ToggleLook()
 	{
-		m_LookRight = !m_LookRight;
+		LookRight = !LookRight;
 		toggleLoop(m_VisualsPivot);
 		
 		void toggleLoop(Node3D pivot)
@@ -68,7 +69,8 @@ public partial class MoveableNPC : CharacterFollower
 		if (!m_Walking && Velocity.LengthSquared() > 0.05f)
 		{
 			m_AnimationPlayer.Stop();
-			m_AnimationPlayer.Play(m_WalkAnimationName);
+			var directionSuffix = LookRight ? 'R' : 'L';
+			m_AnimationPlayer.Play($"{m_WalkAnimationName}_{directionSuffix}");
 			m_Walking = true;
 		}
 		else if(m_Walking && Velocity.LengthSquared() < 0.05f)

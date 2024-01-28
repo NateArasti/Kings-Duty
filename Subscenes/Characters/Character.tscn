@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6bfb044jd67f"]
+[gd_scene load_steps=14 format=3 uid="uid://c6bfb044jd67f"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/CharacterVisuals.cs" id="1_1x2fp"]
 [ext_resource type="Script" path="res://Scripts/Node3DBillboard.cs" id="2_uudij"]
@@ -25,26 +25,8 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 1, 1, 1.05, 1.05, 1.05)
 
-[sub_resource type="Animation" id="Animation_telw8"]
-resource_name = "MeleeAttack"
-length = 0.5
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterVisuals")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, 0.1, 0.1, 0, 0.3, 1, 0.1, 0.1, 0, 0.5, 1, 0, 0, 0)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterVisuals/BillboardPivot/Body")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, 0, 0, -0.216, 0.976, 0.3, 1, 0, 0, -0.216, 0.976, 0.5, 1, 0, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_3xuku"]
-resource_name = "Walk"
+resource_name = "Walk_R"
 loop_mode = 1
 step = 0.05
 tracks/0/type = "position_3d"
@@ -62,11 +44,68 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0, 0, -0.087, 0.996, 0.5, 1, 0, 0, 0, 1, 0.75, 1, 0, 0, 0.087, 0.996, 1, 1, 0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_q330x"]
+resource_name = "Walk_L"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterVisuals")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.25, 1, -0.05, 0.05, 0, 0.5, 1, 0, 0, 0, 0.75, 1, 0.05, 0.05, 0, 1, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterVisuals/BillboardPivot/Body")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0, 0, 0.087, 0.996, 0.5, 1, 0, 0, 0, 1, 0.75, 1, 0, 0, -0.087, 0.996, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_telw8"]
+resource_name = "MeleeAttack_R"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterVisuals")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, 0.1, 0.1, 0, 0.3, 1, 0.1, 0.1, 0, 0.5, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterVisuals/BillboardPivot/Body")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, 0, 0, -0.216, 0.976, 0.3, 1, 0, 0, -0.216, 0.976, 0.5, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_yyldh"]
+resource_name = "MeleeAttack_L"
+length = 0.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterVisuals")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, -0.1, 0.1, 0, 0.3, 1, -0.1, 0.1, 0, 0.5, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterVisuals/BillboardPivot/Body")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, 0, 0, 0.216, 0.976, 0.3, 1, 0, 0, 0.216, 0.976, 0.5, 1, 0, 0, 0, 1)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tingm"]
 _data = {
 "Idle": SubResource("Animation_wbbaf"),
-"MeleeAttack": SubResource("Animation_telw8"),
-"Walk": SubResource("Animation_3xuku")
+"MeleeAttack_L": SubResource("Animation_yyldh"),
+"MeleeAttack_R": SubResource("Animation_telw8"),
+"Walk_L": SubResource("Animation_q330x"),
+"Walk_R": SubResource("Animation_3xuku")
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_lwwl5"]
