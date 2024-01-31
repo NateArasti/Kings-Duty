@@ -8,5 +8,5 @@ resource_name = "Hammer"
 script = ExtResource("2_ooa5n")
 AttackDamage = 3
 AttackCooldown = 1.0
-AttackRange = 0.25
+AttackRange = 0.3
 Sprite = ExtResource("1_dro53")

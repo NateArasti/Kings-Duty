@@ -9,7 +9,6 @@ public partial class AllyNPC : FightNPC
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		HandleTarget();
 		if (AttackFollowTarget) HandleAttackOffset();
 	}
 
@@ -18,24 +17,6 @@ public partial class AllyNPC : FightNPC
 		var direction = (PlayerGlobalController.Instance.Player.GlobalPosition - FollowTarget.GlobalPosition).Normalized();
 		
 		FollowOffset = direction * (CanAttack ? AttackRange : AttackStayInRange);
-	}
-
-	private void HandleTarget()
-	{
-		if (!AttackFollowTarget)
-		{
-			var possibleTarget = GetNextTarget();
-			if (possibleTarget != null)
-			{
-				SubscribeToAttackTarget(possibleTarget);
-			}
-		}
-		
-		if (!AttackFollowTarget || FollowTarget == null
-			|| PlayerGlobalController.Instance.IsTooFarFromPlayer(FollowTarget))
-		{
-			UnsubscribeFromAttackTarget();
-		}
 	}
 
 	public override void UnsubscribeFromAttackTarget()
@@ -59,24 +40,5 @@ public partial class AllyNPC : FightNPC
 			AttackDamage = weapon.AttackDamage;
 		}
 		m_Visuals.SetVisuals(character.Sprite, weapon.Sprite);
-	}
-	
-	private EnemyNPC GetNextTarget()
-	{
-		if (EnemiesController.Instance == null || EnemiesController.Instance.CurrentEnemies.Count == 0) return null;
-		
-		(float sqrDistance, EnemyNPC chosenEnemy) nextTarget = (float.PositiveInfinity, null);
-		foreach (var enemy in EnemiesController.Instance.CurrentEnemies)
-		{
-			var sqrDistance = GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition);
-			
-			if (sqrDistance < nextTarget.sqrDistance && 
-				sqrDistance <= AttackVisionRange * AttackVisionRange)
-			{
-				nextTarget = (sqrDistance, enemy);
-			}
-		}		
-		
-		return nextTarget.chosenEnemy;
 	}
 }

@@ -2,42 +2,65 @@ using Godot;
 
 public partial class EnemyNPC : FightNPC
 {
-	[Export] private int MaxHP = 5;
-
+	[Export] private int m_MaxHP = 10;
+	[Export] private float m_AttackPlayerTimeout = 1;
+	private float m_CurrentPlayerReachTimeout;
+	
 	public override void _Ready()
 	{
 		base._Ready();
-		HealthSystem.MaxHealth = MaxHP;
-		HealthSystem.CurrentHealth = MaxHP;
+		HealthSystem.MaxHealth = m_MaxHP;
+		HealthSystem.CurrentHealth = m_MaxHP;
 	}
+	
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		HandleTarget();
+		HandleTarget((float)delta);
 		if (AttackFollowTarget) HandleAttackOffset();
 	}
 
-    protected override void OnDeath()
-    {
-    }
-
-    private void HandleAttackOffset()
+	private void HandleAttackOffset()
 	{
 		var direction = (GlobalPosition - FollowTarget.GlobalPosition).Normalized();
 		
 		FollowOffset = direction * (CanAttack ? AttackRange : AttackStayInRange);
 	}
 
-	private void HandleTarget()
+	private void HandleTarget(float delta)
 	{
-		if (!AttackFollowTarget || FollowTarget == PlayerGlobalController.Instance.Player)
+		var canReachPlayer = CanReachPlayer();
+		
+		if (canReachPlayer)
 		{
-			var possibleTarget = GetNextTarget();
+			m_CurrentPlayerReachTimeout += delta;
+			m_CurrentPlayerReachTimeout = Mathf.Min(m_CurrentPlayerReachTimeout, m_AttackPlayerTimeout + 1);
+		}
+		else
+		{
+			m_CurrentPlayerReachTimeout = 0;
+		}
+		
+		var shouldAttackPlayer = m_CurrentPlayerReachTimeout >= m_AttackPlayerTimeout;
+		
+		if (shouldAttackPlayer)
+		{
+			if (FollowTarget != PlayerGlobalController.Instance.Player)
+			{
+				SubscribeToAttackTarget(PlayerGlobalController.Instance.Player);
+			}
+			
+			return;
+		}
+		
+		if (!AttackFollowTarget)
+		{
+			var possibleTarget = GetNonPlayerAttackTarget();
 			SubscribeToAttackTarget(possibleTarget ?? PlayerGlobalController.Instance.Player);
 		}
 	}
 	
-	private AllyNPC GetNextTarget()
+	private AllyNPC GetNonPlayerAttackTarget()
 	{
 		if (RetinueController.Instance == null || RetinueController.Instance.CurrentAllies.Count == 0) return null;
 		
@@ -54,5 +77,23 @@ public partial class EnemyNPC : FightNPC
 		}		
 		
 		return nextTarget.chosenEnemy;
+	}
+	
+	private bool CanReachPlayer()
+	{
+		if (RetinueController.Instance == null || RetinueController.Instance.CurrentAllies.Count == 0) return true;
+		
+		var playerDirection = PlayerGlobalController.Instance.Player.GlobalPosition - GlobalPosition;
+		var distanceToPlayer = playerDirection.LengthSquared();
+		
+		foreach (var ally in RetinueController.Instance.CurrentAllies)
+		{
+			var directionToAlly = ally.GlobalPosition - GlobalPosition;
+			var dot = playerDirection.Dot(directionToAlly);
+			var distanceToAlly = directionToAlly.LengthSquared();
+			if(distanceToAlly <= AttackRange || (dot > 0 && distanceToAlly < distanceToPlayer)) return false;
+		}
+		
+		return true;
 	}
 }

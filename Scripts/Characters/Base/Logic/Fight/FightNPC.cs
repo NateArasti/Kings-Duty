@@ -3,10 +3,14 @@ using Godot;
 
 public abstract partial class FightNPC : MoveableNPC, IHittable
 {	
+	public event Action<FightNPC> OnDeath;
+	
 	[Export] private string m_MeleeAttackAnimaitonName = "MeleeAttack";
 	[Export] private string m_RangeAttackAnimaitonName = "RangeAttack";
 	
 	private float m_CurrentAttackCooldown;
+	
+	private IHittable m_CurrentAttackTarget;
 	
 	protected bool CanAttack => AttackFollowTarget && FollowTarget != null && m_CurrentAttackCooldown <= 0;
 	
@@ -32,7 +36,7 @@ public abstract partial class FightNPC : MoveableNPC, IHittable
 	public override void _Ready()
 	{
 		base._Ready();
-		HealthSystem.OnDeath += OnDeath;
+		HealthSystem.OnDeath += Death;
 	}
 
 	public override void _Process(double delta)
@@ -47,13 +51,14 @@ public abstract partial class FightNPC : MoveableNPC, IHittable
 		base._Process(delta);		
 	}
 
-	protected virtual void OnDeath()
+	protected void Death()
 	{
-		QueueFree();
+		OnDeath?.Invoke(this);
 	}
 	
 	public virtual void SubscribeToAttackTarget(Node3D attackTarget)
 	{
+		if(attackTarget == null) throw new NullReferenceException("Provided attack target was null");
 		FollowTarget = attackTarget;
 		
 		if (FollowTarget is IHittable hittable)
@@ -91,6 +96,7 @@ public abstract partial class FightNPC : MoveableNPC, IHittable
 	protected virtual void Attack()
 	{
 		InAttack = true;
+		m_CurrentAttackTarget = FollowTarget as IHittable;
 		m_AnimationPlayer.Stop();
 		var directionSuffix = LookRight ? 'R' : 'L';
 		m_AnimationPlayer.Play($"{m_MeleeAttackAnimaitonName}_{directionSuffix}");
@@ -99,9 +105,9 @@ public abstract partial class FightNPC : MoveableNPC, IHittable
 
 	private void FinishAttack(StringName animName)
 	{
-		if (FollowTarget is IHittable hittable)
+		if (m_CurrentAttackTarget != null)
 		{
-			hittable.HealthSystem.TakeDamage(AttackDamage);
+			m_CurrentAttackTarget.HealthSystem.TakeDamage(AttackDamage);
 		}
 		InAttack = false;
 		m_CurrentAttackCooldown = AttackCooldown;

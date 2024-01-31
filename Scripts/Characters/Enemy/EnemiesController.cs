@@ -6,7 +6,7 @@ public partial class EnemiesController : Node
 {
 	public static EnemiesController Instance { get; private set; }
 	
-	public event Action OnEnemyDeath;
+	public event Action<EnemyNPC> OnEnemyDeath;
 	
 	[Export] private float m_SpawnRange;
 	[Export] private int m_WaveBaseValue = 2;
@@ -65,19 +65,20 @@ public partial class EnemiesController : Node
 	private void SpawnEnemyInstance()
 	{
 		var enemy = m_EnemyScene.Instantiate<EnemyNPC>();
-		enemy.HealthSystem.OnDeath += () => KillEnemy(enemy);
+		enemy.OnDeath += HandleEnemyDeath;
 		var spawnOffset = RandomExtensions.RandomPointOnUnitCircle() * m_SpawnRange;
 		enemy.Position = PlayerGlobalController.Instance.Player.GlobalPosition + new Vector3(spawnOffset.X, 0, spawnOffset.Y);
 		AddChild(enemy);
 		m_CurrentEnemies.Add(enemy);
 	}
 	
-	private void KillEnemy(EnemyNPC instance)
+	private void HandleEnemyDeath(FightNPC instance)
 	{
+		if(instance is not EnemyNPC enemy) return;
 		KilledEnemeiesCount++;
-		m_CurrentEnemies.Remove(instance);
+		m_CurrentEnemies.Remove(enemy);
 		instance.QueueFree();
 		
-		OnEnemyDeath?.Invoke();
+		OnEnemyDeath?.Invoke(enemy);
 	}
 }

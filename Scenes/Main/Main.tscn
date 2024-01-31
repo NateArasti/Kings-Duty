@@ -75,21 +75,6 @@ Player = NodePath("Player")
 [node name="Player" parent="PlayerGlobalController" instance=ExtResource("12_vltxi")]
 process_mode = 0
 
-[node name="RetinueController" type="Node" parent="." node_paths=PackedStringArray("m_CharacterGenerator")]
-process_mode = 3
-script = ExtResource("13_exdnn")
-m_CharacterGenerator = NodePath("RetinueCreation")
-m_AllyScene = ExtResource("14_hl5t6")
-m_StartRetinueCount = 3
-
-[node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]
-visible = false
-
-[node name="EnemiesController" type="Node" parent="."]
-script = ExtResource("16_i2cei")
-m_SpawnRange = 5.0
-m_EnemyScene = ExtResource("17_ppqr3")
-
 [node name="GlobalTimer" type="Node" parent="." node_paths=PackedStringArray("m_TimerLabel")]
 script = ExtResource("18_sllsu")
 m_TimerLabel = NodePath("Label")
@@ -121,3 +106,19 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_g6k35")
 max_value = 1.0
 value = 1.0
 show_percentage = false
+
+[node name="EnemiesController" type="Node" parent="."]
+script = ExtResource("16_i2cei")
+m_SpawnRange = 5.0
+m_EnemyScene = ExtResource("17_ppqr3")
+
+[node name="RetinueController" type="Node" parent="." node_paths=PackedStringArray("m_CharacterGenerator")]
+process_mode = 3
+script = ExtResource("13_exdnn")
+m_CharacterGenerator = NodePath("RetinueCreation")
+m_AllyScene = ExtResource("14_hl5t6")
+m_StartRetinueCount = 3
+m_AttackAreaDistance = 5.0
+
+[node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]
+visible = false
