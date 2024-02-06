@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c6bfb044jd67f" path="res://Subscenes/Characters/Character.tscn" id="1_ppofu"]
 [ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemyNPC.cs" id="2_yn7wj"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_jl127"]
-[ext_resource type="Texture2D" uid="uid://dfgawhtyt0t7r" path="res://Sprites/Monster.png" id="3_uunw6"]
+[ext_resource type="Texture2D" uid="uid://dfgawhtyt0t7r" path="res://Sprites/Enemies/Monster.png" id="3_uunw6"]
 [ext_resource type="Texture2D" uid="uid://cxdd2y6fb4a0y" path="res://Sprites/Characters/SimpleGuy.png" id="4_jhl5a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ifils"]
@@ -17,7 +17,6 @@ shader_parameter/source_texture = ExtResource("4_jhl5a")
 [node name="Enemy" node_paths=PackedStringArray("HealthSystem", "m_VisualsPivot", "m_AnimationPlayer") instance=ExtResource("1_ppofu")]
 script = ExtResource("2_yn7wj")
 AttackStayInRange = 1.0
-AttackVisionRange = 50000.0
 AttackDamage = 2
 HealthSystem = NodePath("HealthSystem")
 m_VisualsPivot = NodePath("CharacterVisuals")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp4wrkh2jmusw"]
+
+[ext_resource type="PackedScene" uid="uid://c4njyn1latrwg" path="res://Subscenes/Characters/Enemies/NPC_Enemy.tscn" id="1_6vuvm"]
+[ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="2_fwgtr"]
+[ext_resource type="Texture2D" uid="uid://cxdd2y6fb4a0y" path="res://Sprites/Characters/SimpleGuy.png" id="3_o14eq"]
+[ext_resource type="Texture2D" uid="uid://ceb7x1vwr3iam" path="res://Sprites/Enemies/Monster+.png" id="4_0kfw8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3nm8i"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("2_fwgtr")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/source_texture = ExtResource("3_o14eq")
+
+[node name="Enemy" instance=ExtResource("1_6vuvm")]
+m_MaxHP = 20
+AttackDamage = 5
+
+[node name="Body" parent="CharacterVisuals/BillboardPivot" index="0"]
+material_overlay = SubResource("ShaderMaterial_3nm8i")
+texture = ExtResource("4_0kfw8")

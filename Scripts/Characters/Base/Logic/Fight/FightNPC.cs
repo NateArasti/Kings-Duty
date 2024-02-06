@@ -17,7 +17,6 @@ public abstract partial class FightNPC : MoveableNPC, IHittable
 	protected bool AttackFollowTarget { get; set; }	
 	
 	[Export] public float AttackStayInRange { get; private set; } = 1.5f;
-	[Export] public float AttackVisionRange { get; private set; } = 5f;
 	[Export] public int AttackDamage { get; protected set; } = 10;
 	[Export] public float AttackRange { get; protected set; } = 0.5f;
 	[Export] public float AttackCooldown { get; protected set; } = 1.5f;

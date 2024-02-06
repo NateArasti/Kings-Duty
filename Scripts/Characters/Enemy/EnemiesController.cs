@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class EnemiesController : Node
@@ -9,62 +11,68 @@ public partial class EnemiesController : Node
 	public event Action<EnemyNPC> OnEnemyDeath;
 	
 	[Export] private float m_SpawnRange;
-	[Export] private int m_WaveBaseValue = 2;
+	[Export] private int m_StartCurrency = 2;
 	[Export] private float m_EnemySpawnCooldown = 1;
-	[Export] private PackedScene m_EnemyScene;
-
-	private float m_CurrentSpawnCooldown;
+	[Export] private float m_WaveSpawnCooldown = 10;
+	[Export] private float m_WaveAwaitAdd = 2;
+	[Export] private PackedScene[] m_EnemyScenes;
+	[Export] private int[] m_EnemyCosts;
 	
-	private int m_WavesCount;
-	private int m_CurrentWaveMaxEnemiesCount;
+	private int m_CurrentWaveMaxCost = 0;
 
+	private readonly ConcurrentQueue<PackedScene> m_EnemySpawnRequests = new();
 	private readonly HashSet<EnemyNPC> m_CurrentEnemies = new();
 
-	public int KilledEnemeiesCount { get; private set; 
-	}
+	public int KilledEnemeiesCount { get; private set; }
 	public IReadOnlyCollection<EnemyNPC> CurrentEnemies => m_CurrentEnemies;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		Instance = this;
+		EnemyRequest();
+		EnemySpawn();
 	}
-
-	public override void _Process(double delta)
+	
+	private async void EnemySpawn()
 	{
-		base._Process(delta);
-		if(m_CurrentSpawnCooldown > 0) m_CurrentSpawnCooldown -= (float)delta;
-		
-		if(m_CurrentSpawnCooldown <= 0)
+		while (true)
 		{
-			if (m_CurrentEnemies.Count == m_CurrentWaveMaxEnemiesCount)
-			{
-				m_CurrentWaveMaxEnemiesCount = GetWaveEnemyCount(m_WavesCount);
-			}
+			await Task.Delay((int)(m_EnemySpawnCooldown * 1000));
+			if(m_EnemySpawnRequests.Count < 0) continue;
 			
-			if(m_CurrentEnemies.Count < m_CurrentWaveMaxEnemiesCount)
+			if (m_EnemySpawnRequests.TryDequeue(out var enemyScene))
 			{
-				SpawnEnemyInstance();
-				m_CurrentSpawnCooldown = m_EnemySpawnCooldown;
-				
-				if (m_CurrentEnemies.Count == m_CurrentWaveMaxEnemiesCount)
-				{
-					m_WavesCount++;
-					m_CurrentWaveMaxEnemiesCount = Mathf.RoundToInt(0.3f * m_CurrentWaveMaxEnemiesCount);
-				}				
+				SpawnEnemyInstance(enemyScene);
 			}
 		}
 	}
 	
-	private int GetWaveEnemyCount(int waveIndex)
+	private async void EnemyRequest()
 	{
-		var waveOffset = waveIndex / 2;
-		return m_WaveBaseValue + m_WaveBaseValue * waveIndex * (1 + GlobalTimer.CurrentTime.Minutes) + GD.RandRange(-waveOffset, waveOffset);
+		while (true)
+		{
+			m_CurrentWaveMaxCost += m_StartCurrency;
+			var awailableCurrency = m_CurrentWaveMaxCost;
+			for (var i = m_EnemyCosts.Length - 1; i >= 0;)
+			{
+				if (awailableCurrency <= m_EnemyCosts[i])
+				{
+					i--;
+					continue;
+				}
+				
+				m_EnemySpawnRequests.Enqueue(m_EnemyScenes[i]);
+				awailableCurrency -= m_EnemyCosts[i];
+			}
+			await Task.Delay((int)(m_WaveSpawnCooldown * 1000));
+			m_WaveSpawnCooldown += m_WaveAwaitAdd;
+		}
 	}
 
-	private void SpawnEnemyInstance()
+	private void SpawnEnemyInstance(PackedScene enemyScene)
 	{
-		var enemy = m_EnemyScene.Instantiate<EnemyNPC>();
+		var enemy = enemyScene.Instantiate<EnemyNPC>();
 		enemy.OnDeath += HandleEnemyDeath;
 		var spawnOffset = RandomExtensions.RandomPointOnUnitCircle() * m_SpawnRange;
 		enemy.Position = PlayerGlobalController.Instance.Player.GlobalPosition + new Vector3(spawnOffset.X, 0, spawnOffset.Y);

@@ -69,8 +69,7 @@ public partial class EnemyNPC : FightNPC
 		{
 			var sqrDistance = GlobalPosition.DistanceSquaredTo(ally.GlobalPosition);
 			
-			if (sqrDistance < nextTarget.sqrDistance && 
-				sqrDistance <= AttackVisionRange * AttackVisionRange)
+			if (sqrDistance < nextTarget.sqrDistance)
 			{
 				nextTarget = (sqrDistance, ally);
 			}
