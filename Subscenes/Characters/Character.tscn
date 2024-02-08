@@ -1,10 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6bfb044jd67f"]
+[gd_scene load_steps=8 format=3 uid="uid://c6bfb044jd67f"]
 
-[ext_resource type="Script" path="res://Scripts/Characters/CharacterVisuals.cs" id="1_1x2fp"]
 [ext_resource type="Script" path="res://Scripts/Node3DBillboard.cs" id="2_uudij"]
 [ext_resource type="Texture2D" uid="uid://cxdd2y6fb4a0y" path="res://Sprites/Characters/SimpleGuy.png" id="3_0h6xq"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_mt1ou"]
-[ext_resource type="Script" path="res://Scripts/Characters/Base/Logic/Fight/HealthSystem.cs" id="4_byrk4"]
+[ext_resource type="AnimationLibrary" uid="uid://bfiktfwaogu1a" path="res://Animations/Character.res" id="4_77oe8"]
+[ext_resource type="PackedScene" uid="uid://67dqxlihm38p" path="res://Subscenes/Characters/HealthSystem.tscn" id="5_gesgb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8dppi"]
 resource_local_to_scene = true
@@ -14,100 +14,6 @@ shader_parameter/active = false
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/source_texture = ExtResource("3_0h6xq")
 
-[sub_resource type="Animation" id="Animation_wbbaf"]
-resource_name = "Idle"
-loop_mode = 2
-tracks/0/type = "scale_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterVisuals")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 1, 1, 1.05, 1.05, 1.05)
-
-[sub_resource type="Animation" id="Animation_3xuku"]
-resource_name = "Walk_R"
-loop_mode = 1
-step = 0.05
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterVisuals")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.25, 1, 0.05, 0.05, 0, 0.5, 1, 0, 0, 0, 0.75, 1, -0.05, 0.05, 0, 1, 1, 0, 0, 0)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterVisuals/BillboardPivot/Body")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0, 0, -0.087, 0.996, 0.5, 1, 0, 0, 0, 1, 0.75, 1, 0, 0, 0.087, 0.996, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_q330x"]
-resource_name = "Walk_L"
-loop_mode = 1
-step = 0.05
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterVisuals")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.25, 1, -0.05, 0.05, 0, 0.5, 1, 0, 0, 0, 0.75, 1, 0.05, 0.05, 0, 1, 1, 0, 0, 0)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterVisuals/BillboardPivot/Body")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0, 0, 0.087, 0.996, 0.5, 1, 0, 0, 0, 1, 0.75, 1, 0, 0, -0.087, 0.996, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_telw8"]
-resource_name = "MeleeAttack_R"
-length = 0.5
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterVisuals")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, 0.1, 0.1, 0, 0.3, 1, 0.1, 0.1, 0, 0.5, 1, 0, 0, 0)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterVisuals/BillboardPivot/Body")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, 0, 0, -0.216, 0.976, 0.3, 1, 0, 0, -0.216, 0.976, 0.5, 1, 0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_yyldh"]
-resource_name = "MeleeAttack_L"
-length = 0.5
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterVisuals")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.2, 1, -0.1, 0.1, 0, 0.3, 1, -0.1, 0.1, 0, 0.5, 1, 0, 0, 0)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterVisuals/BillboardPivot/Body")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.2, 1, 0, 0, 0.216, 0.976, 0.3, 1, 0, 0, 0.216, 0.976, 0.5, 1, 0, 0, 0, 1)
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tingm"]
-_data = {
-"Idle": SubResource("Animation_wbbaf"),
-"MeleeAttack_L": SubResource("Animation_yyldh"),
-"MeleeAttack_R": SubResource("Animation_telw8"),
-"Walk_L": SubResource("Animation_q330x"),
-"Walk_R": SubResource("Animation_3xuku")
-}
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_lwwl5"]
 height = 0.25
 radius = 0.075
@@ -115,10 +21,7 @@ radius = 0.075
 [node name="Character" type="CharacterBody3D"]
 process_mode = 1
 
-[node name="CharacterVisuals" type="Node3D" parent="." node_paths=PackedStringArray("m_BodySprite", "m_MainHandObjectSprite")]
-script = ExtResource("1_1x2fp")
-m_BodySprite = NodePath("BillboardPivot/Body")
-m_MainHandObjectSprite = NodePath("BillboardPivot/Body/MainHandPivot/Object")
+[node name="CharacterVisuals" type="Node3D" parent="."]
 
 [node name="BillboardPivot" type="Node3D" parent="CharacterVisuals"]
 script = ExtResource("2_uudij")
@@ -144,13 +47,12 @@ texture_filter = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_tingm")
+"Character": ExtResource("4_77oe8")
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0.001)
 shape = SubResource("CylinderShape3D_lwwl5")
 
-[node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("m_BodySprite")]
-script = ExtResource("4_byrk4")
+[node name="HealthSystem" parent="." node_paths=PackedStringArray("m_BodySprite") instance=ExtResource("5_gesgb")]
 m_BodySprite = NodePath("../CharacterVisuals/BillboardPivot/Body")

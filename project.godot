@@ -66,6 +66,11 @@ MoveLeft={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Default"
+3d_physics/layer_9="Hitbox"
+
 [rendering]
 
 renderer/rendering_method.mobile="gl_compatibility"

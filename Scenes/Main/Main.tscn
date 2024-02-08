@@ -13,14 +13,14 @@
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerGlobalController.cs" id="11_laj72"]
 [ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player.tscn" id="12_vltxi"]
 [ext_resource type="Script" path="res://Scripts/Characters/Allies/RetinueController.cs" id="13_exdnn"]
-[ext_resource type="PackedScene" uid="uid://d2dfq4aekx133" path="res://Subscenes/Characters/NPC_Ally.tscn" id="14_hl5t6"]
 [ext_resource type="PackedScene" uid="uid://c8g02yp1nunew" path="res://Scenes/Test/RetinueCreation.tscn" id="15_y3ogn"]
 [ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemiesController.cs" id="16_i2cei"]
-[ext_resource type="PackedScene" uid="uid://c4njyn1latrwg" path="res://Subscenes/Characters/Enemies/NPC_Enemy.tscn" id="17_ppqr3"]
-[ext_resource type="PackedScene" uid="uid://dp4wrkh2jmusw" path="res://Subscenes/Characters/Enemies/NPC_Enemy+.tscn" id="18_p4dmn"]
+[ext_resource type="PackedScene" uid="uid://cteantmbe1me3" path="res://Subscenes/Characters/Enemies/Enemy.tscn" id="17_6xbc8"]
+[ext_resource type="PackedScene" uid="uid://qdisib2blxxt" path="res://Subscenes/Characters/Enemies/Enemy+.tscn" id="18_2oj1q"]
 [ext_resource type="Script" path="res://Scripts/GlobalTimer.cs" id="18_sllsu"]
 [ext_resource type="LabelSettings" uid="uid://bto5vc8ptpgi" path="res://CustomResources/UI/SmallFont.tres" id="19_aob7p"]
-[ext_resource type="PackedScene" uid="uid://jmg22fputqqp" path="res://Subscenes/Characters/Enemies/NPC_Enemy++.tscn" id="19_t382v"]
+[ext_resource type="PackedScene" uid="uid://c866ks810n7y8" path="res://Subscenes/Characters/Enemies/Enemy++.tscn" id="19_fx466"]
+[ext_resource type="PackedScene" uid="uid://yuck4c8kfsqx" path="res://Subscenes/Characters/Ally/Ally.tscn" id="19_ux3uk"]
 [ext_resource type="Script" path="res://Scripts/Progression.cs" id="20_b01o2"]
 
 [sub_resource type="Environment" id="Environment_ua30k"]
@@ -111,14 +111,14 @@ show_percentage = false
 [node name="EnemiesController" type="Node" parent="."]
 script = ExtResource("16_i2cei")
 m_SpawnRange = 5.0
-m_EnemyScenes = Array[PackedScene]([ExtResource("17_ppqr3"), ExtResource("18_p4dmn"), ExtResource("19_t382v")])
-m_EnemyCosts = PackedInt32Array(1, 6, 15)
+m_EnemyScenes = Array[PackedScene]([ExtResource("17_6xbc8"), ExtResource("18_2oj1q"), ExtResource("19_fx466")])
+m_EnemyCosts = PackedInt32Array(1, 7, 15)
 
 [node name="RetinueController" type="Node" parent="." node_paths=PackedStringArray("m_CharacterGenerator")]
 process_mode = 3
 script = ExtResource("13_exdnn")
 m_CharacterGenerator = NodePath("RetinueCreation")
-m_AllyScene = ExtResource("14_hl5t6")
+m_AllyScene = ExtResource("19_ux3uk")
 m_StartRetinueCount = 3
 
 [node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]

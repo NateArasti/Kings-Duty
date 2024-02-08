@@ -2,14 +2,14 @@ using Godot;
 
 public partial class MoveableNPC : CharacterFollower
 {
-	[Export] private Node3D m_VisualsPivot;
 	
 	[ExportGroup("Animations")]
 	[Export] protected AnimationPlayer m_AnimationPlayer;
-	[Export] private string m_IDLEAnimationName = "Idle";
-	[Export] private string m_WalkAnimationName = "Walk";
+	[Export] private string m_IDLEAnimationName = "Character/Idle";
+	[Export] private string m_WalkAnimationName = "Character/Walk";
 	
 	private bool m_Walking;
+	private Node3D m_VisualsPivot;
 	
 	protected bool LookRight { get; private set; } = true;
 		
@@ -18,6 +18,7 @@ public partial class MoveableNPC : CharacterFollower
 	public override void _Ready()
 	{
 		base._Ready();
+		m_VisualsPivot = GetNode("CharacterVisuals") as Node3D;
 		ResetWalkAnimationState();
 	}
 

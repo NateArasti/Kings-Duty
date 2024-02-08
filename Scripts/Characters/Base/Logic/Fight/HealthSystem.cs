@@ -8,6 +8,8 @@ public partial class HealthSystem : Node
 	
 	[Export] private Sprite3D m_BodySprite;
 	
+	[Export] public Area3D HitboxArea { get; private set; }
+	
 	public int MaxHealth { get; set; }
 	public int CurrentHealth { get; set; }
 	

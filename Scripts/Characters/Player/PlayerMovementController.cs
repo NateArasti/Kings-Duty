@@ -9,8 +9,8 @@ public partial class PlayerMovementController : CharacterBody3D, IHittable
 	
 	[ExportGroup("Animations")]
 	[Export] private AnimationPlayer m_AnimationPlayer;
-	[Export] private string m_IDLEAnimationName = "Idle";
-	[Export] private string m_WalkAnimationName = "Walk";
+	[Export] private string m_IDLEAnimationName = "Character/Idle";
+	[Export] private string m_WalkAnimationName = "Character/Walk";
 	
 	[ExportGroup("Move Actions Names")]
 	[Export] private string m_MoveUpActionName = "MoveUp";

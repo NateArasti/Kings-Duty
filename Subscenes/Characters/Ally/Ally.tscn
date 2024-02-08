@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://yuck4c8kfsqx"]
+
+[ext_resource type="PackedScene" uid="uid://cxvhcs3rt362t" path="res://Subscenes/Characters/FightNPC.tscn" id="1_5honi"]
+[ext_resource type="Script" path="res://Scripts/Characters/Allies/AllyNPC.cs" id="2_fk1q2"]
+[ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="2_fm01u"]
+[ext_resource type="Script" path="res://Scripts/Characters/CharacterVisuals.cs" id="3_pghog"]
+[ext_resource type="Texture2D" uid="uid://cxdd2y6fb4a0y" path="res://Sprites/Characters/SimpleGuy.png" id="3_u6puw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8qte6"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("2_fm01u")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/source_texture = ExtResource("3_u6puw")
+
+[node name="Ally" node_paths=PackedStringArray("m_Visuals") instance=ExtResource("1_5honi")]
+script = ExtResource("2_fk1q2")
+m_Visuals = NodePath("CharacterVisuals")
+AttackStayInRange = 1.0
+
+[node name="CharacterVisuals" parent="." index="0" node_paths=PackedStringArray("m_BodySprite", "m_MainHandObjectSprite")]
+script = ExtResource("3_pghog")
+m_BodySprite = NodePath("BillboardPivot/Body")
+m_MainHandObjectSprite = NodePath("BillboardPivot/Body/MainHandPivot/Object")
+
+[node name="Body" parent="CharacterVisuals/BillboardPivot" index="0"]
+material_overlay = SubResource("ShaderMaterial_8qte6")

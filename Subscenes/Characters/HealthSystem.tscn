@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://67dqxlihm38p"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/Base/Logic/Fight/HealthSystem.cs" id="1_mdlgv"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lwwl5"]
+height = 0.25
+radius = 0.075
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0x2yl"]
+top_radius = 0.075
+bottom_radius = 0.075
+height = 0.25
+
+[node name="HealthSystem" type="Node3D" node_paths=PackedStringArray("HitboxArea")]
+script = ExtResource("1_mdlgv")
+HitboxArea = NodePath("HitboxArea")
+
+[node name="HitboxArea" type="Area3D" parent="."]
+visible = false
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("CylinderShape3D_lwwl5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HitboxArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+mesh = SubResource("CylinderMesh_0x2yl")

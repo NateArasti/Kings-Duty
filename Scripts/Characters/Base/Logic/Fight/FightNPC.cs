@@ -1,12 +1,12 @@
 using System;
 using Godot;
 
-public abstract partial class FightNPC : MoveableNPC, IHittable
+public partial class FightNPC : MoveableNPC, IHittable
 {	
 	public event Action<FightNPC> OnDeath;
 	
-	[Export] private string m_MeleeAttackAnimaitonName = "MeleeAttack";
-	[Export] private string m_RangeAttackAnimaitonName = "RangeAttack";
+	[Export] private Area3D m_MeleeAttackArea;
+	[Export] private string m_MeleeAttackAnimaitonName = "FightCharacter/MeleeAttack";
 	
 	private float m_CurrentAttackCooldown;
 	
@@ -37,9 +37,9 @@ public abstract partial class FightNPC : MoveableNPC, IHittable
 		base._Ready();
 		HealthSystem.OnDeath += Death;
 	}
-
+	
 	public override void _Process(double delta)
-	{
+	{		
 		if(m_CurrentAttackCooldown > 0) m_CurrentAttackCooldown -= (float)delta;
 		
 		if (!InAttack && CanAttack && FollowTarget.GlobalPosition.DistanceSquaredTo(GlobalPosition) < AttackRange * AttackRange)
@@ -74,6 +74,7 @@ public abstract partial class FightNPC : MoveableNPC, IHittable
 	public virtual void UnsubscribeFromAttackTarget()
 	{
 		FollowTarget = null;
+		m_CurrentAttackTarget = null;
 		
 		if (FollowTarget is IHittable hittable)
 		{
@@ -104,13 +105,26 @@ public abstract partial class FightNPC : MoveableNPC, IHittable
 
 	private void FinishAttack(StringName animName)
 	{
-		if (m_CurrentAttackTarget != null)
-		{
-			m_CurrentAttackTarget.HealthSystem.TakeDamage(AttackDamage);
-		}
 		InAttack = false;
 		m_CurrentAttackCooldown = AttackCooldown;
 		m_AnimationPlayer.AnimationFinished -= FinishAttack;
 		ResetWalkAnimationState();
+	}
+	
+	public virtual void PlaceAttackArea()
+	{
+		if (m_CurrentAttackTarget == null) return;
+		var attackDirection = FollowTarget.GlobalPosition - GlobalPosition;
+		attackDirection.Y = 0;
+		m_MeleeAttackArea.GlobalPosition = GlobalPosition + attackDirection.Normalized() * AttackRange;
+		TryProvideAttack();
+	}
+	
+	public virtual void TryProvideAttack()
+	{
+		if (m_CurrentAttackTarget != null && m_MeleeAttackArea.OverlapsArea(m_CurrentAttackTarget.HealthSystem.HitboxArea))
+		{
+			m_CurrentAttackTarget.HealthSystem.TakeDamage(AttackDamage);
+		}
 	}
 }
