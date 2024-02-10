@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerMovementController.cs" id="2_py02u"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_62u1p"]
 [ext_resource type="PackedScene" uid="uid://bwafhnyut7l3f" path="res://Subscenes/PostProcessing.tscn" id="3_ri1l6"]
-[ext_resource type="Texture2D" uid="uid://cxdd2y6fb4a0y" path="res://Sprites/Characters/SimpleGuy.png" id="4_sph0l"]
+[ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/king.png" id="4_qwdm8"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerHealthSystem.cs" id="6_b2ybh"]
 [ext_resource type="Script" path="res://Scripts/UI/DeathScreen.cs" id="6_mbc2c"]
 [ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/BlackOpsOne-Regular.ttf" id="6_v64bi"]
@@ -18,7 +18,7 @@ render_priority = 1
 shader = ExtResource("3_62u1p")
 shader_parameter/value = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
-shader_parameter/source_texture = ExtResource("4_sph0l")
+shader_parameter/source_texture = ExtResource("4_qwdm8")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2hkn"]
 bg_color = Color(0, 0, 0, 0.588235)
@@ -55,6 +55,7 @@ transform = Transform3D(-4.37114e-08, 0.707107, -0.707107, 0, 0.707107, 0.707107
 
 [node name="Body" parent="CharacterVisuals/BillboardPivot" index="0"]
 material_overlay = SubResource("ShaderMaterial_eo2dv")
+texture = ExtResource("4_qwdm8")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="CharacterVisuals/BillboardPivot/Body/MainHandPivot/Object" index="0"]
 transform = Transform3D(0.906308, -0.422618, 1.2595e-08, 0.422618, 0.906308, -2.70101e-08, 3.55271e-15, 2.98023e-08, 1, 0.0156366, 0.0563829, 0.037)
