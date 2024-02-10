@@ -10,7 +10,7 @@
 resource_local_to_scene = true
 render_priority = 1
 shader = ExtResource("2_fm01u")
-shader_parameter/active = false
+shader_parameter/value = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/source_texture = ExtResource("3_u6puw")
 

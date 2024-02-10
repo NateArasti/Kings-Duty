@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxvhcs3rt362t"]
+[gd_scene load_steps=12 format=3 uid="uid://cxvhcs3rt362t"]
 
 [ext_resource type="PackedScene" uid="uid://c6bfb044jd67f" path="res://Subscenes/Characters/Character.tscn" id="1_gv5tr"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="2_b6wsk"]
@@ -11,11 +11,29 @@
 resource_local_to_scene = true
 render_priority = 1
 shader = ExtResource("2_b6wsk")
-shader_parameter/active = false
+shader_parameter/value = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/source_texture = ExtResource("3_pf15s")
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ws7gb"]
+[sub_resource type="Animation" id="Animation_0tphd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterVisuals/BillboardPivot/Body:material_overlay:shader_parameter/value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0hor"]
+_data = {
+"RESET": SubResource("Animation_0tphd")
+}
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_p600r"]
 height = 0.25
@@ -30,7 +48,7 @@ height = 0.25
 script = ExtResource("2_h0qde")
 m_MeleeAttackArea = NodePath("AttackArea")
 HealthSystem = NodePath("HealthSystem")
-m_AnimationPlayer = NodePath("AnimationPlayer")
+m_AnimationPlayer = NodePath("DefaultAnimationPlayer")
 m_ObstacleAvoidanceRaysCount = 16
 m_ObstacleAvoidanceMinLength = 0.25
 m_ObstacleAvoidanceMaxLength = 1.0
@@ -38,9 +56,9 @@ m_ObstacleAvoidanceMaxLength = 1.0
 [node name="Body" parent="CharacterVisuals/BillboardPivot" index="0"]
 material_overlay = SubResource("ShaderMaterial_s77uf")
 
-[node name="AnimationPlayer" parent="." index="1"]
+[node name="DefaultAnimationPlayer" parent="." index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_ws7gb"),
+"": SubResource("AnimationLibrary_y0hor"),
 "Character": ExtResource("6_74xtg"),
 "FightCharacter": ExtResource("7_td12c")
 }

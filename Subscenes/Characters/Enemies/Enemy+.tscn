@@ -1,17 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://qdisib2blxxt"]
+[gd_scene load_steps=5 format=3 uid="uid://qdisib2blxxt"]
 
 [ext_resource type="PackedScene" uid="uid://cteantmbe1me3" path="res://Subscenes/Characters/Enemies/Enemy.tscn" id="1_qune1"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="2_r2lla"]
-[ext_resource type="Texture2D" uid="uid://cxdd2y6fb4a0y" path="res://Sprites/Characters/SimpleGuy.png" id="3_ty6ue"]
 [ext_resource type="Texture2D" uid="uid://ceb7x1vwr3iam" path="res://Sprites/Enemies/Monster+.png" id="4_v7kqj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_11km1"]
 resource_local_to_scene = true
 render_priority = 1
 shader = ExtResource("2_r2lla")
-shader_parameter/active = false
+shader_parameter/value = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
-shader_parameter/source_texture = ExtResource("3_ty6ue")
+shader_parameter/source_texture = ExtResource("4_v7kqj")
 
 [node name="Enemy" instance=ExtResource("1_qune1")]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)

@@ -6,7 +6,9 @@ public partial class HealthSystem : Node
 {
 	public event Action OnDeath;
 	
-	[Export] private Sprite3D m_BodySprite;
+	[Export] private AnimationPlayer m_HitboxAnimationPlayer;
+	[Export] private string m_HitAnimation;
+	[Export] private string m_DeathAnimation;
 	
 	[Export] public Area3D HitboxArea { get; private set; }
 	
@@ -18,6 +20,7 @@ public partial class HealthSystem : Node
 		CurrentHealth -= damageCount;
 		if (CurrentHealth <= 0)
 		{
+			ShowDeathEffect();
 			OnDeath?.Invoke();
 		}
 		else
@@ -26,10 +29,17 @@ public partial class HealthSystem : Node
 		}
 	}
 	
-	private async void ShowHitEffect()
+	private void ShowDeathEffect()
 	{
-		(m_BodySprite.MaterialOverlay as ShaderMaterial).SetShaderParameter("active", true);
-		await Task.Delay(100);
-		(m_BodySprite.MaterialOverlay as ShaderMaterial).SetShaderParameter("active", false);
+		if(string.IsNullOrEmpty(m_DeathAnimation)) return;
+		m_HitboxAnimationPlayer.Stop();
+		m_HitboxAnimationPlayer.Play(m_DeathAnimation);
+	}
+	
+	private void ShowHitEffect()
+	{
+		if(string.IsNullOrEmpty(m_HitAnimation)) return;
+		m_HitboxAnimationPlayer.Stop();
+		m_HitboxAnimationPlayer.Play(m_HitAnimation);
 	}
 }

@@ -99,7 +99,6 @@ public partial class EnemiesController : Node
 		if(instance is not EnemyNPC enemy) return;
 		KilledEnemeiesCount++;
 		m_CurrentEnemies.Remove(enemy);
-		instance.QueueFree();
 		
 		OnEnemyDeath?.Invoke(enemy);
 	}

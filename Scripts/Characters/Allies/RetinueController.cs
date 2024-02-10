@@ -158,7 +158,6 @@ public partial class RetinueController : Node
 		if(fightNPC is not AllyNPC ally) return;
 		m_CurrentAllies.Remove(ally);
 		RemoveAllyFightDependecies(ally);
-		ally.QueueFree();
 	}
 	
 	private void RemoveAllyFightDependecies(AllyNPC ally)

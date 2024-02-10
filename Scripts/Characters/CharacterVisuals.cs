@@ -9,5 +9,9 @@ public partial class CharacterVisuals : Node3D
 	{
 		m_BodySprite.Texture = bodyTexture;
 		m_MainHandObjectSprite.Texture = mainHandObjectTexture;
+		if (m_BodySprite.MaterialOverlay is ShaderMaterial shaderMaterial)
+		{
+			shaderMaterial.SetShaderParameter("source_texture", bodyTexture);
+		}
 	}
 }

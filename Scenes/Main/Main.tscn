@@ -75,7 +75,6 @@ script = ExtResource("11_laj72")
 Player = NodePath("Player")
 
 [node name="Player" parent="PlayerGlobalController" instance=ExtResource("12_vltxi")]
-process_mode = 0
 
 [node name="GlobalTimer" type="Node" parent="." node_paths=PackedStringArray("m_TimerLabel")]
 script = ExtResource("18_sllsu")
@@ -115,11 +114,11 @@ m_EnemyScenes = Array[PackedScene]([ExtResource("17_6xbc8"), ExtResource("18_2oj
 m_EnemyCosts = PackedInt32Array(1, 7, 15)
 
 [node name="RetinueController" type="Node" parent="." node_paths=PackedStringArray("m_CharacterGenerator")]
-process_mode = 3
 script = ExtResource("13_exdnn")
 m_CharacterGenerator = NodePath("RetinueCreation")
 m_AllyScene = ExtResource("19_ux3uk")
 m_StartRetinueCount = 3
 
 [node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]
+process_mode = 3
 visible = false
