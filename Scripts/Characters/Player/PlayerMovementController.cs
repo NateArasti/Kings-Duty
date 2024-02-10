@@ -27,16 +27,6 @@ public partial class PlayerMovementController : CharacterBody3D, IHittable
 		m_AnimationPlayer.Stop();
 		m_AnimationPlayer.Play(m_IDLEAnimationName);
 		m_Walking = false;
-		
-		HealthSystem.MaxHealth = 1;
-		HealthSystem.CurrentHealth = 1;
-		HealthSystem.OnDeath += OnPlayerDeath;
-	}
-
-	private void OnPlayerDeath()
-	{
-		GetTree().Paused = true;
-		m_DeathScreen.Visible = true;
 	}
 
 	public override void _Process(double delta)

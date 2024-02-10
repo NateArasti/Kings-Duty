@@ -1,18 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwafhnyut7l3f"]
+[gd_scene load_steps=2 format=3 uid="uid://bwafhnyut7l3f"]
 
-[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="1_d0u66"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tqkkh"]
-shader = ExtResource("1_d0u66")
-shader_parameter/alpha = 1.0
-shader_parameter/inner_radius = 0.2
-shader_parameter/outer_radius = 1.2
+[ext_resource type="Material" uid="uid://dgf8nek54rcbk" path="res://Materials/Vignette.tres" id="1_mx1sv"]
 
 [node name="PostProcessing" type="CanvasLayer"]
 layer = -1
 
 [node name="Vignette" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_tqkkh")
+material = ExtResource("1_mx1sv")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
