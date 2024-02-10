@@ -47,10 +47,16 @@ public partial class EnemyNPC : FightNPC
 		{
 			if (FollowTarget != PlayerGlobalController.Instance.Player)
 			{
+				UnsubscribeFromAttackTarget();
 				SubscribeToAttackTarget(PlayerGlobalController.Instance.Player);
 			}
 			
 			return;
+		}
+		
+		if (FollowTarget == PlayerGlobalController.Instance.Player)
+		{
+			UnsubscribeFromAttackTarget();
 		}
 		
 		if (!AttackFollowTarget)
