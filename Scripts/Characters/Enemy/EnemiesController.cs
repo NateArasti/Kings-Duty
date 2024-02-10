@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Godot;
 
 public partial class EnemiesController : Node
@@ -19,6 +18,8 @@ public partial class EnemiesController : Node
 	[Export] private int[] m_EnemyCosts;
 	
 	private int m_CurrentWaveMaxCost = 0;
+	private float m_CurrentEnemySpawnCooldown;
+	private float m_CurrentWaveSpawnCooldown;
 
 	private readonly ConcurrentQueue<PackedScene> m_EnemySpawnRequests = new();
 	private readonly HashSet<EnemyNPC> m_CurrentEnemies = new();
@@ -30,44 +31,57 @@ public partial class EnemiesController : Node
 	{
 		base._Ready();
 		Instance = this;
-		EnemyRequest();
-		EnemySpawn();
+	}
+
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+		
+		EnemyRequest((float)delta);
+		EnemySpawn((float)delta);
+	}
+
+	private void EnemySpawn(float delta)
+	{
+		if (m_CurrentEnemySpawnCooldown > 0)
+		{
+			m_CurrentEnemySpawnCooldown -= delta;
+			return;
+		}
+		
+		if(m_EnemySpawnRequests.Count < 0) return;
+		
+		if (m_EnemySpawnRequests.TryDequeue(out var enemyScene))
+		{
+			SpawnEnemyInstance(enemyScene);
+			m_CurrentEnemySpawnCooldown = m_EnemySpawnCooldown;
+		}
 	}
 	
-	private async void EnemySpawn()
+	private void EnemyRequest(float delta)
 	{
-		while (true)
+		if (m_CurrentWaveSpawnCooldown > 0)
 		{
-			await Task.Delay((int)(m_EnemySpawnCooldown * 1000));
-			if(m_EnemySpawnRequests.Count < 0) continue;
+			m_CurrentWaveSpawnCooldown -= delta;
+			return;
+		}
+		
+		m_CurrentWaveMaxCost += m_StartCurrency;
+		var awailableCurrency = m_CurrentWaveMaxCost;
+		for (var i = m_EnemyCosts.Length - 1; i >= 0;)
+		{
+			if (awailableCurrency <= m_EnemyCosts[i])
+			{
+				i--;
+				continue;
+			}
 			
-			if (m_EnemySpawnRequests.TryDequeue(out var enemyScene))
-			{
-				SpawnEnemyInstance(enemyScene);
-			}
+			m_EnemySpawnRequests.Enqueue(m_EnemyScenes[i]);
+			awailableCurrency -= m_EnemyCosts[i];
 		}
-	}
-	
-	private async void EnemyRequest()
-	{
-		while (true)
-		{
-			m_CurrentWaveMaxCost += m_StartCurrency;
-			var awailableCurrency = m_CurrentWaveMaxCost;
-			for (var i = m_EnemyCosts.Length - 1; i >= 0;)
-			{
-				if (awailableCurrency <= m_EnemyCosts[i])
-				{
-					i--;
-					continue;
-				}
-				
-				m_EnemySpawnRequests.Enqueue(m_EnemyScenes[i]);
-				awailableCurrency -= m_EnemyCosts[i];
-			}
-			await Task.Delay((int)(m_WaveSpawnCooldown * 1000));
-			m_WaveSpawnCooldown += m_WaveAwaitAdd;
-		}
+		
+		m_WaveSpawnCooldown += m_WaveAwaitAdd;
+		m_CurrentWaveSpawnCooldown = m_WaveSpawnCooldown;
 	}
 
 	private void SpawnEnemyInstance(PackedScene enemyScene)
