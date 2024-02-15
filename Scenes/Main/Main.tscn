@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=31 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_fljgg"]
 [ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_r07sy"]
@@ -13,15 +13,18 @@
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerGlobalController.cs" id="11_laj72"]
 [ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player.tscn" id="12_vltxi"]
 [ext_resource type="Script" path="res://Scripts/Characters/Allies/RetinueController.cs" id="13_exdnn"]
+[ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="14_g52f2"]
+[ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/king.png" id="15_d07yq"]
 [ext_resource type="PackedScene" uid="uid://c8g02yp1nunew" path="res://Scenes/Test/RetinueCreation.tscn" id="15_y3ogn"]
 [ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemiesController.cs" id="16_i2cei"]
 [ext_resource type="PackedScene" uid="uid://cteantmbe1me3" path="res://Subscenes/Characters/Enemies/Enemy.tscn" id="17_6xbc8"]
 [ext_resource type="PackedScene" uid="uid://qdisib2blxxt" path="res://Subscenes/Characters/Enemies/Enemy+.tscn" id="18_2oj1q"]
 [ext_resource type="Script" path="res://Scripts/GlobalTimer.cs" id="18_sllsu"]
-[ext_resource type="LabelSettings" uid="uid://bto5vc8ptpgi" path="res://CustomResources/UI/SmallFont.tres" id="19_aob7p"]
+[ext_resource type="LabelSettings" uid="uid://bto5vc8ptpgi" path="res://CustomResources/UI/Fonts/SmallFont.tres" id="19_aob7p"]
 [ext_resource type="PackedScene" uid="uid://c866ks810n7y8" path="res://Subscenes/Characters/Enemies/Enemy++.tscn" id="19_fx466"]
 [ext_resource type="PackedScene" uid="uid://yuck4c8kfsqx" path="res://Subscenes/Characters/Ally/Ally.tscn" id="19_ux3uk"]
 [ext_resource type="Script" path="res://Scripts/Progression.cs" id="20_b01o2"]
+[ext_resource type="PackedScene" uid="uid://cntj6x0vj868l" path="res://Subscenes/Props/Statue.tscn" id="23_os0a1"]
 
 [sub_resource type="Environment" id="Environment_ua30k"]
 background_mode = 1
@@ -35,6 +38,14 @@ adjustment_contrast = 1.1
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qynxp"]
 auto_exposure_scale = 0.06
 dof_blur_far_distance = 8040.33
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m3jjx"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("14_g52f2")
+shader_parameter/value = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/source_texture = ExtResource("15_d07yq")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bovkp"]
 bg_color = Color(0, 0, 0, 1)
@@ -54,6 +65,8 @@ m_WorldTile = ExtResource("2_r07sy")
 m_GroundTextures = Array[Texture2D]([ExtResource("3_aqul3"), ExtResource("4_vf3m5"), ExtResource("5_07180"), ExtResource("6_75mh7"), ExtResource("7_ukdxv")])
 m_RoadTextures = Array[Texture2D]([ExtResource("8_cqcl8"), ExtResource("9_mjx4q")])
 m_StepValue = Vector2(0.5, 0.385)
+m_PropScene = ExtResource("23_os0a1")
+m_PropSpawnChance = 0.1
 m_TreeScene = ExtResource("10_hurmi")
 m_TreeSpawnMinDistance = 0.8
 
@@ -70,11 +83,17 @@ directional_shadow_mode = 1
 environment = SubResource("Environment_ua30k")
 camera_attributes = SubResource("CameraAttributesPractical_qynxp")
 
-[node name="PlayerGlobalController" type="Node" parent="." node_paths=PackedStringArray("Player")]
+[node name="PlayerGlobalController" type="Node" parent="." node_paths=PackedStringArray("Player", "PlayerHealthSystem", "PlayerInteraction")]
 script = ExtResource("11_laj72")
 Player = NodePath("Player")
+PlayerHealthSystem = NodePath("Player/HealthSystem")
+PlayerInteraction = NodePath("Player/Interaction")
 
 [node name="Player" parent="PlayerGlobalController" instance=ExtResource("12_vltxi")]
+process_mode = 0
+
+[node name="Body" parent="PlayerGlobalController/Player/CharacterVisuals/BillboardPivot" index="0"]
+material_overlay = SubResource("ShaderMaterial_m3jjx")
 
 [node name="GlobalTimer" type="Node" parent="." node_paths=PackedStringArray("m_TimerLabel")]
 script = ExtResource("18_sllsu")
@@ -117,8 +136,10 @@ m_EnemyCosts = PackedInt32Array(1, 7, 15)
 script = ExtResource("13_exdnn")
 m_CharacterGenerator = NodePath("RetinueCreation")
 m_AllyScene = ExtResource("19_ux3uk")
-m_StartRetinueCount = 3
 
 [node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]
 process_mode = 3
 visible = false
+
+[editable path="PlayerGlobalController/Player"]
+[editable path="PlayerGlobalController/Player/HealthSystem"]

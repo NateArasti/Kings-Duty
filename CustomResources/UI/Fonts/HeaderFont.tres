@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dpsuoo76k2bij"]
 
-[ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/BlackOpsOne-Regular.ttf" id="1_cq0h0"]
+[ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/Fonts/BlackOpsOne-Regular.ttf" id="1_cq0h0"]
 
 [resource]
 font = ExtResource("1_cq0h0")

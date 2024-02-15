@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://c4mhsqaj38qlq"]
 
 [ext_resource type="Script" path="res://Scripts/UI/CharacterPanel.cs" id="1_1usn2"]
-[ext_resource type="LabelSettings" uid="uid://co6jxguooayye" path="res://CustomResources/UI/RegularFont.tres" id="1_m7467"]
-[ext_resource type="LabelSettings" uid="uid://bto5vc8ptpgi" path="res://CustomResources/UI/SmallFont.tres" id="4_8h60i"]
-[ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/BlackOpsOne-Regular.ttf" id="5_m1ftp"]
+[ext_resource type="LabelSettings" uid="uid://co6jxguooayye" path="res://CustomResources/UI/Fonts/RegularFont.tres" id="1_m7467"]
+[ext_resource type="LabelSettings" uid="uid://bto5vc8ptpgi" path="res://CustomResources/UI/Fonts/SmallFont.tres" id="4_8h60i"]
+[ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/Fonts/BlackOpsOne-Regular.ttf" id="5_m1ftp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r04dg"]
 bg_color = Color(0, 0, 0, 0.686275)

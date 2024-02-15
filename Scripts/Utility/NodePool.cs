@@ -24,7 +24,7 @@ public class NodePool<T> where T : Node
 		
 		for (var i = 0; i < PoolCapacity; ++i)
 		{
-			m_Pool.Push(CreateInstance());
+			Return(CreateInstance());
 		}
 	}
 	

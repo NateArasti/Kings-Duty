@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://c8g02yp1nunew"]
 
-[ext_resource type="LabelSettings" uid="uid://dpsuoo76k2bij" path="res://CustomResources/UI/HeaderFont.tres" id="1_csiqm"]
-[ext_resource type="LabelSettings" uid="uid://co6jxguooayye" path="res://CustomResources/UI/RegularFont.tres" id="2_qwyrd"]
+[ext_resource type="LabelSettings" uid="uid://dpsuoo76k2bij" path="res://CustomResources/UI/Fonts/HeaderFont.tres" id="1_csiqm"]
+[ext_resource type="LabelSettings" uid="uid://co6jxguooayye" path="res://CustomResources/UI/Fonts/RegularFont.tres" id="2_qwyrd"]
 [ext_resource type="PackedScene" uid="uid://c4mhsqaj38qlq" path="res://Subscenes/UI/CharacterChoosePanel.tscn" id="3_b47ya"]
 [ext_resource type="Script" path="res://Scripts/UI/RandomCharactersGenerator.cs" id="3_m4clw"]
 [ext_resource type="Resource" uid="uid://dfta0lmjs318e" path="res://CustomResources/Characters/Melee/Berserk+.tres" id="4_3fm3a"]

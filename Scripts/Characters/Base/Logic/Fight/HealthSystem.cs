@@ -8,6 +8,7 @@ public partial class HealthSystem : Node
 	[Export] protected AnimationPlayer m_HitboxAnimationPlayer;
 	[Export] protected string m_HitAnimation;
 	[Export] protected string m_DeathAnimation;
+	[Export] protected string m_HealAnimation;
 	[Export] protected string m_ResetAnimation;
 	
 	[Export] public Area3D HitboxArea { get; private set; }
@@ -24,6 +25,7 @@ public partial class HealthSystem : Node
 	public virtual void TakeDamage(int damageCount)
 	{
 		CurrentHealth -= damageCount;
+		OnHPChanged();
 		if (CurrentHealth <= 0)
 		{
 			ShowDeathEffect();
@@ -33,6 +35,15 @@ public partial class HealthSystem : Node
 		{
 			ShowHitEffect();			
 		}
+	}
+	
+	protected virtual void OnHPChanged() { }
+	
+	public void HealFull()
+	{
+		CurrentHealth = MaxHealth;
+		OnHPChanged();
+		ShowHealEffect();
 	}
 	
 	protected virtual void ShowDeathEffect()
@@ -47,5 +58,12 @@ public partial class HealthSystem : Node
 		if(string.IsNullOrEmpty(m_HitAnimation)) return;
 		m_HitboxAnimationPlayer.Stop();
 		m_HitboxAnimationPlayer.Play(m_HitAnimation);
+	}
+	
+	protected virtual void ShowHealEffect()
+	{
+		if(string.IsNullOrEmpty(m_HitAnimation)) return;
+		m_HitboxAnimationPlayer.Stop();
+		m_HitboxAnimationPlayer.Play(m_HealAnimation);
 	}
 }

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://l7d6fnllspln"
-path="res://.godot/imported/BlackOpsOne-Regular.ttf-b4836e86e6748a6430cbb5f0592777c5.fontdata"
+path="res://.godot/imported/BlackOpsOne-Regular.ttf-8f5368ce73c8a2b78ff821ee1980b8a7.fontdata"
 
 [deps]
 
-source_file="res://CustomResources/UI/BlackOpsOne-Regular.ttf"
-dest_files=["res://.godot/imported/BlackOpsOne-Regular.ttf-b4836e86e6748a6430cbb5f0592777c5.fontdata"]
+source_file="res://CustomResources/UI/Fonts/BlackOpsOne-Regular.ttf"
+dest_files=["res://.godot/imported/BlackOpsOne-Regular.ttf-8f5368ce73c8a2b78ff821ee1980b8a7.fontdata"]
 
 [params]
 

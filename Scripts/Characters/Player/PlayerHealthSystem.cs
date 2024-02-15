@@ -22,6 +22,10 @@ public partial class PlayerHealthSystem : HealthSystem
 	public override void TakeDamage(int damageCount)
 	{
 		base.TakeDamage(1);
+	}
+	
+	protected override void OnHPChanged() 
+	{
 		m_TargetHitValue = 1 - (float)CurrentHealth / MaxHealth;
 	}
 

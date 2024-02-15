@@ -29,6 +29,9 @@ public partial class GridWorldGenerator : Node3D
 	[Export] private Vector2 m_YGridDirection = new Vector2(1, 1);
 	
 	[ExportGroup("World Filling")]
+	[Export] private bool m_SpawnProps = true;
+	[Export] private PackedScene m_PropScene;
+	[Export(PropertyHint.Range, "0, 1")] private float m_PropSpawnChance = 0.25f;
 	[Export] private bool m_SpawnNature = true;
 	[Export] private PackedScene m_TreeScene;
 	[Export] private float m_TreeSpawnMinDistance = 5;
@@ -40,6 +43,7 @@ public partial class GridWorldGenerator : Node3D
 	
 	private NodePool<Sprite3D> m_WorldTilesPool;
 	private NodePool<Tree> m_TreePool;
+	private NodePool<Statue> m_PropsPool;
 	
 	private WorldGenerator m_WorldGenerator;
 	
@@ -77,6 +81,7 @@ public partial class GridWorldGenerator : Node3D
 		var maxRuntimeTilesCount = k_RuntimeChunksCount * Mathf.CeilToInt(1 / m_CellSize) * Mathf.CeilToInt(m_GridSize.X) * Mathf.CeilToInt(m_GridSize.Y);
 		m_WorldTilesPool = new NodePool<Sprite3D>(CreateWorldTile, maxRuntimeTilesCount, PoolGetCallback, PoolReturnCallback);
 		m_TreePool = new NodePool<Tree>(CreateTree, 5000, PoolGetCallback, PoolReturnCallback);
+		m_PropsPool = new NodePool<Statue>(CreateProp, 1000, PoolGetCallback, PoolReturnCallback);
 		m_ChunkOffsets = new Vector2[k_RuntimeChunksCount]
 		{
 			new Vector2(-1.5f, 0) * RectSize,
@@ -217,24 +222,14 @@ public partial class GridWorldGenerator : Node3D
 		
 		if (m_SpawnNature)
 		{
-			var possibleTreesPositions = PoissonSampler.SamplePositions(
-				new Rect2(0, -0.5f * RectSize.Y, RectSize), 
-				m_TreeSpawnMinDistance,
-				maxSearchIterionsCount: 5
-			);
-			
-			foreach (var position in possibleTreesPositions)
-			{
-				var gridPosition = GetGridCoords(position + Vector2.Right * m_CellSize * m_StepValue.X);
-				if(gridPosition.X.InRange(0, m_WorldGenerator.Width - 1)
-					&& gridPosition.Y.InRange(0, m_WorldGenerator.Height - 1)
-					&& chunk.ChunkCells[Utility.GetFlatIndex(gridPosition.X, gridPosition.Y, m_WorldGenerator.Width)] == WorldGenerator.CellType.Ground)
-				{
-					var tree = SpawnTree(position);
-					tree.Position += worldOffset;
-					trees.Add(tree);
-				}
-			}			
+			SpawnNature(chunk, trees, worldOffset);
+		}
+		
+		var props = new HashSet<Node3D>();
+		
+		if (m_SpawnProps)
+		{
+			SpawnProps(chunk, props, worldOffset);
 		}
 		
 		m_CurrentChunks[chunkIndex] = new(
@@ -246,6 +241,40 @@ public partial class GridWorldGenerator : Node3D
 			m_RightBorderPositionsBuffer.ToArray(),
 			m_BottomBorderPositionsBuffer.ToArray()
 		);
+	}
+	
+	private void SpawnNature(WorldGenerator.Chunk chunk, HashSet<Tree> trees, Vector3 worldOffset)
+	{
+		var possibleTreesPositions = PoissonSampler.SamplePositions(
+			new Rect2(0, -0.5f * RectSize.Y, RectSize), 
+			m_TreeSpawnMinDistance,
+			maxSearchIterionsCount: 5
+		);
+		
+		foreach (var position in possibleTreesPositions)
+		{
+			var gridPosition = GetGridCoords(position + Vector2.Right * m_CellSize * m_StepValue.X);
+			if(gridPosition.X.InRange(0, m_WorldGenerator.Width - 1)
+				&& gridPosition.Y.InRange(0, m_WorldGenerator.Height - 1)
+				&& chunk.ChunkCells[Utility.GetFlatIndex(gridPosition.X, gridPosition.Y, m_WorldGenerator.Width)] == WorldGenerator.CellType.Ground)
+			{
+				var tree = SpawnTree(position);
+				tree.Position += worldOffset;
+				trees.Add(tree);
+			}
+		}
+	}
+	
+	private void SpawnProps(WorldGenerator.Chunk chunk, HashSet<Node3D> props, Vector3 worldOffset)
+	{		
+		foreach (var gridPosition in chunk.PointOfInterestCells)
+		{
+			if (GD.Randf() > m_PropSpawnChance) continue;
+			var position = GetWorldCoords(gridPosition);
+			var prop = SpawnProp(position);
+			prop.Position += worldOffset;
+			props.Add(prop);
+		}
 	}
 	
 	private void FillEdgeBuffers(WorldGenerator.Chunk chunk)
@@ -302,8 +331,24 @@ public partial class GridWorldGenerator : Node3D
 	
 	private Tree CreateTree()
 	{
-		var instance = m_TreeScene.Instantiate() as Tree;
-		instance.Hide();
+		var instance = m_TreeScene.Instantiate<Tree>();
+		AddChild(instance);
+		return instance;
+	}
+	
+	private Statue SpawnProp(Vector2 position)
+	{
+		if(m_PropsPool.TryGet(out var instance))
+		{
+			instance.Position = new Vector3(position.Y, 0, position.X);
+			instance.Show();
+		}
+		return instance;
+	}
+	
+	private Statue CreateProp()
+	{
+		var instance = m_PropScene.Instantiate<Statue>();
 		AddChild(instance);
 		return instance;
 	}
@@ -327,7 +372,7 @@ public partial class GridWorldGenerator : Node3D
 	
 	private Sprite3D CreateWorldTile()
 	{
-		var instance = m_WorldTile.Instantiate() as Sprite3D;
+		var instance = m_WorldTile.Instantiate<Sprite3D>();
 		instance.Scale = Vector3.One * m_CellSize;
 		AddChild(instance);
 		return instance;
@@ -336,11 +381,13 @@ public partial class GridWorldGenerator : Node3D
 	private void PoolGetCallback(Node3D instance)
 	{
 		instance.Show();
+		instance.ProcessMode = ProcessModeEnum.Inherit;
 	}
 	
 	private void PoolReturnCallback(Node3D instance)
 	{
 		instance.Hide();
+		instance.ProcessMode = ProcessModeEnum.Disabled;
 	}
 	
 	private Vector2 GetWorldCoords(Vector2I gridCoords)

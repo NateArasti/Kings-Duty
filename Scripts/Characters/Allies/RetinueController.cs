@@ -8,8 +8,8 @@ public partial class RetinueController : Node
 	
 	[Export] private RandomCharactersGenerator m_CharacterGenerator;
 	[Export] private PackedScene m_AllyScene;
+	[Export] private int m_RetinueStartCount = 2;
 	[Export] private float m_RetinueOffset = 1;
-	[Export] private int m_StartRetinueCount = 4;
 	[Export] private float m_AttackAreaDistance = 3;
 	
 	private readonly List<AllyNPC> m_CurrentAllies = new();
@@ -27,7 +27,7 @@ public partial class RetinueController : Node
 		
 		m_CharacterGenerator.OnCharactersCreated += AddCharactersToRetinue;
 		EnemiesController.Instance.OnEnemyDeath += HandleEnemyDeath;
-		GenerateAlly(m_StartRetinueCount);
+		GenerateAlly(m_RetinueStartCount);
 	}
 
 	public override void _Process(double delta)
@@ -185,5 +185,13 @@ public partial class RetinueController : Node
 			}
 		}
 		m_EnemyTargetingData.Remove(enemy);
+	}
+
+	public void HealAllies()
+	{
+		foreach (var ally in m_CurrentAllies)
+		{
+			ally.HealthSystem.HealFull();
+		}
 	}
 }

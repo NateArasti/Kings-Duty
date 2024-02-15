@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cntj6x0vj868l"]
+
+[ext_resource type="Script" path="res://Scripts/WorldGeneration/Statue.cs" id="1_2yyfu"]
+[ext_resource type="Script" path="res://Scripts/Node3DBillboard.cs" id="1_83c0j"]
+[ext_resource type="Texture2D" uid="uid://bgpguxfdlji21" path="res://Sprites/Props/tile_0065.png" id="2_u4h1y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qs5mt"]
+size = Vector3(0.25, 0.25, 0.1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hsvmr"]
+height = 0.25
+radius = 0.3
+
+[node name="Statue" type="Node3D" node_paths=PackedStringArray("m_TriggerArea")]
+script = ExtResource("1_2yyfu")
+m_TriggerArea = NodePath("Area3D")
+
+[node name="NodeBillboard" type="Node3D" parent="."]
+script = ExtResource("1_83c0j")
+
+[node name="Sprite3D" type="Sprite3D" parent="NodeBillboard"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+offset = Vector2(0, 7)
+shaded = true
+double_sided = false
+alpha_cut = 2
+texture_filter = 4
+texture = ExtResource("2_u4h1y")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_qs5mt")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 65536
+collision_mask = 65536
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("CylinderShape3D_hsvmr")
