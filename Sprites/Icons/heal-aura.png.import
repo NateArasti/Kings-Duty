@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmqntmlkkq01b"
-path="res://.godot/imported/add-friend.png-41a497c65d3c947de92900e086f3e263.ctex"
+uid="uid://c0wrmaxadhv7j"
+path="res://.godot/imported/heal-aura.png-834dac917bd606acc48e15e0eef8fabd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CustomResources/UI/Icons/add-friend.png"
-dest_files=["res://.godot/imported/add-friend.png-41a497c65d3c947de92900e086f3e263.ctex"]
+source_file="res://Sprites/Icons/heal-aura.png"
+dest_files=["res://.godot/imported/heal-aura.png-834dac917bd606acc48e15e0eef8fabd.ctex"]
 
 [params]
 

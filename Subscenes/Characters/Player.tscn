@@ -12,10 +12,10 @@
 [ext_resource type="AnimationLibrary" uid="uid://bfiktfwaogu1a" path="res://Animations/Character.res" id="10_4tb4a"]
 [ext_resource type="AnimationLibrary" uid="uid://cbc2kgqio8nvk" path="res://Animations/Player.res" id="11_88xnr"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Interaction/PlayerInteraction.cs" id="12_hyle0"]
-[ext_resource type="Texture2D" uid="uid://0ghch2ke4hp7" path="res://CustomResources/UI/Icons/heal.png" id="13_470rw"]
+[ext_resource type="Texture2D" uid="uid://0ghch2ke4hp7" path="res://Sprites/Icons/heal.png" id="13_470rw"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Interaction/LevelUpInteraction.cs" id="13_x26sr"]
-[ext_resource type="Texture2D" uid="uid://bmqntmlkkq01b" path="res://CustomResources/UI/Icons/add-friend.png" id="14_u5ppb"]
-[ext_resource type="Texture2D" uid="uid://c0wrmaxadhv7j" path="res://CustomResources/UI/Icons/heal-aura.png" id="15_gowo2"]
+[ext_resource type="Texture2D" uid="uid://bmqntmlkkq01b" path="res://Sprites/Icons/add-friend.png" id="14_u5ppb"]
+[ext_resource type="Texture2D" uid="uid://c0wrmaxadhv7j" path="res://Sprites/Icons/heal-aura.png" id="15_gowo2"]
 [ext_resource type="LabelSettings" uid="uid://dpsuoo76k2bij" path="res://CustomResources/UI/Fonts/HeaderFont.tres" id="16_18jlf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eo2dv"]
@@ -186,6 +186,7 @@ theme_override_fonts/font = ExtResource("6_v64bi")
 theme_override_font_sizes/font_size = 45
 text = "Heal allies"
 icon = ExtResource("13_470rw")
+flat = true
 clip_text = true
 icon_alignment = 1
 vertical_icon_alignment = 0
@@ -198,6 +199,7 @@ theme_override_fonts/font = ExtResource("6_v64bi")
 theme_override_font_sizes/font_size = 45
 text = "Add ally"
 icon = ExtResource("14_u5ppb")
+flat = true
 clip_text = true
 icon_alignment = 1
 vertical_icon_alignment = 0
@@ -210,6 +212,7 @@ theme_override_fonts/font = ExtResource("6_v64bi")
 theme_override_font_sizes/font_size = 45
 text = "Heal self"
 icon = ExtResource("15_gowo2")
+flat = true
 clip_text = true
 icon_alignment = 1
 vertical_icon_alignment = 0

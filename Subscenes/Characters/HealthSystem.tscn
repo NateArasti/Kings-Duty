@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://67dqxlihm38p"]
+[gd_scene load_steps=8 format=3 uid="uid://67dqxlihm38p"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Base/Logic/Fight/HealthSystem.cs" id="1_mdlgv"]
+[ext_resource type="Texture2D" uid="uid://0ghch2ke4hp7" path="res://Sprites/Icons/heal.png" id="2_jmn5r"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_lwwl5"]
 height = 0.25
@@ -11,8 +12,30 @@ top_radius = 0.075
 bottom_radius = 0.075
 height = 0.25
 
-[node name="HealthSystem" type="Node3D" node_paths=PackedStringArray("HitboxArea")]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eomdk"]
+emission_shape_offset = Vector3(0, 0.15, 0)
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+emission_shape = 3
+emission_box_extents = Vector3(0.1, 0.1, 0.15)
+direction = Vector3(0, 1, 0)
+spread = 30.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nbsjl"]
+transparency = 1
+shading_mode = 0
+diffuse_mode = 3
+albedo_color = Color(0, 1, 0.133333, 1)
+albedo_texture = ExtResource("2_jmn5r")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_1vciq"]
+material = SubResource("StandardMaterial3D_nbsjl")
+size = Vector2(0.1, 0.1)
+
+[node name="HealthSystem" type="Node3D" node_paths=PackedStringArray("m_HealEffect", "HitboxArea")]
 script = ExtResource("1_mdlgv")
+m_HealEffect = NodePath("GPUParticles3D")
 HitboxArea = NodePath("HitboxArea")
 
 [node name="HitboxArea" type="Area3D" parent="."]
@@ -27,3 +50,12 @@ shape = SubResource("CylinderShape3D_lwwl5")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HitboxArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 mesh = SubResource("CylinderMesh_0x2yl")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+lifetime = 0.5
+one_shot = true
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_eomdk")
+draw_pass_1 = SubResource("QuadMesh_1vciq")

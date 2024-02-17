@@ -6,9 +6,9 @@ public partial class HealthSystem : Node
 	public event Action OnDeath;
 	
 	[Export] protected AnimationPlayer m_HitboxAnimationPlayer;
+	[Export] protected GpuParticles3D m_HealEffect;
 	[Export] protected string m_HitAnimation;
 	[Export] protected string m_DeathAnimation;
-	[Export] protected string m_HealAnimation;
 	[Export] protected string m_ResetAnimation;
 	
 	[Export] public Area3D HitboxArea { get; private set; }
@@ -62,8 +62,6 @@ public partial class HealthSystem : Node
 	
 	protected virtual void ShowHealEffect()
 	{
-		if(string.IsNullOrEmpty(m_HitAnimation)) return;
-		m_HitboxAnimationPlayer.Stop();
-		m_HitboxAnimationPlayer.Play(m_HealAnimation);
+		m_HealEffect.Emitting = true;
 	}
 }
