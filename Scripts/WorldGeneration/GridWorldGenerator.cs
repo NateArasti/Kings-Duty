@@ -225,7 +225,7 @@ public partial class GridWorldGenerator : Node3D
 			SpawnNature(chunk, trees, worldOffset);
 		}
 		
-		var props = new HashSet<Node3D>();
+		var props = new HashSet<Statue>();
 		
 		if (m_SpawnProps)
 		{
@@ -235,6 +235,7 @@ public partial class GridWorldGenerator : Node3D
 		m_CurrentChunks[chunkIndex] = new(
 			chunkTiles,
 			trees,
+			props,
 			chunk,
 			m_LeftBorderPositionsBuffer.ToArray(),
 			m_TopBorderPositionsBuffer.ToArray(),
@@ -265,7 +266,7 @@ public partial class GridWorldGenerator : Node3D
 		}
 	}
 	
-	private void SpawnProps(WorldGenerator.Chunk chunk, HashSet<Node3D> props, Vector3 worldOffset)
+	private void SpawnProps(WorldGenerator.Chunk chunk, HashSet<Statue> props, Vector3 worldOffset)
 	{		
 		foreach (var gridPosition in chunk.PointOfInterestCells)
 		{
@@ -340,6 +341,7 @@ public partial class GridWorldGenerator : Node3D
 	{
 		if(m_PropsPool.TryGet(out var instance))
 		{
+			instance.Reset();
 			instance.Position = new Vector3(position.Y, 0, position.X);
 			instance.Show();
 		}
@@ -406,6 +408,7 @@ public partial class GridWorldGenerator : Node3D
 	{
 		public IReadOnlyCollection<Sprite3D> ChunkTiles { get; }
 		public IReadOnlyCollection<Tree> Trees { get; }
+		public IReadOnlyCollection<Statue> Props { get; }
 		
 		public WorldGenerator.Chunk Chunk { get; }
 		public IReadOnlyList<Vector2> InvertedLeftBorderPositions { get; }
@@ -416,6 +419,7 @@ public partial class GridWorldGenerator : Node3D
 		public ChunkInstance(
 			IReadOnlyCollection<Sprite3D> chunkTiles,
 			IReadOnlyCollection<Tree> trees,
+			IReadOnlyCollection<Statue> props,
 			WorldGenerator.Chunk chunk,
 			IReadOnlyList<Vector2> invertedLeftBorderPositions,
 			IReadOnlyList<Vector2> invertedTopBorderPositions,
@@ -425,6 +429,7 @@ public partial class GridWorldGenerator : Node3D
 		{
 			ChunkTiles = chunkTiles;
 			Trees = trees;
+			Props = props;
 			Chunk = chunk;
 			InvertedLeftBorderPositions = invertedLeftBorderPositions;
 			InvertedTopBorderPositions = invertedTopBorderPositions;
