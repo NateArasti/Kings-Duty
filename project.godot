@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="KingsDuty"
-run/main_scene="res://Scenes/Main/Main.tscn"
+run/main_scene="res://Scenes/Main/Menu.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,7 @@ DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 

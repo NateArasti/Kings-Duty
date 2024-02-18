@@ -196,6 +196,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tcnef")
 script = ExtResource("27_7qb4n")
+m_MenuPath = "res://Scenes/Main/Menu.tscn"
 m_PauseActionName = "Pause"
 
 [node name="Label" type="Label" parent="Pause/Panel"]
@@ -212,25 +213,47 @@ label_settings = SubResource("LabelSettings_fvb1d")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Pause/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -97.0
-offset_top = -37.0
-offset_right = 109.0
-offset_bottom = 37.0
+offset_left = -90.0
+offset_top = -60.0
+offset_right = 90.0
+offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+
+[node name="ContinueButton" type="Button" parent="Pause/Panel/VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("28_65t7c")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 48
 text = "Continue"
 flat = true
 
-[connection signal="pressed" from="Pause/Panel/Button" to="Pause/Panel" method="Continue"]
+[node name="ExitToMenuButton" type="Button" parent="Pause/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.75, 0.75, 1)
+theme_override_fonts/font = ExtResource("28_65t7c")
+theme_override_font_sizes/font_size = 36
+text = "Exit to menu"
+flat = true
+
+[node name="ExitGameButton" type="Button" parent="Pause/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.75, 0.75, 1)
+theme_override_fonts/font = ExtResource("28_65t7c")
+theme_override_font_sizes/font_size = 36
+text = "Exit game"
+flat = true
+
+[connection signal="pressed" from="Pause/Panel/VBoxContainer/ContinueButton" to="Pause/Panel" method="Continue"]
+[connection signal="pressed" from="Pause/Panel/VBoxContainer/ExitToMenuButton" to="Pause/Panel" method="ExitToMenu"]
+[connection signal="pressed" from="Pause/Panel/VBoxContainer/ExitGameButton" to="Pause/Panel" method="ExitGame"]
 
 [editable path="PlayerGlobalController/Player"]
 [editable path="PlayerGlobalController/Player/HealthSystem"]

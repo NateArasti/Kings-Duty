@@ -14,8 +14,14 @@ public partial class PauseSystem : Node
 		base._EnterTree();
 		Instance = this;
 	}
-	
-	public void Pause(Node node)
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+		GetTree().Paused = false;
+    }
+
+    public void Pause(Node node)
 	{
 		m_NodePauseRequests.Add(node);
 		HandlePause();

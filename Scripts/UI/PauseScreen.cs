@@ -2,6 +2,7 @@ using Godot;
 
 public partial class PauseScreen : Control
 {
+	[Export] private string m_MenuPath;
 	[Export] private string m_PauseActionName;
 
 	public override void _Input(InputEvent @event)
@@ -33,8 +34,13 @@ public partial class PauseScreen : Control
 		Hide();
 	}
 	
+	public void ExitToMenu()
+	{
+		GetTree().ChangeSceneToFile(m_MenuPath);
+	}
+	
 	public void ExitGame()
 	{
-		GetTree().Root.PropagateNotification((int)NotificationWMCloseRequest);
+		GetTree().Quit();
 	}
 }
