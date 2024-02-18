@@ -1,16 +1,17 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://cp36hgh1xvntf"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://cp36hgh1xvntf"]
 
 [ext_resource type="Texture2D" uid="uid://dn25mwal844y0" path="res://Sprites/Characters/Rogue.png" id="1_qu4e6"]
+[ext_resource type="Resource" uid="uid://bacj6qdyr5r76" path="res://CustomResources/Weapons/Melee/Axe.tres" id="4_i4wjy"]
 [ext_resource type="Resource" uid="uid://cx6vuyjitrhnj" path="res://CustomResources/Weapons/Melee/Knife.tres" id="6_lu1pi"]
 [ext_resource type="Resource" uid="uid://qhhsufko6oif" path="res://CustomResources/Weapons/Melee/Sword_Short.tres" id="9_48umk"]
 [ext_resource type="Script" path="res://Scripts/Characters/Base/Data/MeleeCharacter.cs" id="10_ayery"]
 
 [resource]
 script = ExtResource("10_ayery")
-m_PossibleWeapons = Array[Resource]([ExtResource("6_lu1pi"), ExtResource("9_48umk")])
+m_PossibleWeapons = Array[Resource]([ExtResource("6_lu1pi"), ExtResource("9_48umk"), ExtResource("4_i4wjy")])
 Type = "Rogue"
-m_AttackSpeedRange = Vector2(2, 3)
+m_AttackSpeedRange = Vector2(2, 2.5)
 m_Gender = 2
 m_PossibleSprites = Array[Texture2D]([ExtResource("1_qu4e6")])
-m_MaxHPRange = Vector2i(5, 10)
+m_MaxHPRange = Vector2i(6, 15)
 m_DefaultResistanceRange = Vector2(0, 0)

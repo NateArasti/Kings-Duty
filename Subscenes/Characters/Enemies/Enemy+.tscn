@@ -14,10 +14,10 @@ shader_parameter/source_texture = ExtResource("4_v7kqj")
 
 [node name="Enemy" instance=ExtResource("1_qune1")]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
-m_MaxHP = 20
-AttackDamage = 5
-AttackRange = 1.0
-AttackCooldown = 2.0
+m_MaxHP = 30
+AttackDamage = 10
+AttackRange = 0.75
+AttackCooldown = 1.6
 
 [node name="Body" parent="CharacterVisuals/BillboardPivot" index="0"]
 material_overlay = SubResource("ShaderMaterial_11km1")

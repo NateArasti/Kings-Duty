@@ -11,8 +11,8 @@
 script = ExtResource("6_kubfu")
 m_PossibleWeapons = Array[Resource]([ExtResource("2_ycpro"), ExtResource("3_nhfbu"), ExtResource("4_gsfc8"), ExtResource("5_2t54b")])
 Type = "Berserk"
-m_AttackSpeedRange = Vector2(1.25, 1.5)
+m_AttackSpeedRange = Vector2(1.2, 1.5)
 m_Gender = 2
 m_PossibleSprites = Array[Texture2D]([ExtResource("1_e4r47")])
-m_MaxHPRange = Vector2i(15, 25)
+m_MaxHPRange = Vector2i(18, 23)
 m_DefaultResistanceRange = Vector2(0, 0)

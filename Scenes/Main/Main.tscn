@@ -82,7 +82,7 @@ m_GroundTextures = Array[Texture2D]([ExtResource("3_aqul3"), ExtResource("4_vf3m
 m_RoadTextures = Array[Texture2D]([ExtResource("8_cqcl8"), ExtResource("9_mjx4q")])
 m_StepValue = Vector2(0.5, 0.385)
 m_PropScene = ExtResource("23_os0a1")
-m_PropSpawnChance = 0.1
+m_PropSpawnChance = 0.125
 m_TreeScene = ExtResource("10_hurmi")
 m_TreeSpawnMinDistance = 0.8
 
@@ -128,7 +128,7 @@ process_mode = 3
 script = ExtResource("20_b01o2")
 m_CurrentProgress = NodePath("VisibleProgressBar")
 m_ShouldBeProgress = NodePath("ActualProgress")
-m_TimeExperienceModifier = 0.05
+m_TimeExperienceModifier = 0.1
 
 [node name="ActualProgress" type="ProgressBar" parent="Progression"]
 custom_minimum_size = Vector2(0, 16)
@@ -164,15 +164,19 @@ show_percentage = false
 
 [node name="EnemiesController" type="Node" parent="."]
 script = ExtResource("16_i2cei")
-m_SpawnRange = 5.0
+m_SpawnRange = 7.0
+m_StartCurrency = 3
+m_BaseCurrency = 1
+m_EnemySpawnCooldown = 1.5
 m_EnemyScenes = Array[PackedScene]([ExtResource("17_6xbc8"), ExtResource("18_2oj1q"), ExtResource("19_fx466")])
-m_EnemyCosts = PackedInt32Array(1, 7, 15)
+m_EnemyCosts = PackedInt32Array(1, 12, 25)
 
 [node name="RetinueController" type="Node" parent="." node_paths=PackedStringArray("m_CharacterGenerator")]
 script = ExtResource("13_exdnn")
 m_CharacterGenerator = NodePath("RetinueCreation")
 m_AllyScene = ExtResource("19_ux3uk")
 m_RetinueStartCount = 3
+m_AttackAreaDistance = 2.5
 
 [node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]
 process_mode = 3

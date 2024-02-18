@@ -11,7 +11,7 @@
 script = ExtResource("11_l5uxq")
 m_PossibleWeapons = Array[Resource]([ExtResource("5_1hmhx"), ExtResource("8_55f54"), ExtResource("9_7hi4l"), ExtResource("10_oja6r")])
 Type = "Knight"
-m_AttackSpeedRange = Vector2(1.4, 1.6)
+m_AttackSpeedRange = Vector2(0.8, 0.9)
 m_Gender = 2
 m_PossibleSprites = Array[Texture2D]([ExtResource("1_kboin")])
 m_MaxHPRange = Vector2i(20, 25)

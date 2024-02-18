@@ -3,6 +3,9 @@ using Godot;
 
 public partial class Progression : Node
 {
+	// exp = (level / x) ^ 2
+	private const float k_XPProgressModifier = 0.5f;
+	
 	public event Action OnLevelUpStart;
 	public event Action OnLevelUpEnd;
 	
@@ -11,7 +14,6 @@ public partial class Progression : Node
 	[Export] private ProgressBar m_CurrentProgress;
 	[Export] private ProgressBar m_ShouldBeProgress;
 	[Export] private float m_VisualsChangeSpeed = 1f;
-	[Export] private int m_BaseExperiencePerLevel = 5;
 	[Export] private float m_TimeExperienceModifier = 1;
 
 	private int m_CurrentLevel;
@@ -20,13 +22,13 @@ public partial class Progression : Node
 	
 	private int m_LastCheckedSeconds;
 
-    public override void _EnterTree()
-    {
-        base._EnterTree();
+	public override void _EnterTree()
+	{
+		base._EnterTree();
 		Instance = this;
-    }
+	}
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		base._Ready();
 		m_CurrentProgress.Value = 0;
@@ -36,7 +38,9 @@ public partial class Progression : Node
 
 	private void AddProgressForEnemyKill(EnemyNPC enemy)
 	{
-		UpdateProgress(1);
+		var currentSeconds = (int)GlobalTimer.CurrentTime.TotalSeconds;
+		var timeModifier = currentSeconds / 30f;
+		UpdateProgress(1 + timeModifier);
 	}
 
 	public override void _Process(double delta)
@@ -64,7 +68,7 @@ public partial class Progression : Node
 	
 	private void AddTimeProgress()
 	{
-		var currentSeconds = GlobalTimer.CurrentTime.Seconds;
+		var currentSeconds = (int)GlobalTimer.CurrentTime.TotalSeconds;
 		if(currentSeconds == m_LastCheckedSeconds) return;
 		var delta = currentSeconds - m_LastCheckedSeconds;
 		m_LastCheckedSeconds = currentSeconds;
@@ -93,11 +97,11 @@ public partial class Progression : Node
 	
 	private int GetCorrespondingLevel(float experience)
 	{
-		return (int) (experience / m_BaseExperiencePerLevel);
+		return (int) (k_XPProgressModifier * Mathf.Sqrt(experience));
 	}
 	
 	private float GetCorrespondingExperience(int level)
 	{
-		return level * m_BaseExperiencePerLevel;
+		return Mathf.Pow(level / k_XPProgressModifier, 2);
 	}
 }

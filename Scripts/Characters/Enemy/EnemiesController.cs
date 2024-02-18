@@ -11,6 +11,7 @@ public partial class EnemiesController : Node
 	
 	[Export] private float m_SpawnRange;
 	[Export] private int m_StartCurrency = 2;
+	[Export] private int m_BaseCurrency = 2;
 	[Export] private float m_EnemySpawnCooldown = 1;
 	[Export] private float m_WaveSpawnCooldown = 10;
 	[Export] private float m_WaveAwaitAdd = 2;
@@ -27,12 +28,18 @@ public partial class EnemiesController : Node
 	public int KilledEnemeiesCount { get; private set; }
 	public IReadOnlyCollection<EnemyNPC> CurrentEnemies => m_CurrentEnemies;
 
-    public override void _EnterTree()
-    {
-        base._EnterTree();
+	public override void _EnterTree()
+	{
+		base._EnterTree();
 		
 		Instance = this;
-    }
+	}
+
+	public override void _Ready()
+	{
+		base._Ready();
+		m_CurrentWaveMaxCost = m_StartCurrency;
+	}
 
 	public override void _Process(double delta)
 	{
@@ -67,7 +74,7 @@ public partial class EnemiesController : Node
 			return;
 		}
 		
-		m_CurrentWaveMaxCost += m_StartCurrency;
+		m_CurrentWaveMaxCost += m_BaseCurrency;
 		var awailableCurrency = m_CurrentWaveMaxCost;
 		for (var i = m_EnemyCosts.Length - 1; i >= 0;)
 		{

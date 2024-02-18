@@ -16,9 +16,10 @@ shader_parameter/source_texture = ExtResource("5_7bhfj")
 [node name="Enemy" instance=ExtResource("1_ok325")]
 script = ExtResource("2_inqib")
 m_MaxHP = 10
-m_AttackPlayerTimeout = 1.0
+m_AttackPlayerTimeout = 0.6
 AttackStayInRange = 1.0
-AttackDamage = 2
+AttackDamage = 1
+AttackCooldown = 1.25
 
 [node name="Body" parent="CharacterVisuals/BillboardPivot" index="0"]
 material_overlay = SubResource("ShaderMaterial_toj01")

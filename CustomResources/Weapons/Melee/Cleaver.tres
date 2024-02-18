@@ -7,6 +7,6 @@
 resource_name = "Cleaver"
 script = ExtResource("2_o3gkn")
 AttackDamage = 5
-AttackCooldown = 2.0
-AttackRange = 0.35
+AttackCooldown = 1.5
+AttackRange = 0.4
 Sprite = ExtResource("1_3lnpu")

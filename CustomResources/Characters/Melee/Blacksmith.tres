@@ -15,8 +15,8 @@
 script = ExtResource("13_jf1bo")
 m_PossibleWeapons = Array[Resource]([ExtResource("5_g6daw"), ExtResource("6_3m4yd"), ExtResource("7_60ckk"), ExtResource("8_pkj35"), ExtResource("9_hemie"), ExtResource("10_71reo"), ExtResource("11_qvnwq"), ExtResource("12_iu3kd")])
 Type = "Blacksmith"
-m_AttackSpeedRange = Vector2(0.8, 1.2)
+m_AttackSpeedRange = Vector2(1, 1)
 m_Gender = 2
 m_PossibleSprites = Array[Texture2D]([ExtResource("1_gyfju")])
-m_MaxHPRange = Vector2i(7, 10)
+m_MaxHPRange = Vector2i(12, 15)
 m_DefaultResistanceRange = Vector2(0, 0)

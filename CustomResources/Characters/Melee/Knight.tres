@@ -1,18 +1,17 @@
-[gd_resource type="Resource" load_steps=7 format=3 uid="uid://cjlsmqqndh7a2"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://cjlsmqqndh7a2"]
 
 [ext_resource type="Texture2D" uid="uid://copip0q84fm3t" path="res://Sprites/Characters/Knight_Small.png" id="1_w8ay2"]
 [ext_resource type="Resource" uid="uid://ddp8evmimi301" path="res://CustomResources/Weapons/Melee/Cleaver.tres" id="5_ukx7r"]
 [ext_resource type="Resource" uid="uid://bsqdtp4o7f13a" path="res://CustomResources/Weapons/Melee/Sword_Big.tres" id="8_m8i55"]
-[ext_resource type="Resource" uid="uid://bh3wk6xs2r1b5" path="res://CustomResources/Weapons/Melee/Sword_Golden.tres" id="9_5gb5h"]
 [ext_resource type="Resource" uid="uid://qhhsufko6oif" path="res://CustomResources/Weapons/Melee/Sword_Short.tres" id="10_pso8b"]
 [ext_resource type="Script" path="res://Scripts/Characters/Base/Data/MeleeCharacter.cs" id="11_8miro"]
 
 [resource]
 script = ExtResource("11_8miro")
-m_PossibleWeapons = Array[Resource]([ExtResource("5_ukx7r"), ExtResource("8_m8i55"), ExtResource("9_5gb5h"), ExtResource("10_pso8b")])
+m_PossibleWeapons = Array[Resource]([ExtResource("5_ukx7r"), ExtResource("8_m8i55"), ExtResource("10_pso8b")])
 Type = "Knight"
-m_AttackSpeedRange = Vector2(1, 1)
+m_AttackSpeedRange = Vector2(1, 1.2)
 m_Gender = 2
 m_PossibleSprites = Array[Texture2D]([ExtResource("1_w8ay2")])
-m_MaxHPRange = Vector2i(10, 15)
+m_MaxHPRange = Vector2i(14, 18)
 m_DefaultResistanceRange = Vector2(0, 0)
