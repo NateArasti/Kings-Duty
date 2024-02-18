@@ -109,7 +109,7 @@ public partial class RetinueController : Node
 
 	public void GenerateAlly(int count = 1)
 	{
-		GetTree().Paused = true;
+		PauseSystem.Instance.Pause(this);
 		
 		m_CharacterGenerator.StartCharacterCreation(count);
 	}
@@ -122,7 +122,7 @@ public partial class RetinueController : Node
 		}
 		UpdateRetinuePositioning();
 		
-		GetTree().Paused = false;
+		PauseSystem.Instance.Unpause(this);
 	}
 	
 	private void SpawnAlly(Character character)

@@ -31,7 +31,7 @@ public partial class PlayerHealthSystem : HealthSystem
 
 	protected override void ShowDeathEffect()
 	{
-		GetTree().Paused = true;
+		PauseSystem.Instance.Pause(PlayerGlobalController.Instance.Player);
 		DelayedDeathEffect();
 	}
 	

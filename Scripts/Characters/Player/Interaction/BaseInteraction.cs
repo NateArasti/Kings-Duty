@@ -11,12 +11,12 @@ public partial class BaseInteraction : Control
 	public virtual void StartInteraction()
 	{
 		Show();
-		GetTree().Paused = true;
+		PauseSystem.Instance.Pause(this);
 	}
 	
 	public virtual void EndInteraction()
 	{
 		Hide();
-		GetTree().Paused = false;
+		PauseSystem.Instance.Unpause(this);
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=38 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_fljgg"]
 [ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_r07sy"]
@@ -25,6 +25,9 @@
 [ext_resource type="PackedScene" uid="uid://yuck4c8kfsqx" path="res://Subscenes/Characters/Ally/Ally.tscn" id="19_ux3uk"]
 [ext_resource type="Script" path="res://Scripts/Progression.cs" id="20_b01o2"]
 [ext_resource type="PackedScene" uid="uid://cntj6x0vj868l" path="res://Subscenes/Props/Statue.tscn" id="23_os0a1"]
+[ext_resource type="Script" path="res://Scripts/PauseSystem.cs" id="26_x11jv"]
+[ext_resource type="Script" path="res://Scripts/UI/PauseScreen.cs" id="27_7qb4n"]
+[ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/Fonts/BlackOpsOne-Regular.ttf" id="28_65t7c"]
 
 [sub_resource type="Environment" id="Environment_ua30k"]
 background_mode = 1
@@ -58,6 +61,13 @@ bg_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6k35"]
 bg_color = Color(0.247059, 0.32549, 0.87451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcnef"]
+bg_color = Color(0, 0, 0, 0.784314)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fvb1d"]
+font = ExtResource("28_65t7c")
+font_size = 72
 
 [node name="Main" type="Node"]
 
@@ -167,6 +177,56 @@ m_RetinueStartCount = 3
 [node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]
 process_mode = 3
 visible = false
+
+[node name="Pause" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("26_x11jv")
+
+[node name="Panel" type="Panel" parent="Pause"]
+visible = false
+z_index = 100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tcnef")
+script = ExtResource("27_7qb4n")
+m_PauseActionName = "Pause"
+
+[node name="Label" type="Label" parent="Pause/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 0.5
+anchor_bottom = 0.4
+grow_horizontal = 2
+grow_vertical = 2
+text = "PAUSE"
+label_settings = SubResource("LabelSettings_fvb1d")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Pause/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -37.0
+offset_right = 109.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("28_65t7c")
+theme_override_font_sizes/font_size = 36
+text = "Continue"
+flat = true
+
+[connection signal="pressed" from="Pause/Panel/Button" to="Pause/Panel" method="Continue"]
 
 [editable path="PlayerGlobalController/Player"]
 [editable path="PlayerGlobalController/Player/HealthSystem"]

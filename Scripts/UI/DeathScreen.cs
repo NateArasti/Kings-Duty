@@ -4,7 +4,7 @@ public partial class DeathScreen : Control
 {
 	public void Restart()
 	{
-		GetTree().Paused = false;
+		PauseSystem.Instance.Unpause(PlayerGlobalController.Instance.Player);
 		GetTree().ReloadCurrentScene();
 	}
 }
