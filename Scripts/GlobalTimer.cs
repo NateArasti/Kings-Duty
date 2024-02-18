@@ -7,6 +7,12 @@ public partial class GlobalTimer : Node
 	
 	[Export] private Label m_TimerLabel;
 
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		CurrentTime = new TimeSpan();
+	}
+
 	public override void _Process(double delta)
 	{
 		CurrentTime += new TimeSpan(0, 0, 0, 0, (int)(delta * 1000));

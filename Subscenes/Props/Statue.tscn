@@ -71,9 +71,10 @@ _data = {
 "RESET": SubResource("Animation_170q2")
 }
 
-[node name="Statue" type="Node3D" node_paths=PackedStringArray("m_TriggerArea", "m_AnimationPlayer")]
+[node name="Statue" type="Node3D" node_paths=PackedStringArray("m_TriggerArea", "m_Visuals", "m_AnimationPlayer")]
 script = ExtResource("1_2yyfu")
 m_TriggerArea = NodePath("Area3D")
+m_Visuals = NodePath("OmniLight3D")
 m_AnimationPlayer = NodePath("AnimationPlayer")
 m_DestroyAnimationName = "Destroy"
 m_ResetAnimationName = "RESET"

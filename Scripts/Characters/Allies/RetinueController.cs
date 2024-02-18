@@ -19,11 +19,16 @@ public partial class RetinueController : Node
 	
 	public IReadOnlyCollection<AllyNPC> CurrentAllies => m_CurrentAllies;
 
-	public override void _Ready()
-	{
-		base._Ready();
+    public override void _EnterTree()
+    {
+        base._EnterTree();
 		
 		Instance = this;
+    }
+
+    public override void _Ready()
+	{
+		base._Ready();
 		
 		m_CharacterGenerator.OnCharactersCreated += AddCharactersToRetinue;
 		EnemiesController.Instance.OnEnemyDeath += HandleEnemyDeath;

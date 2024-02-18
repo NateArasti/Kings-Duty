@@ -27,11 +27,12 @@ public partial class EnemiesController : Node
 	public int KilledEnemeiesCount { get; private set; }
 	public IReadOnlyCollection<EnemyNPC> CurrentEnemies => m_CurrentEnemies;
 
-	public override void _Ready()
-	{
-		base._Ready();
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+		
 		Instance = this;
-	}
+    }
 
 	public override void _Process(double delta)
 	{

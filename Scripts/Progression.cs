@@ -1,49 +1,103 @@
+using System;
 using Godot;
 
 public partial class Progression : Node
 {
+	public event Action OnLevelUpStart;
+	public event Action OnLevelUpEnd;
+	
+	public static Progression Instance { get; private set; }
+	
 	[Export] private ProgressBar m_CurrentProgress;
-	[Export] private int m_BaseEnemyKillsPerLevel = 5;
+	[Export] private ProgressBar m_ShouldBeProgress;
+	[Export] private float m_VisualsChangeSpeed = 1f;
+	[Export] private int m_BaseExperiencePerLevel = 5;
+	[Export] private float m_TimeExperienceModifier = 1;
 
 	private int m_CurrentLevel;
+	private float m_CurrentExperience;
+	private bool m_IsWaitingForLevelUp;
+	
+	private int m_LastCheckedSeconds;
 
-	public override void _Ready()
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+		Instance = this;
+    }
+
+    public override void _Ready()
 	{
 		base._Ready();
-		// EnemiesController.Instance.OnEnemyDeath += UpdateProgress;
+		m_CurrentProgress.Value = 0;
+		m_ShouldBeProgress.Value = 0;
+		EnemiesController.Instance.OnEnemyDeath += AddProgressForEnemyKill;
+	}
+
+	private void AddProgressForEnemyKill(EnemyNPC enemy)
+	{
+		UpdateProgress(1);
 	}
 
 	public override void _Process(double delta)
 	{
-		UpdateProgress();
+		AddTimeProgress();
+		UpdateVisuals(delta);
 	}
 
-	private void UpdateProgress()
+	private void UpdateProgress(float addExp)
 	{
-		var currentEnemyKillCount = EnemiesController.Instance.KilledEnemeiesCount;
-		var shouldBeLevel = GetCorrespondingLevel(currentEnemyKillCount);
-		if (shouldBeLevel > m_CurrentLevel)
+		if (m_IsWaitingForLevelUp == true) return;
+		
+		m_CurrentExperience += addExp;
+		if(GetCorrespondingLevel(m_CurrentExperience) > m_CurrentLevel)
 		{
-			LevelUp();
+			StartLevelUp();
 		}
 		
-		m_CurrentProgress.Value = Mathf.Remap(currentEnemyKillCount, GetCorrespondingEnemyKillCount(m_CurrentLevel), GetCorrespondingEnemyKillCount(m_CurrentLevel + 1), 0f, 1f);
+		m_ShouldBeProgress.Value = Mathf.Remap(
+			m_CurrentExperience, 
+			GetCorrespondingExperience(m_CurrentLevel), 
+			GetCorrespondingExperience(m_CurrentLevel + 1), 
+			0f, 1f);
+	}
+	
+	private void AddTimeProgress()
+	{
+		var currentSeconds = GlobalTimer.CurrentTime.Seconds;
+		if(currentSeconds == m_LastCheckedSeconds) return;
+		var delta = currentSeconds - m_LastCheckedSeconds;
+		m_LastCheckedSeconds = currentSeconds;
+		UpdateProgress(delta * m_TimeExperienceModifier);
+	}
+	
+	private void UpdateVisuals(double delta)
+	{
+		m_CurrentProgress.Value = Mathf.MoveToward(m_CurrentProgress.Value, m_ShouldBeProgress.Value, Mathf.Min(m_CurrentProgress.Step, m_VisualsChangeSpeed * delta));
 	}
 
-	private void LevelUp()
+	public void StartLevelUp()
 	{
-		GD.Print("LevelUp");
-		RetinueController.Instance.GenerateAlly();
+		OnLevelUpStart?.Invoke();
+		m_IsWaitingForLevelUp = true;
+	}
+	
+	public void FinishLevelUp()
+	{
+		OnLevelUpEnd?.Invoke();	
+		m_IsWaitingForLevelUp = false;
 		m_CurrentLevel++;
+		m_CurrentProgress.Value = 0;
+		m_ShouldBeProgress.Value = 0;
 	}
 	
-	private int GetCorrespondingLevel(int enemyKillCount)
+	private int GetCorrespondingLevel(float experience)
 	{
-		return enemyKillCount / m_BaseEnemyKillsPerLevel;
+		return (int) (experience / m_BaseExperiencePerLevel);
 	}
 	
-	private int GetCorrespondingEnemyKillCount(int level)
+	private float GetCorrespondingExperience(int level)
 	{
-		return level * m_BaseEnemyKillsPerLevel;	
+		return level * m_BaseExperiencePerLevel;
 	}
 }

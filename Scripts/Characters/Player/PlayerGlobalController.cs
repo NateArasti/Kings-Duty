@@ -8,9 +8,10 @@ public partial class PlayerGlobalController : Node
 	[Export] public PlayerHealthSystem PlayerHealthSystem { get; private set; }
 	[Export] public PlayerInteraction PlayerInteraction { get; private set; }
 
-	public override void _Ready()
+	public override void _EnterTree()
 	{
-		base._Ready();
+		base._EnterTree();
+		
 		Instance = this;
 	}
 }

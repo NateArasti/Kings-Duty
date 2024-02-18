@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=33 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_fljgg"]
 [ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_r07sy"]
@@ -47,8 +47,14 @@ shader_parameter/value = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/source_texture = ExtResource("15_d07yq")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tudu5"]
+bg_color = Color(0, 0, 0, 0.294118)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51p3k"]
+bg_color = Color(1, 1, 1, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bovkp"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6k35"]
 bg_color = Color(0.247059, 0.32549, 0.87451, 1)
@@ -107,11 +113,30 @@ offset_bottom = 46.0
 text = "00:00"
 label_settings = ExtResource("19_aob7p")
 
-[node name="Progression" type="Node" parent="." node_paths=PackedStringArray("m_CurrentProgress")]
+[node name="Progression" type="Node" parent="." node_paths=PackedStringArray("m_CurrentProgress", "m_ShouldBeProgress")]
+process_mode = 3
 script = ExtResource("20_b01o2")
-m_CurrentProgress = NodePath("ProgressBar")
+m_CurrentProgress = NodePath("VisibleProgressBar")
+m_ShouldBeProgress = NodePath("ActualProgress")
+m_TimeExperienceModifier = 0.05
 
-[node name="ProgressBar" type="ProgressBar" parent="Progression"]
+[node name="ActualProgress" type="ProgressBar" parent="Progression"]
+custom_minimum_size = Vector2(0, 16)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_tudu5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_51p3k")
+max_value = 1.0
+step = 0.001
+value = 0.62
+show_percentage = false
+
+[node name="VisibleProgressBar" type="ProgressBar" parent="Progression"]
 custom_minimum_size = Vector2(0, 16)
 anchors_preset = 12
 anchor_top = 1.0
@@ -123,7 +148,8 @@ grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_bovkp")
 theme_override_styles/fill = SubResource("StyleBoxFlat_g6k35")
 max_value = 1.0
-value = 1.0
+step = 0.001
+value = 0.5
 show_percentage = false
 
 [node name="EnemiesController" type="Node" parent="."]
@@ -136,6 +162,7 @@ m_EnemyCosts = PackedInt32Array(1, 7, 15)
 script = ExtResource("13_exdnn")
 m_CharacterGenerator = NodePath("RetinueCreation")
 m_AllyScene = ExtResource("19_ux3uk")
+m_RetinueStartCount = 3
 
 [node name="RetinueCreation" parent="RetinueController" instance=ExtResource("15_y3ogn")]
 process_mode = 3
