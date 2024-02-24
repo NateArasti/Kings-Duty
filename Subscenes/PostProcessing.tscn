@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwafhnyut7l3f"]
 
-[ext_resource type="Material" uid="uid://dgf8nek54rcbk" path="res://Materials/Vignette.tres" id="1_mx1sv"]
+[ext_resource type="Material" uid="uid://dgf8nek54rcbk" path="res://CustomResources/Materials/Vignette.tres" id="1_mx1sv"]
 
 [node name="PostProcessing" type="CanvasLayer"]
 layer = -1

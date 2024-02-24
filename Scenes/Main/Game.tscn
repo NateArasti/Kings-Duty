@@ -1,15 +1,11 @@
-[gd_scene load_steps=38 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=36 format=3 uid="uid://dwpxrxrso4gxp"]
 
-[ext_resource type="Script" path="res://Scripts/WorldGeneration/GridWorldGenerator.cs" id="1_fljgg"]
-[ext_resource type="PackedScene" uid="uid://d0vpneaidygpk" path="res://Subscenes/WorldTiles/WorldTile.tscn" id="2_r07sy"]
-[ext_resource type="Texture2D" uid="uid://jeip5slvibhd" path="res://Sprites/GroundSprites/grass1.png" id="3_aqul3"]
-[ext_resource type="Texture2D" uid="uid://c2sfg0jkj4vm7" path="res://Sprites/GroundSprites/grass5.png" id="4_vf3m5"]
-[ext_resource type="Texture2D" uid="uid://bsococoq13ajh" path="res://Sprites/GroundSprites/grass8.png" id="5_07180"]
-[ext_resource type="Texture2D" uid="uid://46vx14kgnxm5" path="res://Sprites/GroundSprites/grass9.png" id="6_75mh7"]
-[ext_resource type="Texture2D" uid="uid://buyiv3osh6a2j" path="res://Sprites/GroundSprites/grass10.png" id="7_ukdxv"]
-[ext_resource type="Texture2D" uid="uid://bobyw1qicxpkf" path="res://Sprites/GroundSprites/dirt1.png" id="8_cqcl8"]
-[ext_resource type="Texture2D" uid="uid://cn76oijngw7c7" path="res://Sprites/GroundSprites/dirt4.png" id="9_mjx4q"]
-[ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Nature/Tree.tscn" id="10_hurmi"]
+[ext_resource type="Script" path="res://Scripts/WorldGeneration/Base/TileWorldGenerator.cs" id="1_fljgg"]
+[ext_resource type="Material" uid="uid://ddkuqr58cyom6" path="res://CustomResources/Materials/WorldTile.tres" id="2_ete7x"]
+[ext_resource type="Script" path="res://Scripts/WorldGeneration/NatureGenerator.cs" id="3_hbg1g"]
+[ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/TreeMultimesh.tres" id="4_itje5"]
+[ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Props/Obstacle.tscn" id="5_lcgxn"]
+[ext_resource type="Script" path="res://Scripts/WorldGeneration/StatuesGenerator.cs" id="6_7u5n0"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerGlobalController.cs" id="11_laj72"]
 [ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player.tscn" id="12_vltxi"]
 [ext_resource type="Script" path="res://Scripts/Characters/Allies/RetinueController.cs" id="13_exdnn"]
@@ -31,6 +27,7 @@
 
 [sub_resource type="Environment" id="Environment_ua30k"]
 background_mode = 1
+background_color = Color(0.2, 0.2, 0.2, 1)
 ambient_light_energy = 0.01
 reflected_light_source = 1
 sdfgi_read_sky_light = false
@@ -41,6 +38,15 @@ adjustment_contrast = 1.1
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qynxp"]
 auto_exposure_scale = 0.06
 dof_blur_far_distance = 8040.33
+
+[sub_resource type="QuadMesh" id="QuadMesh_ty64c"]
+material = ExtResource("2_ete7x")
+orientation = 1
+
+[sub_resource type="MultiMesh" id="MultiMesh_5mvwk"]
+transform_format = 1
+use_custom_data = true
+mesh = SubResource("QuadMesh_ty64c")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m3jjx"]
 resource_local_to_scene = true
@@ -73,31 +79,33 @@ font_size = 72
 
 [node name="Environment" type="Node" parent="."]
 
-[node name="World" type="Node3D" parent="Environment" node_paths=PackedStringArray("m_Player")]
-script = ExtResource("1_fljgg")
-m_Player = NodePath("../../PlayerGlobalController/Player")
-m_MinTimeToGenerateChunk = 1.0
-m_WorldTile = ExtResource("2_r07sy")
-m_GroundTextures = Array[Texture2D]([ExtResource("3_aqul3"), ExtResource("4_vf3m5"), ExtResource("5_07180"), ExtResource("6_75mh7"), ExtResource("7_ukdxv")])
-m_RoadTextures = Array[Texture2D]([ExtResource("8_cqcl8"), ExtResource("9_mjx4q")])
-m_StepValue = Vector2(0.5, 0.385)
-m_PropScene = ExtResource("23_os0a1")
-m_PropSpawnChance = 0.125
-m_TreeScene = ExtResource("10_hurmi")
-m_TreeSpawnMinDistance = 0.8
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(0.0201397, 0.28061, -0.959611, -4.65661e-10, 0.959805, 0.280667, 0.999797, -0.00565255, 0.0193302, 0, 0, 0)
-light_color = Color(0.247059, 0.247059, 0.247059, 1)
-shadow_bias = 0.01
-shadow_normal_bias = 1.0
-shadow_reverse_cull_face = true
-shadow_opacity = 0.75
-directional_shadow_mode = 1
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = SubResource("Environment_ua30k")
 camera_attributes = SubResource("CameraAttributesPractical_qynxp")
+
+[node name="World" type="Node3D" parent="Environment" node_paths=PackedStringArray("m_TilesMultimesh")]
+script = ExtResource("1_fljgg")
+m_StepValue = Vector2(0.5, 0.385)
+m_TilesMultimesh = NodePath("Tiles_MultiMeshInstance3D")
+m_DefaultTileBasis = Basis(0, 0, -1, 0, 1, 0, 1, 0, 0)
+m_GroundTilesIndexRange = Vector2i(0, 9)
+m_RoadTilesIndexRange = Vector2i(10, 11)
+
+[node name="Tiles_MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Environment/World"]
+sorting_offset = -1e+06
+sorting_use_aabb_center = false
+multimesh = SubResource("MultiMesh_5mvwk")
+
+[node name="TreeGenerator" type="Node3D" parent="Environment/World"]
+script = ExtResource("3_hbg1g")
+m_TreesTextureRange = Vector2i(0, 1)
+m_TreeMeshData = ExtResource("4_itje5")
+m_DefaultTreeBasis = Basis(0, 0.707, -0.707, 0, 0.707, 0.707, 1, 0, 0)
+m_ObstacleScene = ExtResource("5_lcgxn")
+
+[node name="StatuesGenerator" type="Node3D" parent="Environment/World"]
+script = ExtResource("6_7u5n0")
+m_PropScene = ExtResource("23_os0a1")
 
 [node name="PlayerGlobalController" type="Node" parent="." node_paths=PackedStringArray("Player", "PlayerHealthSystem", "PlayerInteraction")]
 script = ExtResource("11_laj72")

@@ -28,10 +28,10 @@ public class WorldGenerator
 	private readonly List<Vector2I> m_PointOfInterestCellsBuffer = new();
 	private readonly List<Vector2I> m_GroundCellsBuffer = new();
 	
-	public WorldGenerator(Vector2 chunkSize, float cellSize, float minDIstance, float removeEdgeChance = 0.25f)
+	public WorldGenerator(Vector2I chunkSize, float cellSize, float minDIstance, float removeEdgeChance = 0.25f)
 	{
-		Width = Mathf.CeilToInt(chunkSize.X / cellSize);
-		Height = Mathf.CeilToInt(chunkSize.Y / cellSize);
+		Width = chunkSize.X;
+		Height = chunkSize.Y;
 		CellSize = cellSize;
 		MinDistance = minDIstance;
 		RemoveEdgeChance = removeEdgeChance;

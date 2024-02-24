@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerHealthSystem.cs" id="6_b2ybh"]
 [ext_resource type="Script" path="res://Scripts/UI/DeathScreen.cs" id="6_mbc2c"]
 [ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/Fonts/BlackOpsOne-Regular.ttf" id="6_v64bi"]
-[ext_resource type="Material" uid="uid://dgf8nek54rcbk" path="res://Materials/Vignette.tres" id="7_chfch"]
+[ext_resource type="Material" uid="uid://dgf8nek54rcbk" path="res://CustomResources/Materials/Vignette.tres" id="7_chfch"]
 [ext_resource type="AnimationLibrary" uid="uid://bfiktfwaogu1a" path="res://Animations/Character.res" id="10_4tb4a"]
 [ext_resource type="AnimationLibrary" uid="uid://cbc2kgqio8nvk" path="res://Animations/Player.res" id="11_88xnr"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Interaction/PlayerInteraction.cs" id="12_hyle0"]
@@ -68,7 +68,7 @@ material_overlay = SubResource("ShaderMaterial_eo2dv")
 texture = ExtResource("4_qwdm8")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="CharacterVisuals/BillboardPivot/Body/MainHandPivot/Object" index="0"]
-transform = Transform3D(0.906308, -0.422618, 1.2595e-08, 0.422618, 0.906308, -2.70101e-08, 3.55271e-15, 2.98023e-08, 1, 0.0156366, 0.0563829, 0.037)
+transform = Transform3D(0.906308, -0.422618, 9.31296e-08, 0.422618, 0.906308, 2.25815e-08, -6.83335e-08, 0, 1, -0.192952, 0.176223, 0.037)
 light_color = Color(0.878431, 0.47451, 0.129412, 1)
 light_size = 0.1
 light_specular = 1.0
@@ -76,7 +76,7 @@ light_bake_mode = 0
 shadow_enabled = true
 shadow_reverse_cull_face = true
 shadow_opacity = 0.5
-omni_range = 10.0
+omni_range = 2.0
 omni_attenuation = 1.5
 
 [node name="HealthSystem" parent="." index="3"]

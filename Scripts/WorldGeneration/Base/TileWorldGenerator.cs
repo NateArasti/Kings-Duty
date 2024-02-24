@@ -1,51 +1,52 @@
-using System;
 using System.Collections.Generic;
 using Godot;
 
 /// <summary>
 /// Generates 9 chunks around player at runtime
 /// Chunks are set like that
-/// 	 <2>
-///   <1>	<5>
+/// 	 <6>
+///   <3>	<7>
 /// <0>  <4>   <8>
-///   <3>   <7>
-///      <6>
+///   <1>   <5>
+///      <2>
 ///      
 /// Player is always at center(4) chunk
 /// </summary>
-public partial class GridWorldGenerator : Node3D
+public partial class TileWorldGenerator : Node3D
 {
-	private const int k_RuntimeChunksCount = 9;
-	
-	[Export] private Node3D m_Player;
-	[Export] private float m_MinTimeToGenerateChunk = 2;
+	public const int k_RuntimeChunksCount = 9;
+	public const int k_RuntimeChunksSideCount = 3;
 	
 	[ExportGroup("Grid Generation")]
-	[Export] private PackedScene m_WorldTile;
-	[Export] private Texture2D[] m_GroundTextures;
-	[Export] private Texture2D[] m_RoadTextures;
 	[Export] private Vector2 m_StepValue = Vector2.One;
 	[Export] private Vector2 m_XGridDirection = new Vector2(1, -1);
 	[Export] private Vector2 m_YGridDirection = new Vector2(1, 1);
 	
-	[ExportGroup("World Filling")]
-	[Export] private bool m_SpawnProps = true;
-	[Export] private PackedScene m_PropScene;
-	[Export(PropertyHint.Range, "0, 1")] private float m_PropSpawnChance = 0.25f;
-	[Export] private bool m_SpawnNature = true;
-	[Export] private PackedScene m_TreeScene;
-	[Export] private float m_TreeSpawnMinDistance = 5;
+	[ExportGroup("World Tiles")]
+	[Export] private MultiMeshInstance3D m_TilesMultimesh;
+	[Export] private Basis m_DefaultTileBasis;
+	[Export] private Vector2I m_GroundTilesIndexRange;
+	[Export] private Vector2I m_RoadTilesIndexRange;
 	
 	[ExportGroup("World Generation")]
-	[Export] private Vector2 m_GridSize = new(20, 20);
+	[Export] private Vector2I m_ChunkGridSize = new(20, 20);
 	[Export] private float m_CellSize = 1f;
-	[Export] private float m_MinDistance = 5;
+	[Export] private float m_MinRoadCellDistance = 5;
+	[Export] private float m_MinTimeToGenerateChunk = 2;
 	
-	private NodePool<Sprite3D> m_WorldTilesPool;
-	private NodePool<Tree> m_TreePool;
-	private NodePool<Statue> m_PropsPool;
-	
+	private Vector2 m_ChunkSize;
+	private Vector2 m_RectSize;
 	private WorldGenerator m_WorldGenerator;
+	
+	private Vector2 m_GlobalOffset;
+	private Vector2 m_StartOffset;
+	
+	private Vector2[] m_ChunkOffsets;
+	
+	private int m_CurrentChunkIndex;
+	private float m_CurrentTimeInChunk = 0;
+	
+	private readonly List<IWorldGenerationSubscriber> m_WorldGenerationSubscribers = new();
 	
 	private readonly ChunkInstance[] m_CurrentChunks = new ChunkInstance[k_RuntimeChunksCount];
 	
@@ -53,13 +54,6 @@ public partial class GridWorldGenerator : Node3D
 	private readonly List<Vector2> m_TopBorderPositionsBuffer = new();
 	private readonly List<Vector2> m_RightBorderPositionsBuffer = new();
 	private readonly List<Vector2> m_BottomBorderPositionsBuffer = new();
-	
-	private Vector2 m_GlobalOffset;
-	
-	private Vector2[] m_ChunkOffsets;
-	
-	private int m_CurrentChunkIndex;
-	private float m_CurrentTimeInChunk = 0;
 	
 	private readonly int[][] m_ChunkSubgroups = new int[k_RuntimeChunksCount][]
 	{
@@ -73,32 +67,102 @@ public partial class GridWorldGenerator : Node3D
 		new[] { 3, 4, 5, 6, 7, 8 },
 		new[] { 4, 5, 7, 8 },
 	};
-	
-	private Vector2 RectSize => 2 * m_GridSize * m_StepValue;
-	
-	public override void _Ready()
-	{
-		var maxRuntimeTilesCount = k_RuntimeChunksCount * Mathf.CeilToInt(1 / m_CellSize) * Mathf.CeilToInt(m_GridSize.X) * Mathf.CeilToInt(m_GridSize.Y);
-		m_WorldTilesPool = new NodePool<Sprite3D>(CreateWorldTile, maxRuntimeTilesCount, PoolGetCallback, PoolReturnCallback);
-		m_TreePool = new NodePool<Tree>(CreateTree, 5000, PoolGetCallback, PoolReturnCallback);
-		m_PropsPool = new NodePool<Statue>(CreateProp, 1000, PoolGetCallback, PoolReturnCallback);
+
+    public override void _EnterTree()
+    {
+		m_ChunkSize = (Vector2)m_ChunkGridSize * m_CellSize;
+		m_RectSize = 2 * m_ChunkSize * m_StepValue;
+		
+		var maxRuntimeTilesCount = k_RuntimeChunksCount * m_ChunkGridSize.X * m_ChunkGridSize.Y;
+		
+		var multimesh = m_TilesMultimesh.Multimesh;
+		multimesh.InstanceCount = 0;
+		multimesh.InstanceCount = maxRuntimeTilesCount;
+		multimesh.Mesh.Set("size", Vector2.One * m_CellSize);	
+		
 		m_ChunkOffsets = new Vector2[k_RuntimeChunksCount]
 		{
-			new Vector2(-1.5f, 0) * RectSize,
-			new Vector2(-1f, 0.5f) * RectSize,
-			new Vector2(-0.5f, 1) * RectSize,
-			new Vector2(-1f, -0.5f) * RectSize,
-			new Vector2(-0.5f, 0) * RectSize,
-			new Vector2(0, 0.5f) * RectSize,
-			new Vector2(-0.5f, -1f) * RectSize,
-			new Vector2(0, -0.5f) * RectSize,
-			new Vector2(0.5f, 0) * RectSize,
+			new Vector2(-1.5f, 0) * m_RectSize,
+			new Vector2(-1f, -0.5f) * m_RectSize,
+			new Vector2(-0.5f, -1f) * m_RectSize,
+			new Vector2(-1f, 0.5f) * m_RectSize,
+			new Vector2(-0.5f, 0) * m_RectSize,
+			new Vector2(0, -0.5f) * m_RectSize,
+			new Vector2(-0.5f, 1) * m_RectSize,
+			new Vector2(0, 0.5f) * m_RectSize,
+			new Vector2(0.5f, 0) * m_RectSize,
 		};
 		
-		m_WorldGenerator = new WorldGenerator(m_GridSize, m_CellSize, m_MinDistance);
+		m_StartOffset = m_ChunkOffsets[0];
+		m_GlobalOffset = m_StartOffset;
+		
+		foreach (var child in GetChildren())
+		{
+			if (child is IWorldGenerationSubscriber worldGenerationSubscriber)
+			{
+				worldGenerationSubscriber.Initialize(m_ChunkGridSize, m_RectSize, GetGridCoords, GetWorldCoords);
+				m_WorldGenerationSubscribers.Add(worldGenerationSubscriber);
+			}
+		}
+    }
+
+    public override void _Ready()
+	{
+		m_WorldGenerator = new WorldGenerator(m_ChunkGridSize, m_CellSize, m_MinRoadCellDistance);
+		GenerateWorld();
+	}
+	
+	private void GenerateWorld()
+	{
 		for (var i = 0; i < k_RuntimeChunksCount; ++i)
 		{
-			GenerateChunk(i);			
+			if(m_CurrentChunks[i] != null) continue;
+			GenerateChunk(i);
+		}
+		RegenerateMultiMesh();
+	}
+	
+	private void RegenerateMultiMesh()
+	{
+		// need to look from upside down (y = height - y) to set instances of multimesh in correct draw order
+		var globalSize = k_RuntimeChunksSideCount * m_ChunkGridSize;
+
+		var worldOffset = new Vector3(m_GlobalOffset.Y, 0, m_GlobalOffset.X);
+		for (var i = 0; i < k_RuntimeChunksCount; i++)
+		{
+			var chunk = m_CurrentChunks[i].Chunk;
+			var cells = chunk.ChunkCells;
+			var chunkCoordinates = Utility.Get2DIndex(i, k_RuntimeChunksSideCount);
+			var newChunk = false;
+			if (m_CurrentChunks[i].TilesTextures == null)
+			{
+				newChunk = true;
+				m_CurrentChunks[i].TilesTextures = new();
+			}
+			for (var j = 0; j < cells.Count; ++j)
+			{
+				var coords = Utility.Get2DIndex(j, m_WorldGenerator.Width);
+				var globalCoords = coords + chunkCoordinates * m_ChunkGridSize;
+				var spawnCoordinates = GetWorldCoords(globalCoords);
+				var index = Utility.GetFlatIndex(globalCoords.X, globalSize.Y - 1 - globalCoords.Y, globalSize.X);
+
+				int texture_index;
+				if (newChunk)
+				{
+					texture_index = cells[j] == WorldGenerator.CellType.Ground ? 
+						GD.RandRange(m_GroundTilesIndexRange.X, m_GroundTilesIndexRange.Y) : 
+						GD.RandRange(m_RoadTilesIndexRange.X, m_RoadTilesIndexRange.Y);
+						
+					m_CurrentChunks[i].TilesTextures.Add(texture_index);
+				}
+				else
+				{
+					texture_index = m_CurrentChunks[i].TilesTextures[j];
+				}
+					
+				m_TilesMultimesh.Multimesh.SetInstanceCustomData(index, new Color(texture_index, texture_index, texture_index, texture_index));
+				m_TilesMultimesh.Multimesh.SetInstanceTransform(index, new Transform3D(m_DefaultTileBasis, worldOffset + new Vector3(spawnCoordinates.Y, 0, spawnCoordinates.X) - m_StepValue.X * Vector3.Forward));
+			}
 		}
 	}
 
@@ -143,7 +207,7 @@ public partial class GridWorldGenerator : Node3D
 			}
 			else
 			{
-				m_CurrentChunks[i].DiscardChunk(m_WorldTilesPool.Return, m_TreePool.Return);
+				m_CurrentChunks[i]?.DiscardChunk();
 				m_CurrentChunks[i] = null;
 			}
 		}
@@ -170,25 +234,28 @@ public partial class GridWorldGenerator : Node3D
 		for (var i = 0; i < k_RuntimeChunksCount; ++i)
 		{
 			if(!generatedChunks[i])
-			{
-				m_CurrentChunks[i]?.DiscardChunk(m_WorldTilesPool.Return, m_TreePool.Return);				
+			{		
+				m_CurrentChunks[i]?.DiscardChunk();
 				m_CurrentChunks[i] = null;
 				GenerateChunk(i);
 			}
 		}
+		
+		RegenerateMultiMesh();
 	}
 	
 	private int GetPlayerChunk()
 	{
-		var gridCoords = GetGridCoords(new Vector2(m_Player.GlobalPosition.Z, m_Player.GlobalPosition.X) - m_ChunkOffsets[4] - m_GlobalOffset + Vector2.Right * m_CellSize * m_StepValue.X);
-		var chunkCoordinates = (gridCoords / m_GridSize).Floor();
-		var chunkInddex = ((int)chunkCoordinates.X + 1) * 3 + (int)chunkCoordinates.Y + 1;
-		return Mathf.Clamp(chunkInddex, 0, k_RuntimeChunksCount);
+		var player = PlayerGlobalController.Instance.Player;
+		var gridCoords = GetGridCoords(new Vector2(player.GlobalPosition.Z, player.GlobalPosition.X) - m_ChunkOffsets[4] - (m_GlobalOffset - m_StartOffset));
+		var chunkCoordinates = (gridCoords / (Vector2)m_ChunkGridSize).Floor();
+		var chunkIndex = (int)(chunkCoordinates.Y + 1) * k_RuntimeChunksSideCount + (int)(chunkCoordinates.X + 1);
+		return Mathf.Clamp(chunkIndex, 0, k_RuntimeChunksCount);
 	}
 
 	private void GenerateChunk(int chunkIndex)
 	{
-		var chunkOffset = m_ChunkOffsets[chunkIndex] + m_GlobalOffset;
+		var chunkOffset = m_ChunkOffsets[chunkIndex] + m_GlobalOffset - m_StartOffset;
 		var worldOffset = new Vector3(chunkOffset.Y, 0, chunkOffset.X);
 		
 		var chunk = chunkIndex switch
@@ -206,75 +273,20 @@ public partial class GridWorldGenerator : Node3D
 		};
 		FillEdgeBuffers(chunk);
 		
-		var chunkTiles = new HashSet<Sprite3D>();
-		
-		for (var i = 0; i < chunk.ChunkCells.Count; ++i)
-		{
-			var coords = Utility.Get2DIndex(i, m_WorldGenerator.Width);
-			var spawnCoordinates = GetWorldCoords(coords);
-			var tile = SpawnTile(spawnCoordinates, chunk.ChunkCells[i]);
-			tile.Position += worldOffset;
-			
-			chunkTiles.Add(tile);
-		}
-		
-		var trees = new HashSet<Tree>();
-		
-		if (m_SpawnNature)
-		{
-			SpawnNature(chunk, trees, worldOffset);
-		}
-		
-		var props = new HashSet<Statue>();
-		
-		if (m_SpawnProps)
-		{
-			SpawnProps(chunk, props, worldOffset);
-		}
-		
 		m_CurrentChunks[chunkIndex] = new(
-			chunkTiles,
-			trees,
-			props,
 			chunk,
 			m_LeftBorderPositionsBuffer.ToArray(),
 			m_TopBorderPositionsBuffer.ToArray(),
 			m_RightBorderPositionsBuffer.ToArray(),
 			m_BottomBorderPositionsBuffer.ToArray()
 		);
-	}
-	
-	private void SpawnNature(WorldGenerator.Chunk chunk, HashSet<Tree> trees, Vector3 worldOffset)
-	{
-		var possibleTreesPositions = PoissonSampler.SamplePositions(
-			new Rect2(0, -0.5f * RectSize.Y, RectSize), 
-			m_TreeSpawnMinDistance,
-			maxSearchIterionsCount: 5
-		);
 		
-		foreach (var position in possibleTreesPositions)
+		foreach (var subsciber in m_WorldGenerationSubscribers)
 		{
-			var gridPosition = GetGridCoords(position + Vector2.Right * m_CellSize * m_StepValue.X);
-			if(gridPosition.X.InRange(0, m_WorldGenerator.Width - 1)
-				&& gridPosition.Y.InRange(0, m_WorldGenerator.Height - 1)
-				&& chunk.ChunkCells[Utility.GetFlatIndex(gridPosition.X, gridPosition.Y, m_WorldGenerator.Width)] == WorldGenerator.CellType.Ground)
+			if(subsciber.Enabled)
 			{
-				var tree = SpawnTree(position);
-				tree.Position += worldOffset;
-				trees.Add(tree);
+				subsciber.OnChunkGenerated(m_CurrentChunks[chunkIndex], worldOffset);
 			}
-		}
-	}
-	
-	private void SpawnProps(WorldGenerator.Chunk chunk, HashSet<Statue> props, Vector3 worldOffset)
-	{		
-		foreach (var gridPosition in chunk.PointOfInterestCells)
-		{
-			if (GD.Randf() > m_PropSpawnChance) continue;
-			var position = GetWorldCoords(gridPosition);
-			var prop = SpawnProp(position);
-			prop.Position += worldOffset;
-			props.Add(prop);
 		}
 	}
 	
@@ -319,79 +331,6 @@ public partial class GridWorldGenerator : Node3D
 		}
 	}
 	
-	private Tree SpawnTree(Vector2 position)
-	{
-		if(m_TreePool.TryGet(out var instance))
-		{
-			instance.Position = new Vector3(position.Y, 0, position.X);
-			instance.SetRandom();
-			instance.Show();
-		}
-		return instance;
-	}
-	
-	private Tree CreateTree()
-	{
-		var instance = m_TreeScene.Instantiate<Tree>();
-		AddChild(instance);
-		return instance;
-	}
-	
-	private Statue SpawnProp(Vector2 position)
-	{
-		if(m_PropsPool.TryGet(out var instance))
-		{
-			instance.Reset();
-			instance.Position = new Vector3(position.Y, 0, position.X);
-			instance.Show();
-		}
-		return instance;
-	}
-	
-	private Statue CreateProp()
-	{
-		var instance = m_PropScene.Instantiate<Statue>();
-		AddChild(instance);
-		return instance;
-	}
-	
-	private Sprite3D SpawnTile(Vector2 position, WorldGenerator.CellType tileType)
-	{
-		if(m_WorldTilesPool.TryGet(out var instance))
-		{
-			instance.Position = new Vector3(position.Y, 0, position.X);
-			
-			instance.Texture = tileType switch
-			{
-				WorldGenerator.CellType.Ground => m_GroundTextures[GD.RandRange(0, m_GroundTextures.Length - 1)],
-				WorldGenerator.CellType.Road => m_RoadTextures[GD.RandRange(0, m_RoadTextures.Length - 1)],
-				_ => m_RoadTextures[GD.RandRange(0, m_RoadTextures.Length - 1)],
-			};
-
-		}
-		return instance;
-	}
-	
-	private Sprite3D CreateWorldTile()
-	{
-		var instance = m_WorldTile.Instantiate<Sprite3D>();
-		instance.Scale = Vector3.One * m_CellSize;
-		AddChild(instance);
-		return instance;
-	}
-	
-	private void PoolGetCallback(Node3D instance)
-	{
-		instance.Show();
-		instance.ProcessMode = ProcessModeEnum.Inherit;
-	}
-	
-	private void PoolReturnCallback(Node3D instance)
-	{
-		instance.Hide();
-		instance.ProcessMode = ProcessModeEnum.Disabled;
-	}
-	
 	private Vector2 GetWorldCoords(Vector2I gridCoords)
 	{
 		return m_CellSize * m_StepValue * (gridCoords.X * m_XGridDirection + gridCoords.Y * m_YGridDirection);
@@ -404,11 +343,9 @@ public partial class GridWorldGenerator : Node3D
 		return new Vector2I(Mathf.FloorToInt(x), Mathf.FloorToInt(y));
 	}
 	
-	private class ChunkInstance
+	public class ChunkInstance
 	{
-		public IReadOnlyCollection<Sprite3D> ChunkTiles { get; }
-		public IReadOnlyCollection<Tree> Trees { get; }
-		public IReadOnlyCollection<Statue> Props { get; }
+		public event System.Action OnChunkDiscard;
 		
 		public WorldGenerator.Chunk Chunk { get; }
 		public IReadOnlyList<Vector2> InvertedLeftBorderPositions { get; }
@@ -416,10 +353,9 @@ public partial class GridWorldGenerator : Node3D
 		public IReadOnlyList<Vector2> InvertedRightBorderPositions { get; }
 		public IReadOnlyList<Vector2> InvertedBottomBorderPositions { get; }
 		
+		public List<int> TilesTextures;
+		
 		public ChunkInstance(
-			IReadOnlyCollection<Sprite3D> chunkTiles,
-			IReadOnlyCollection<Tree> trees,
-			IReadOnlyCollection<Statue> props,
 			WorldGenerator.Chunk chunk,
 			IReadOnlyList<Vector2> invertedLeftBorderPositions,
 			IReadOnlyList<Vector2> invertedTopBorderPositions,
@@ -427,26 +363,16 @@ public partial class GridWorldGenerator : Node3D
 			IReadOnlyList<Vector2> invertedBottomBorderPositions
 		)
 		{
-			ChunkTiles = chunkTiles;
-			Trees = trees;
-			Props = props;
 			Chunk = chunk;
 			InvertedLeftBorderPositions = invertedLeftBorderPositions;
 			InvertedTopBorderPositions = invertedTopBorderPositions;
 			InvertedRightBorderPositions = invertedRightBorderPositions;
 			InvertedBottomBorderPositions = invertedBottomBorderPositions;
 		}
-	
-		public void DiscardChunk(Action<Sprite3D> worldTileDiscard, Action<Tree> treeDiscard)
+		
+		public void DiscardChunk()
 		{
-			foreach (var tile in ChunkTiles)
-			{
-				worldTileDiscard(tile);
-			}
-			foreach (var tree in Trees)
-			{
-				treeDiscard(tree);
-			}
+			OnChunkDiscard?.Invoke();
 		}
 	}
 }
