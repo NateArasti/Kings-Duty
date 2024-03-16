@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/Characters/Allies/RetinueController.cs" id="13_exdnn"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="14_g52f2"]
 [ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/king.png" id="15_d07yq"]
-[ext_resource type="PackedScene" uid="uid://c8g02yp1nunew" path="res://Scenes/Test/RetinueCreation.tscn" id="15_y3ogn"]
+[ext_resource type="PackedScene" uid="uid://c8g02yp1nunew" path="res://Subscenes/UI/RetinueCreation.tscn" id="15_y3ogn"]
 [ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemiesController.cs" id="16_i2cei"]
 [ext_resource type="PackedScene" uid="uid://cteantmbe1me3" path="res://Subscenes/Characters/Enemies/Enemy.tscn" id="17_6xbc8"]
 [ext_resource type="PackedScene" uid="uid://qdisib2blxxt" path="res://Subscenes/Characters/Enemies/Enemy+.tscn" id="18_2oj1q"]

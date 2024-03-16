@@ -1,9 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://drhvexd87vm8l"]
+[gd_scene load_steps=15 format=3 uid="uid://drhvexd87vm8l"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/Base/TileWorldGenerator.cs" id="1_i3m1l"]
 [ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/TreeMultimesh.tres" id="2_y5v6c"]
 [ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Props/Obstacle.tscn" id="3_ux8gk"]
-[ext_resource type="Material" uid="uid://ddkuqr58cyom6" path="res://CustomResources/Materials/WorldTile.tres" id="5_la11x"]
+[ext_resource type="MultiMesh" uid="uid://bcgch8h5ph107" path="res://CustomResources/Multimeshes/WorldTile.tres" id="6_2vcmp"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="6_gt7be"]
 [ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/king.png" id="7_8md6s"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/NatureGenerator.cs" id="7_lfs27"]
@@ -34,15 +34,6 @@ shader_parameter/value = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/source_texture = ExtResource("7_8md6s")
 
-[sub_resource type="QuadMesh" id="QuadMesh_nn4j8"]
-material = ExtResource("5_la11x")
-orientation = 1
-
-[sub_resource type="MultiMesh" id="MultiMesh_byjxp"]
-transform_format = 1
-use_custom_data = true
-mesh = SubResource("QuadMesh_nn4j8")
-
 [node name="WorldGenerationTest" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -70,7 +61,7 @@ m_RoadTilesIndexRange = Vector2i(10, 11)
 [node name="Tiles_MultiMeshInstance3D" type="MultiMeshInstance3D" parent="World"]
 sorting_offset = -1e+06
 sorting_use_aabb_center = false
-multimesh = SubResource("MultiMesh_byjxp")
+multimesh = ExtResource("6_2vcmp")
 
 [node name="TreeGenerator" type="Node3D" parent="World"]
 script = ExtResource("7_lfs27")
