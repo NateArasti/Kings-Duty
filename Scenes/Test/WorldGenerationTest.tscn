@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cntj6x0vj868l" path="res://Subscenes/Props/Statue.tscn" id="10_k2k61"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/StatuesGenerator.cs" id="10_usc8m"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerGlobalController.cs" id="12_vr2e0"]
-[ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player.tscn" id="13_o4qm5"]
+[ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player/Player.tscn" id="13_o4qm5"]
 
 [sub_resource type="Environment" id="Environment_ppnb0"]
 background_mode = 1

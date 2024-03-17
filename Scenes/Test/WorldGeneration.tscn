@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://dif2ucbn31u57"]
+
+[ext_resource type="PackedScene" uid="uid://dno44gfnh83rk" path="res://Subscenes/Characters/Player/GlobalPlayer.tscn" id="1_ronm5"]
+[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/WorldController.cs" id="2_ol023"]
+[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/Base/ChunkGenerator.cs" id="3_gf0so"]
+[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TileGenerator.cs" id="4_luxm7"]
+[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/PropsGenerator.cs" id="5_ss806"]
+[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/BuildingsGenerator.cs" id="6_b1kww"]
+
+[sub_resource type="Environment" id="Environment_ofovr"]
+background_mode = 1
+background_color = Color(0.2, 0.2, 0.2, 1)
+ambient_light_energy = 0.01
+reflected_light_source = 1
+sdfgi_read_sky_light = false
+fog_light_color = Color(0, 0, 0, 1)
+adjustment_brightness = 0.8
+adjustment_contrast = 1.1
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gkqe2"]
+auto_exposure_scale = 0.06
+dof_blur_far_distance = 8040.33
+
+[node name="WorldGeneration" type="Node3D"]
+
+[node name="PlayerGlobalController" parent="." instance=ExtResource("1_ronm5")]
+
+[node name="World" type="Node3D" parent="."]
+script = ExtResource("2_ol023")
+
+[node name="Generator" type="Node" parent="World"]
+script = ExtResource("3_gf0so")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_ofovr")
+camera_attributes = SubResource("CameraAttributesPractical_gkqe2")
+
+[node name="WorldTiles" type="Node3D" parent="World"]
+script = ExtResource("4_luxm7")
+
+[node name="Props" type="Node3D" parent="World"]
+script = ExtResource("5_ss806")
+
+[node name="Buildings" type="Node3D" parent="World"]
+script = ExtResource("6_b1kww")

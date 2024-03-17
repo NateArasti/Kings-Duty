@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=32 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/Base/TileWorldGenerator.cs" id="1_fljgg"]
 [ext_resource type="Material" uid="uid://ddkuqr58cyom6" path="res://CustomResources/Materials/WorldTile.tres" id="2_ete7x"]
@@ -6,11 +6,8 @@
 [ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/TreeMultimesh.tres" id="4_itje5"]
 [ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Props/Obstacle.tscn" id="5_lcgxn"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/StatuesGenerator.cs" id="6_7u5n0"]
-[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerGlobalController.cs" id="11_laj72"]
-[ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player.tscn" id="12_vltxi"]
+[ext_resource type="PackedScene" uid="uid://dno44gfnh83rk" path="res://Subscenes/Characters/Player/GlobalPlayer.tscn" id="8_efk2s"]
 [ext_resource type="Script" path="res://Scripts/Characters/Allies/RetinueController.cs" id="13_exdnn"]
-[ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="14_g52f2"]
-[ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/king.png" id="15_d07yq"]
 [ext_resource type="PackedScene" uid="uid://c8g02yp1nunew" path="res://Subscenes/UI/RetinueCreation.tscn" id="15_y3ogn"]
 [ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemiesController.cs" id="16_i2cei"]
 [ext_resource type="PackedScene" uid="uid://cteantmbe1me3" path="res://Subscenes/Characters/Enemies/Enemy.tscn" id="17_6xbc8"]
@@ -47,14 +44,6 @@ orientation = 1
 transform_format = 1
 use_custom_data = true
 mesh = SubResource("QuadMesh_ty64c")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m3jjx"]
-resource_local_to_scene = true
-render_priority = 1
-shader = ExtResource("14_g52f2")
-shader_parameter/value = 0.0
-shader_parameter/flash_color = Color(1, 0, 0, 1)
-shader_parameter/source_texture = ExtResource("15_d07yq")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tudu5"]
 bg_color = Color(0, 0, 0, 0.294118)
@@ -107,17 +96,7 @@ m_ObstacleScene = ExtResource("5_lcgxn")
 script = ExtResource("6_7u5n0")
 m_PropScene = ExtResource("23_os0a1")
 
-[node name="PlayerGlobalController" type="Node" parent="." node_paths=PackedStringArray("Player", "PlayerHealthSystem", "PlayerInteraction")]
-script = ExtResource("11_laj72")
-Player = NodePath("Player")
-PlayerHealthSystem = NodePath("Player/HealthSystem")
-PlayerInteraction = NodePath("Player/Interaction")
-
-[node name="Player" parent="PlayerGlobalController" instance=ExtResource("12_vltxi")]
-process_mode = 0
-
-[node name="Body" parent="PlayerGlobalController/Player/CharacterVisuals/BillboardPivot" index="0"]
-material_overlay = SubResource("ShaderMaterial_m3jjx")
+[node name="PlayerGlobalController" parent="." instance=ExtResource("8_efk2s")]
 
 [node name="GlobalTimer" type="Node" parent="." node_paths=PackedStringArray("m_TimerLabel")]
 script = ExtResource("18_sllsu")
@@ -262,6 +241,3 @@ flat = true
 [connection signal="pressed" from="Pause/Panel/VBoxContainer/ContinueButton" to="Pause/Panel" method="Continue"]
 [connection signal="pressed" from="Pause/Panel/VBoxContainer/ExitToMenuButton" to="Pause/Panel" method="ExitToMenu"]
 [connection signal="pressed" from="Pause/Panel/VBoxContainer/ExitGameButton" to="Pause/Panel" method="ExitGame"]
-
-[editable path="PlayerGlobalController/Player"]
-[editable path="PlayerGlobalController/Player/HealthSystem"]
