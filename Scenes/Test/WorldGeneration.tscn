@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dif2ucbn31u57"]
 
 [ext_resource type="PackedScene" uid="uid://dno44gfnh83rk" path="res://Subscenes/Characters/Player/GlobalPlayer.tscn" id="1_ronm5"]
-[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/WorldController.cs" id="2_ol023"]
+[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/Base/WorldController.cs" id="2_ol023"]
 [ext_resource type="Script" path="res://Scripts/NewWorldGeneration/Base/ChunkGenerator.cs" id="3_gf0so"]
 [ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TileGenerator.cs" id="4_luxm7"]
 [ext_resource type="Script" path="res://Scripts/NewWorldGeneration/PropsGenerator.cs" id="5_ss806"]

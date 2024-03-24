@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfbu1r735rnyg"]
+
+[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/Test/NodesCreationTest.cs" id="1_i37u7"]
+
+[node name="Generator" type="Node2D"]
+script = ExtResource("1_i37u7")
