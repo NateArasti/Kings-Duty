@@ -103,6 +103,18 @@ public static class DelaunayTriangulator
 		}
 	}
 	
+	public static HashSet<Edge> TriangulateToDistinctEdges(IReadOnlyList<Vector2> points)
+	{
+		var triangles = Triangulate(points);
+		var edges = new HashSet<Edge>();
+		foreach (var triangle in triangles)
+		{
+			edges.Add(new Edge(triangle.FirstIndex, triangle.SecondIndex));
+			edges.Add(new Edge(triangle.FirstIndex, triangle.ThirdIndex));
+			edges.Add(new Edge(triangle.SecondIndex, triangle.ThirdIndex));
+		}
+		return edges;
+	}
 	public static HashSet<Edge> GetEdges(List<Triangle> triangles)
 	{
 		var edges = new HashSet<Edge>();
