@@ -103,17 +103,34 @@ public static class DelaunayTriangulator
 		}
 	}
 	
-	public static HashSet<Edge> TriangulateToDistinctEdges(IReadOnlyList<Vector2> points)
+	public static IReadOnlyDictionary<int, List<Edge>> TriangulateToEdgeGraph(IReadOnlyList<Vector2> points)
 	{
 		var triangles = Triangulate(points);
-		var edges = new HashSet<Edge>();
+		var graph = new Dictionary<int, List<Edge>>();
 		foreach (var triangle in triangles)
 		{
-			edges.Add(new Edge(triangle.FirstIndex, triangle.SecondIndex));
-			edges.Add(new Edge(triangle.FirstIndex, triangle.ThirdIndex));
-			edges.Add(new Edge(triangle.SecondIndex, triangle.ThirdIndex));
+			if (!graph.ContainsKey(triangle.FirstIndex))
+			{
+				graph[triangle.FirstIndex] = new();
+			}
+			graph[triangle.FirstIndex].Add(new Edge(triangle.FirstIndex, triangle.SecondIndex));
+			graph[triangle.FirstIndex].Add(new Edge(triangle.FirstIndex, triangle.ThirdIndex));
+			
+			if (!graph.ContainsKey(triangle.SecondIndex))
+			{
+				graph[triangle.SecondIndex] = new();
+			}
+			graph[triangle.SecondIndex].Add(new Edge(triangle.SecondIndex, triangle.FirstIndex));
+			graph[triangle.SecondIndex].Add(new Edge(triangle.SecondIndex, triangle.ThirdIndex));
+			
+			if (!graph.ContainsKey(triangle.ThirdIndex))
+			{
+				graph[triangle.ThirdIndex] = new();
+			}
+			graph[triangle.ThirdIndex].Add(new Edge(triangle.ThirdIndex, triangle.FirstIndex));
+			graph[triangle.ThirdIndex].Add(new Edge(triangle.ThirdIndex, triangle.SecondIndex));
 		}
-		return edges;
+		return graph;
 	}
 	public static HashSet<Edge> GetEdges(List<Triangle> triangles)
 	{

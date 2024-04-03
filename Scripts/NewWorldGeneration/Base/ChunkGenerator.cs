@@ -17,15 +17,58 @@ namespace WorldGeneration
 		{
 			var chunkRect = new Rect2(Vector2.Zero, ChunkSize);
 			var areaCount = GD.RandRange(m_AreaCountRange.X, m_AreaCountRange.Y);
-			var areas = new List<Rect2>();
+			var areaRects = new List<Rect2>();
 			for (var i = 0; i < areaCount; ++i)
 			{
 				var size = new Vector2((float)GD.RandRange(m_AreaWidthRange.X, m_AreaWidthRange.Y), (float)GD.RandRange(m_AreaHeightRange.X, m_AreaHeightRange.Y));
-				areas.Add(new Rect2(Vector2.Zero, size));
+				areaRects.Add(new Rect2(Vector2.Zero, size));
 			}
 			var edgePoints = GetStartPositions(null, null, null, null);
-			var points = PoissonSampler.SamplePositions(chunkRect, m_PointsMinDistance, areas, edgePoints);
-			var edges = DelaunayTriangulator.TriangulateToDistinctEdges(points);
+			var points = PoissonSampler.SamplePositions(chunkRect, m_PointsMinDistance, areaRects, edgePoints);
+			var edgeGraph = DelaunayTriangulator.TriangulateToEdgeGraph(points);
+			var areas = new List<Area>();
+			foreach (var areaRect in areaRects)
+			{
+				areas.Add(new Area()
+				{
+					AreaRect = areaRect,
+				});
+			}
+			
+			// removing border edges
+			var edgesToRemove = new HashSet<DelaunayTriangulator.Edge>();
+			foreach (var pointEdges in edgeGraph)
+			{
+				if (!pointEdges.Key.InRange(areas.Count, areas.Count + edgePoints.Count - 1))
+				{
+					continue;
+				}
+				
+				edgesToRemove.Clear();
+				foreach (var edge in pointEdges.Value)
+				{
+					if(edge.EndIndex.InRange(areas.Count, areas.Count + edgePoints.Count - 1))
+					{
+						edgesToRemove.Add(edge);
+					}
+				}
+				
+				foreach (var edge in edgesToRemove)
+				{
+					edgeGraph[edge.StartIndex].Remove(edge);
+					edgeGraph[edge.EndIndex].Remove(edge);
+				}
+			}
+
+			var edges = new HashSet<DelaunayTriangulator.Edge>();
+			
+			foreach (var pointEdges in edgeGraph)
+			{
+				foreach (var edge in pointEdges.Value)
+				{
+					edges.Add(edge);
+				}
+			}
 			
 			return new ChunkInstance(globalIndex, areas, points, edges);
 		}

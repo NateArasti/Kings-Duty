@@ -50,7 +50,7 @@ namespace WorldGeneration.Test
 			DrawRect(borderRect, Colors.White, false, 5);
 			foreach (var area in m_ChunkInstance.Areas)
 			{
-				var shiftArea = area;
+				var shiftArea = area.AreaRect;
 				shiftArea.Position += m_Offset;
 				DrawRect(shiftArea, Colors.Yellow);
 			}
