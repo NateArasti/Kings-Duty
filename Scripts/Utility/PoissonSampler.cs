@@ -35,7 +35,7 @@ public static partial class PoissonSampler
 	public static List<Vector2> SamplePositions(
 		Rect2 rect, 
 		float minimumDistance, 
-		List<Vector2> startPoints,
+		IReadOnlyList<Vector2> startPoints,
 		int maxSearchIterionsCount = k_MaxSearchIterionsCount)
 	{
 		void samplePreparation(SampleData sampleData)
@@ -58,7 +58,7 @@ public static partial class PoissonSampler
 		Rect2 rect,
 		float minimumDistance, 
 		List<Rect2> predefinedAreas,
-		List<Vector2> startPoints = null,
+		IReadOnlyList<Vector2> startPoints = null,
 		int maxSearchIterionsCount = k_MaxSearchIterionsCount)
 	{
 		return SamplePositions(rect, minimumDistance, (data) =>
@@ -151,7 +151,7 @@ public static partial class PoissonSampler
 		return resultPoints;
 	}
 	
-	private static void PrepareStartPoints(SampleData sampleData, List<Vector2> startPoints)
+	private static void PrepareStartPoints(SampleData sampleData, IReadOnlyList<Vector2> startPoints)
 	{
 		foreach	(var point in startPoints)
 		{

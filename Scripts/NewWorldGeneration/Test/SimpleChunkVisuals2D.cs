@@ -7,8 +7,8 @@ namespace WorldGeneration.Test
 		[Export] private Vector2 m_Offset;
 		[Export] private ChunkGenerator m_ChunkGenerator;
 		
-		private Rect2 borderRect;
-		private ChunkInstance m_ChunkInstance;
+		private readonly Rect2[] borderRects = new Rect2[4];
+		private readonly ChunkInstance[] m_ChunkInstances = new ChunkInstance[4];
 		
 		private readonly Texture2D m_IconSprite = ResourceLoader.Load<Texture2D>("icon.svg");
 		
@@ -21,15 +21,25 @@ namespace WorldGeneration.Test
 				child.QueueFree();
 			}
 			
-			m_ChunkInstance = m_ChunkGenerator.GenerateChunk(0);
-			borderRect = new Rect2(m_Offset, m_ChunkGenerator.ChunkSize);
-			foreach (var point in m_ChunkInstance.Points)
+			for (var i = 0; i < 4; ++i)
 			{
-				var sprite = new Sprite2D();
-				AddChild(sprite);
-				sprite.Texture = m_IconSprite;
-				sprite.Position = point + m_Offset;
-				sprite.Scale = Vector2.One * 0.1f;
+				borderRects[i] = new Rect2(m_Offset + Utility.Get2DIndex(i, 2) * m_ChunkGenerator.ChunkSize, m_ChunkGenerator.ChunkSize);
+				
+				m_ChunkInstances[i] = i switch 
+				{
+					0 => m_ChunkGenerator.GenerateChunk(0),
+					1 => m_ChunkGenerator.GenerateChunk(1, m_ChunkInstances[0]),
+					2 => m_ChunkGenerator.GenerateChunk(2, null, m_ChunkInstances[0]),
+					3 => m_ChunkGenerator.GenerateChunk(3, m_ChunkInstances[2], m_ChunkInstances[1]),
+				};
+				foreach (var point in m_ChunkInstances[i].AllPoints)
+				{
+					var sprite = new Sprite2D();
+					AddChild(sprite);
+					sprite.Texture = m_IconSprite;
+					sprite.Position = point + borderRects[i].Position;
+					sprite.Scale = Vector2.One * 0.1f;
+				}
 			}
 			QueueRedraw();
 		}
@@ -47,16 +57,19 @@ namespace WorldGeneration.Test
 		{
 			base._Draw();
 			
-			DrawRect(borderRect, Colors.White, false, 5);
-			foreach (var area in m_ChunkInstance.Areas)
+			for (var i = 0; i < 4; ++i)
 			{
-				var shiftArea = area.AreaRect;
-				shiftArea.Position += m_Offset;
-				DrawRect(shiftArea, Colors.Yellow);
-			}
-			foreach (var road in m_ChunkInstance.Roads)
-			{
-				DrawLine(m_ChunkInstance.Points[road.StartIndex] + m_Offset, m_ChunkInstance.Points[road.EndIndex] + m_Offset, Colors.Red);
+				DrawRect(borderRects[i], Colors.White, false, 5);
+				foreach (var area in m_ChunkInstances[i].Areas)
+				{
+					var shiftArea = area.AreaRect;
+					shiftArea.Position += borderRects[i].Position;
+					DrawRect(shiftArea, Colors.Yellow);
+				}
+				foreach (var road in m_ChunkInstances[i].Roads)
+				{
+					DrawLine(m_ChunkInstances[i].AllPoints[road.StartIndex] + borderRects[i].Position, m_ChunkInstances[i].AllPoints[road.EndIndex] + borderRects[i].Position, Colors.Red);
+				}
 			}
 		}
 	}

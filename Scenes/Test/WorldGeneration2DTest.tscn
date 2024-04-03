@@ -5,12 +5,13 @@
 
 [node name="Generator" type="Node2D" node_paths=PackedStringArray("m_ChunkGenerator")]
 script = ExtResource("1_wxl3v")
-m_Offset = Vector2(250, 100)
+m_Offset = Vector2(150, 50)
 m_ChunkGenerator = NodePath("ChunkGenerator")
 
 [node name="ChunkGenerator" type="Node" parent="."]
 script = ExtResource("2_14l1u")
-m_PointsMinDistance = 175.0
+m_PointsMinDistance = 100.0
 m_AreaCountRange = Vector2i(0, 3)
-m_AreaWidthRange = Vector2(100, 300)
-m_AreaHeightRange = Vector2(50, 200)
+m_AreaWidthRange = Vector2(50, 70)
+m_AreaHeightRange = Vector2(30, 50)
+ChunkSize = Vector2(500, 300)
