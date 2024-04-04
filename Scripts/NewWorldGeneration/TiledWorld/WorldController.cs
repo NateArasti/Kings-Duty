@@ -172,10 +172,10 @@ namespace WorldGeneration.Tiled
 			var startChunkIndex = GetGlobalChunkIndex(Convert2DTo3D(m_GlobalOffset));
 			m_CurrentChunks[localChunkIndex] = m_ChunkGenerator.GenerateChunk(startChunkIndex + Utility.Get2DIndex(localChunkIndex, k_RuntimeChunksSideCount));
 			
-			var convertedGlobalOffset = Convert2DTo3D(m_GlobalOffset);
+			var chunkOffset = Convert2DTo3D(m_ChunkOffsets[localChunkIndex] + m_GlobalOffset - m_StartOffset);
 			foreach (var subscriber in m_WorldGenerationSubscribers)
 			{
-				subscriber.OnChunkGenerated(m_CurrentChunks[localChunkIndex], convertedGlobalOffset);
+				subscriber.OnChunkGenerated(m_CurrentChunks[localChunkIndex], chunkOffset);
 			}
 		}
 		

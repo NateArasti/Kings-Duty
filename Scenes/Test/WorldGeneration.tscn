@@ -35,8 +35,8 @@ m_StepValue = Vector2(0.5, 0.385)
 
 [node name="Generator" type="Node" parent="World"]
 script = ExtResource("3_tox21")
-TilesCountPerChunk = Vector2i(30, 30)
-CellSize = 0.75
+TilesCountPerChunk = Vector2i(20, 20)
+CellSize = 1.0
 m_PointsMinDistance = 7.0
 ChunkSize = Vector2(0, 0)
 
@@ -55,7 +55,7 @@ m_RoadTilesIndexRange = Vector2i(10, 11)
 script = ExtResource("5_ss806")
 m_TreesTextureRange = Vector2i(0, 1)
 m_TreeMeshData = ExtResource("7_s6ygv")
-m_DefaultTreeBasis = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
+m_DefaultTreeBasis = Basis(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707)
 m_ObstacleScene = ExtResource("8_18fap")
 
 [node name="Buildings" type="Node3D" parent="World"]

@@ -6,6 +6,7 @@ namespace WorldGeneration.Tiled
 	{
 		[Export] public bool Enabled { get; private set; } = true;
 		
+		[ExportGroup("Generation Data")]
 		[Export] private MultiMesh m_WorldTilesMultiMesh;
 		[Export] private Basis m_DefaultTileBasis;
 		[Export] private Vector2I m_GroundTilesIndexRange;
@@ -33,7 +34,9 @@ namespace WorldGeneration.Tiled
 			
 			m_TilesMultimesh = new MultiMeshInstance3D
 			{
-				Multimesh = m_WorldTilesMultiMesh
+				Multimesh = m_WorldTilesMultiMesh,
+				SortingOffset = float.MinValue,
+				SortingUseAabbCenter = false
 			};
 			AddChild(m_TilesMultimesh);
 			var maxRuntimeTilesCount = maxRuntimeChunksCount * m_ChunkGridSize.X * m_ChunkGridSize.Y;			

@@ -14,7 +14,7 @@ namespace WorldGeneration.Tiled
 			System.Func<Vector3, Vector2I> getGridCoords, 
 			System.Func<Vector2I, Vector3> getWorldCoords);
 		
-		void OnChunkGenerated(ChunkInstance chunkInstance, Vector3 globalOffset);
+		void OnChunkGenerated(ChunkInstance chunkInstance, Vector3 chunkOffset);
 		
 		void UpdateAllChunks(ChunkInstance[] allChunksInstances, Vector3 globalOffset);
 	}	
