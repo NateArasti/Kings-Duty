@@ -27,10 +27,10 @@ namespace WorldGeneration.Test
 				
 				m_ChunkInstances[i] = i switch 
 				{
-					0 => m_ChunkGenerator.GenerateChunk(0),
-					1 => m_ChunkGenerator.GenerateChunk(1, m_ChunkInstances[0]),
-					2 => m_ChunkGenerator.GenerateChunk(2, null, m_ChunkInstances[0]),
-					3 => m_ChunkGenerator.GenerateChunk(3, m_ChunkInstances[2], m_ChunkInstances[1]),
+					0 => m_ChunkGenerator.GenerateChunk(new Vector2I(0, 0)),
+					1 => m_ChunkGenerator.GenerateChunk(new Vector2I(0, 1), m_ChunkInstances[0]),
+					2 => m_ChunkGenerator.GenerateChunk(new Vector2I(1, 0), null, m_ChunkInstances[0]),
+					3 => m_ChunkGenerator.GenerateChunk(new Vector2I(1, 1), m_ChunkInstances[2], m_ChunkInstances[1]),
 				};
 				foreach (var point in m_ChunkInstances[i].AllPoints)
 				{

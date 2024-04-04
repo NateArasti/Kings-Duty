@@ -4,6 +4,8 @@ namespace WorldGeneration.Tiled
 {
 	public partial class WorldTilesGenerator : Node, IWorldGenerationSubscriber
 	{
+		[Export] public bool Enabled { get; private set; } = true;
+		
 		[Export] private MultiMesh m_WorldTilesMultiMesh;
 		[Export] private Basis m_DefaultTileBasis;
 		[Export] private Vector2I m_GroundTilesIndexRange;
@@ -12,16 +14,18 @@ namespace WorldGeneration.Tiled
 		private MultiMeshInstance3D m_TilesMultimesh;
 		
 		private float m_CellSize;
+		private Vector2 m_ChunkRectSize;
 		private Vector2I m_ChunkGridSize;
 		private Vector2I m_GlobalSize;
 		private System.Func<Vector3, Vector2I> GetGridCoords;
 		private System.Func<Vector2I, Vector3> GetWorldCoords;
 
-		public void Init(int maxRuntimeChunksCount, Vector2I chunkGridSize, float cellSize, System.Func<Vector3, Vector2I> getGridCoords, System.Func<Vector2I, Vector3> getWorldCoords)
+		public void Init(int maxRuntimeChunksCount, Vector2 rectSize, Vector2I chunkGridSize, float cellSize, System.Func<Vector3, Vector2I> getGridCoords, System.Func<Vector2I, Vector3> getWorldCoords)
 		{
 			GetGridCoords = getGridCoords;
 			GetWorldCoords = getWorldCoords;
 			
+			m_ChunkRectSize = rectSize;
 			m_ChunkGridSize = chunkGridSize;
 			m_CellSize = cellSize;
 			
@@ -60,8 +64,8 @@ namespace WorldGeneration.Tiled
 					var coords = Utility.Get2DIndex(j, m_ChunkGridSize.X);
 					var globalCoords = coords + chunkCoordinates * m_ChunkGridSize;
 					var spawnCoordinates = GetWorldCoords(globalCoords);
-					// need to set from right to left (x = width - x) to set instances of multimesh in correct draw order
-					var index = Utility.GetFlatIndex(m_GlobalSize.X - 1 - globalCoords.X, globalCoords.Y, m_GlobalSize.X);
+					// need to set from top to bottom (y = height - y) to set instances of multimesh in correct draw order
+					var index = Utility.GetFlatIndex(globalCoords.X, m_GlobalSize.Y - 1 - globalCoords.Y, m_GlobalSize.X);
 					
 					int texture_index;
 					if (newChunk)

@@ -4,8 +4,11 @@ namespace WorldGeneration.Tiled
 {
 	public interface IWorldGenerationSubscriber
 	{
+		bool Enabled { get; }
+		
 		void Init(
 			int maxRuntimeChunksCount, 
+			Vector2 rectSize,
 			Vector2I chunkGridSize, 
 			float cellSize, 
 			System.Func<Vector3, Vector2I> getGridCoords, 

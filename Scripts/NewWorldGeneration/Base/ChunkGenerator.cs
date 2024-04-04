@@ -14,7 +14,8 @@ namespace WorldGeneration
 		[Export] private float m_PointsMinDistance = 50;
 		[Export] public Vector2 ChunkSize { get; protected set; } = new Vector2(800, 500);
 		
-		public virtual ChunkInstance GenerateChunk(int globalIndex, 
+		public virtual ChunkInstance GenerateChunk(
+			Vector2I globalIndex, 
 			ChunkInstance leftNeighbour = null, 
 			ChunkInstance topNeighbour = null,
 			ChunkInstance rightNeighbour = null,
@@ -152,11 +153,6 @@ namespace WorldGeneration
 			}
 
 			return startPositions;
-		}
-		
-		public int GetCorrespondingChunkIndex(Vector2 globalPosition)
-		{
-			return 0;
 		}
 	}
 }

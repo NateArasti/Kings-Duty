@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dif2ucbn31u57"]
+[gd_scene load_steps=12 format=3 uid="uid://dif2ucbn31u57"]
 
 [ext_resource type="PackedScene" uid="uid://dno44gfnh83rk" path="res://Subscenes/Characters/Player/GlobalPlayer.tscn" id="1_ronm5"]
 [ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TiledWorld/WorldController.cs" id="2_ol023"]
@@ -7,6 +7,8 @@
 [ext_resource type="MultiMesh" uid="uid://bcgch8h5ph107" path="res://CustomResources/Multimeshes/WorldTile.tres" id="5_5oac0"]
 [ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TiledWorld/PropsGenerator.cs" id="5_ss806"]
 [ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TiledWorld/BuildingsGenerator.cs" id="6_b1kww"]
+[ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/TreeMultimesh.tres" id="7_s6ygv"]
+[ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Props/Obstacle.tscn" id="8_18fap"]
 
 [sub_resource type="Environment" id="Environment_ofovr"]
 background_mode = 1
@@ -51,9 +53,10 @@ m_RoadTilesIndexRange = Vector2i(10, 11)
 
 [node name="Props" type="Node3D" parent="World"]
 script = ExtResource("5_ss806")
+m_TreesTextureRange = Vector2i(0, 1)
+m_TreeMeshData = ExtResource("7_s6ygv")
+m_DefaultTreeBasis = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
+m_ObstacleScene = ExtResource("8_18fap")
 
 [node name="Buildings" type="Node3D" parent="World"]
 script = ExtResource("6_b1kww")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.627311, 0.778769, 0, -0.778769, 0.627311, 0, 0, 0)

@@ -18,6 +18,7 @@ namespace WorldGeneration.Tiled
 	public partial class WorldController : Node
 	{
 		public const int k_RuntimeChunksCount = 9;
+		public const int k_RuntimeChunksSideCount = 3;
 		
 		[Export] private TileChunkGenerator m_ChunkGenerator;
 		[Export] private float m_MinTimeToGenerateChunk = 2;
@@ -74,9 +75,9 @@ namespace WorldGeneration.Tiled
 			
 			foreach (var child in GetChildren())
 			{
-				if (child is IWorldGenerationSubscriber worldGenerationSubscriber)
+				if (child is IWorldGenerationSubscriber worldGenerationSubscriber && worldGenerationSubscriber.Enabled)
 				{
-					worldGenerationSubscriber.Init(k_RuntimeChunksCount, m_ChunkGenerator.TilesCountPerChunk, m_ChunkGenerator.CellSize, GetGridCoords, GetWorldCoords);
+					worldGenerationSubscriber.Init(k_RuntimeChunksCount, rectSize, m_ChunkGenerator.TilesCountPerChunk, m_ChunkGenerator.CellSize, GetGridCoords, GetWorldCoords);
 					m_WorldGenerationSubscribers.Add(worldGenerationSubscriber);
 				}
 			}
@@ -86,17 +87,12 @@ namespace WorldGeneration.Tiled
 				if(m_CurrentChunks[i] != null) continue;
 				GenerateChunk(i);
 			}
-			
-			var convertedGlobalOffset = Convert2DTo3D(m_GlobalOffset);
-			foreach (var subscriber in m_WorldGenerationSubscribers)
-			{
-				subscriber.UpdateAllChunks(m_CurrentChunks, convertedGlobalOffset);
-			}
+			OnAllChunksUpdate();
 		}
 
 		public override void _Process(double delta)
 		{
-			var chunkIndex = GetPlayerChunk();
+			var chunkIndex = GetPlayerLocalChunkIndex();
 			
 			if(m_CurrentChunkIndex != chunkIndex)
 			{
@@ -118,13 +114,63 @@ namespace WorldGeneration.Tiled
 			}
 		}
 
-		private void RegenerateChunksAround(int currentChunkIndex)
+		private void RegenerateChunksAround(int newCenterChunkIndex)
 		{
+			m_GlobalOffset += m_ChunkOffsets[newCenterChunkIndex] - m_ChunkOffsets[4];
+			var indexOffset = 4 - newCenterChunkIndex;
+			var generatedChunks = new bool[k_RuntimeChunksCount];
+			var subGroup = m_ChunkSubgroups[newCenterChunkIndex];
+			
+			var groupIndex = 0;
+			for (var i = 0; i < k_RuntimeChunksCount; ++i)
+			{
+				if (groupIndex < subGroup.Length && subGroup[groupIndex] == i)
+				{
+					groupIndex++;
+				}
+				else
+				{
+					m_CurrentChunks[i]?.DiscardChunk();
+					m_CurrentChunks[i] = null;
+				}
+			}
+			
+			if (Mathf.Sign(indexOffset) > 0)
+			{
+				for (int i = subGroup.Length - 1; i >= 0; i--)
+				{
+					m_CurrentChunks[subGroup[i] + indexOffset] = m_CurrentChunks[subGroup[i]];
+					generatedChunks[subGroup[i] + indexOffset] = true;
+					m_CurrentChunks[subGroup[i]] = null;
+				}
+			}
+			else
+			{
+				for (int i = 0; i < subGroup.Length; i++)
+				{
+					m_CurrentChunks[subGroup[i] + indexOffset] = m_CurrentChunks[subGroup[i]];
+					generatedChunks[subGroup[i] + indexOffset] = true;
+					m_CurrentChunks[subGroup[i]] = null;
+				}
+			}
+			
+			for (var i = 0; i < k_RuntimeChunksCount; ++i)
+			{
+				if(!generatedChunks[i])
+				{		
+					m_CurrentChunks[i]?.DiscardChunk();
+					m_CurrentChunks[i] = null;
+					GenerateChunk(i);
+				}
+			}
+			
+			OnAllChunksUpdate();
 		}
 		
 		private void GenerateChunk(int localChunkIndex)
 		{
-			m_CurrentChunks[localChunkIndex] = m_ChunkGenerator.GenerateChunk(localChunkIndex);
+			var startChunkIndex = GetGlobalChunkIndex(Convert2DTo3D(m_GlobalOffset));
+			m_CurrentChunks[localChunkIndex] = m_ChunkGenerator.GenerateChunk(startChunkIndex + Utility.Get2DIndex(localChunkIndex, k_RuntimeChunksSideCount));
 			
 			var convertedGlobalOffset = Convert2DTo3D(m_GlobalOffset);
 			foreach (var subscriber in m_WorldGenerationSubscribers)
@@ -132,13 +178,29 @@ namespace WorldGeneration.Tiled
 				subscriber.OnChunkGenerated(m_CurrentChunks[localChunkIndex], convertedGlobalOffset);
 			}
 		}
-
-		private int GetPlayerChunk()
+		
+		private void OnAllChunksUpdate()
 		{
-			var player = PlayerGlobalController.Instance.Player;
-			var globalChunkIndex = m_ChunkGenerator.GetCorrespondingChunkIndex(Convert3DTo2D(player.GlobalPosition));
+			var convertedGlobalOffset = Convert2DTo3D(m_GlobalOffset);
+			foreach (var subscriber in m_WorldGenerationSubscribers)
+			{
+				subscriber.UpdateAllChunks(m_CurrentChunks, convertedGlobalOffset);
+			}
+		}
+
+		private int GetPlayerLocalChunkIndex()
+		{
+			var globalChunkIndex = GetGlobalChunkIndex(PlayerGlobalController.Instance.Player.GlobalPosition);
 			var localChunkIndex = globalChunkIndex - m_CurrentChunks[0].Index;
-			return Mathf.Clamp(localChunkIndex, 0, k_RuntimeChunksCount);
+			var flatIndex = Utility.GetFlatIndex(localChunkIndex.X, localChunkIndex.Y, k_RuntimeChunksSideCount);
+			return flatIndex;
+		}
+		
+		private Vector2I GetGlobalChunkIndex(Vector3 position)
+		{
+			var gridPosition = GetGridCoords(position);
+			var chunkIndex = (Vector2I)((gridPosition + 0.5f * (Vector2)m_ChunkGenerator.TilesCountPerChunk) / m_ChunkGenerator.TilesCountPerChunk).Floor();
+			return chunkIndex;
 		}
 	
 		private Vector3 GetWorldCoords(Vector2I gridCoords)
@@ -154,14 +216,14 @@ namespace WorldGeneration.Tiled
 			return new Vector2I(Mathf.FloorToInt(x), Mathf.FloorToInt(y));
 		}
 		
-		private static Vector3 Convert2DTo3D(Vector2 original)
+		internal static Vector3 Convert2DTo3D(Vector2 original)
 		{
-			return new Vector3(original.X, 0, original.Y);
+			return new Vector3(original.X, 0, -original.Y);
 		}
 		
-		private static Vector2 Convert3DTo2D(Vector3 original)
+		internal static Vector2 Convert3DTo2D(Vector3 original)
 		{
-			return new Vector2(original.X, original.Z);
+			return new Vector2(original.X, -original.Z);
 		}
 	}
 }

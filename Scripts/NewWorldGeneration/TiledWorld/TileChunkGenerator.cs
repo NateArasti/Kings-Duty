@@ -14,7 +14,7 @@ namespace WorldGeneration.Tiled
 			ChunkSize = (Vector2)TilesCountPerChunk * CellSize;
 		}
 
-		public override ChunkInstance GenerateChunk(int globalIndex, ChunkInstance leftNeighbour = null, ChunkInstance topNeighbour = null, ChunkInstance rightNeighbour = null, ChunkInstance bottomNeighbour = null)
+		public override ChunkInstance GenerateChunk(Vector2I globalIndex, ChunkInstance leftNeighbour = null, ChunkInstance topNeighbour = null, ChunkInstance rightNeighbour = null, ChunkInstance bottomNeighbour = null)
 		{
 			var chunkInstance = base.GenerateChunk(
 				globalIndex, 
