@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -6,14 +5,16 @@ namespace WorldGeneration
 {
 	public partial class ChunkGenerator : Node
 	{
-		[Export] private float m_PointsMinDistance = 50;
+		[ExportGroup("Area params")]
 		[Export] private Vector2I m_AreaCountRange;
 		[Export] private Vector2 m_AreaWidthRange;
 		[Export] private Vector2 m_AreaHeightRange;
 		
-		[Export] public Vector2 ChunkSize { get; private set; } = new Vector2(800, 500);
+		[ExportGroup("Generation Params")]
+		[Export] private float m_PointsMinDistance = 50;
+		[Export] public Vector2 ChunkSize { get; protected set; } = new Vector2(800, 500);
 		
-		public ChunkInstance GenerateChunk(int globalIndex, 
+		public virtual ChunkInstance GenerateChunk(int globalIndex, 
 			ChunkInstance leftNeighbour = null, 
 			ChunkInstance topNeighbour = null,
 			ChunkInstance rightNeighbour = null,
@@ -153,9 +154,9 @@ namespace WorldGeneration
 			return startPositions;
 		}
 		
-		public int GetCorrespondingChunkIndex(Vector3 globalPosition)
+		public int GetCorrespondingChunkIndex(Vector2 globalPosition)
 		{
-			throw new NotImplementedException();
+			return 0;
 		}
 	}
 }

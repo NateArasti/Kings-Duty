@@ -13,8 +13,11 @@ shader_parameter/value = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/source_texture = ExtResource("4_vc0tx")
 
-[node name="PlayerGlobalController" type="Node"]
+[node name="PlayerGlobalController" type="Node" node_paths=PackedStringArray("Player", "PlayerHealthSystem", "PlayerInteraction")]
 script = ExtResource("1_muxci")
+Player = NodePath("Player")
+PlayerHealthSystem = NodePath("Player/HealthSystem")
+PlayerInteraction = NodePath("Player/Interaction")
 
 [node name="Player" parent="." instance=ExtResource("2_nceyi")]
 process_mode = 0

@@ -36,11 +36,11 @@ public partial class PlayerMovementController : CharacterBody3D, IHittable
 		var moveVector = Vector2.Zero;
 		if (Input.IsActionPressed(m_MoveUpActionName))
 		{
-			moveVector += Vector2.Down;
+			moveVector += Vector2.Up;
 		}
 		if (Input.IsActionPressed(m_MoveDownActionName))
 		{
-			moveVector += Vector2.Up;
+			moveVector += Vector2.Down;
 		}
 		if (Input.IsActionPressed(m_MoveRightActionName))
 		{
@@ -50,7 +50,7 @@ public partial class PlayerMovementController : CharacterBody3D, IHittable
 		{
 			moveVector += Vector2.Left;
 		}
-		Velocity = new Vector3(moveVector.Y, 0, moveVector.X).Normalized() * m_MoveSpeed;
+		Velocity = new Vector3(moveVector.X, 0, moveVector.Y).Normalized() * m_MoveSpeed;
 		
 		if (moveVector.X != 0 && 
 			((Input.IsActionPressed(m_MoveRightActionName) && !m_LookRight)
