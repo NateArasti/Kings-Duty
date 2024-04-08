@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public static class RandomExtensions
@@ -22,5 +23,20 @@ public static class RandomExtensions
 		var y = Mathf.Sin(angle);
 		
 		return new Vector2(x, y);
+	}
+	
+	public static float RandomInRange(this Vector2 range)
+	{
+		return (float)GD.RandRange(range.X, range.Y);
+	}
+	
+	public static int RandomInRange(this Vector2I range)
+	{
+		return GD.RandRange(range.X, range.Y);
+	}
+	
+	public static T Random<T>(this IReadOnlyList<T> values)
+	{
+		return values[GD.RandRange(0, values.Count - 1)];
 	}
 }

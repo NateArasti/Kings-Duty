@@ -7,8 +7,7 @@ namespace WorldGeneration
 	{
 		[ExportGroup("Area params")]
 		[Export] private Vector2I m_AreaCountRange;
-		[Export] private Vector2 m_AreaWidthRange;
-		[Export] private Vector2 m_AreaHeightRange;
+		[Export] private Area[] m_AreaDatas;
 		
 		[ExportGroup("Generation Params")]
 		[Export] private float m_PointsMinDistance = 50;
@@ -22,28 +21,23 @@ namespace WorldGeneration
 			ChunkInstance bottomNeighbour = null)
 		{
 			var chunkRect = new Rect2(Vector2.Zero, ChunkSize);
-			var areaCount = GD.RandRange(m_AreaCountRange.X, m_AreaCountRange.Y);
+			var areas = GetAreasForChunk(globalIndex);
+			
 			var areaRects = new List<Rect2>();
-			for (var i = 0; i < areaCount; ++i)
+			for (var i = 0; i < areas.Count; ++i)
 			{
-				var size = new Vector2((float)GD.RandRange(m_AreaWidthRange.X, m_AreaWidthRange.Y), (float)GD.RandRange(m_AreaHeightRange.X, m_AreaHeightRange.Y));
-				areaRects.Add(new Rect2(Vector2.Zero, size));
-			}
-			var edgePoints = GetStartPositions(leftNeighbour, topNeighbour, rightNeighbour, bottomNeighbour);
-			var points = PoissonSampler.SamplePositions(chunkRect, m_PointsMinDistance, areaRects, edgePoints);
-			var edgeGraph = DelaunayTriangulator.TriangulateToEdgeGraph(points);
-			var areas = new List<Area>();
-			foreach (var areaRect in areaRects)
-			{
-				areas.Add(new Area()
-				{
-					Center = areaRect.GetCenter(),
-					AreaRect = areaRect,
-				});
+				areaRects.Add(new Rect2(Vector2.Zero, areas[i].Size));
 			}
 			
+			var edgePoints = GetStartPositions(leftNeighbour, topNeighbour, rightNeighbour, bottomNeighbour);
+			var points = PoissonSampler.SamplePositions(chunkRect, m_PointsMinDistance, areaRects, edgePoints);
+			for (int i = 0; i < areaRects.Count; i++)
+			{
+				areas[i].Center = areaRects[i].GetCenter();
+			}
+			
+			var edgeGraph = DelaunayTriangulator.TriangulateToEdgeGraph(points);			
 			RemoveBorderEdges(edgeGraph, new Vector2I(areas.Count, areas.Count + edgePoints.Count - 1));
-
 			var edges = new HashSet<DelaunayTriangulator.Edge>();
 			
 			foreach (var pointEdges in edgeGraph)
@@ -55,6 +49,20 @@ namespace WorldGeneration
 			}
 			
 			return new ChunkInstance(globalIndex, areas, edgePoints, points, edges);
+		}
+		
+		public List<Area> GetAreasForChunk(Vector2I globalIndex)
+		{
+			var areaCount = m_AreaCountRange.RandomInRange();
+			var areas = new List<Area>();
+			
+			for (var i = 0; i < areaCount; ++i)
+			{
+				var area = m_AreaDatas.Random().GetInstance();
+				areas.Add(area);
+			}
+			
+			return areas;
 		}
 		
 		private static void RemoveBorderEdges(IReadOnlyDictionary<int, List<DelaunayTriangulator.Edge>> edgeGraph, Vector2I borderPointsRange)

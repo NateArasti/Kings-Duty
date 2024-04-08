@@ -25,13 +25,14 @@ namespace WorldGeneration.Test
 			{
 				borderRects[i] = new Rect2(m_Offset + Utility.Get2DIndex(i, 2) * m_ChunkGenerator.ChunkSize, m_ChunkGenerator.ChunkSize);
 				
-				m_ChunkInstances[i] = i switch 
-				{
-					0 => m_ChunkGenerator.GenerateChunk(new Vector2I(0, 0)),
-					1 => m_ChunkGenerator.GenerateChunk(new Vector2I(0, 1), m_ChunkInstances[0]),
-					2 => m_ChunkGenerator.GenerateChunk(new Vector2I(1, 0), null, m_ChunkInstances[0]),
-					3 => m_ChunkGenerator.GenerateChunk(new Vector2I(1, 1), m_ChunkInstances[2], m_ChunkInstances[1]),
-				};
+				m_ChunkInstances[i] = i switch
+                {
+                    0 => m_ChunkGenerator.GenerateChunk(new Vector2I(0, 0)),
+                    1 => m_ChunkGenerator.GenerateChunk(new Vector2I(0, 1), m_ChunkInstances[0]),
+                    2 => m_ChunkGenerator.GenerateChunk(new Vector2I(1, 0), null, m_ChunkInstances[0]),
+                    3 => m_ChunkGenerator.GenerateChunk(new Vector2I(1, 1), m_ChunkInstances[2], m_ChunkInstances[1]),
+                    _ => throw new System.NotImplementedException(),
+                };
 				foreach (var point in m_ChunkInstances[i].AllPoints)
 				{
 					var sprite = new Sprite2D();
@@ -62,7 +63,7 @@ namespace WorldGeneration.Test
 				DrawRect(borderRects[i], Colors.White, false, 5);
 				foreach (var area in m_ChunkInstances[i].Areas)
 				{
-					var shiftArea = area.AreaRect;
+					var shiftArea = new Rect2(area.Center - 0.5f * area.Size, area.Size);
 					shiftArea.Position += borderRects[i].Position;
 					DrawRect(shiftArea, Colors.Yellow);
 				}

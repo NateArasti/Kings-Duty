@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cqcu4r1xu75pw"]
+
+[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/Base/Area.cs" id="1_doqrk"]
+
+[resource]
+script = ExtResource("1_doqrk")
+WidthRange = Vector2(100, 150)
+HeightRange = Vector2(75, 125)
