@@ -53,7 +53,7 @@ namespace WorldGeneration.Tiled
 			var sideChunkCount = (int)Mathf.Sqrt(allChunksInstances.Length);
 			for (var i = 0; i < allChunksInstances.Length; i++)
 			{
-				var tileChunkInstance = allChunksInstances[i] as TileChunkGenerator.TiledChunkInstance;
+				var tileChunkInstance = allChunksInstances[i] as TiledChunkInstance;
 				var cells = tileChunkInstance.ChunkTiles;
 				var chunkCoordinates = Utility.Get2DIndex(i, sideChunkCount);
 				var newChunk = false;
@@ -73,7 +73,7 @@ namespace WorldGeneration.Tiled
 					int texture_index;
 					if (newChunk)
 					{
-						texture_index = cells[j] == TileChunkGenerator.TileType.Ground ? 
+						texture_index = cells[j] == TileType.Ground ? 
 							GD.RandRange(m_GroundTilesIndexRange.X, m_GroundTilesIndexRange.Y) :
 							GD.RandRange(m_RoadTilesIndexRange.X, m_RoadTilesIndexRange.Y);
 							

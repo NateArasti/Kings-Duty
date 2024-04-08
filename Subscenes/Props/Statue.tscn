@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://cntj6x0vj868l"]
+[gd_scene load_steps=8 format=3 uid="uid://cntj6x0vj868l"]
 
-[ext_resource type="Script" path="res://Scripts/WorldGeneration/Statue.cs" id="1_2yyfu"]
 [ext_resource type="Script" path="res://Scripts/Node3DBillboard.cs" id="1_83c0j"]
 [ext_resource type="Texture2D" uid="uid://bgpguxfdlji21" path="res://Sprites/Props/tile_0065.png" id="2_u4h1y"]
 
@@ -95,13 +94,7 @@ _data = {
 "RESET": SubResource("Animation_170q2")
 }
 
-[node name="Statue" type="Node3D" node_paths=PackedStringArray("m_TriggerArea", "m_Visuals", "m_AnimationPlayer")]
-script = ExtResource("1_2yyfu")
-m_TriggerArea = NodePath("Area3D")
-m_Visuals = NodePath("OmniLight3D")
-m_AnimationPlayer = NodePath("AnimationPlayer")
-m_DestroyAnimationName = "Destroy"
-m_ResetAnimationName = "RESET"
+[node name="Statue" type="Node3D"]
 
 [node name="NodeBillboard" type="Node3D" parent="."]
 script = ExtResource("1_83c0j")

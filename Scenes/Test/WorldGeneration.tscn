@@ -1,14 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://dif2ucbn31u57"]
+[gd_scene load_steps=14 format=3 uid="uid://dif2ucbn31u57"]
 
 [ext_resource type="PackedScene" uid="uid://dno44gfnh83rk" path="res://Subscenes/Characters/Player/GlobalPlayer.tscn" id="1_ronm5"]
-[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TiledWorld/WorldController.cs" id="2_ol023"]
-[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TiledWorld/TileChunkGenerator.cs" id="3_tox21"]
+[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TiledWorld/Base/WorldController.cs" id="2_ol023"]
+[ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TiledWorld/Base/TileChunkGenerator.cs" id="3_tox21"]
 [ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TiledWorld/WorldTilesGenerator.cs" id="4_38do4"]
+[ext_resource type="Resource" uid="uid://x6xbwmkxwlta" path="res://CustomResources/StatueArea.tres" id="4_bcuca"]
 [ext_resource type="MultiMesh" uid="uid://bcgch8h5ph107" path="res://CustomResources/Multimeshes/WorldTile.tres" id="5_5oac0"]
 [ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TiledWorld/PropsGenerator.cs" id="5_ss806"]
 [ext_resource type="Script" path="res://Scripts/NewWorldGeneration/TiledWorld/BuildingsGenerator.cs" id="6_b1kww"]
 [ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/TreeMultimesh.tres" id="7_s6ygv"]
 [ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Props/Obstacle.tscn" id="8_18fap"]
+[ext_resource type="PackedScene" uid="uid://cntj6x0vj868l" path="res://Subscenes/Props/Statue.tscn" id="13_y4n7s"]
 
 [sub_resource type="Environment" id="Environment_ofovr"]
 background_mode = 1
@@ -37,6 +39,8 @@ m_StepValue = Vector2(0.5, 0.385)
 script = ExtResource("3_tox21")
 TilesCountPerChunk = Vector2i(20, 20)
 CellSize = 1.0
+m_AreaCountRange = Vector2i(1, 1)
+m_AreaDatas = Array[Resource]([ExtResource("4_bcuca")])
 m_PointsMinDistance = 7.0
 ChunkSize = Vector2(0, 0)
 
@@ -60,3 +64,4 @@ m_ObstacleScene = ExtResource("8_18fap")
 
 [node name="Buildings" type="Node3D" parent="World"]
 script = ExtResource("6_b1kww")
+m_StatueScene = ExtResource("13_y4n7s")

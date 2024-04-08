@@ -18,7 +18,6 @@ namespace WorldGeneration.Tiled
 		private float m_CellSize;
 		private Vector2 m_ChunkRectSize;
 		private Vector2I m_ChunkGridSize;
-		private Vector2I m_GlobalSize;
 		private System.Func<Vector3, Vector2I> GetGridCoords;
 		private System.Func<Vector2I, Vector3> GetWorldCoords;
 		
@@ -27,7 +26,6 @@ namespace WorldGeneration.Tiled
 
 		public override void _Ready()
 		{
-			GD.Print(m_DefaultTreeBasis);
 			m_ObstaclesPool = new NodePool<Node3D>(CreateObstacle, 5000, PoolGetCallback, PoolReturnCallback);
 			
 			for (var i = 0; i < TileWorldGenerator.k_RuntimeChunksCount; ++i)
@@ -55,30 +53,16 @@ namespace WorldGeneration.Tiled
 			m_ChunkRectSize = rectSize;
 			m_ChunkGridSize = chunkGridSize;
 			m_CellSize = cellSize;
-			
-			m_GlobalSize = (int)Mathf.Sqrt(maxRuntimeChunksCount) * chunkGridSize;
 		}
 
 		public void OnChunkGenerated(ChunkInstance chunkInstance, Vector3 chunkOffset)
 		{
+			var tiledChunkInstance = chunkInstance as TiledChunkInstance;
+			
 			var obstacles = new HashSet<Node3D>();
 			var natureMultimeshInstance = m_FreeNatureMultimeshInstances.Dequeue();
-			
-			SpawnNature(chunkInstance as TileChunkGenerator.TiledChunkInstance, obstacles, chunkOffset, natureMultimeshInstance.Multimesh);
-			chunkInstance.OnChunkDiscard += () => 
-			{
-				m_FreeNatureMultimeshInstances.Enqueue(natureMultimeshInstance);
-				foreach (var obstacle in obstacles)
-				{
-					m_ObstaclesPool.Return(obstacle);
-				}
-			};
-		}
+			var multiMesh = natureMultimeshInstance.Multimesh;
 
-		public void UpdateAllChunks(ChunkInstance[] allChunksInstances, Vector3 globalOffset) { }
-		
-		private void SpawnNature(TileChunkGenerator.TiledChunkInstance tiledChunkInstance, HashSet<Node3D> obstacles, Vector3 chunkOffset, MultiMesh multiMesh)
-		{
 			var possibleTreesPositions = PoissonSampler.SamplePositions(
 				new Rect2(0, -0.5f * m_ChunkRectSize.Y, m_ChunkRectSize),
 				m_TreeSpawnMinDistance,
@@ -91,7 +75,7 @@ namespace WorldGeneration.Tiled
 				var gridPosition = GetGridCoords(WorldController.Convert2DTo3D(position));
 				if(gridPosition.X.InRange(0, m_ChunkGridSize.X - 1)
 					&& gridPosition.Y.InRange(0, m_ChunkGridSize.Y - 1)
-					&& tiledChunkInstance.ChunkTiles[Utility.GetFlatIndex(gridPosition.X, gridPosition.Y, m_ChunkGridSize.X)] == TileChunkGenerator.TileType.Ground)
+					&& tiledChunkInstance.ChunkTiles[Utility.GetFlatIndex(gridPosition.X, gridPosition.Y, m_ChunkGridSize.X)] == TileType.Ground)
 				{
 					var obstacle = SpawnObstacle(position);
 					obstacle.Position += chunkOffset;
@@ -105,7 +89,18 @@ namespace WorldGeneration.Tiled
 			}
 			
 			multiMesh.VisibleInstanceCount = index;
+			
+			chunkInstance.OnChunkDiscard += () => 
+			{
+				m_FreeNatureMultimeshInstances.Enqueue(natureMultimeshInstance);
+				foreach (var obstacle in obstacles)
+				{
+					m_ObstaclesPool.Return(obstacle);
+				}
+			};
 		}
+
+		public void UpdateAllChunks(ChunkInstance[] allChunksInstances, Vector3 globalOffset) { }
 		
 		private Node3D SpawnObstacle(Vector2 position)
 		{

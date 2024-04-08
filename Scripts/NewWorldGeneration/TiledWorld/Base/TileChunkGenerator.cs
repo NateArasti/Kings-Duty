@@ -2,7 +2,7 @@ using Godot;
 
 namespace WorldGeneration.Tiled
 {
-	public partial class TileChunkGenerator : ChunkGenerator
+    public partial class TileChunkGenerator : ChunkGenerator
 	{
 		[ExportGroup("Tile Data")]
 		[Export] public Vector2I TilesCountPerChunk { get; private set;}
@@ -47,30 +47,21 @@ namespace WorldGeneration.Tiled
 				}
 			}
 			
+			foreach (var area in chunkInstance.Areas)
+			{
+				var start = Utility.GetGridPosition(area.Center - 0.5f * area.Size, Vector2.Zero, CellSize);
+				var end = Utility.GetGridPosition(area.Center + 0.5f * area.Size, Vector2.Zero, CellSize);
+				for (var x = start.X; x <= end.X; ++x)
+				{
+					for (var y = start.Y; y <= end.Y; ++y)
+					{
+						var index = Utility.GetFlatIndex(x, y, TilesCountPerChunk.X);
+						chunkTiles[index] = TileType.Area;
+					}
+				}
+			}
+			
 			return new TiledChunkInstance(chunkInstance, chunkTiles);
-		}
-
-		public class TiledChunkInstance : ChunkInstance
-		{
-			public TileType[] ChunkTiles { get; }
-			public int[] TilesCustomData { get; private set; }
-			
-			public TiledChunkInstance(ChunkInstance chunkInstance, TileType[] chunkTiles) 
-				: base(chunkInstance.Index, chunkInstance.Areas, chunkInstance.EdgePoints, chunkInstance.AllPoints, chunkInstance.Roads)
-			{
-				ChunkTiles = chunkTiles;
-			}
-			
-			public void SetupCustomData()
-			{
-				TilesCustomData = new int[ChunkTiles.Length];
-			}
-		}
-		
-		public enum TileType
-		{
-			Ground,
-			Road
 		}
 	}
 }
