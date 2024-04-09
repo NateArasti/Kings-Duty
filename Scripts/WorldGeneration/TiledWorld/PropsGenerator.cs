@@ -28,7 +28,7 @@ namespace WorldGeneration.Tiled
 		{
 			m_ObstaclesPool = new NodePool<Node3D>(CreateObstacle, 5000, PoolGetCallback, PoolReturnCallback);
 			
-			for (var i = 0; i < TileWorldGenerator.k_RuntimeChunksCount; ++i)
+			for (var i = 0; i < WorldController.k_RuntimeChunksCount; ++i)
 			{
 				var instance = new MultiMeshInstance3D();
 				var multiMesh = new MultiMesh
