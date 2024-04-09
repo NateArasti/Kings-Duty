@@ -13,7 +13,5 @@ m_ChunkGenerator = NodePath("ChunkGenerator")
 
 [node name="ChunkGenerator" type="Node" parent="."]
 script = ExtResource("2_14l1u")
-m_AreaCountRange = Vector2i(0, 3)
 m_AreaDatas = Array[Resource]([ExtResource("3_113ey"), ExtResource("4_wulko"), ExtResource("5_i744v")])
-m_PointsMinDistance = 100.0
-ChunkSize = Vector2(500, 300)
+ChunkSize = Vector2(350, 200)

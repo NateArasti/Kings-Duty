@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=20 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Base/WorldController.cs" id="1_73pfk"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Base/TileChunkGenerator.cs" id="2_erra8"]
-[ext_resource type="Resource" uid="uid://x6xbwmkxwlta" path="res://CustomResources/StatueArea.tres" id="3_soi56"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/WorldTilesGenerator.cs" id="4_4wtrg"]
 [ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/TreeMultimesh.tres" id="4_itje5"]
 [ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Props/Obstacle.tscn" id="5_lcgxn"]
@@ -55,10 +54,6 @@ m_StepValue = Vector2(0.5, 0.385)
 script = ExtResource("2_erra8")
 TilesCountPerChunk = Vector2i(20, 20)
 CellSize = 1.0
-m_AreaCountRange = Vector2i(1, 1)
-m_AreaDatas = Array[Resource]([ExtResource("3_soi56")])
-m_PointsMinDistance = 7.0
-ChunkSize = Vector2(0, 0)
 
 [node name="WorldTiles" type="Node3D" parent="Environment/World"]
 script = ExtResource("4_4wtrg")
