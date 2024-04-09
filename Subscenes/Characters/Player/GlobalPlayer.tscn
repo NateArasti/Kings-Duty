@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dno44gfnh83rk"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerGlobalController.cs" id="1_muxci"]
+[ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player/Player.tscn" id="2_nceyi"]
+[ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_6d5jq"]
+[ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/king.png" id="4_vc0tx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m3jjx"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("3_6d5jq")
+shader_parameter/value = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/source_texture = ExtResource("4_vc0tx")
+
+[node name="PlayerGlobalController" type="Node" node_paths=PackedStringArray("Player", "PlayerHealthSystem", "PlayerInteraction")]
+script = ExtResource("1_muxci")
+Player = NodePath("Player")
+PlayerHealthSystem = NodePath("Player/HealthSystem")
+PlayerInteraction = NodePath("Player/Interaction")
+
+[node name="Player" parent="." instance=ExtResource("2_nceyi")]
+process_mode = 0
+
+[node name="Body" parent="Player/CharacterVisuals/BillboardPivot" index="0"]
+material_overlay = SubResource("ShaderMaterial_m3jjx")
+
+[node name="Interaction" parent="Player" index="7" node_paths=PackedStringArray("m_Interactions")]
+m_Interactions = [null]
+
+[editable path="Player"]
+[editable path="Player/HealthSystem"]

@@ -10,4 +10,9 @@ public static class Utility
 		var delta = point - start;
 		return new Vector2I((int)(delta.X / cellSize), (int)(delta.Y / cellSize));
 	}
+	
+	public static Vector2 GetWorldPosition(Vector2I gridCoords, Vector2 start, float cellSize)
+	{
+		return start + (Vector2)gridCoords * cellSize;
+	}
 }
