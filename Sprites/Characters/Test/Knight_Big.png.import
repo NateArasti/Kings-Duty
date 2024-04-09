@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dejuf15se5htd"
-path="res://.godot/imported/Blacksmith.png-20d68dc30eb4430cba5924d64deaa9a6.ctex"
+uid="uid://cc8g4o4pkmm3k"
+path="res://.godot/imported/Knight_Big.png-dc6ce9c2958600e5b099b2c38226457d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Characters/Blacksmith.png"
-dest_files=["res://.godot/imported/Blacksmith.png-20d68dc30eb4430cba5924d64deaa9a6.ctex"]
+source_file="res://Sprites/Characters/Test/Knight_Big.png"
+dest_files=["res://.godot/imported/Knight_Big.png-dc6ce9c2958600e5b099b2c38226457d.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerGlobalController.cs" id="1_muxci"]
 [ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player/Player.tscn" id="2_nceyi"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_6d5jq"]
-[ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/king.png" id="4_vc0tx"]
+[ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/Test/king.png" id="4_vc0tx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m3jjx"]
 resource_local_to_scene = true
@@ -24,6 +24,9 @@ process_mode = 0
 
 [node name="Body" parent="Player/CharacterVisuals/BillboardPivot" index="0"]
 material_overlay = SubResource("ShaderMaterial_m3jjx")
+
+[node name="MainHandPivot" parent="Player/CharacterVisuals/BillboardPivot/Body" index="0"]
+transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, 0.1, 0.06, 0.001)
 
 [node name="Interaction" parent="Player" index="7" node_paths=PackedStringArray("m_Interactions")]
 m_Interactions = [null]

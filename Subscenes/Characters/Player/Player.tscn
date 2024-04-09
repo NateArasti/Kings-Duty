@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerMovementController.cs" id="2_py02u"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_62u1p"]
 [ext_resource type="PackedScene" uid="uid://bwafhnyut7l3f" path="res://Subscenes/PostProcessing.tscn" id="3_ri1l6"]
-[ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/king.png" id="4_qwdm8"]
+[ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/Test/king.png" id="4_l3a21"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerHealthSystem.cs" id="6_b2ybh"]
 [ext_resource type="Script" path="res://Scripts/UI/DeathScreen.cs" id="6_mbc2c"]
 [ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/Fonts/BlackOpsOne-Regular.ttf" id="6_v64bi"]
@@ -24,7 +24,7 @@ render_priority = 1
 shader = ExtResource("3_62u1p")
 shader_parameter/value = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
-shader_parameter/source_texture = ExtResource("4_qwdm8")
+shader_parameter/source_texture = ExtResource("4_l3a21")
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fnoll"]
 
@@ -60,16 +60,13 @@ m_DeathScreen = NodePath("DeathScreen")
 m_AnimationPlayer = NodePath("DefaultAnimationPlayer")
 HealthSystem = NodePath("HealthSystem")
 
-[node name="BillboardPivot" parent="CharacterVisuals" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
 [node name="Body" parent="CharacterVisuals/BillboardPivot" index="0"]
 material_overlay = SubResource("ShaderMaterial_eo2dv")
-texture = ExtResource("4_qwdm8")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="CharacterVisuals/BillboardPivot/Body/MainHandPivot/Object" index="0"]
-transform = Transform3D(0.906308, -0.422618, 9.31296e-08, 0.422618, 0.906308, 2.25815e-08, -6.83335e-08, 0, 1, -0.192952, 0.176223, 0.037)
+[node name="OmniLight3D" type="OmniLight3D" parent="CharacterVisuals/BillboardPivot/Body" index="1"]
+transform = Transform3D(1, 0, 6.83335e-08, 0, 1, 0, -6.83335e-08, 0, 1, 0.000855148, 0.433696, 0.00099997)
 light_color = Color(0.878431, 0.47451, 0.129412, 1)
+light_energy = 3.0
 light_size = 0.1
 light_specular = 1.0
 light_bake_mode = 0

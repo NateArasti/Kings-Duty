@@ -3,7 +3,7 @@ render_mode cull_disabled;
 
 uniform float value: hint_range(0, 1);
 uniform vec4 flash_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform sampler2D source_texture: filter_nearest, source_color; // A copy of the texture for the Sprite3D or AnimatedSprite3D 
+uniform sampler2D source_texture: source_color; // A copy of the texture for the Sprite3D or AnimatedSprite3D 
 
 void fragment() {
 	vec4 col = texture(source_texture, UV);

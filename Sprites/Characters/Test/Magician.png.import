@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc8g4o4pkmm3k"
-path="res://.godot/imported/Knight_Big.png-4680fe73e1c1cc2fb2731a79816a6673.ctex"
+uid="uid://b3ev8aotguh6e"
+path="res://.godot/imported/Magician.png-524d6cff9f4c15040c1535e00e1b68b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Characters/Knight_Big.png"
-dest_files=["res://.godot/imported/Knight_Big.png-4680fe73e1c1cc2fb2731a79816a6673.ctex"]
+source_file="res://Sprites/Characters/Test/Magician.png"
+dest_files=["res://.godot/imported/Magician.png-524d6cff9f4c15040c1535e00e1b68b0.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1t82ucg8iot6"
-path="res://.godot/imported/king.png-f4a784a350314a195029f4e3cef31c0b.ctex"
+uid="uid://dgueo6fff2wtw"
+path="res://.godot/imported/Witch.png-ff1962ba3818094d8e7069eaca4948b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Characters/king.png"
-dest_files=["res://.godot/imported/king.png-f4a784a350314a195029f4e3cef31c0b.ctex"]
+source_file="res://Sprites/Characters/Test/Witch.png"
+dest_files=["res://.godot/imported/Witch.png-ff1962ba3818094d8e7069eaca4948b9.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3ev8aotguh6e"
-path="res://.godot/imported/Magician.png-663cd05d373e3e412985f041668df884.ctex"
+uid="uid://cxdd2y6fb4a0y"
+path="res://.godot/imported/SimpleGuy.png-6ceefe943543b1790f689a851e878267.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Characters/Magician.png"
-dest_files=["res://.godot/imported/Magician.png-663cd05d373e3e412985f041668df884.ctex"]
+source_file="res://Sprites/Characters/Test/SimpleGuy.png"
+dest_files=["res://.godot/imported/SimpleGuy.png-6ceefe943543b1790f689a851e878267.ctex"]
 
 [params]
 
