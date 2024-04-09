@@ -74,8 +74,8 @@ namespace WorldGeneration.Tiled
 					if (newChunk)
 					{
 						texture_index = cells[j] == TileType.Ground ? 
-							GD.RandRange(m_GroundTilesIndexRange.X, m_GroundTilesIndexRange.Y) :
-							GD.RandRange(m_RoadTilesIndexRange.X, m_RoadTilesIndexRange.Y);
+							m_GroundTilesIndexRange.RandomInRange() :
+							m_RoadTilesIndexRange.RandomInRange();
 							
 						tileChunkInstance.TilesCustomData[j] = texture_index;
 					}

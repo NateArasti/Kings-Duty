@@ -80,7 +80,7 @@ namespace WorldGeneration.Tiled
 					var obstacle = SpawnObstacle(position);
 					obstacle.Position += chunkOffset;
 					multiMesh.SetInstanceTransform(index, new Transform3D(m_DefaultTreeBasis, obstacle.Position));
-					multiMesh.SetInstanceCustomData(index, new Color(GD.RandRange(m_TreesTextureRange.X, m_TreesTextureRange.Y), 0, 0, 0));
+					multiMesh.SetInstanceCustomData(index, new Color(m_TreesTextureRange.RandomInRange(), 0, 0, 0));
 					index++;
 					obstacles.Add(obstacle);
 					

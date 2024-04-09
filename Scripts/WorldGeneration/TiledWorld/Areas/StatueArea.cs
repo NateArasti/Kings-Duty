@@ -8,7 +8,6 @@ namespace WorldGeneration.Tiled
 		{
 			var instance = new StatueArea();
 			instance.SetInstanceValues(this);
-			GD.Print(instance.Size);
 			return instance;
 		}
 	}
