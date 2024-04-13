@@ -1,16 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://bq63l7m02j036"]
+[gd_scene load_steps=19 format=3 uid="uid://bq63l7m02j036"]
 
 [ext_resource type="PackedScene" uid="uid://c6bfb044jd67f" path="res://Subscenes/Characters/Character.tscn" id="1_up7c8"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerMovementController.cs" id="2_py02u"]
 [ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_62u1p"]
 [ext_resource type="PackedScene" uid="uid://bwafhnyut7l3f" path="res://Subscenes/PostProcessing.tscn" id="3_ri1l6"]
-[ext_resource type="Texture2D" uid="uid://d1t82ucg8iot6" path="res://Sprites/Characters/Test/king.png" id="4_l3a21"]
-[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerHealthSystem.cs" id="6_b2ybh"]
+[ext_resource type="Texture2D" uid="uid://c8ioxbfouojjc" path="res://Sprites/Characters/Player/king_v0.1.0.png" id="4_hrbcl"]
 [ext_resource type="Script" path="res://Scripts/UI/DeathScreen.cs" id="6_mbc2c"]
 [ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/Fonts/BlackOpsOne-Regular.ttf" id="6_v64bi"]
-[ext_resource type="Material" uid="uid://dgf8nek54rcbk" path="res://CustomResources/Materials/Vignette.tres" id="7_chfch"]
-[ext_resource type="AnimationLibrary" uid="uid://bfiktfwaogu1a" path="res://Animations/Character.res" id="10_4tb4a"]
-[ext_resource type="AnimationLibrary" uid="uid://cbc2kgqio8nvk" path="res://Animations/Player.res" id="11_88xnr"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Interaction/PlayerInteraction.cs" id="12_hyle0"]
 [ext_resource type="Texture2D" uid="uid://0ghch2ke4hp7" path="res://Sprites/Icons/heal.png" id="13_470rw"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Interaction/LevelUpInteraction.cs" id="13_x26sr"]
@@ -18,15 +14,13 @@
 [ext_resource type="Texture2D" uid="uid://c0wrmaxadhv7j" path="res://Sprites/Icons/heal-aura.png" id="15_gowo2"]
 [ext_resource type="LabelSettings" uid="uid://dpsuoo76k2bij" path="res://CustomResources/UI/Fonts/HeaderFont.tres" id="16_18jlf"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eo2dv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2yoa"]
 resource_local_to_scene = true
 render_priority = 1
 shader = ExtResource("3_62u1p")
 shader_parameter/value = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
-shader_parameter/source_texture = ExtResource("4_l3a21")
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fnoll"]
+shader_parameter/source_texture = ExtResource("4_hrbcl")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2hkn"]
 bg_color = Color(0, 0, 0, 0.588235)
@@ -52,19 +46,25 @@ corner_radius_bottom_left = 10
 height = 0.25
 radius = 0.3
 
-[node name="Character" node_paths=PackedStringArray("m_VisualsPivot", "m_DeathScreen", "m_AnimationPlayer", "HealthSystem") instance=ExtResource("1_up7c8")]
+[node name="Character" node_paths=PackedStringArray("m_Visuals") instance=ExtResource("1_up7c8")]
 script = ExtResource("2_py02u")
 m_MoveSpeed = 1.25
-m_VisualsPivot = NodePath("CharacterVisuals")
-m_DeathScreen = NodePath("DeathScreen")
-m_AnimationPlayer = NodePath("DefaultAnimationPlayer")
-HealthSystem = NodePath("HealthSystem")
+m_Visuals = NodePath("CharacterVisuals")
 
-[node name="Body" parent="CharacterVisuals/BillboardPivot" index="0"]
-material_overlay = SubResource("ShaderMaterial_eo2dv")
+[node name="CharacterVisuals" parent="." index="0" node_paths=PackedStringArray("m_CharacterSprites")]
+m_CharacterSprites = [NodePath("BillboardPivot/Sprite")]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="CharacterVisuals/BillboardPivot/Body" index="1"]
-transform = Transform3D(1, 0, 6.83335e-08, 0, 1, 0, -6.83335e-08, 0, 1, 0.000855148, 0.433696, 0.00099997)
+[node name="Sprite" type="Sprite3D" parent="CharacterVisuals/BillboardPivot" index="0"]
+material_overlay = SubResource("ShaderMaterial_v2yoa")
+offset = Vector2(0, 512)
+pixel_size = 0.001
+shaded = true
+alpha_cut = 2
+texture_filter = 4
+texture = ExtResource("4_hrbcl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="CharacterVisuals/BillboardPivot" index="1"]
+transform = Transform3D(1, 0, 6.83335e-08, 0, 1, 0, -6.83335e-08, 0, 1, 0.000855154, 0.433696, 0.0857867)
 light_color = Color(0.878431, 0.47451, 0.129412, 1)
 light_energy = 3.0
 light_size = 0.1
@@ -76,30 +76,14 @@ shadow_opacity = 0.5
 omni_range = 2.0
 omni_attenuation = 1.5
 
-[node name="HealthSystem" parent="." index="3"]
-script = ExtResource("6_b2ybh")
-m_MaxHealth = 5
-m_PlayerVignette = ExtResource("7_chfch")
-m_HitValueChangeSpeed = 1.0
-m_PlayerResetAnimation = "Player/RESET"
-m_HitAnimation = "Player/Hitted"
-m_DeathAnimation = "Player/Death"
-
-[node name="HitboxAnimationPlayer" parent="." index="4"]
-libraries = {
-"": SubResource("AnimationLibrary_fnoll"),
-"Character": ExtResource("10_4tb4a"),
-"Player": ExtResource("11_88xnr")
-}
-
-[node name="Camera3D" type="Camera3D" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+[node name="Camera3D" type="Camera3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 16, 15)
 projection = 1
 size = 5.0
 
 [node name="PostProcessing" parent="Camera3D" index="0" instance=ExtResource("3_ri1l6")]
 
-[node name="DeathScreen" type="Panel" parent="." index="6"]
+[node name="DeathScreen" type="Panel" parent="." index="3"]
 process_mode = 3
 visible = false
 anchors_preset = 15
@@ -138,7 +122,7 @@ theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_170uy")
 text = "Restart"
 
-[node name="Interaction" type="Node3D" parent="." index="7" node_paths=PackedStringArray("m_Interactions", "InteractionArea")]
+[node name="Interaction" type="Node3D" parent="." index="4" node_paths=PackedStringArray("m_Interactions", "InteractionArea")]
 script = ExtResource("12_hyle0")
 m_Interactions = [NodePath("LevelUpScreen")]
 InteractionArea = NodePath("Area3D")
@@ -226,5 +210,3 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="button_up" from="DeathScreen/Button" to="DeathScreen" method="Restart"]
-
-[editable path="HealthSystem"]

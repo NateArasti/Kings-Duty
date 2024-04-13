@@ -3,14 +3,7 @@ using Godot;
 public partial class PlayerMovementController : CharacterBody3D, IHittable
 {
 	[Export] private float m_MoveSpeed = 2;
-	[Export] private Node3D m_VisualsPivot;
-	[Export] private bool m_LookRight = true;
-	[Export] private Control m_DeathScreen;
-	
-	[ExportGroup("Animations")]
-	[Export] private AnimationPlayer m_AnimationPlayer;
-	[Export] private string m_IDLEAnimationName = "Character/Idle";
-	[Export] private string m_WalkAnimationName = "Character/Walk";
+	[Export] private CharacterVisuals m_Visuals;
 	
 	[ExportGroup("Move Actions Names")]
 	[Export] private string m_MoveUpActionName = "MoveUp";
@@ -18,16 +11,9 @@ public partial class PlayerMovementController : CharacterBody3D, IHittable
 	[Export] private string m_MoveRightActionName = "MoveRight";
 	[Export] private string m_MoveLeftActionName = "MoveLeft";
 	
-	private bool m_Walking;
+	private bool m_LookRight = true;
 
 	[Export] public HealthSystem HealthSystem { get; private set; }
-
-	public override void _Ready()
-	{
-		m_AnimationPlayer.Stop();
-		m_AnimationPlayer.Play(m_IDLEAnimationName);
-		m_Walking = false;
-	}
 
 	public override void _Process(double delta)
 	{
@@ -56,54 +42,11 @@ public partial class PlayerMovementController : CharacterBody3D, IHittable
 			((Input.IsActionPressed(m_MoveRightActionName) && !m_LookRight)
 			|| (Input.IsActionPressed(m_MoveLeftActionName) && m_LookRight)))
 		{
-			ToggleLook();
+			m_LookRight = !m_LookRight;
+			m_Visuals.ToggleLook();
 		}
 		
-		HandleAnimation();
-	}
-	
-	private void ToggleLook()
-	{
-		m_LookRight = !m_LookRight;
-		toggleLoop(m_VisualsPivot);
-		
-		void toggleLoop(Node3D pivot)
-		{
-			foreach (Node3D node in pivot.GetChildren())
-			{
-				var position = node.Position;
-				position.X *= -1;
-				node.Position = position;
-				
-				var rotation = node.Rotation;
-				rotation.Z *= -1;
-				node.Rotation = rotation;
-				
-				if(node is Sprite3D sprite)
-				{
-					sprite.FlipH = !sprite.FlipH;
-				}
-				
-				toggleLoop(node);
-			}
-		}
-	}
-	
-	private void HandleAnimation()
-	{
-		if (!m_Walking && Velocity.LengthSquared() > 0)
-		{
-			m_AnimationPlayer.Stop();
-			var directionSuffix = m_LookRight ? 'R' : 'L';
-			m_AnimationPlayer.Play($"{m_WalkAnimationName}_{directionSuffix}");
-			m_Walking = true;
-		}
-		else if(m_Walking && Velocity.LengthSquared() == 0)
-		{
-			m_AnimationPlayer.Stop();
-			m_AnimationPlayer.Play(m_IDLEAnimationName);
-			m_Walking = false;
-		}
+		m_Visuals.SetState(Velocity.LengthSquared() > 0 ? CharacterVisuals.State.Walk : CharacterVisuals.State.IDLE);
 	}
 
 	public override void _PhysicsProcess(double delta)
