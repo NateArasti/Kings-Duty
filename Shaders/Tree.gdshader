@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode diffuse_toon, blend_mix;
+render_mode diffuse_toon, blend_mix, depth_prepass_alpha;
 
 uniform float alpha_distance = 0.2f;
 uniform float alpha_border = 0.2f;
@@ -17,9 +17,9 @@ void fragment() {
 	
 	ALBEDO = col.rgb;
 	ALPHA = col.a;
-	float distance_from_center = distance(SCREEN_UV, vec2(0.5f, 0.5f));
-	float alpha_weight = distance_from_center / alpha_distance;
-	if((1.0f - UV.y) > alpha_border && distance_from_center < alpha_distance){
-		ALPHA = min(ALPHA, mix(ALPHA, alpha_fade, 1.0f - alpha_weight * alpha_weight * alpha_weight));
-	}
+	//float distance_from_center = distance(SCREEN_UV, vec2(0.5f, 0.5f));
+	//float alpha_weight = distance_from_center / alpha_distance;
+	//if((1.0f - UV.y) > alpha_border && distance_from_center < alpha_distance){
+		//ALPHA = min(ALPHA, mix(ALPHA, alpha_fade, 1.0f - alpha_weight * alpha_weight * alpha_weight));
+	//}
 }

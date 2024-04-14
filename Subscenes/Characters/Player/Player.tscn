@@ -54,6 +54,9 @@ m_Visuals = NodePath("CharacterVisuals")
 [node name="CharacterVisuals" parent="." index="0" node_paths=PackedStringArray("m_CharacterSprites")]
 m_CharacterSprites = [NodePath("BillboardPivot/Sprite")]
 
+[node name="BillboardPivot" parent="CharacterVisuals" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
 [node name="Sprite" type="Sprite3D" parent="CharacterVisuals/BillboardPivot" index="0"]
 material_overlay = SubResource("ShaderMaterial_v2yoa")
 offset = Vector2(0, 512)
@@ -63,25 +66,26 @@ alpha_cut = 2
 texture_filter = 4
 texture = ExtResource("4_hrbcl")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="CharacterVisuals/BillboardPivot" index="1"]
-transform = Transform3D(1, 0, 6.83335e-08, 0, 1, 0, -6.83335e-08, 0, 1, 0.000855154, 0.433696, 0.0857867)
-light_color = Color(0.878431, 0.47451, 0.129412, 1)
-light_energy = 3.0
-light_size = 0.1
-light_specular = 1.0
-light_bake_mode = 0
-shadow_enabled = true
-shadow_reverse_cull_face = true
-shadow_opacity = 0.5
-omni_range = 2.0
-omni_attenuation = 1.5
-
 [node name="Camera3D" type="Camera3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 16, 15)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3.5, 3)
 projection = 1
 size = 5.0
 
 [node name="PostProcessing" parent="Camera3D" index="0" instance=ExtResource("3_ri1l6")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.991445, 0.130526, 0, -0.130526, 0.991445, 0, 0, 0)
+light_color = Color(1, 0.647059, 0.34902, 1)
+light_energy = 5.0
+light_size = 0.1
+light_specular = 1.0
+light_bake_mode = 0
+shadow_enabled = true
+shadow_opacity = 0.5
+spot_range = 15.0
+spot_attenuation = 0.5
+spot_angle = 25.0
+spot_angle_attenuation = 5.0
 
 [node name="DeathScreen" type="Panel" parent="." index="3"]
 process_mode = 3
