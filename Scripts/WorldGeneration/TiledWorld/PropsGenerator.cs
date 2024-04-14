@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 namespace WorldGeneration.Tiled
@@ -70,7 +71,7 @@ namespace WorldGeneration.Tiled
 			);
 			
 			var index = 0;
-			foreach (var position in possibleTreesPositions)
+			foreach (var position in possibleTreesPositions.OrderByDescending(pos => pos.Y))
 			{
 				var gridPosition = GetGridCoords(WorldController.Convert2DTo3D(position));
 				if(gridPosition.X.InRange(0, m_ChunkGridSize.X - 1)
