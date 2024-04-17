@@ -9,11 +9,11 @@ namespace WorldGeneration.Tiled
 		[Export] public bool Enabled { get; private set; } = true;
 		
 		[ExportGroup("Generation Data")]
-		[Export] private float m_TreeSpawnMinDistance = 1;
-		[Export] private int m_MaxChunkTreeCount = 100;
-		[Export] private Vector2I m_TreesTextureRange;
-		[Export] private Mesh m_TreeMeshData;
-		[Export] private Basis m_DefaultTreeBasis;
+		[Export] private float m_PropsSpawnMinDistance = 1;
+		[Export] private int m_MaxChunkPropsCount = 100;
+		[Export] private Vector2I m_PropsTextureRange;
+		[Export] private Mesh m_PropsMeshData;
+		[Export] private Basis m_DefaultPropBasis;
 		[Export] private PackedScene m_ObstacleScene;
 		
 		private float m_CellSize;
@@ -23,7 +23,7 @@ namespace WorldGeneration.Tiled
 		private System.Func<Vector2I, Vector3> GetWorldCoords;
 		
 		private NodePool<Node3D> m_ObstaclesPool;
-		private readonly Queue<MultiMeshInstance3D> m_FreeNatureMultimeshInstances = new();
+		private readonly Queue<MultiMeshInstance3D> m_FreeMultimeshInstances = new();
 
 		public override void _Ready()
 		{
@@ -34,14 +34,14 @@ namespace WorldGeneration.Tiled
 				var instance = new MultiMeshInstance3D();
 				var multiMesh = new MultiMesh
 				{
-					Mesh = m_TreeMeshData,
+					Mesh = m_PropsMeshData,
 					UseCustomData = true,
 					VisibleInstanceCount = 0,
 					TransformFormat = MultiMesh.TransformFormatEnum.Transform3D
 				};
 				instance.Multimesh = multiMesh;
-				m_FreeNatureMultimeshInstances.Enqueue(instance);
-				multiMesh.InstanceCount = m_MaxChunkTreeCount;
+				m_FreeMultimeshInstances.Enqueue(instance);
+				multiMesh.InstanceCount = m_MaxChunkPropsCount;
 				AddChild(instance);
 			}
 		}
@@ -61,17 +61,17 @@ namespace WorldGeneration.Tiled
 			var tiledChunkInstance = chunkInstance as TiledChunkInstance;
 			
 			var obstacles = new HashSet<Node3D>();
-			var natureMultimeshInstance = m_FreeNatureMultimeshInstances.Dequeue();
-			var multiMesh = natureMultimeshInstance.Multimesh;
+			var multimeshInstance = m_FreeMultimeshInstances.Dequeue();
+			var multiMesh = multimeshInstance.Multimesh;
 
-			var possibleTreesPositions = PoissonSampler.SamplePositions(
+			var possiblePropsPositions = PoissonSampler.SamplePositions(
 				new Rect2(0, -0.5f * m_ChunkRectSize.Y, m_ChunkRectSize),
-				m_TreeSpawnMinDistance,
+				m_PropsSpawnMinDistance,
 				maxSearchIterionsCount: 5
 			);
 			
 			var index = 0;
-			foreach (var position in possibleTreesPositions.OrderByDescending(pos => pos.Y))
+			foreach (var position in possiblePropsPositions.OrderByDescending(pos => pos.Y))
 			{
 				var gridPosition = GetGridCoords(WorldController.Convert2DTo3D(position));
 				if(gridPosition.X.InRange(0, m_ChunkGridSize.X - 1)
@@ -80,12 +80,12 @@ namespace WorldGeneration.Tiled
 				{
 					var obstacle = SpawnObstacle(position);
 					obstacle.Position += chunkOffset;
-					multiMesh.SetInstanceTransform(index, new Transform3D(m_DefaultTreeBasis, obstacle.Position));
-					multiMesh.SetInstanceCustomData(index, new Color(m_TreesTextureRange.RandomInRange(), 0, 0, 0));
+					multiMesh.SetInstanceTransform(index, new Transform3D(m_DefaultPropBasis, obstacle.Position));
+					multiMesh.SetInstanceCustomData(index, new Color(m_PropsTextureRange.RandomInRange(), 0, 0, 0));
 					index++;
 					obstacles.Add(obstacle);
 					
-					if(index >= m_MaxChunkTreeCount) break;
+					if(index >= m_MaxChunkPropsCount) break;
 				}
 			}
 			
@@ -93,7 +93,7 @@ namespace WorldGeneration.Tiled
 			
 			chunkInstance.OnChunkDiscard += () => 
 			{
-				m_FreeNatureMultimeshInstances.Enqueue(natureMultimeshInstance);
+				m_FreeMultimeshInstances.Enqueue(multimeshInstance);
 				foreach (var obstacle in obstacles)
 				{
 					m_ObstaclesPool.Return(obstacle);

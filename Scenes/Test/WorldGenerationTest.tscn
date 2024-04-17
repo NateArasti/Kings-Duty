@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dno44gfnh83rk" path="res://Subscenes/Characters/Player/GlobalPlayer.tscn" id="1_b8fdd"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Base/WorldController.cs" id="2_gukwf"]
-[ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/TreeMultimesh.tres" id="2_y5v6c"]
+[ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/NaturePropsMultimesh.tres" id="2_y5v6c"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Base/TileChunkGenerator.cs" id="3_i4adw"]
 [ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Props/Obstacle.tscn" id="3_ux8gk"]
 [ext_resource type="Resource" uid="uid://x6xbwmkxwlta" path="res://CustomResources/StatueArea.tres" id="4_2snyj"]
@@ -55,11 +55,11 @@ m_DefaultTileBasis = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
 m_GroundTilesIndexRange = Vector2i(0, 9)
 m_RoadTilesIndexRange = Vector2i(10, 11)
 
-[node name="Props" type="Node3D" parent="World"]
+[node name="NatureProps" type="Node3D" parent="World"]
 script = ExtResource("7_e8jwe")
-m_TreesTextureRange = Vector2i(0, 1)
-m_TreeMeshData = ExtResource("2_y5v6c")
-m_DefaultTreeBasis = Basis(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707)
+m_PropsTextureRange = Vector2i(0, 4)
+m_PropsMeshData = ExtResource("2_y5v6c")
+m_DefaultPropBasis = Basis(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707)
 m_ObstacleScene = ExtResource("3_ux8gk")
 
 [node name="Buildings" type="Node3D" parent="World"]
