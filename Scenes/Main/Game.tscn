@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Base/WorldController.cs" id="1_73pfk"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Base/TileChunkGenerator.cs" id="2_erra8"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/WorldTilesGenerator.cs" id="4_4wtrg"]
-[ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/TreeMultimesh.tres" id="4_itje5"]
+[ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/NaturePropsMultimesh.tres" id="4_itje5"]
 [ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Props/Obstacle.tscn" id="5_lcgxn"]
 [ext_resource type="MultiMesh" uid="uid://bcgch8h5ph107" path="res://CustomResources/Multimeshes/WorldTile.tres" id="5_q5hc1"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/PropsGenerator.cs" id="6_eikbd"]

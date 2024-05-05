@@ -1,9 +1,7 @@
 using Godot;
 
 public partial class AllyNPC : FightNPC
-{
-	[Export] private CharacterVisuals m_Visuals;
-	
+{	
 	public Vector3 PlayerFollowOffset { get; set; }
 
 	public override void _Process(double delta)
@@ -39,6 +37,5 @@ public partial class AllyNPC : FightNPC
 			AttackRange = weapon.AttackRange;
 			AttackDamage = weapon.AttackDamage;
 		}
-		m_Visuals.SetVisuals(character.Sprite, weapon.Sprite);
 	}
 }
