@@ -1,48 +1,48 @@
 [gd_scene load_steps=23 format=3 uid="uid://1y352ajww8fw"]
 
-[ext_resource type="Shader" path="res://Shaders/GenericCharacter.gdshader" id="1_h7xnr"]
-[ext_resource type="Texture2D" uid="uid://bs0v3c4jhxp47" path="res://Sprites/Characters/Allies/Body/Body_1/Skin/Body_1_Skin_Light2.png" id="2_27dxd"]
-[ext_resource type="Texture2D" uid="uid://cn48ci6dt6ta5" path="res://Sprites/Characters/Allies/Hair/Hair_1/Hair_1_Blonde.png" id="2_eutmp"]
-[ext_resource type="Texture2D" uid="uid://13wgnobt7fmy" path="res://Sprites/Characters/Allies/Hair/Hair_1/Hair_1_Cardboard.png" id="3_7l6cy"]
-[ext_resource type="Texture2D" uid="uid://cj3kj0t01dsad" path="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Cardboard.png" id="3_pnccd"]
-[ext_resource type="Texture2D" uid="uid://dfq33i745hwv4" path="res://Sprites/Characters/Allies/Hair/Hair_1/Hair_1_Cardboard_Outline.png" id="4_5m0s0"]
-[ext_resource type="Texture2D" uid="uid://bjsmpfte2husu" path="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Cardboard_Outline.png" id="4_vqxwf"]
-[ext_resource type="Texture2D" uid="uid://g5drvg4raneu" path="res://Sprites/Characters/Allies/Body/Body_1/Clothes/Skirt/Body_1_Clothes_Skirt_Blue.png" id="5_1648v"]
-[ext_resource type="Texture2D" uid="uid://g2fd4jj2j2kd" path="res://Sprites/Characters/Allies/Head/Head_1/Head_1_Light2.png" id="5_esmfv"]
-[ext_resource type="Texture2D" uid="uid://cue6js127vh5x" path="res://Sprites/Characters/Allies/Face/Eyes/Eyes_1.png" id="6_afok3"]
-[ext_resource type="Texture2D" uid="uid://ddkgkiptq31ba" path="res://Sprites/Characters/Allies/Head/Head_1/Head_1_Cardboard.png" id="6_wn6xq"]
-[ext_resource type="Texture2D" uid="uid://jffvjhx188qa" path="res://Sprites/Characters/Allies/Head/Head_1/Head_1_Cardboard_Outline.png" id="7_a413f"]
-[ext_resource type="Texture2D" uid="uid://br7d5jdeqp4wc" path="res://Sprites/Characters/Allies/Legs/Legs_1/Legs_1.png" id="13_i4g08"]
-[ext_resource type="Texture2D" uid="uid://b7yr1wpkcndcu" path="res://Sprites/Characters/Allies/Legs/Legs_1/Legs_1_Cardboard.png" id="14_hgxfy"]
-[ext_resource type="Texture2D" uid="uid://bmhrfixp3arru" path="res://Sprites/Characters/Allies/Legs/Legs_1/Legs_1_Cardboard_Outline.png" id="15_fw7f8"]
-[ext_resource type="Texture2D" uid="uid://bqn16o3t6lllk" path="res://Sprites/Characters/Allies/Face/Nose/Nose_1.png" id="16_58ifa"]
-[ext_resource type="Texture2D" uid="uid://b3www8i1pey44" path="res://Sprites/Characters/Allies/Face/Mouth/Mouth_1.png" id="17_lhxby"]
-[ext_resource type="Texture2D" uid="uid://ts6rhxvpkf0c" path="res://Sprites/Characters/Allies/Weapon/Hoe/Weapon_Hoe.png" id="18_sh8km"]
-[ext_resource type="Texture2D" uid="uid://bt2sjwm8q0n2b" path="res://Sprites/Characters/Allies/Weapon/Hoe/Weapon_Hoe_Cardboard.png" id="19_0eocq"]
-[ext_resource type="Texture2D" uid="uid://bl4gu0acwr0mt" path="res://Sprites/Characters/Allies/Weapon/Hoe/Weapon_Hoe_Cardboard_Outline.png" id="20_611gc"]
+[ext_resource type="Shader" path="res://Shaders/GenericCharacter.gdshader" id="1_24ah2"]
+[ext_resource type="Texture2D" uid="uid://bs0v3c4jhxp47" path="res://Sprites/Characters/Allies/Body/Body_1/Skin/Body_1_Skin_Light2.png" id="2_lb7be"]
+[ext_resource type="Texture2D" uid="uid://cj3kj0t01dsad" path="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Cardboard.png" id="3_tj8lg"]
+[ext_resource type="Texture2D" uid="uid://bjsmpfte2husu" path="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Cardboard_Outline.png" id="4_olqbr"]
+[ext_resource type="Texture2D" uid="uid://g5drvg4raneu" path="res://Sprites/Characters/Allies/Body/Body_1/Clothes/Skirt/Body_1_Clothes_Skirt_Blue.png" id="5_vftgp"]
+[ext_resource type="Texture2D" uid="uid://cue6js127vh5x" path="res://Sprites/Characters/Allies/Face/Eyes/Eyes_1.png" id="6_h65ri"]
+[ext_resource type="Texture2D" uid="uid://cn48ci6dt6ta5" path="res://Sprites/Characters/Allies/Hair/Hair_1/Hair_1_Blonde.png" id="7_7r72a"]
+[ext_resource type="Texture2D" uid="uid://13wgnobt7fmy" path="res://Sprites/Characters/Allies/Hair/Hair_1/Hair_1_Cardboard.png" id="8_kpr6e"]
+[ext_resource type="Texture2D" uid="uid://dfq33i745hwv4" path="res://Sprites/Characters/Allies/Hair/Hair_1/Hair_1_Cardboard_Outline.png" id="9_w2oar"]
+[ext_resource type="Texture2D" uid="uid://g2fd4jj2j2kd" path="res://Sprites/Characters/Allies/Head/Head_1/Head_1_Light2.png" id="10_g4a8q"]
+[ext_resource type="Texture2D" uid="uid://ddkgkiptq31ba" path="res://Sprites/Characters/Allies/Head/Head_1/Head_1_Cardboard.png" id="11_gnahe"]
+[ext_resource type="Texture2D" uid="uid://jffvjhx188qa" path="res://Sprites/Characters/Allies/Head/Head_1/Head_1_Cardboard_Outline.png" id="12_j43er"]
+[ext_resource type="Texture2D" uid="uid://br7d5jdeqp4wc" path="res://Sprites/Characters/Allies/Legs/Legs_1/Legs_1.png" id="13_k8ti5"]
+[ext_resource type="Texture2D" uid="uid://b7yr1wpkcndcu" path="res://Sprites/Characters/Allies/Legs/Legs_1/Legs_1_Cardboard.png" id="14_sqwd4"]
+[ext_resource type="Texture2D" uid="uid://bmhrfixp3arru" path="res://Sprites/Characters/Allies/Legs/Legs_1/Legs_1_Cardboard_Outline.png" id="15_1sgea"]
+[ext_resource type="Texture2D" uid="uid://bqn16o3t6lllk" path="res://Sprites/Characters/Allies/Face/Nose/Nose_1.png" id="16_8cffv"]
+[ext_resource type="Texture2D" uid="uid://b3www8i1pey44" path="res://Sprites/Characters/Allies/Face/Mouth/Mouth_1.png" id="17_rf52e"]
+[ext_resource type="Texture2D" uid="uid://ts6rhxvpkf0c" path="res://Sprites/Characters/Allies/Weapon/Hoe/Weapon_Hoe.png" id="18_a0t5l"]
+[ext_resource type="Texture2D" uid="uid://bt2sjwm8q0n2b" path="res://Sprites/Characters/Allies/Weapon/Hoe/Weapon_Hoe_Cardboard.png" id="19_wwmbh"]
+[ext_resource type="Texture2D" uid="uid://bl4gu0acwr0mt" path="res://Sprites/Characters/Allies/Weapon/Hoe/Weapon_Hoe_Cardboard_Outline.png" id="20_wimgm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wuooi"]
 render_priority = 0
-shader = ExtResource("1_h7xnr")
-shader_parameter/weapon = ExtResource("18_sh8km")
-shader_parameter/weapon_cardboard = ExtResource("19_0eocq")
-shader_parameter/weapon_cardboard_outline = ExtResource("20_611gc")
-shader_parameter/hair = ExtResource("2_eutmp")
-shader_parameter/hair_cardboard = ExtResource("3_7l6cy")
-shader_parameter/hair_cardboard_outline = ExtResource("4_5m0s0")
-shader_parameter/eyes = ExtResource("6_afok3")
-shader_parameter/nose = ExtResource("17_lhxby")
-shader_parameter/mouth = ExtResource("16_58ifa")
-shader_parameter/head = ExtResource("5_esmfv")
-shader_parameter/head_cardboard = ExtResource("6_wn6xq")
-shader_parameter/head_cardboard_outline = ExtResource("7_a413f")
-shader_parameter/clothes = ExtResource("5_1648v")
-shader_parameter/body = ExtResource("2_27dxd")
-shader_parameter/body_cardboard = ExtResource("3_pnccd")
-shader_parameter/body_cardboard_outline = ExtResource("4_vqxwf")
-shader_parameter/legs = ExtResource("13_i4g08")
-shader_parameter/legs_cardboard = ExtResource("14_hgxfy")
-shader_parameter/legs_cardboard_outline = ExtResource("15_fw7f8")
+shader = ExtResource("1_24ah2")
+shader_parameter/weapon = ExtResource("18_a0t5l")
+shader_parameter/weapon_cardboard = ExtResource("19_wwmbh")
+shader_parameter/weapon_cardboard_outline = ExtResource("20_wimgm")
+shader_parameter/hair = ExtResource("7_7r72a")
+shader_parameter/hair_cardboard = ExtResource("8_kpr6e")
+shader_parameter/hair_cardboard_outline = ExtResource("9_w2oar")
+shader_parameter/eyes = ExtResource("6_h65ri")
+shader_parameter/nose = ExtResource("17_rf52e")
+shader_parameter/mouth = ExtResource("16_8cffv")
+shader_parameter/head = ExtResource("10_g4a8q")
+shader_parameter/head_cardboard = ExtResource("11_gnahe")
+shader_parameter/head_cardboard_outline = ExtResource("12_j43er")
+shader_parameter/clothes = ExtResource("5_vftgp")
+shader_parameter/body = ExtResource("2_lb7be")
+shader_parameter/body_cardboard = ExtResource("3_tj8lg")
+shader_parameter/body_cardboard_outline = ExtResource("4_olqbr")
+shader_parameter/legs = ExtResource("13_k8ti5")
+shader_parameter/legs_cardboard = ExtResource("14_sqwd4")
+shader_parameter/legs_cardboard_outline = ExtResource("15_1sgea")
 
 [sub_resource type="QuadMesh" id="QuadMesh_xidvw"]
 resource_local_to_scene = true

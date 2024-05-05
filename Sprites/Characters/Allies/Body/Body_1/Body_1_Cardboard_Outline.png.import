@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjsmpfte2husu"
-path.bptc="res://.godot/imported/Body_1_Cardboard_Outline.png-75ee4be1af101016a310a1e27ac7fbce.bptc.ctex"
+path.s3tc="res://.godot/imported/Body_1_Cardboard_Outline.png-75ee4be1af101016a310a1e27ac7fbce.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,17 +12,17 @@ metadata={
 [deps]
 
 source_file="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Cardboard_Outline.png"
-dest_files=["res://.godot/imported/Body_1_Cardboard_Outline.png-75ee4be1af101016a310a1e27ac7fbce.bptc.ctex"]
+dest_files=["res://.godot/imported/Body_1_Cardboard_Outline.png-75ee4be1af101016a310a1e27ac7fbce.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
