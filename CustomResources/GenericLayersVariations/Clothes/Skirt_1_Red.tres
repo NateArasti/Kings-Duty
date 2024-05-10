@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cqb05tchntn11"]
+
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/ElementVariation.cs" id="1_m6kr4"]
+[ext_resource type="Texture2D" uid="uid://wdsyxdriy2og" path="res://Sprites/Characters/Allies/Body/Body_1/Clothes/Skirt/Body_1_Clothes_Skirt_Red.png" id="1_myuxw"]
+
+[resource]
+script = ExtResource("1_m6kr4")
+Layer = 6
+Label = "Skirt_1_Red"
+Main = ExtResource("1_myuxw")
+AvailableDependents = Array[Resource]([])

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://x6xbwmkxwlta"]
 
-[ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Areas/StatueArea.cs" id="1_3huq2"]
+[ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Areas/StatueArea.cs" id="1_a6gxq"]
 
 [resource]
-script = ExtResource("1_3huq2")
+script = ExtResource("1_a6gxq")
 WidthRange = Vector2(3, 5)
 HeightRange = Vector2(3, 5)

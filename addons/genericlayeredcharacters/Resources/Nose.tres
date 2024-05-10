@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://xqycbqawifog"]
+
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CharacterElement.cs" id="1_01fdc"]
+[ext_resource type="Resource" uid="uid://dnkoyuphaut2t" path="res://CustomResources/GenericLayersVariations/Face/Nose/Nose_1.tres" id="1_3dkm7"]
+[ext_resource type="Resource" uid="uid://d2hky5bvft8dg" path="res://CustomResources/GenericLayersVariations/Face/Nose/Nose_2.tres" id="2_2x81u"]
+[ext_resource type="Resource" uid="uid://c476rylnihk3a" path="res://CustomResources/GenericLayersVariations/Face/Nose/Nose_3.tres" id="3_xyv4p"]
+
+[resource]
+script = ExtResource("1_01fdc")
+Layer = 3
+Variations = [ExtResource("1_3dkm7"), ExtResource("2_2x81u"), ExtResource("3_xyv4p")]

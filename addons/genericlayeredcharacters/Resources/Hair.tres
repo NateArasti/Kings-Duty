@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://de2u852l45tu7"]
+
+[ext_resource type="Resource" uid="uid://cpirgcgt6gm7i" path="res://CustomResources/GenericLayersVariations/Hair/Hair_1/Hair_1_Blonde.tres" id="1_p4rhc"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CharacterElement.cs" id="1_t2p4a"]
+[ext_resource type="Resource" uid="uid://d4nkhua25gg4s" path="res://CustomResources/GenericLayersVariations/Hair/Hair_1/Hair_1_Brown.tres" id="2_5vc1f"]
+[ext_resource type="Resource" uid="uid://be0bnokbqiuq3" path="res://CustomResources/GenericLayersVariations/Hair/Hair_2.tres" id="3_ldhlw"]
+[ext_resource type="Resource" uid="uid://ckvlo4mw5kf3g" path="res://CustomResources/GenericLayersVariations/Hair/Hair_3/Hair_3_Blonde.tres" id="4_nw552"]
+[ext_resource type="Resource" uid="uid://dj45wdaotbq4r" path="res://CustomResources/GenericLayersVariations/Hair/Hair_3/Hair_3_Brown.tres" id="5_6ed56"]
+
+[resource]
+script = ExtResource("1_t2p4a")
+Layer = 1
+Variations = [ExtResource("3_ldhlw"), ExtResource("5_6ed56"), ExtResource("4_nw552"), ExtResource("2_5vc1f"), ExtResource("1_p4rhc")]

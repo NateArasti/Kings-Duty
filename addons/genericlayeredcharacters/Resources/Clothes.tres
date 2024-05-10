@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bx41xh3kgytns"]
+
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CharacterElement.cs" id="1_80js4"]
+[ext_resource type="Resource" uid="uid://djsne5mb5178p" path="res://CustomResources/GenericLayersVariations/Clothes/Skirt_1_Blue.tres" id="1_ccwl0"]
+[ext_resource type="Resource" uid="uid://cqb05tchntn11" path="res://CustomResources/GenericLayersVariations/Clothes/Skirt_1_Red.tres" id="2_laydf"]
+
+[resource]
+script = ExtResource("1_80js4")
+Layer = 6
+Variations = [ExtResource("1_ccwl0"), ExtResource("2_laydf")]

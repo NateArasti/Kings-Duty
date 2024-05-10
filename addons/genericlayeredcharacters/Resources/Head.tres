@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=10 format=3 uid="uid://6gv6p5m3ghed"]
+
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CharacterElement.cs" id="1_kykq0"]
+[ext_resource type="Resource" uid="uid://ce40r0pyo3tf5" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_Brown.tres" id="1_oxqot"]
+[ext_resource type="Resource" uid="uid://cruxiu1l75l5h" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_Light1.tres" id="2_njgei"]
+[ext_resource type="Resource" uid="uid://bd16p6hcn26sl" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_Light2.tres" id="3_ergvc"]
+[ext_resource type="Resource" uid="uid://bkq764r8r2h7t" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_White.tres" id="4_qhvqu"]
+[ext_resource type="Resource" uid="uid://8iac1rrewuja" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_Brown.tres" id="5_otf7h"]
+[ext_resource type="Resource" uid="uid://bp88q12epen68" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_Light1.tres" id="6_k306x"]
+[ext_resource type="Resource" uid="uid://p3jeas0lbvww" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_Light2.tres" id="7_g22ko"]
+[ext_resource type="Resource" uid="uid://bxssupuekjih0" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_White.tres" id="8_lixwt"]
+
+[resource]
+script = ExtResource("1_kykq0")
+Layer = 5
+Variations = [ExtResource("1_oxqot"), ExtResource("2_njgei"), ExtResource("3_ergvc"), ExtResource("4_qhvqu"), ExtResource("5_otf7h"), ExtResource("6_k306x"), ExtResource("7_g22ko"), ExtResource("8_lixwt")]
