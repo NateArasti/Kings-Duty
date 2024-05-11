@@ -1,9 +1,17 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://wjt3rg7fg8r"]
+[gd_resource type="Resource" load_steps=13 format=3 uid="uid://wjt3rg7fg8r"]
 
 [ext_resource type="Texture2D" uid="uid://cj3kj0t01dsad" path="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Cardboard.png" id="1_3pqeo"]
 [ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="1_v0mc0"]
-[ext_resource type="Texture2D" uid="uid://dme3c3syjm83d" path="res://Sprites/Characters/Allies/Body/Body_1/Skin/Body_1_Skin_White.png" id="2_aiqkm"]
+[ext_resource type="Resource" uid="uid://bjw28uqd4erjw" path="res://CustomResources/GenericLayersVariations/Weapon/Hoe.tres" id="1_vfvho"]
+[ext_resource type="Resource" uid="uid://c5fym47ihitjf" path="res://CustomResources/GenericLayersVariations/Weapon/Rake.tres" id="2_qpfxb"]
 [ext_resource type="Texture2D" uid="uid://bjsmpfte2husu" path="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Cardboard_Outline.png" id="3_2nyu7"]
+[ext_resource type="Resource" uid="uid://ctfyqqpt0jfwd" path="res://CustomResources/GenericLayersVariations/Legs/Legs_1.tres" id="3_keva2"]
+[ext_resource type="Resource" uid="uid://dycj2dkswmqpe" path="res://CustomResources/GenericLayersVariations/Legs/Legs_2.tres" id="4_bq7x7"]
+[ext_resource type="Resource" uid="uid://djsne5mb5178p" path="res://CustomResources/GenericLayersVariations/Clothes/Skirt_1_Blue.tres" id="5_jvd0x"]
+[ext_resource type="Resource" uid="uid://cqb05tchntn11" path="res://CustomResources/GenericLayersVariations/Clothes/Skirt_1_Red.tres" id="6_1elwd"]
+[ext_resource type="Resource" uid="uid://bxssupuekjih0" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_White.tres" id="7_66y7u"]
+[ext_resource type="Resource" uid="uid://bkq764r8r2h7t" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_White.tres" id="8_kfadd"]
+[ext_resource type="Texture2D" uid="uid://dme3c3syjm83d" path="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Skin_White.png" id="10_dvg17"]
 
 [resource]
 script = ExtResource("1_v0mc0")
@@ -11,5 +19,5 @@ Cardboard = ExtResource("1_3pqeo")
 Outline = ExtResource("3_2nyu7")
 Layer = 7
 Label = "Body_1_White"
-Main = ExtResource("2_aiqkm")
-AvailableDependents = []
+Main = ExtResource("10_dvg17")
+AvailableDependents = [ExtResource("8_kfadd"), ExtResource("7_66y7u"), ExtResource("5_jvd0x"), ExtResource("6_1elwd"), ExtResource("3_keva2"), ExtResource("4_bq7x7"), ExtResource("2_qpfxb"), ExtResource("1_vfvho")]

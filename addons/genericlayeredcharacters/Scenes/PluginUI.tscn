@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://n8bfpkay56a1"]
+[gd_scene load_steps=6 format=3 uid="uid://n8bfpkay56a1"]
 
 [ext_resource type="Shader" path="res://addons/genericlayeredcharacters/Shaders/GenericCharacter2D.gdshader" id="1_12q2i"]
 [ext_resource type="Texture2D" uid="uid://slhyv756h0e2" path="res://addons/genericlayeredcharacters/EmptyTexture.png" id="18_ywvji"]
-[ext_resource type="Texture2D" uid="uid://g5drvg4raneu" path="res://Sprites/Characters/Allies/Body/Body_1/Clothes/Skirt/Body_1_Clothes_Skirt_Blue.png" id="19_lgwf5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgn1y"]
 shader = ExtResource("1_12q2i")
@@ -165,5 +164,4 @@ visible = false
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 text = "Name"
-icon = ExtResource("19_lgwf5")
 expand_icon = true

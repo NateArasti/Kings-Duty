@@ -1,11 +1,15 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://djsne5mb5178p"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://djsne5mb5178p"]
 
-[ext_resource type="Texture2D" uid="uid://g5drvg4raneu" path="res://Sprites/Characters/Allies/Body/Body_1/Clothes/Skirt/Body_1_Clothes_Skirt_Blue.png" id="1_0xnvs"]
-[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/ElementVariation.cs" id="1_l8gqv"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="1_fsdhd"]
+[ext_resource type="Texture2D" uid="uid://djcc0hrr8uxt6" path="res://Sprites/Characters/Allies/Clothes/Skirt/Clothes_Skirt_Cardboard.png" id="1_o1wjn"]
+[ext_resource type="Texture2D" uid="uid://bsrxiuk0dlke" path="res://Sprites/Characters/Allies/Clothes/Skirt/Clothes_Skirt_Blue.png" id="2_i4q7i"]
+[ext_resource type="Texture2D" uid="uid://cg5v4o5fjwh05" path="res://Sprites/Characters/Allies/Clothes/Skirt/Clothes_Skirt_Cardboard_Outline.png" id="3_uj5tm"]
 
 [resource]
-script = ExtResource("1_l8gqv")
+script = ExtResource("1_fsdhd")
+Cardboard = ExtResource("1_o1wjn")
+Outline = ExtResource("3_uj5tm")
 Layer = 6
 Label = "Skirt_1_Blue"
-Main = ExtResource("1_0xnvs")
+Main = ExtResource("2_i4q7i")
 AvailableDependents = Array[Resource]([])

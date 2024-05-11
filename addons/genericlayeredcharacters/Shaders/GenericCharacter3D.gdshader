@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, blend_mix, cull_disabled, depth_prepass_alpha;
+render_mode blend_mix, cull_disabled, depth_prepass_alpha;
 
 uniform sampler2D weapon : filter_nearest, source_color;
 uniform sampler2D weapon_cardboard : filter_nearest, source_color;

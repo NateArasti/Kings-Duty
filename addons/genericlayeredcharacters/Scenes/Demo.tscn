@@ -1,3 +1,71 @@
-[gd_scene format=3 uid="uid://drcwexnrya4c3"]
+[gd_scene load_steps=7 format=3 uid="uid://drcwexnrya4c3"]
 
-[node name="Demo" type="Node3D"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Demo.cs" id="1_4omgj"]
+[ext_resource type="Shader" path="res://addons/genericlayeredcharacters/Shaders/GenericCharacter3D.gdshader" id="1_ia04d"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_djjon"]
+size = Vector2(10, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vhonu"]
+render_priority = 0
+shader = ExtResource("1_ia04d")
+
+[sub_resource type="QuadMesh" id="QuadMesh_2dybx"]
+size = Vector2(2, 2)
+center_offset = Vector3(0, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wjsx"]
+bg_color = Color(0.133333, 0.12549, 0.14902, 1)
+border_width_left = 15
+border_width_top = 10
+border_width_right = 15
+border_width_bottom = 10
+border_color = Color(0.133333, 0.12549, 0.14902, 1)
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Demo" type="Node3D" node_paths=PackedStringArray("m_Quad", "m_GenerateRandom")]
+script = ExtResource("1_4omgj")
+m_Quad = NodePath("Character")
+m_GenerateRandom = NodePath("UI/Button")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_djjon")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3.5, 3)
+projection = 1
+size = 5.0
+
+[node name="Character" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_vhonu")
+mesh = SubResource("QuadMesh_2dybx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.961703, -0.111165, 0.250539, -7.45058e-09, 0.914063, 0.405572, -0.274094, -0.39004, 0.879057, 0, 0.485498, 0.933087)
+shadow_enabled = true
+shadow_bias = 0.01
+shadow_reverse_cull_face = true
+shadow_blur = 0.25
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -73.0
+offset_right = 73.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wjsx")
+text = "Generate random"

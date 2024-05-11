@@ -59,6 +59,7 @@ namespace GenericLayeredCharacters
 			}
 			
 			RemoveCustomResources();
+			DiscardDependencies();
 		}
 
 		public override bool _HasMainScreen() => true;
@@ -80,7 +81,7 @@ namespace GenericLayeredCharacters
 		
 		#region UI
 		
-		internal void Init()
+		private void Init()
 		{
 			GatherReferences();
 			
@@ -97,11 +98,21 @@ namespace GenericLayeredCharacters
 			
 			ClearPreview();
 		}
+		
+		private void DiscardDependencies()
+		{
+			m_RandomButton.Pressed -= SetRandomCharacter;
+			m_ClearButton.Pressed -= ClearPreview;
+			m_AllLayersList.ItemSelected -= SelectElement;
+			m_LayerVariationsList.ItemSelected -= SelectElementVariation;
+			m_DependentLayersList.ItemSelected -= SelectDependentLayer;
+			ClearPreview();
+		}
 
 		private void GatherReferences()
 		{
-			m_ClearButton = m_PluginGUI.GetNode<Button>("HBoxContainer/Clear");
-			m_RandomButton = m_PluginGUI.GetNode<Button>("HBoxContainer/Random");
+			m_ClearButton = m_PluginGUI.GetNode<Button>("Buttons/Clear");
+			m_RandomButton = m_PluginGUI.GetNode<Button>("Buttons/Random");
 			m_AllLayersList = m_PluginGUI.GetNode<ItemList>("Left/AllElementsList");
 			m_LayerVariationsList = m_PluginGUI.GetNode<ItemList>("Left/VariationsList");
 			m_DependentLayersList = m_PluginGUI.GetNode<ItemList>("Right/DependantBodyElementsList");
@@ -208,7 +219,7 @@ namespace GenericLayeredCharacters
 				m_SelectedElementVariation.AvailableDependents.Remove(elementVariation);
 				Utility.ClearLayer(m_CharacterPreviewMaterial, elementVariation.Layer);
 			}
-			// ResourceSaver.Save(m_SelectedElementVariation);
+			ResourceSaver.Save(m_SelectedElementVariation);
 		}
 
 		private void ClearAvailableVariationList()

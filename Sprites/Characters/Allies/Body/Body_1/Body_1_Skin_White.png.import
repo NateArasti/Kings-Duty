@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wdsyxdriy2og"
-path="res://.godot/imported/Body_1_Clothes_Skirt_Red.png-d457abddc297c4e1809c73956782596f.ctex"
+uid="uid://dme3c3syjm83d"
+path="res://.godot/imported/Body_1_Skin_White.png-110385fb8981f5c9afb5d2ffd78b8a5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Characters/Allies/Body/Body_1/Clothes/Skirt/Body_1_Clothes_Skirt_Red.png"
-dest_files=["res://.godot/imported/Body_1_Clothes_Skirt_Red.png-d457abddc297c4e1809c73956782596f.ctex"]
+source_file="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Skin_White.png"
+dest_files=["res://.godot/imported/Body_1_Skin_White.png-110385fb8981f5c9afb5d2ffd78b8a5a.ctex"]
 
 [params]
 
