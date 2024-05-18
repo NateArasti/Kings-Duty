@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://bkagng0tu6c6o"]
+
+[ext_resource type="Resource" uid="uid://bacj6qdyr5r76" path="res://CustomResources/Weapons/Melee/Axe.tres" id="1_ewv1q"]
+[ext_resource type="Script" path="res://Scripts/Characters/Base/Data/FightCharacter.cs" id="1_yar1v"]
+[ext_resource type="Resource" uid="uid://dbu0ql7roncsm" path="res://CustomResources/Weapons/Melee/Hammer.tres" id="2_7y665"]
+[ext_resource type="Resource" uid="uid://dpruynxjx1ea8" path="res://CustomResources/Weapons/Melee/Hoe.tres" id="3_ygy5o"]
+[ext_resource type="Resource" uid="uid://dw6adu00xdgg" path="res://CustomResources/Weapons/Melee/Rake.tres" id="4_30qbr"]
+[ext_resource type="Resource" uid="uid://df1fmmrjadefx" path="res://CustomResources/Weapons/Melee/Shovel.tres" id="5_bv8ud"]
+[ext_resource type="Resource" uid="uid://ci32fprt82ktw" path="res://CustomResources/Weapons/Melee/Sickle.tres" id="6_t4cr4"]
+
+[resource]
+script = ExtResource("1_yar1v")
+Type = "Peasent"
+m_AttackSpeedRange = Vector2(0.9, 1.1)
+m_PossibleWeapons = Array[Resource]([ExtResource("1_ewv1q"), ExtResource("2_7y665"), ExtResource("3_ygy5o"), ExtResource("4_30qbr"), ExtResource("5_bv8ud"), ExtResource("6_t4cr4")])
+m_Gender = 2
+m_MaxHPRange = Vector2i(5, 15)
+m_DefaultResistanceRange = Vector2(0, 0)

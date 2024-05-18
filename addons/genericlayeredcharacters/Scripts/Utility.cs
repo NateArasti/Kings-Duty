@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 
 namespace GenericLayeredCharacters
@@ -18,7 +17,7 @@ namespace GenericLayeredCharacters
 			[Layer.Nose] = false,
 			[Layer.Mouth] = false,
 			[Layer.Head] = true,
-			[Layer.Clothes] = false,
+			[Layer.Clothes] = true,
 			[Layer.Body] = true,
 			[Layer.Legs] = true,
 		};
@@ -79,23 +78,11 @@ namespace GenericLayeredCharacters
 		public static void SetElementVariationOnMaterial(ShaderMaterial material, ElementVariation elementVariation)
 		{
 			var layerProprtyName = s_LayersMaterialPropertyNames[elementVariation.Layer];
-			if (elementVariation.Main == null)
-			{
-				GD.Print(elementVariation.Label);
-			}
 			material.SetShaderParameter(layerProprtyName, elementVariation.Main);
 			if (s_LayersCardboardsFlag[elementVariation.Layer])
 			{
 				if (elementVariation is CardboardElementVariation cardboardElementVariation)
 				{
-					if (cardboardElementVariation.Cardboard == null)
-					{
-						GD.Print(elementVariation.Label);
-					}
-					if (cardboardElementVariation.Outline == null)
-					{
-						GD.Print(elementVariation.Label);
-					}
 					material.SetShaderParameter($"{layerProprtyName}{k_CardboardLayerSuffix}", cardboardElementVariation.Cardboard);
 					material.SetShaderParameter($"{layerProprtyName}{k_OutlineLayerSuffix}", cardboardElementVariation.Outline);
 				}
@@ -104,6 +91,14 @@ namespace GenericLayeredCharacters
 					material.SetShaderParameter($"{layerProprtyName}{k_CardboardLayerSuffix}", EmptyTexture);
 					material.SetShaderParameter($"{layerProprtyName}{k_OutlineLayerSuffix}", EmptyTexture);
 				}
+			}
+		}
+		
+		public static void SetElementVariationsOnMaterial(ShaderMaterial material, IEnumerable<ElementVariation> elementVariations)
+		{
+			foreach (var elementVariation in elementVariations)
+			{
+				SetElementVariationOnMaterial(material, elementVariation);
 			}
 		}
 		
@@ -126,17 +121,15 @@ namespace GenericLayeredCharacters
 			}
 		}
 		
-		public static void FillRandomLayers(ShaderMaterial material, bool setWeapon = true)
+		public static IReadOnlyDictionary<Layer, ElementVariation> GetRandomLayers(bool setWeapon = true)
 		{
-			ClearAllLayers(material);
 			var chosenVariations = new Dictionary<Layer, ElementVariation>();
 			
-			// Setting random body layer
+			// Getting random body layer
 			var bodyElement = LayerElements[Layer.Body];
 			chosenVariations[Layer.Body] = bodyElement.Variations[GD.RandRange(0, bodyElement.Variations.Length - 1)];
-			SetElementVariationOnMaterial(material, chosenVariations[Layer.Body]);
 			
-			// Setting random available dependent body layers
+			// Getting random available dependent body layers
 			var possibleVariations = new Dictionary<Layer, List<ElementVariation>>();
 			foreach (var layer in GetAllDependentLayers(Layer.Body))
 			{
@@ -150,10 +143,9 @@ namespace GenericLayeredCharacters
 			{
 				var layerVariations = possibleVariations[layer];
 				chosenVariations[layer] = layerVariations[GD.RandRange(0, layerVariations.Count - 1)];
-				SetElementVariationOnMaterial(material, chosenVariations[layer]);
 			}
 			
-			// Setting random available dependent head layers
+			// Getting random available dependent head layers
 			possibleVariations.Clear();
 			foreach (var layer in GetAllDependentLayers(Layer.Head))
 			{
@@ -167,16 +159,22 @@ namespace GenericLayeredCharacters
 			{
 				var layerVariations = possibleVariations[layer];
 				chosenVariations[layer] = layerVariations[GD.RandRange(0, layerVariations.Count - 1)];
-				SetElementVariationOnMaterial(material, chosenVariations[layer]);
 			}
 			
 			if (setWeapon)
 			{
-				// Setting random weapon layer
+				// Getting random weapon layer
 				var weaponElement = LayerElements[Layer.Weapon];
 				chosenVariations[Layer.Weapon] = weaponElement.Variations[GD.RandRange(0, weaponElement.Variations.Length - 1)];
-				SetElementVariationOnMaterial(material, chosenVariations[Layer.Weapon]);
 			}
+			
+			return chosenVariations;
+		}
+		
+		public static void FillRandomLayers(ShaderMaterial material, bool setWeapon = true)
+		{
+			ClearAllLayers(material);
+			SetElementVariationsOnMaterial(material, GetRandomLayers(setWeapon).Values);
 		}
 	}
 }

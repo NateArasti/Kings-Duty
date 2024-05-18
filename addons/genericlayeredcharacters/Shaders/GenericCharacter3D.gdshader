@@ -18,6 +18,8 @@ uniform sampler2D head_cardboard : filter_nearest, source_color;
 uniform sampler2D head_cardboard_outline : filter_nearest, source_color;
 
 uniform sampler2D clothes : filter_nearest, source_color;
+uniform sampler2D clothes_cardboard : filter_nearest, source_color;
+uniform sampler2D clothes_cardboard_outline : filter_nearest, source_color;
 
 uniform sampler2D body : filter_nearest, source_color;
 uniform sampler2D body_cardboard: filter_nearest, source_color;
@@ -35,6 +37,8 @@ vec4 getOutlineColor(vec2 uv) {
 	layerColor = texture(legs_cardboard_outline, uv);
 	resultColor = mix(resultColor, layerColor, layerColor.a);
 	layerColor = texture(body_cardboard_outline, uv);
+	resultColor = mix(resultColor, layerColor, layerColor.a);
+	layerColor = texture(clothes_cardboard_outline, uv);
 	resultColor = mix(resultColor, layerColor, layerColor.a);
 	layerColor = texture(head_cardboard_outline, uv);
 	resultColor = mix(resultColor, layerColor, layerColor.a);
@@ -54,6 +58,8 @@ vec4 getCardboardColor(vec2 uv) {
 	layerColor = texture(legs_cardboard, uv);
 	resultColor = mix(resultColor, layerColor, layerColor.a);
 	layerColor = texture(body_cardboard, uv);
+	resultColor = mix(resultColor, layerColor, layerColor.a);
+	layerColor = texture(clothes_cardboard, uv);
 	resultColor = mix(resultColor, layerColor, layerColor.a);
 	layerColor = texture(head_cardboard, uv);
 	resultColor = mix(resultColor, layerColor, layerColor.a);

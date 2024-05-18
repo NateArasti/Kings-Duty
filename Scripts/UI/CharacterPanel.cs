@@ -5,8 +5,7 @@ public partial class CharacterPanel : Node
 	public System.Action<Character> OnCharacterChosen;
 	
 	[Export] private Label m_NameLabel;
-	[Export] private TextureRect m_MainRect;
-	[Export] private TextureRect m_WeaponRect;
+	[Export] private TextureRect m_CharacterRect;
 	
 	[ExportGroup("Data labels")]
 	[Export] private Label m_TypeLabel;
@@ -23,7 +22,10 @@ public partial class CharacterPanel : Node
 	{
 		Character = character;
 		m_NameLabel.Text = Character.Name;
-		m_MainRect.Texture = Character.Sprite;
+		
+		var characterMaterial = m_CharacterRect.Material as ShaderMaterial;
+		GenericLayeredCharacters.Utility.ClearAllLayers(characterMaterial);
+		GenericLayeredCharacters.Utility.SetElementVariationsOnMaterial(characterMaterial, Character.Visuals.Values);
 		
 		m_HealthLabel.Text = $"Health: {character.MaxHP}";
 		
@@ -44,7 +46,7 @@ public partial class CharacterPanel : Node
 		
 		if (weapon != null)
 		{
-			m_WeaponRect.Texture = weapon.Sprite;
+			GenericLayeredCharacters.Utility.SetElementVariationOnMaterial(characterMaterial, weapon.Visuals);
 			m_WeaponNameLabel.Text = $"Type: {weapon.ResourceName}";
 			m_WeaponDamageLabel.Text = $"Damage: {weapon.AttackDamage}";
 			m_WeaponAttackCooldownLabel.Text = $"Cooldown: {weapon.AttackCooldown:0.00}";

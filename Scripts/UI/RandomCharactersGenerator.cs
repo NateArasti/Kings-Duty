@@ -51,7 +51,8 @@ public partial class RandomCharactersGenerator : Control
 	{
 		for (var i = 0; i < m_CharacterPanels.Length; ++i)
 		{
-			m_CharacterPanels[i].SetCharacter(m_CharactersDatas[GD.RandRange(0, m_CharactersDatas.Length - 1)].GetInstance());
+			var characterInstance = m_CharactersDatas[GD.RandRange(0, m_CharactersDatas.Length - 1)].GetInstance();
+			m_CharacterPanels[i].SetCharacter(characterInstance);
 		}
 	}
 }

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dpruynxjx1ea8"]
+
+[ext_resource type="Resource" uid="uid://bjw28uqd4erjw" path="res://CustomResources/GenericLayersVariations/Weapon/Hoe.tres" id="1_08hxj"]
+[ext_resource type="Script" path="res://Scripts/Characters/Weapons/MeleeWeapon.cs" id="2_0og3s"]
+
+[resource]
+resource_name = "Hoe"
+script = ExtResource("2_0og3s")
+AttackDamage = 6
+AttackCooldown = 2.0
+AttackRange = 0.5
+Visuals = ExtResource("1_08hxj")

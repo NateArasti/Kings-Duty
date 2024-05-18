@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4mhsqaj38qlq"]
+[gd_scene load_steps=10 format=3 uid="uid://c4mhsqaj38qlq"]
 
 [ext_resource type="Script" path="res://Scripts/UI/CharacterPanel.cs" id="1_1usn2"]
 [ext_resource type="LabelSettings" uid="uid://co6jxguooayye" path="res://CustomResources/UI/Fonts/RegularFont.tres" id="1_m7467"]
+[ext_resource type="Shader" path="res://addons/genericlayeredcharacters/Shaders/GenericCharacter2D.gdshader" id="3_1wuex"]
+[ext_resource type="Texture2D" uid="uid://slhyv756h0e2" path="res://addons/genericlayeredcharacters/EmptyTexture.png" id="4_6xow7"]
 [ext_resource type="LabelSettings" uid="uid://bto5vc8ptpgi" path="res://CustomResources/UI/Fonts/SmallFont.tres" id="4_8h60i"]
 [ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/Fonts/BlackOpsOne-Regular.ttf" id="5_m1ftp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvrcq"]
+resource_local_to_scene = true
+shader = ExtResource("3_1wuex")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r04dg"]
 bg_color = Color(0, 0, 0, 0.686275)
@@ -25,15 +31,14 @@ expand_margin_top = 2.0
 expand_margin_right = 20.0
 expand_margin_bottom = 2.0
 
-[node name="CharacterChoosePanel" type="VBoxContainer" node_paths=PackedStringArray("m_NameLabel", "m_MainRect", "m_WeaponRect", "m_TypeLabel", "m_HealthLabel", "m_AttackSpeedLabel", "m_ResistanceLabel", "m_WeaponNameLabel", "m_WeaponDamageLabel", "m_WeaponAttackCooldownLabel")]
+[node name="CharacterChoosePanel" type="VBoxContainer" node_paths=PackedStringArray("m_NameLabel", "m_CharacterRect", "m_TypeLabel", "m_HealthLabel", "m_AttackSpeedLabel", "m_ResistanceLabel", "m_WeaponNameLabel", "m_WeaponDamageLabel", "m_WeaponAttackCooldownLabel")]
 offset_right = 250.0
 offset_bottom = 500.0
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("1_1usn2")
 m_NameLabel = NodePath("Name")
-m_MainRect = NodePath("MainPart/MainSprite")
-m_WeaponRect = NodePath("MainPart/MainSprite/Weapon")
+m_CharacterRect = NodePath("MainPart/MainSprite")
 m_TypeLabel = NodePath("MainPart/InfoPanel/MarginContainer/Data/Type")
 m_HealthLabel = NodePath("MainPart/InfoPanel/MarginContainer/Data/Health")
 m_AttackSpeedLabel = NodePath("MainPart/InfoPanel/MarginContainer/Data/AttackSpeed")
@@ -57,6 +62,7 @@ size_flags_vertical = 3
 
 [node name="MainSprite" type="TextureRect" parent="MainPart"]
 texture_filter = 5
+material = SubResource("ShaderMaterial_jvrcq")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -65,19 +71,9 @@ anchor_right = 0.9
 anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("4_6xow7")
+expand_mode = 3
 stretch_mode = 5
-
-[node name="Weapon" type="TextureRect" parent="MainPart/MainSprite"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.8
-anchor_top = 0.28
-anchor_right = 1.4
-anchor_bottom = 0.8
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 0.436332
-flip_h = true
 
 [node name="InfoPanel" type="Panel" parent="MainPart"]
 visible = false
