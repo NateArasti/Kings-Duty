@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwpxrxrso4gxp"]
+[gd_scene load_steps=13 format=3 uid="uid://dwpxrxrso4gxp"]
 
 [ext_resource type="PackedScene" uid="uid://b7me2pvqi0wpm" path="res://Subscenes/Environment.tscn" id="1_6nkns"]
 [ext_resource type="PackedScene" uid="uid://dno44gfnh83rk" path="res://Subscenes/Characters/Player/GlobalPlayer.tscn" id="8_efk2s"]
+[ext_resource type="Script" path="res://Scripts/Characters/Allies/RetinueController.cs" id="8_w8i7v"]
+[ext_resource type="PackedScene" uid="uid://yuck4c8kfsqx" path="res://Subscenes/Characters/Ally/Ally.tscn" id="9_2852q"]
+[ext_resource type="PackedScene" uid="uid://c8g02yp1nunew" path="res://Subscenes/UI/RetinueCreation.tscn" id="10_jyvr2"]
 [ext_resource type="Script" path="res://Scripts/GlobalTimer.cs" id="18_sllsu"]
 [ext_resource type="LabelSettings" uid="uid://bto5vc8ptpgi" path="res://CustomResources/UI/Fonts/SmallFont.tres" id="19_aob7p"]
 [ext_resource type="Script" path="res://Scripts/PauseSystem.cs" id="26_x11jv"]
@@ -101,6 +104,15 @@ theme_override_fonts/font = ExtResource("28_65t7c")
 theme_override_font_sizes/font_size = 36
 text = "Exit game"
 flat = true
+
+[node name="RetinueController" type="Node" parent="." node_paths=PackedStringArray("m_CharacterGenerator")]
+script = ExtResource("8_w8i7v")
+m_CharacterGenerator = NodePath("RetinueCreation")
+m_AllyScene = ExtResource("9_2852q")
+
+[node name="RetinueCreation" parent="RetinueController" instance=ExtResource("10_jyvr2")]
+process_mode = 2
+visible = false
 
 [connection signal="pressed" from="Pause/Panel/VBoxContainer/ContinueButton" to="Pause/Panel" method="Continue"]
 [connection signal="pressed" from="Pause/Panel/VBoxContainer/ExitToMenuButton" to="Pause/Panel" method="ExitToMenu"]

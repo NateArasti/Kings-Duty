@@ -24,4 +24,7 @@ process_mode = 0
 [node name="Sprite" parent="Player/CharacterVisuals/BillboardPivot" index="0"]
 material_overlay = SubResource("ShaderMaterial_5yuo5")
 
+[node name="LevelUpScreen" parent="Player/Interaction" index="1"]
+visible = false
+
 [editable path="Player"]

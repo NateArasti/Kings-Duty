@@ -17,7 +17,7 @@ public partial class LevelUpInteraction : BaseInteraction
 	public void AddAlly()
 	{
 		EndInteraction();
-		RetinueController.Instance.GenerateAlly();
+		RetinueController.Instance.GenerateAllies();
 	}
 	
 	public void HealAllies()

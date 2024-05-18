@@ -1,7 +1,8 @@
 using Godot;
 
 public partial class AllyNPC : FightNPC
-{	
+{
+	[Export] private GeometryInstance3D m_GenericVisuals;
 	public Vector3 PlayerFollowOffset { get; set; }
 
 	public override void _Process(double delta)
@@ -27,12 +28,16 @@ public partial class AllyNPC : FightNPC
 
 	public void SetCharacterData(Character character)
 	{
-		var fightCharacter = character as FightCharacter;
-		var weapon = fightCharacter?.Weapon;
-		if (fightCharacter != null)
+		var shaderMaterial = m_GenericVisuals.MaterialOverride as ShaderMaterial;
+		GenericLayeredCharacters.Utility.ClearAllLayers(shaderMaterial);
+		GenericLayeredCharacters.Utility.SetElementVariationsOnMaterial(shaderMaterial, character.Visuals.Values);
+		if (character is FightCharacter fightCharacter)
 		{
-			HealthSystem.MaxHealth = fightCharacter.MaxHP;
-			HealthSystem.CurrentHealth = fightCharacter.MaxHP;
+			var weapon = fightCharacter.Weapon;
+			GenericLayeredCharacters.Utility.SetElementVariationOnMaterial(shaderMaterial, weapon.Visuals);
+			
+			// HealthSystem.MaxHealth = fightCharacter.MaxHP;
+			// HealthSystem.CurrentHealth = fightCharacter.MaxHP;
 			AttackCooldown = Mathf.Max(0.1f, weapon.AttackCooldown / fightCharacter.AttackSpeed);
 			AttackRange = weapon.AttackRange;
 			AttackDamage = weapon.AttackDamage;

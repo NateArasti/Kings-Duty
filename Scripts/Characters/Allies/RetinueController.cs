@@ -31,15 +31,15 @@ public partial class RetinueController : Node
 		base._Ready();
 		
 		m_CharacterGenerator.OnCharactersCreated += AddCharactersToRetinue;
-		EnemiesController.Instance.OnEnemyDeath += HandleEnemyDeath;
-		GenerateAlly(m_RetinueStartCount);
+		// EnemiesController.Instance.OnEnemyDeath += HandleEnemyDeath;
+		GenerateAllies(m_RetinueStartCount);
 	}
 
-	public override void _Process(double delta)
-	{
-		base._Process(delta);
-		AdjustRetinueTargets();
-	}
+	// public override void _Process(double delta)
+	// {
+	// 	base._Process(delta);
+	// 	AdjustRetinueTargets();
+	// }
 	
 	private void AdjustRetinueTargets()
 	{
@@ -107,7 +107,7 @@ public partial class RetinueController : Node
 		}
 	}
 
-	public void GenerateAlly(int count = 1)
+	public void GenerateAllies(int count = 1)
 	{
 		PauseSystem.Instance.Pause(this);
 		

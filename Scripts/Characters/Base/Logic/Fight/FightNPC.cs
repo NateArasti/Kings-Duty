@@ -35,7 +35,7 @@ public partial class FightNPC : MoveableNPC, IHittable
 	public override void _Ready()
 	{
 		base._Ready();
-		HealthSystem.OnDeath += Death;
+		// HealthSystem.OnDeath += Death;
 	}
 	
 	public override void _Process(double delta)
@@ -97,17 +97,17 @@ public partial class FightNPC : MoveableNPC, IHittable
 	{
 		InAttack = true;
 		m_CurrentAttackTarget = FollowTarget as IHittable;
-		m_AnimationPlayer.Stop();
-		var directionSuffix = LookRight ? 'R' : 'L';
-		m_AnimationPlayer.Play($"{m_MeleeAttackAnimaitonName}_{directionSuffix}");
-		m_AnimationPlayer.AnimationFinished += FinishAttack;
+		// m_AnimationPlayer.Stop();
+		// var directionSuffix = LookRight ? 'R' : 'L';
+		// m_AnimationPlayer.Play($"{m_MeleeAttackAnimaitonName}_{directionSuffix}");
+		// m_AnimationPlayer.AnimationFinished += FinishAttack;
 	}
 
 	private void FinishAttack(StringName animName)
 	{
 		InAttack = false;
 		m_CurrentAttackCooldown = AttackCooldown;
-		m_AnimationPlayer.AnimationFinished -= FinishAttack;
+		// m_AnimationPlayer.AnimationFinished -= FinishAttack;
 		ResetWalkAnimationState();
 	}
 	
