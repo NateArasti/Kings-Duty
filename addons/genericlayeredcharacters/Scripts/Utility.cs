@@ -79,11 +79,23 @@ namespace GenericLayeredCharacters
 		public static void SetElementVariationOnMaterial(ShaderMaterial material, ElementVariation elementVariation)
 		{
 			var layerProprtyName = s_LayersMaterialPropertyNames[elementVariation.Layer];
+			if (elementVariation.Main == null)
+			{
+				GD.Print(elementVariation.Label);
+			}
 			material.SetShaderParameter(layerProprtyName, elementVariation.Main);
 			if (s_LayersCardboardsFlag[elementVariation.Layer])
 			{
 				if (elementVariation is CardboardElementVariation cardboardElementVariation)
 				{
+					if (cardboardElementVariation.Cardboard == null)
+					{
+						GD.Print(elementVariation.Label);
+					}
+					if (cardboardElementVariation.Outline == null)
+					{
+						GD.Print(elementVariation.Label);
+					}
 					material.SetShaderParameter($"{layerProprtyName}{k_CardboardLayerSuffix}", cardboardElementVariation.Cardboard);
 					material.SetShaderParameter($"{layerProprtyName}{k_OutlineLayerSuffix}", cardboardElementVariation.Outline);
 				}

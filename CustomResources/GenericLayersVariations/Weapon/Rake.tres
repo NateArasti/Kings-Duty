@@ -1,15 +1,15 @@
 [gd_resource type="Resource" load_steps=5 format=3 uid="uid://c5fym47ihitjf"]
 
-[ext_resource type="Texture2D" uid="uid://bj5076nvwqpr5" path="res://Sprites/Characters/Allies/Weapon/Rake/Weapon_Rake_Cardboard.png" id="1_2i70n"]
+[ext_resource type="Texture2D" uid="uid://bj5076nvwqpr5" path="res://Sprites/Characters/Allies/Weapon/Rake/Rake_Cardboard.png" id="1_8sftl"]
 [ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="1_86gal"]
-[ext_resource type="Texture2D" uid="uid://cdwkbohugkd7j" path="res://Sprites/Characters/Allies/Weapon/Rake/Weapon_Rake.png" id="2_u5831"]
-[ext_resource type="Texture2D" uid="uid://dsfxy5g2xw7h3" path="res://Sprites/Characters/Allies/Weapon/Rake/Weapon_Rake_Cardboard_Outline.png" id="3_6gdi4"]
+[ext_resource type="Texture2D" uid="uid://cdwkbohugkd7j" path="res://Sprites/Characters/Allies/Weapon/Rake/Rake.png" id="2_26igt"]
+[ext_resource type="Texture2D" uid="uid://dsfxy5g2xw7h3" path="res://Sprites/Characters/Allies/Weapon/Rake/Rake_Cardboard_Outline.png" id="3_jdmac"]
 
 [resource]
 script = ExtResource("1_86gal")
-Cardboard = ExtResource("1_2i70n")
-Outline = ExtResource("3_6gdi4")
+Cardboard = ExtResource("1_8sftl")
+Outline = ExtResource("3_jdmac")
 Layer = 0
 Label = "Rake"
-Main = ExtResource("2_u5831")
+Main = ExtResource("2_26igt")
 AvailableDependents = []

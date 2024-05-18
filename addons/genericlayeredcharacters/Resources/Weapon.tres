@@ -1,10 +1,14 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://defoem7p0xnjl"]
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://defoem7p0xnjl"]
 
 [ext_resource type="Resource" uid="uid://bjw28uqd4erjw" path="res://CustomResources/GenericLayersVariations/Weapon/Hoe.tres" id="1_hhulq"]
+[ext_resource type="Resource" uid="uid://bhj3duck63oh0" path="res://CustomResources/GenericLayersVariations/Weapon/Axe.tres" id="1_i2r0x"]
 [ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CharacterElement.cs" id="1_rt25b"]
+[ext_resource type="Resource" uid="uid://cgltih167ymjb" path="res://CustomResources/GenericLayersVariations/Weapon/Hammer.tres" id="2_e41q2"]
 [ext_resource type="Resource" uid="uid://c5fym47ihitjf" path="res://CustomResources/GenericLayersVariations/Weapon/Rake.tres" id="2_qkwq0"]
+[ext_resource type="Resource" uid="uid://bvx3a27vheshe" path="res://CustomResources/GenericLayersVariations/Weapon/Shovel.tres" id="5_0ntog"]
+[ext_resource type="Resource" uid="uid://cc3tujojng0ow" path="res://CustomResources/GenericLayersVariations/Weapon/Sickle.tres" id="6_or2r5"]
 
 [resource]
 script = ExtResource("1_rt25b")
 Layer = 0
-Variations = [ExtResource("1_hhulq"), ExtResource("2_qkwq0")]
+Variations = [ExtResource("1_i2r0x"), ExtResource("2_e41q2"), ExtResource("1_hhulq"), ExtResource("2_qkwq0"), ExtResource("5_0ntog"), ExtResource("6_or2r5")]

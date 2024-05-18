@@ -1,15 +1,15 @@
 [gd_resource type="Resource" load_steps=5 format=3 uid="uid://bjw28uqd4erjw"]
 
-[ext_resource type="Texture2D" uid="uid://bt2sjwm8q0n2b" path="res://Sprites/Characters/Allies/Weapon/Hoe/Weapon_Hoe_Cardboard.png" id="1_emwfr"]
+[ext_resource type="Texture2D" uid="uid://bt2sjwm8q0n2b" path="res://Sprites/Characters/Allies/Weapon/Hoe/Hoe_Cardboard.png" id="1_bhusq"]
 [ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="1_iqwch"]
-[ext_resource type="Texture2D" uid="uid://ts6rhxvpkf0c" path="res://Sprites/Characters/Allies/Weapon/Hoe/Weapon_Hoe.png" id="2_b8bll"]
-[ext_resource type="Texture2D" uid="uid://bl4gu0acwr0mt" path="res://Sprites/Characters/Allies/Weapon/Hoe/Weapon_Hoe_Cardboard_Outline.png" id="3_047vh"]
+[ext_resource type="Texture2D" uid="uid://ts6rhxvpkf0c" path="res://Sprites/Characters/Allies/Weapon/Hoe/Hoe.png" id="2_yacje"]
+[ext_resource type="Texture2D" uid="uid://bl4gu0acwr0mt" path="res://Sprites/Characters/Allies/Weapon/Hoe/Hoe_Cardboard_Outline.png" id="3_mwb12"]
 
 [resource]
 script = ExtResource("1_iqwch")
-Cardboard = ExtResource("1_emwfr")
-Outline = ExtResource("3_047vh")
+Cardboard = ExtResource("1_bhusq")
+Outline = ExtResource("3_mwb12")
 Layer = 0
 Label = "Hoe"
-Main = ExtResource("2_b8bll")
+Main = ExtResource("2_yacje")
 AvailableDependents = []

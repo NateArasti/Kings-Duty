@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://cc3tujojng0ow"]
+
+[ext_resource type="Texture2D" uid="uid://lgnm0dkt2kwe" path="res://Sprites/Characters/Allies/Weapon/Sickle/Sickle_Cardboard.png" id="1_edpuk"]
+[ext_resource type="Texture2D" uid="uid://b6ndxpfhbmam5" path="res://Sprites/Characters/Allies/Weapon/Sickle/Sickle.png" id="2_2lntf"]
+[ext_resource type="Texture2D" uid="uid://dorlbdp5eixve" path="res://Sprites/Characters/Allies/Weapon/Sickle/Sickle_Cardboard_Outline.png" id="3_lyn3s"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="4_pcffq"]
+
+[resource]
+script = ExtResource("4_pcffq")
+Cardboard = ExtResource("1_edpuk")
+Outline = ExtResource("3_lyn3s")
+Layer = 0
+Label = "Sickle"
+Main = ExtResource("2_2lntf")
+AvailableDependents = []

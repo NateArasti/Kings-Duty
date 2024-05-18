@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=19 format=3 uid="uid://bxssupuekjih0"]
+[gd_resource type="Resource" load_steps=41 format=3 uid="uid://bxssupuekjih0"]
 
 [ext_resource type="Texture2D" uid="uid://crqdqh437h1qv" path="res://Sprites/Characters/Allies/Head/Head_2/Head_2_Cardboard.png" id="1_3y5yo"]
+[ext_resource type="Resource" uid="uid://dnmbukxks1o5w" path="res://CustomResources/GenericLayersVariations/Hair/Hair_1/Hair_1_Black.tres" id="1_8jopq"]
 [ext_resource type="Resource" uid="uid://be0bnokbqiuq3" path="res://CustomResources/GenericLayersVariations/Hair/Hair_2.tres" id="1_8ul4s"]
 [ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="1_i36ju"]
 [ext_resource type="Resource" uid="uid://dj45wdaotbq4r" path="res://CustomResources/GenericLayersVariations/Hair/Hair_3/Hair_3_Brown.tres" id="2_1o5hg"]
@@ -8,16 +9,37 @@
 [ext_resource type="Texture2D" uid="uid://dl7m0qvna16q5" path="res://Sprites/Characters/Allies/Head/Head_2/Head_2_Cardboard_Outline.png" id="3_hi2m7"]
 [ext_resource type="Resource" uid="uid://ckvlo4mw5kf3g" path="res://CustomResources/GenericLayersVariations/Hair/Hair_3/Hair_3_Blonde.tres" id="3_umwu6"]
 [ext_resource type="Resource" uid="uid://d4nkhua25gg4s" path="res://CustomResources/GenericLayersVariations/Hair/Hair_1/Hair_1_Brown.tres" id="4_ufy06"]
+[ext_resource type="Resource" uid="uid://c08pmk8q8beab" path="res://CustomResources/GenericLayersVariations/Hair/Hair_1/Hair_1_Red.tres" id="4_v1u6n"]
 [ext_resource type="Resource" uid="uid://cpirgcgt6gm7i" path="res://CustomResources/GenericLayersVariations/Hair/Hair_1/Hair_1_Blonde.tres" id="5_75iow"]
+[ext_resource type="Resource" uid="uid://bma62h7siqgn" path="res://CustomResources/GenericLayersVariations/Hair/Hair_1/Hair_1_Silver.tres" id="5_bmx4k"]
 [ext_resource type="Resource" uid="uid://b5j3t2e8ixjf2" path="res://CustomResources/GenericLayersVariations/Face/Eyes/Eyes_1.tres" id="6_33k30"]
+[ext_resource type="Resource" uid="uid://rc30i7013jge" path="res://CustomResources/GenericLayersVariations/Hair/Hair_3/Hair_3_Black.tres" id="6_mg18x"]
 [ext_resource type="Resource" uid="uid://iqvo8d041vaf" path="res://CustomResources/GenericLayersVariations/Face/Eyes/Eyes_2.tres" id="7_81v4d"]
 [ext_resource type="Resource" uid="uid://bms4r0wspvqn3" path="res://CustomResources/GenericLayersVariations/Face/Eyes/Eyes_3.tres" id="8_x7sr2"]
 [ext_resource type="Resource" uid="uid://dnkoyuphaut2t" path="res://CustomResources/GenericLayersVariations/Face/Nose/Nose_1.tres" id="9_8ghlv"]
+[ext_resource type="Resource" uid="uid://bmr5y0tmqffuf" path="res://CustomResources/GenericLayersVariations/Hair/Hair_3/Hair_3_Red.tres" id="9_uxw7b"]
 [ext_resource type="Resource" uid="uid://d2hky5bvft8dg" path="res://CustomResources/GenericLayersVariations/Face/Nose/Nose_2.tres" id="10_2nmp4"]
+[ext_resource type="Resource" uid="uid://bt5ravvjj6wyi" path="res://CustomResources/GenericLayersVariations/Hair/Hair_3/Hair_3_Silver.tres" id="10_u0rf5"]
 [ext_resource type="Resource" uid="uid://c476rylnihk3a" path="res://CustomResources/GenericLayersVariations/Face/Nose/Nose_3.tres" id="11_ljpro"]
+[ext_resource type="Resource" uid="uid://dwv8pce3w2ttt" path="res://CustomResources/GenericLayersVariations/Hair/Hair_4/Hair_4_Black.tres" id="11_qr6dy"]
+[ext_resource type="Resource" uid="uid://d1f7ertfdflim" path="res://CustomResources/GenericLayersVariations/Hair/Hair_4/Hair_4_Blonde.tres" id="12_qottb"]
 [ext_resource type="Resource" uid="uid://nqek8w2p3qcb" path="res://CustomResources/GenericLayersVariations/Face/Mouth/Mouth_1.tres" id="12_xcdu2"]
+[ext_resource type="Resource" uid="uid://dtwtju05xqow3" path="res://CustomResources/GenericLayersVariations/Hair/Hair_4/Hair_4_Brown.tres" id="13_dmoo8"]
 [ext_resource type="Resource" uid="uid://bvdk3ucbgvlki" path="res://CustomResources/GenericLayersVariations/Face/Mouth/Mouth_2.tres" id="13_rvqbo"]
 [ext_resource type="Resource" uid="uid://cai64vgifveu" path="res://CustomResources/GenericLayersVariations/Face/Mouth/Mouth_3.tres" id="14_12do0"]
+[ext_resource type="Resource" uid="uid://dw4qr6ifj6ijl" path="res://CustomResources/GenericLayersVariations/Hair/Hair_4/Hair_4_Red.tres" id="14_bagsr"]
+[ext_resource type="Resource" uid="uid://hlttjcnsagox" path="res://CustomResources/GenericLayersVariations/Hair/Hair_4/Hair_4_Silver.tres" id="15_8podl"]
+[ext_resource type="Resource" uid="uid://b7rrv78socc2n" path="res://CustomResources/GenericLayersVariations/Hair/Hair_5/Hair_5_Black.tres" id="16_4htcn"]
+[ext_resource type="Resource" uid="uid://btxrxtq1lmqme" path="res://CustomResources/GenericLayersVariations/Hair/Hair_5/Hair_5_Blonde.tres" id="17_8rspa"]
+[ext_resource type="Resource" uid="uid://6or1mimpmhcy" path="res://CustomResources/GenericLayersVariations/Hair/Hair_5/Hair_5_Brown.tres" id="18_6yio0"]
+[ext_resource type="Resource" uid="uid://c1uswb20yvwh0" path="res://CustomResources/GenericLayersVariations/Hair/Hair_5/Hair_5_Red.tres" id="19_orar2"]
+[ext_resource type="Resource" uid="uid://h82e4onx1x1k" path="res://CustomResources/GenericLayersVariations/Hair/Hair_5/Hair_5_Silver.tres" id="20_dfipb"]
+[ext_resource type="Resource" uid="uid://0uy57m8p51rt" path="res://CustomResources/GenericLayersVariations/Face/Eyes/Eyes_4.tres" id="25_12cyh"]
+[ext_resource type="Resource" uid="uid://bu53iclg8xjaa" path="res://CustomResources/GenericLayersVariations/Face/Eyes/Eyes_5.tres" id="26_0tc1y"]
+[ext_resource type="Resource" uid="uid://d2hx8x5l08h6o" path="res://CustomResources/GenericLayersVariations/Face/Nose/Nose_4.tres" id="30_cctkw"]
+[ext_resource type="Resource" uid="uid://dcynwcjoshagi" path="res://CustomResources/GenericLayersVariations/Face/Nose/Nose_5.tres" id="31_tkjws"]
+[ext_resource type="Resource" uid="uid://dabeox47ihv4p" path="res://CustomResources/GenericLayersVariations/Face/Mouth/Mouth_4.tres" id="35_2x0yr"]
+[ext_resource type="Resource" uid="uid://dopx06bq2ojvd" path="res://CustomResources/GenericLayersVariations/Face/Mouth/Mouth_5.tres" id="36_liib2"]
 
 [resource]
 script = ExtResource("1_i36ju")
@@ -26,4 +48,4 @@ Outline = ExtResource("3_hi2m7")
 Layer = 5
 Label = "Head_2_White"
 Main = ExtResource("2_3nqok")
-AvailableDependents = Array[Resource]([ExtResource("1_8ul4s"), ExtResource("2_1o5hg"), ExtResource("3_umwu6"), ExtResource("4_ufy06"), ExtResource("5_75iow"), ExtResource("6_33k30"), ExtResource("7_81v4d"), ExtResource("8_x7sr2"), ExtResource("9_8ghlv"), ExtResource("10_2nmp4"), ExtResource("11_ljpro"), ExtResource("12_xcdu2"), ExtResource("13_rvqbo"), ExtResource("14_12do0")])
+AvailableDependents = [ExtResource("1_8jopq"), ExtResource("5_75iow"), ExtResource("4_ufy06"), ExtResource("4_v1u6n"), ExtResource("5_bmx4k"), ExtResource("6_mg18x"), ExtResource("3_umwu6"), ExtResource("2_1o5hg"), ExtResource("9_uxw7b"), ExtResource("10_u0rf5"), ExtResource("11_qr6dy"), ExtResource("12_qottb"), ExtResource("13_dmoo8"), ExtResource("14_bagsr"), ExtResource("15_8podl"), ExtResource("16_4htcn"), ExtResource("17_8rspa"), ExtResource("18_6yio0"), ExtResource("19_orar2"), ExtResource("20_dfipb"), ExtResource("1_8ul4s"), ExtResource("6_33k30"), ExtResource("7_81v4d"), ExtResource("8_x7sr2"), ExtResource("25_12cyh"), ExtResource("26_0tc1y"), ExtResource("9_8ghlv"), ExtResource("10_2nmp4"), ExtResource("11_ljpro"), ExtResource("30_cctkw"), ExtResource("31_tkjws"), ExtResource("12_xcdu2"), ExtResource("13_rvqbo"), ExtResource("14_12do0"), ExtResource("35_2x0yr"), ExtResource("36_liib2")]

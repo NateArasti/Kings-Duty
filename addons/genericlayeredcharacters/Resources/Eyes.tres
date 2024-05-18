@@ -1,11 +1,13 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://dgvy46w5gj8yw"]
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://dgvy46w5gj8yw"]
 
 [ext_resource type="Resource" uid="uid://b5j3t2e8ixjf2" path="res://CustomResources/GenericLayersVariations/Face/Eyes/Eyes_1.tres" id="1_6o17p"]
 [ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CharacterElement.cs" id="1_sav4n"]
 [ext_resource type="Resource" uid="uid://iqvo8d041vaf" path="res://CustomResources/GenericLayersVariations/Face/Eyes/Eyes_2.tres" id="2_r77ou"]
 [ext_resource type="Resource" uid="uid://bms4r0wspvqn3" path="res://CustomResources/GenericLayersVariations/Face/Eyes/Eyes_3.tres" id="3_eaflk"]
+[ext_resource type="Resource" uid="uid://0uy57m8p51rt" path="res://CustomResources/GenericLayersVariations/Face/Eyes/Eyes_4.tres" id="4_xbnge"]
+[ext_resource type="Resource" uid="uid://bu53iclg8xjaa" path="res://CustomResources/GenericLayersVariations/Face/Eyes/Eyes_5.tres" id="5_s8341"]
 
 [resource]
 script = ExtResource("1_sav4n")
 Layer = 2
-Variations = [ExtResource("1_6o17p"), ExtResource("2_r77ou"), ExtResource("3_eaflk")]
+Variations = [ExtResource("1_6o17p"), ExtResource("2_r77ou"), ExtResource("3_eaflk"), ExtResource("4_xbnge"), ExtResource("5_s8341")]

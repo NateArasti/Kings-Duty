@@ -1,12 +1,20 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://bqjdrnl7uw7fa"]
+[gd_resource type="Resource" load_steps=14 format=3 uid="uid://bqjdrnl7uw7fa"]
 
 [ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CharacterElement.cs" id="1_d1ehq"]
-[ext_resource type="Resource" uid="uid://dp23b5j7ua4jq" path="res://CustomResources/GenericLayersVariations/Body/Body_1_Brown.tres" id="1_lcrfd"]
-[ext_resource type="Resource" uid="uid://db7yn10uq3x4x" path="res://CustomResources/GenericLayersVariations/Body/Body_1_Light1.tres" id="2_a2r3v"]
-[ext_resource type="Resource" uid="uid://c2ge3cetcfn3a" path="res://CustomResources/GenericLayersVariations/Body/Body_1_Light2.tres" id="3_3ibye"]
-[ext_resource type="Resource" uid="uid://wjt3rg7fg8r" path="res://CustomResources/GenericLayersVariations/Body/Body_1_White.tres" id="4_cbahw"]
+[ext_resource type="Resource" uid="uid://dp23b5j7ua4jq" path="res://CustomResources/GenericLayersVariations/Body/1/Body_1_Brown.tres" id="1_lcrfd"]
+[ext_resource type="Resource" uid="uid://db7yn10uq3x4x" path="res://CustomResources/GenericLayersVariations/Body/1/Body_1_Light1.tres" id="2_a2r3v"]
+[ext_resource type="Resource" uid="uid://c2ge3cetcfn3a" path="res://CustomResources/GenericLayersVariations/Body/1/Body_1_Light2.tres" id="3_3ibye"]
+[ext_resource type="Resource" uid="uid://wjt3rg7fg8r" path="res://CustomResources/GenericLayersVariations/Body/1/Body_1_White.tres" id="4_cbahw"]
+[ext_resource type="Resource" uid="uid://dlhwx1w7vrmyd" path="res://CustomResources/GenericLayersVariations/Body/2/Body_2_Brown.tres" id="5_kon7y"]
+[ext_resource type="Resource" uid="uid://d4kjgrknnmv0a" path="res://CustomResources/GenericLayersVariations/Body/2/Body_2_Light1.tres" id="6_2wjy2"]
+[ext_resource type="Resource" uid="uid://p4w1xlf6r18p" path="res://CustomResources/GenericLayersVariations/Body/2/Body_2_Light2.tres" id="7_aifwk"]
+[ext_resource type="Resource" uid="uid://cmdidhdcl4ikd" path="res://CustomResources/GenericLayersVariations/Body/2/Body_2_White.tres" id="8_gng86"]
+[ext_resource type="Resource" uid="uid://cpnrqt2fo4x7b" path="res://CustomResources/GenericLayersVariations/Body/3/Body_3_Brown.tres" id="9_lfuhf"]
+[ext_resource type="Resource" uid="uid://dirdb0tihuoar" path="res://CustomResources/GenericLayersVariations/Body/3/Body_3_Light1.tres" id="10_imwnd"]
+[ext_resource type="Resource" uid="uid://ciim6bh1ojn7c" path="res://CustomResources/GenericLayersVariations/Body/3/Body_3_Light2.tres" id="11_mx24l"]
+[ext_resource type="Resource" uid="uid://bnorj0vy6novf" path="res://CustomResources/GenericLayersVariations/Body/3/Body_3_White.tres" id="12_38vvo"]
 
 [resource]
 script = ExtResource("1_d1ehq")
 Layer = 7
-Variations = [ExtResource("1_lcrfd"), ExtResource("2_a2r3v"), ExtResource("3_3ibye"), ExtResource("4_cbahw")]
+Variations = [ExtResource("1_lcrfd"), ExtResource("2_a2r3v"), ExtResource("3_3ibye"), ExtResource("4_cbahw"), ExtResource("5_kon7y"), ExtResource("6_2wjy2"), ExtResource("7_aifwk"), ExtResource("8_gng86"), ExtResource("9_lfuhf"), ExtResource("10_imwnd"), ExtResource("11_mx24l"), ExtResource("12_38vvo")]

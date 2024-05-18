@@ -13,6 +13,7 @@ namespace GenericLayeredCharacters
 		
 		private Button m_ClearButton;
 		private Button m_RandomButton;
+		private Button m_SelectAll;
 		private ItemList m_AllLayersList;
 		private ItemList m_LayerVariationsList;
 		private ItemList m_DependentLayersList;
@@ -91,14 +92,16 @@ namespace GenericLayeredCharacters
 				m_AllLayersList.AddItem(layer.ToString());
 			}
 			m_RandomButton.Pressed += SetRandomCharacter;
+			
 			m_ClearButton.Pressed += ClearPreview;
 			m_AllLayersList.ItemSelected += SelectElement;
+			m_SelectAll.Pressed += SelectAllVariations;
 			m_LayerVariationsList.ItemSelected += SelectElementVariation;
 			m_DependentLayersList.ItemSelected += SelectDependentLayer;
 			
 			ClearPreview();
 		}
-		
+
 		private void DiscardDependencies()
 		{
 			m_RandomButton.Pressed -= SetRandomCharacter;
@@ -113,6 +116,7 @@ namespace GenericLayeredCharacters
 		{
 			m_ClearButton = m_PluginGUI.GetNode<Button>("Buttons/Clear");
 			m_RandomButton = m_PluginGUI.GetNode<Button>("Buttons/Random");
+			m_SelectAll = m_PluginGUI.GetNode<Button>("Buttons/SelectAl");
 			m_AllLayersList = m_PluginGUI.GetNode<ItemList>("Left/AllElementsList");
 			m_LayerVariationsList = m_PluginGUI.GetNode<ItemList>("Left/VariationsList");
 			m_DependentLayersList = m_PluginGUI.GetNode<ItemList>("Right/DependantBodyElementsList");
@@ -120,6 +124,28 @@ namespace GenericLayeredCharacters
 			m_AvaialableVariationToggleReference = m_PluginGUI.GetNode<CheckButton>("Right/SelectedVariations/MarginContainer/ScrollContainer/VBoxContainer/CheckButton");
 			
 			m_CharacterPreviewMaterial = m_PluginGUI.GetNode<TextureRect>("CharacterPreview").Material as ShaderMaterial;
+		}
+
+		private void SelectAllVariations()
+		{
+			if (m_SelectedElementVariation == null) return;
+			
+			foreach (var layer in Utility.GetAllDependentLayers(m_SelectedCharacterElement.Layer))
+			{
+				var dependentLayer = Utility.LayerElements[layer];
+				foreach (var elementVariation in dependentLayer.Variations)
+				{
+					if (m_SelectedElementVariation.AvailableDependents.Contains(elementVariation)) continue;
+					m_SelectedElementVariation.AvailableDependents.Add(elementVariation);
+				}
+			}
+			ResourceSaver.Save(m_SelectedElementVariation);
+			
+			// regenerating elements if needed
+			if (m_SelectedDependantCharacterElement != null)
+			{
+				FillAvailableVariationList();
+			}
 		}
 
 		private void SetRandomCharacter()
@@ -140,6 +166,8 @@ namespace GenericLayeredCharacters
 			m_DependentLayersList.Clear();
 			
 			m_SelectedElementVariation = null;
+			m_SelectAll.Visible = false;
+			
 			ClearAvailableVariationList();
 		}
 
@@ -149,6 +177,7 @@ namespace GenericLayeredCharacters
 			m_SelectedCharacterElement = Utility.LayerElements[layer];
 			
 			m_SelectedElementVariation = null;
+			m_SelectAll.Visible = false;
 			m_LayerVariationsList.DeselectAll();
 			m_LayerVariationsList.Clear();
 			foreach (var elementVariation in m_SelectedCharacterElement.Variations)
@@ -171,6 +200,8 @@ namespace GenericLayeredCharacters
 		{
 			m_SelectedElementVariation = m_SelectedCharacterElement.Variations[index];
 			Utility.SetElementVariationOnMaterial(m_CharacterPreviewMaterial, m_SelectedElementVariation);
+			
+			m_SelectAll.Visible = true;
 			
 			if (m_SelectedDependantCharacterElement != null)
 			{
