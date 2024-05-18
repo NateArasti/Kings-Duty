@@ -1,67 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dif2ucbn31u57"]
+[gd_scene load_steps=3 format=3 uid="uid://dif2ucbn31u57"]
 
 [ext_resource type="PackedScene" uid="uid://dno44gfnh83rk" path="res://Subscenes/Characters/Player/GlobalPlayer.tscn" id="1_b8fdd"]
-[ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Base/WorldController.cs" id="2_gukwf"]
-[ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/NaturePropsMultimesh.tres" id="2_y5v6c"]
-[ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Base/TileChunkGenerator.cs" id="3_i4adw"]
-[ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Props/Obstacle.tscn" id="3_ux8gk"]
-[ext_resource type="Resource" uid="uid://x6xbwmkxwlta" path="res://CustomResources/WorldAreas/StatueArea.tres" id="4_2snyj"]
-[ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/WorldTilesGenerator.cs" id="5_6vrrg"]
-[ext_resource type="MultiMesh" uid="uid://bcgch8h5ph107" path="res://CustomResources/Multimeshes/WorldTile.tres" id="6_2vcmp"]
-[ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/PropsGenerator.cs" id="7_e8jwe"]
-[ext_resource type="PackedScene" uid="uid://cntj6x0vj868l" path="res://Subscenes/Props/Statue.tscn" id="10_k2k61"]
-[ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/BuildingsGenerator.cs" id="10_xt5jp"]
-
-[sub_resource type="Environment" id="Environment_ofovr"]
-background_mode = 1
-background_color = Color(0.2, 0.2, 0.2, 1)
-ambient_light_energy = 0.01
-reflected_light_source = 1
-sdfgi_read_sky_light = false
-fog_light_color = Color(0, 0, 0, 1)
-adjustment_brightness = 0.8
-adjustment_contrast = 1.1
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gkqe2"]
-auto_exposure_scale = 0.06
-dof_blur_far_distance = 8040.33
+[ext_resource type="PackedScene" uid="uid://b7me2pvqi0wpm" path="res://Subscenes/Environment.tscn" id="2_qaq11"]
 
 [node name="WorldGeneration" type="Node3D"]
 
 [node name="PlayerGlobalController" parent="." instance=ExtResource("1_b8fdd")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ofovr")
-camera_attributes = SubResource("CameraAttributesPractical_gkqe2")
-
-[node name="World" type="Node3D" parent="." node_paths=PackedStringArray("m_ChunkGenerator")]
-script = ExtResource("2_gukwf")
-m_ChunkGenerator = NodePath("Generator")
-m_StepValue = Vector2(0.5, 0.385)
-
-[node name="Generator" type="Node" parent="World"]
-script = ExtResource("3_i4adw")
-TilesCountPerChunk = Vector2i(20, 20)
-CellSize = 1.0
-m_AreaCountRange = Vector2i(1, 1)
-m_AreaDatas = Array[Resource]([ExtResource("4_2snyj")])
-m_PointsMinDistance = 7.0
-ChunkSize = Vector2(0, 0)
-
-[node name="WorldTiles" type="Node3D" parent="World"]
-script = ExtResource("5_6vrrg")
-m_WorldTilesMultiMesh = ExtResource("6_2vcmp")
-m_DefaultTileBasis = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
-m_GroundTilesIndexRange = Vector2i(0, 9)
-m_RoadTilesIndexRange = Vector2i(10, 11)
-
-[node name="NatureProps" type="Node3D" parent="World"]
-script = ExtResource("7_e8jwe")
-m_PropsTextureRange = Vector2i(0, 4)
-m_PropsMeshData = ExtResource("2_y5v6c")
-m_DefaultPropBasis = Basis(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707)
-m_ObstacleScene = ExtResource("3_ux8gk")
-
-[node name="Buildings" type="Node3D" parent="World"]
-script = ExtResource("10_xt5jp")
-m_StatueScene = ExtResource("10_k2k61")
+[node name="Environment" parent="." instance=ExtResource("2_qaq11")]
