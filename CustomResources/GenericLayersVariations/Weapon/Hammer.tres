@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://cgltih167ymjb"]
+
+[ext_resource type="Texture2D" uid="uid://dbmclv75jq2hr" path="res://Sprites/Characters/Allies/Weapon/Hammer/Hammer_Cardboard.png" id="1_jv72i"]
+[ext_resource type="Texture2D" uid="uid://vlytq71gltxh" path="res://Sprites/Characters/Allies/Weapon/Hammer/Hammer.png" id="2_inm3g"]
+[ext_resource type="Texture2D" uid="uid://bcyp4rouruebx" path="res://Sprites/Characters/Allies/Weapon/Hammer/Hammer_Cardboard_Outline.png" id="3_ah0d1"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="4_6go5o"]
+
+[resource]
+script = ExtResource("4_6go5o")
+Cardboard = ExtResource("1_jv72i")
+Outline = ExtResource("3_ah0d1")
+Layer = 0
+Label = "Hammer"
+Main = ExtResource("2_inm3g")
+AvailableDependents = []

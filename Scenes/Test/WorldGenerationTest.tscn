@@ -5,7 +5,7 @@
 [ext_resource type="QuadMesh" uid="uid://loj8otq0ccni" path="res://CustomResources/Multimeshes/NaturePropsMultimesh.tres" id="2_y5v6c"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/Base/TileChunkGenerator.cs" id="3_i4adw"]
 [ext_resource type="PackedScene" uid="uid://4qu2ijrrqc34" path="res://Subscenes/Props/Obstacle.tscn" id="3_ux8gk"]
-[ext_resource type="Resource" uid="uid://x6xbwmkxwlta" path="res://CustomResources/StatueArea.tres" id="4_2snyj"]
+[ext_resource type="Resource" uid="uid://x6xbwmkxwlta" path="res://CustomResources/WorldAreas/StatueArea.tres" id="4_2snyj"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/WorldTilesGenerator.cs" id="5_6vrrg"]
 [ext_resource type="MultiMesh" uid="uid://bcgch8h5ph107" path="res://CustomResources/Multimeshes/WorldTile.tres" id="6_2vcmp"]
 [ext_resource type="Script" path="res://Scripts/WorldGeneration/TiledWorld/PropsGenerator.cs" id="7_e8jwe"]

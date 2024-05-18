@@ -1,0 +1,45 @@
+[gd_resource type="Resource" load_steps=35 format=3 uid="uid://c2ge3cetcfn3a"]
+
+[ext_resource type="Texture2D" uid="uid://cj3kj0t01dsad" path="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Cardboard.png" id="1_2vpkb"]
+[ext_resource type="Resource" uid="uid://bd16p6hcn26sl" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_Light2.tres" id="1_83f5v"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="1_hegqu"]
+[ext_resource type="Resource" uid="uid://p3jeas0lbvww" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_Light2.tres" id="2_33gg8"]
+[ext_resource type="Texture2D" uid="uid://bs0v3c4jhxp47" path="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Light2.png" id="2_62yua"]
+[ext_resource type="Texture2D" uid="uid://bjsmpfte2husu" path="res://Sprites/Characters/Allies/Body/Body_1/Body_1_Cardboard_Outline.png" id="3_nrnku"]
+[ext_resource type="Resource" uid="uid://ctfyqqpt0jfwd" path="res://CustomResources/GenericLayersVariations/Legs/Legs_1.tres" id="5_wyd6r"]
+[ext_resource type="Resource" uid="uid://dycj2dkswmqpe" path="res://CustomResources/GenericLayersVariations/Legs/Legs_2.tres" id="6_p5cp2"]
+[ext_resource type="Resource" uid="uid://bjw28uqd4erjw" path="res://CustomResources/GenericLayersVariations/Weapon/Hoe.tres" id="7_p13su"]
+[ext_resource type="Resource" uid="uid://c5fym47ihitjf" path="res://CustomResources/GenericLayersVariations/Weapon/Rake.tres" id="8_rhere"]
+[ext_resource type="Resource" uid="uid://cui165ouvfpti" path="res://CustomResources/GenericLayersVariations/Head/Head_3/Head_3_Light2.tres" id="11_1obl7"]
+[ext_resource type="Resource" uid="uid://oct4whg6egih" path="res://CustomResources/GenericLayersVariations/Head/Head_4/Head_4_Light2.tres" id="15_jhj8f"]
+[ext_resource type="Resource" uid="uid://htcqil4upwlw" path="res://CustomResources/GenericLayersVariations/Head/Head_5/Head_5_Light2.tres" id="19_ul87r"]
+[ext_resource type="Resource" uid="uid://dplf86xhpsp3" path="res://CustomResources/GenericLayersVariations/Clothes/Apron/Apron_Blue.tres" id="21_41aue"]
+[ext_resource type="Resource" uid="uid://sm5bduxtv3pc" path="res://CustomResources/GenericLayersVariations/Clothes/Apron/Apron_Green.tres" id="22_jmo5m"]
+[ext_resource type="Resource" uid="uid://ddwn70xffbgew" path="res://CustomResources/GenericLayersVariations/Clothes/Apron/Apron_Grey.tres" id="23_7pcst"]
+[ext_resource type="Resource" uid="uid://dufvuigk6oxbd" path="res://CustomResources/GenericLayersVariations/Clothes/Blouse/Blouse_Blue.tres" id="24_7ijtl"]
+[ext_resource type="Resource" uid="uid://duq86sdd2vtw0" path="res://CustomResources/GenericLayersVariations/Clothes/Blouse/Blouse_Red.tres" id="25_pu2ex"]
+[ext_resource type="Resource" uid="uid://c6gniej5m82pn" path="res://CustomResources/GenericLayersVariations/Clothes/Blouse/Blouse_Yellow.tres" id="26_faxsv"]
+[ext_resource type="Resource" uid="uid://cqlpuir5xdnmt" path="res://CustomResources/GenericLayersVariations/Clothes/Jacket/Jacket_Blue.tres" id="27_sbouc"]
+[ext_resource type="Resource" uid="uid://dpv1x8le6gnv6" path="res://CustomResources/GenericLayersVariations/Clothes/Jacket/Jacket_Brown.tres" id="28_eoj8c"]
+[ext_resource type="Resource" uid="uid://ba8od5nfep5bd" path="res://CustomResources/GenericLayersVariations/Clothes/Jacket/Jacket_Green.tres" id="29_r3eeh"]
+[ext_resource type="Resource" uid="uid://c5r5nurxdu5qv" path="res://CustomResources/GenericLayersVariations/Clothes/Jacket/Jacket_Red.tres" id="30_fefjh"]
+[ext_resource type="Resource" uid="uid://c5sx85guxkw1u" path="res://CustomResources/GenericLayersVariations/Clothes/Shirt/Shirt_Blue.tres" id="31_h6ro6"]
+[ext_resource type="Resource" uid="uid://3mxxus558b6n" path="res://CustomResources/GenericLayersVariations/Clothes/Shirt/Shirt_Green.tres" id="32_wnwxv"]
+[ext_resource type="Resource" uid="uid://c2vghd5ifeqjt" path="res://CustomResources/GenericLayersVariations/Clothes/Shirt/Shirt_Red.tres" id="33_a8key"]
+[ext_resource type="Resource" uid="uid://ceww2flbqrji0" path="res://CustomResources/GenericLayersVariations/Clothes/Shirt/Shirt_White.tres" id="34_0t4oi"]
+[ext_resource type="Resource" uid="uid://be1cxwa8sof38" path="res://CustomResources/GenericLayersVariations/Legs/Legs_3.tres" id="37_0i8sq"]
+[ext_resource type="Resource" uid="uid://c3h403p015vo2" path="res://CustomResources/GenericLayersVariations/Legs/Legs_4.tres" id="38_3oybe"]
+[ext_resource type="Resource" uid="uid://c5n41xnotx8hj" path="res://CustomResources/GenericLayersVariations/Legs/Legs_5.tres" id="39_qk82p"]
+[ext_resource type="Resource" uid="uid://bhj3duck63oh0" path="res://CustomResources/GenericLayersVariations/Weapon/Axe.tres" id="40_i245r"]
+[ext_resource type="Resource" uid="uid://cgltih167ymjb" path="res://CustomResources/GenericLayersVariations/Weapon/Hammer.tres" id="41_hjfeg"]
+[ext_resource type="Resource" uid="uid://bvx3a27vheshe" path="res://CustomResources/GenericLayersVariations/Weapon/Shovel.tres" id="44_fells"]
+[ext_resource type="Resource" uid="uid://cc3tujojng0ow" path="res://CustomResources/GenericLayersVariations/Weapon/Sickle.tres" id="45_82iog"]
+
+[resource]
+script = ExtResource("1_hegqu")
+Cardboard = ExtResource("1_2vpkb")
+Outline = ExtResource("3_nrnku")
+Layer = 7
+Label = "Body_1_Light2"
+Main = ExtResource("2_62yua")
+AvailableDependents = [ExtResource("1_83f5v"), ExtResource("2_33gg8"), ExtResource("11_1obl7"), ExtResource("15_jhj8f"), ExtResource("19_ul87r"), ExtResource("21_41aue"), ExtResource("22_jmo5m"), ExtResource("23_7pcst"), ExtResource("24_7ijtl"), ExtResource("25_pu2ex"), ExtResource("26_faxsv"), ExtResource("27_sbouc"), ExtResource("28_eoj8c"), ExtResource("29_r3eeh"), ExtResource("30_fefjh"), ExtResource("31_h6ro6"), ExtResource("32_wnwxv"), ExtResource("33_a8key"), ExtResource("34_0t4oi"), ExtResource("5_wyd6r"), ExtResource("6_p5cp2"), ExtResource("37_0i8sq"), ExtResource("38_3oybe"), ExtResource("39_qk82p"), ExtResource("40_i245r"), ExtResource("41_hjfeg"), ExtResource("7_p13su"), ExtResource("8_rhere"), ExtResource("44_fells"), ExtResource("45_82iog")]

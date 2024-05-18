@@ -1,6 +1,7 @@
 addons/*
-!addons/.editorconfig
 .addons/*
+!addons/.editorconfig
+!addons/genericlayeredcharacters
 # Godot 4+ specific ignores
 .godot/
 /Build/

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b5j3t2e8ixjf2"]
+
+[ext_resource type="Texture2D" uid="uid://cue6js127vh5x" path="res://Sprites/Characters/Allies/Face/Eyes/Eyes_1.png" id="1_125s3"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/ElementVariation.cs" id="1_gpo4j"]
+
+[resource]
+script = ExtResource("1_gpo4j")
+Layer = 2
+Label = "Eyes_1"
+Main = ExtResource("1_125s3")
+AvailableDependents = Array[Resource]([])

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://c6gniej5m82pn"]
+
+[ext_resource type="Texture2D" uid="uid://yudl278obgvq" path="res://Sprites/Characters/Allies/Clothes/Blouse/Blouse_Cardboard.png" id="1_en7qt"]
+[ext_resource type="Texture2D" uid="uid://dw070gbjj6tsg" path="res://Sprites/Characters/Allies/Clothes/Blouse/Blouse_Yellow.png" id="2_e25jo"]
+[ext_resource type="Texture2D" uid="uid://bq08a1y7pqvtm" path="res://Sprites/Characters/Allies/Clothes/Blouse/Blouse_Cardboard_Outline.png" id="2_i0775"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="3_eyyny"]
+
+[resource]
+script = ExtResource("3_eyyny")
+Cardboard = ExtResource("1_en7qt")
+Outline = ExtResource("2_i0775")
+Layer = 6
+Label = "Blouse_Yellow"
+Main = ExtResource("2_e25jo")
+AvailableDependents = []

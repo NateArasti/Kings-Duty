@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=22 format=3 uid="uid://6gv6p5m3ghed"]
+
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CharacterElement.cs" id="1_kykq0"]
+[ext_resource type="Resource" uid="uid://ce40r0pyo3tf5" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_Brown.tres" id="1_oxqot"]
+[ext_resource type="Resource" uid="uid://cruxiu1l75l5h" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_Light1.tres" id="2_njgei"]
+[ext_resource type="Resource" uid="uid://bd16p6hcn26sl" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_Light2.tres" id="3_ergvc"]
+[ext_resource type="Resource" uid="uid://bkq764r8r2h7t" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_White.tres" id="4_qhvqu"]
+[ext_resource type="Resource" uid="uid://8iac1rrewuja" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_Brown.tres" id="5_otf7h"]
+[ext_resource type="Resource" uid="uid://bp88q12epen68" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_Light1.tres" id="6_k306x"]
+[ext_resource type="Resource" uid="uid://p3jeas0lbvww" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_Light2.tres" id="7_g22ko"]
+[ext_resource type="Resource" uid="uid://bxssupuekjih0" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_White.tres" id="8_lixwt"]
+[ext_resource type="Resource" uid="uid://5nf1yxdxghew" path="res://CustomResources/GenericLayersVariations/Head/Head_3/Head_3_Brown.tres" id="9_cbwyh"]
+[ext_resource type="Resource" uid="uid://dep72qp45v48b" path="res://CustomResources/GenericLayersVariations/Head/Head_3/Head_3_Light1.tres" id="10_awn1v"]
+[ext_resource type="Resource" uid="uid://cui165ouvfpti" path="res://CustomResources/GenericLayersVariations/Head/Head_3/Head_3_Light2.tres" id="11_eamn5"]
+[ext_resource type="Resource" uid="uid://c7kbyyybaoum1" path="res://CustomResources/GenericLayersVariations/Head/Head_3/Head_3_White.tres" id="12_oxemg"]
+[ext_resource type="Resource" uid="uid://7d2qi37alw2p" path="res://CustomResources/GenericLayersVariations/Head/Head_4/Head_4_Brown.tres" id="13_wjkjt"]
+[ext_resource type="Resource" uid="uid://dhqxrqp8fa8s6" path="res://CustomResources/GenericLayersVariations/Head/Head_4/Head_4_Light1.tres" id="14_i1f58"]
+[ext_resource type="Resource" uid="uid://oct4whg6egih" path="res://CustomResources/GenericLayersVariations/Head/Head_4/Head_4_Light2.tres" id="15_h4r2h"]
+[ext_resource type="Resource" uid="uid://cgv7wgt7w1xlc" path="res://CustomResources/GenericLayersVariations/Head/Head_4/Head_4_White.tres" id="16_70vbg"]
+[ext_resource type="Resource" uid="uid://c0peqsttr1kuv" path="res://CustomResources/GenericLayersVariations/Head/Head_5/Head_5_Brown.tres" id="17_c7gxp"]
+[ext_resource type="Resource" uid="uid://brwyut78s548b" path="res://CustomResources/GenericLayersVariations/Head/Head_5/Head_5_Light1.tres" id="18_kju7r"]
+[ext_resource type="Resource" uid="uid://htcqil4upwlw" path="res://CustomResources/GenericLayersVariations/Head/Head_5/Head_5_Light2.tres" id="19_eo7tj"]
+[ext_resource type="Resource" uid="uid://cl1l6tf0h8xs" path="res://CustomResources/GenericLayersVariations/Head/Head_5/Head_5_White.tres" id="20_2uyom"]
+
+[resource]
+script = ExtResource("1_kykq0")
+Layer = 5
+Variations = [ExtResource("1_oxqot"), ExtResource("2_njgei"), ExtResource("3_ergvc"), ExtResource("4_qhvqu"), ExtResource("5_otf7h"), ExtResource("6_k306x"), ExtResource("7_g22ko"), ExtResource("8_lixwt"), ExtResource("9_cbwyh"), ExtResource("10_awn1v"), ExtResource("11_eamn5"), ExtResource("12_oxemg"), ExtResource("13_wjkjt"), ExtResource("14_i1f58"), ExtResource("15_h4r2h"), ExtResource("16_70vbg"), ExtResource("17_c7gxp"), ExtResource("18_kju7r"), ExtResource("19_eo7tj"), ExtResource("20_2uyom")]

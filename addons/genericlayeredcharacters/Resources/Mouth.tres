@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://v42naqq05nbe"]
+
+[ext_resource type="Resource" uid="uid://nqek8w2p3qcb" path="res://CustomResources/GenericLayersVariations/Face/Mouth/Mouth_1.tres" id="1_6hjya"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CharacterElement.cs" id="1_ubb4b"]
+[ext_resource type="Resource" uid="uid://bvdk3ucbgvlki" path="res://CustomResources/GenericLayersVariations/Face/Mouth/Mouth_2.tres" id="2_54e7i"]
+[ext_resource type="Resource" uid="uid://cai64vgifveu" path="res://CustomResources/GenericLayersVariations/Face/Mouth/Mouth_3.tres" id="3_iqd77"]
+[ext_resource type="Resource" uid="uid://dabeox47ihv4p" path="res://CustomResources/GenericLayersVariations/Face/Mouth/Mouth_4.tres" id="4_rjfs1"]
+[ext_resource type="Resource" uid="uid://dopx06bq2ojvd" path="res://CustomResources/GenericLayersVariations/Face/Mouth/Mouth_5.tres" id="5_igau5"]
+
+[resource]
+script = ExtResource("1_ubb4b")
+Layer = 4
+Variations = [ExtResource("1_6hjya"), ExtResource("2_54e7i"), ExtResource("3_iqd77"), ExtResource("4_rjfs1"), ExtResource("5_igau5")]
