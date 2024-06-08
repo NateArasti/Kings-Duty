@@ -72,6 +72,19 @@ namespace WorldGeneration.Test
 				
 				if (currentStep == 0) continue;
 				
+				foreach (var area in m_ChunkInstances[i].Areas)
+				{
+					DrawRect(new Rect2(area.Center + borderRects[i].Position - 0.5f * area.Size, area.Size), Colors.Red);
+					
+					var sprite = new Sprite2D();
+					AddChild(sprite);
+					sprite.Texture = m_IconSprite;
+					sprite.Position = area.Center + borderRects[i].Position;
+					sprite.Scale = Vector2.One * 0.1f;
+				}
+				
+				if (currentStep == 1) continue;
+				
 				foreach (var point in m_ChunkInstances[i].AllPoints)
 				{
 					var sprite = new Sprite2D();
@@ -81,7 +94,7 @@ namespace WorldGeneration.Test
 					sprite.Scale = Vector2.One * 0.1f;
 				}
 				
-				if (currentStep == 1) continue;
+				if (currentStep == 2) continue;
 				
 				foreach (var road in m_ChunkInstances[i].Roads)
 				{
