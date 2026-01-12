@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://b8fm7xkuav5qd"]
+
+[ext_resource type="Shader" path="res://Shaders/Tree.gdshader" id="1_r08d5"]
+[ext_resource type="Texture2D" uid="uid://gc66h25n2r48" path="res://Sprites/Props/Nature/BasicTree.png" id="2_2f4vl"]
+[ext_resource type="Texture2D" uid="uid://dxf5o3atwwnxy" path="res://Sprites/Props/Nature/Tree_NoLeaves_1.png" id="3_la0ms"]
+[ext_resource type="Texture2D" uid="uid://bb8y2rdeclbhk" path="res://Sprites/Props/Nature/Tree_RareLeaves_1.png" id="4_rrirf"]
+[ext_resource type="Texture2D" uid="uid://cgge86niq6ksx" path="res://Sprites/Props/Nature/Bush_1.png" id="5_nekg2"]
+[ext_resource type="Texture2D" uid="uid://bplatmshv1ol" path="res://Sprites/Props/Nature/Rock_1.png" id="6_h4qi5"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_r08d5")
+shader_parameter/alpha_distance = 0.2
+shader_parameter/alpha_fade = 0.3
+shader_parameter/alpha_borders = PackedFloat32Array(0.15, 0.15, 0.15, 1, 1)
+shader_parameter/tile_textures = Array[Texture2D]([ExtResource("2_2f4vl"), ExtResource("4_rrirf"), ExtResource("3_la0ms"), ExtResource("5_nekg2"), ExtResource("6_h4qi5")])

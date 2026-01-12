@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwafhnyut7l3f"]
+
+[ext_resource type="Material" uid="uid://dgf8nek54rcbk" path="res://CustomResources/Materials/Vignette.tres" id="1_mx1sv"]
+
+[node name="PostProcessing" type="CanvasLayer"]
+layer = -1
+
+[node name="Vignette" type="ColorRect" parent="."]
+material = ExtResource("1_mx1sv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

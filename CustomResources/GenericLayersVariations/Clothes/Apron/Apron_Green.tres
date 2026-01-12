@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://sm5bduxtv3pc"]
+
+[ext_resource type="Texture2D" uid="uid://twcg2mgburj1" path="res://Sprites/Characters/Allies/Clothes/Apron/Apron_Cardboard.png" id="1_su4f0"]
+[ext_resource type="Texture2D" uid="uid://cq4412xhjrbeo" path="res://Sprites/Characters/Allies/Clothes/Apron/Apron_Green.png" id="2_dtwn6"]
+[ext_resource type="Texture2D" uid="uid://pa7uikhcpdrh" path="res://Sprites/Characters/Allies/Clothes/Apron/Apron_Cardboard_Outline.png" id="2_uheph"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="3_deqfx"]
+
+[resource]
+script = ExtResource("3_deqfx")
+Cardboard = ExtResource("1_su4f0")
+Outline = ExtResource("2_uheph")
+Layer = 6
+Label = "Apron_Green"
+Main = ExtResource("2_dtwn6")
+AvailableDependents = []

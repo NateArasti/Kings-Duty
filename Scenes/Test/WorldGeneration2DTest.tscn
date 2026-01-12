@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfbu1r735rnyg"]
+
+[ext_resource type="Script" path="res://Scripts/WorldGeneration/Test/SimpleChunkVisuals2D.cs" id="1_wxl3v"]
+[ext_resource type="Script" path="res://Scripts/WorldGeneration/Base/ChunkGenerator.cs" id="2_14l1u"]
+[ext_resource type="Resource" uid="uid://dmm4brqop2xwj" path="res://CustomResources/WorldAreas/Test/DefaultMiddleArea.tres" id="4_wulko"]
+[ext_resource type="Resource" uid="uid://bwwovxltpk5vf" path="res://CustomResources/WorldAreas/Test/DefaultSmallArea.tres" id="5_i744v"]
+
+[node name="Generator" type="Node2D" node_paths=PackedStringArray("m_ChunkGenerator")]
+script = ExtResource("1_wxl3v")
+m_Offset = Vector2(150, 50)
+m_ChunkGenerator = NodePath("ChunkGenerator")
+
+[node name="ChunkGenerator" type="Node" parent="."]
+script = ExtResource("2_14l1u")
+m_AreaCountRange = Vector2i(0, 3)
+m_AreaDatas = Array[Resource]([ExtResource("4_wulko"), ExtResource("5_i744v")])
+ChunkSize = Vector2(350, 200)

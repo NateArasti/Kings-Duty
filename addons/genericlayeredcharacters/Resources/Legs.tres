@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://hany7gou7tmv"]
+
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CharacterElement.cs" id="1_mxj4r"]
+[ext_resource type="Resource" uid="uid://ctfyqqpt0jfwd" path="res://CustomResources/GenericLayersVariations/Legs/Legs_1.tres" id="1_qe6fh"]
+[ext_resource type="Resource" uid="uid://dycj2dkswmqpe" path="res://CustomResources/GenericLayersVariations/Legs/Legs_2.tres" id="2_242wu"]
+[ext_resource type="Resource" uid="uid://be1cxwa8sof38" path="res://CustomResources/GenericLayersVariations/Legs/Legs_3.tres" id="3_6n2vc"]
+[ext_resource type="Resource" uid="uid://c3h403p015vo2" path="res://CustomResources/GenericLayersVariations/Legs/Legs_4.tres" id="4_8ysax"]
+[ext_resource type="Resource" uid="uid://c5n41xnotx8hj" path="res://CustomResources/GenericLayersVariations/Legs/Legs_5.tres" id="5_nwd2n"]
+
+[resource]
+script = ExtResource("1_mxj4r")
+Layer = 8
+Variations = [ExtResource("1_qe6fh"), ExtResource("2_242wu"), ExtResource("3_6n2vc"), ExtResource("4_8ysax"), ExtResource("5_nwd2n")]

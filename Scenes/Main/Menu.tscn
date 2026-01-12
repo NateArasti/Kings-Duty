@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://dri5bc7c22qca"]
+
+[ext_resource type="Texture2D" uid="uid://b8b7w1uvcnnij" path="res://Sprites/concept.png" id="1_tu3gr"]
+[ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/Fonts/BlackOpsOne-Regular.ttf" id="2_y6a6d"]
+[ext_resource type="Script" path="res://Scripts/UI/MainMenu.cs" id="2_yglg5"]
+[ext_resource type="PackedScene" uid="uid://dwpxrxrso4gxp" path="res://Scenes/Main/Game.tscn" id="3_3ab0f"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c1eql"]
+texture = ExtResource("1_tu3gr")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8a66"]
+bg_color = Color(0, 0, 0, 0.588235)
+
+[node name="Menu" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c1eql")
+script = ExtResource("2_yglg5")
+m_GameScene = ExtResource("3_3ab0f")
+m_ReviewURL = "https://forms.gle/8NiVCMhp4CB9dpEg6"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d8a66")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -281.0
+offset_right = 359.0
+grow_vertical = 0
+
+[node name="PlayButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_y6a6d")
+theme_override_font_sizes/font_size = 72
+text = "PLAY"
+flat = true
+alignment = 0
+
+[node name="ReviewButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_y6a6d")
+theme_override_font_sizes/font_size = 32
+text = "Review"
+flat = true
+alignment = 0
+
+[node name="ExitButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_y6a6d")
+theme_override_font_sizes/font_size = 32
+text = "Exit"
+flat = true
+alignment = 0
+
+[connection signal="pressed" from="Panel/VBoxContainer/PlayButton" to="." method="StartGame"]
+[connection signal="pressed" from="Panel/VBoxContainer/ReviewButton" to="." method="LeaveReview"]
+[connection signal="pressed" from="Panel/VBoxContainer/ExitButton" to="." method="ExitGame"]

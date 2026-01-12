@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://d4nkhua25gg4s"]
+
+[ext_resource type="Texture2D" uid="uid://13wgnobt7fmy" path="res://Sprites/Characters/Allies/Hair/Hair_1/Hair_1_Cardboard.png" id="1_160s0"]
+[ext_resource type="Texture2D" uid="uid://emfsebu0xien" path="res://Sprites/Characters/Allies/Hair/Hair_1/Hair_1_Brown.png" id="2_wu02n"]
+[ext_resource type="Texture2D" uid="uid://dfq33i745hwv4" path="res://Sprites/Characters/Allies/Hair/Hair_1/Hair_1_Cardboard_Outline.png" id="3_fhyxr"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="4_0ah18"]
+
+[resource]
+script = ExtResource("4_0ah18")
+Cardboard = ExtResource("1_160s0")
+Outline = ExtResource("3_fhyxr")
+Layer = 1
+Label = "Hair_1_Brown"
+Main = ExtResource("2_wu02n")
+AvailableDependents = Array[Resource]([])

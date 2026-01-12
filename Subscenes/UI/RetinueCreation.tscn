@@ -1,0 +1,91 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8g02yp1nunew"]
+
+[ext_resource type="LabelSettings" uid="uid://dpsuoo76k2bij" path="res://CustomResources/UI/Fonts/HeaderFont.tres" id="1_csiqm"]
+[ext_resource type="Resource" uid="uid://bkagng0tu6c6o" path="res://CustomResources/Characters/Melee/Peasent_Melee.tres" id="2_flrkb"]
+[ext_resource type="LabelSettings" uid="uid://co6jxguooayye" path="res://CustomResources/UI/Fonts/RegularFont.tres" id="2_qwyrd"]
+[ext_resource type="PackedScene" uid="uid://c4mhsqaj38qlq" path="res://Subscenes/UI/CharacterChoosePanel.tscn" id="3_b47ya"]
+[ext_resource type="Script" path="res://Scripts/UI/RandomCharactersGenerator.cs" id="3_m4clw"]
+
+[node name="RetinueCreation" type="Control" node_paths=PackedStringArray("m_CharacterPanels", "m_CharactersCoundown")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 4.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_m4clw")
+m_CharactersDatas = Array[Resource]([ExtResource("2_flrkb")])
+m_CharacterPanels = [NodePath("CharactersChoose/Character_1"), NodePath("CharactersChoose/Character_2"), NodePath("CharactersChoose/Character_3")]
+m_CharactersCoundown = NodePath("Header/Countdown")
+
+[node name="BackPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.2
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Choose your ally..."
+label_settings = ExtResource("1_csiqm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Countdown" type="Label" parent="Header"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -132.0
+offset_top = 15.0
+offset_right = -4.0
+offset_bottom = 79.0
+grow_horizontal = 0
+text = "0/0"
+label_settings = ExtResource("2_qwyrd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharactersChoose" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.2
+anchor_right = 0.9
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Character_1" parent="CharactersChoose" instance=ExtResource("3_b47ya")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Character_2" parent="CharactersChoose" instance=ExtResource("3_b47ya")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Character_3" parent="CharactersChoose" instance=ExtResource("3_b47ya")]
+layout_mode = 2
+size_flags_horizontal = 3

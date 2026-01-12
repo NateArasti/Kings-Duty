@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dif2ucbn31u57"]
+
+[ext_resource type="PackedScene" uid="uid://dno44gfnh83rk" path="res://Subscenes/Characters/Player/GlobalPlayer.tscn" id="1_b8fdd"]
+[ext_resource type="PackedScene" uid="uid://b7me2pvqi0wpm" path="res://Subscenes/Environment.tscn" id="2_qaq11"]
+
+[node name="WorldGeneration" type="Node3D"]
+
+[node name="PlayerGlobalController" parent="." instance=ExtResource("1_b8fdd")]
+
+[node name="Environment" parent="." instance=ExtResource("2_qaq11")]

@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=14 format=3 uid="uid://ddkuqr58cyom6"]
+
+[ext_resource type="Shader" path="res://Shaders/WorldTile.gdshader" id="1_ohaew"]
+[ext_resource type="Texture2D" uid="uid://dmq12fgmgmx" path="res://Sprites/GroundSprites/grass2.png" id="2_1k7cc"]
+[ext_resource type="Texture2D" uid="uid://jeip5slvibhd" path="res://Sprites/GroundSprites/grass1.png" id="3_707jc"]
+[ext_resource type="Texture2D" uid="uid://cn76oijngw7c7" path="res://Sprites/GroundSprites/dirt4.png" id="3_mtk87"]
+[ext_resource type="Texture2D" uid="uid://cigv2qsyhusry" path="res://Sprites/GroundSprites/grass3.png" id="4_gj8ji"]
+[ext_resource type="Texture2D" uid="uid://ckx5hcb75bylv" path="res://Sprites/GroundSprites/grass4.png" id="5_dp7sh"]
+[ext_resource type="Texture2D" uid="uid://c2sfg0jkj4vm7" path="res://Sprites/GroundSprites/grass5.png" id="6_j63qn"]
+[ext_resource type="Texture2D" uid="uid://bmr8yo6sh2xp0" path="res://Sprites/GroundSprites/grass6.png" id="7_5g52x"]
+[ext_resource type="Texture2D" uid="uid://bw46g1m723pue" path="res://Sprites/GroundSprites/grass7.png" id="8_ebey0"]
+[ext_resource type="Texture2D" uid="uid://bsococoq13ajh" path="res://Sprites/GroundSprites/grass8.png" id="9_hvgj7"]
+[ext_resource type="Texture2D" uid="uid://46vx14kgnxm5" path="res://Sprites/GroundSprites/grass9.png" id="10_wf41b"]
+[ext_resource type="Texture2D" uid="uid://buyiv3osh6a2j" path="res://Sprites/GroundSprites/grass10.png" id="11_sx1pj"]
+[ext_resource type="Texture2D" uid="uid://bobyw1qicxpkf" path="res://Sprites/GroundSprites/dirt1.png" id="12_t6ye2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ohaew")
+shader_parameter/tile_textures = Array[Texture2D]([ExtResource("3_707jc"), ExtResource("2_1k7cc"), ExtResource("4_gj8ji"), ExtResource("5_dp7sh"), ExtResource("6_j63qn"), ExtResource("7_5g52x"), ExtResource("8_ebey0"), ExtResource("9_hvgj7"), ExtResource("10_wf41b"), ExtResource("11_sx1pj"), ExtResource("12_t6ye2"), ExtResource("3_mtk87")])

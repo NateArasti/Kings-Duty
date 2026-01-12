@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dbu0ql7roncsm"]
+
+[ext_resource type="Resource" uid="uid://cgltih167ymjb" path="res://CustomResources/GenericLayersVariations/Weapon/Hammer.tres" id="1_s8byh"]
+[ext_resource type="Script" path="res://Scripts/Characters/Weapons/MeleeWeapon.cs" id="2_ooa5n"]
+
+[resource]
+resource_name = "Hammer"
+script = ExtResource("2_ooa5n")
+AttackDamage = 6
+AttackCooldown = 2.0
+AttackRange = 0.5
+Visuals = ExtResource("1_s8byh")

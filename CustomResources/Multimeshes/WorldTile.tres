@@ -1,0 +1,12 @@
+[gd_resource type="MultiMesh" load_steps=3 format=3 uid="uid://bcgch8h5ph107"]
+
+[ext_resource type="Material" uid="uid://ddkuqr58cyom6" path="res://CustomResources/Materials/WorldTile.tres" id="1_2rwoj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_nn4j8"]
+material = ExtResource("1_2rwoj")
+orientation = 1
+
+[resource]
+transform_format = 1
+use_custom_data = true
+mesh = SubResource("QuadMesh_nn4j8")

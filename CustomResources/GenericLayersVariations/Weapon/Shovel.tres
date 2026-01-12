@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bvx3a27vheshe"]
+
+[ext_resource type="Texture2D" uid="uid://brqxvjhgk03d8" path="res://Sprites/Characters/Allies/Weapon/Shovel/Shovel_Cardboard.png" id="1_cmbot"]
+[ext_resource type="Texture2D" uid="uid://cj45kjxbfc2ro" path="res://Sprites/Characters/Allies/Weapon/Shovel/Shovel.png" id="2_obmd0"]
+[ext_resource type="Texture2D" uid="uid://nlv32nptp64m" path="res://Sprites/Characters/Allies/Weapon/Shovel/Shovel_Cardboard_Outline.png" id="3_cwkpw"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="4_h8u1h"]
+
+[resource]
+script = ExtResource("4_h8u1h")
+Cardboard = ExtResource("1_cmbot")
+Outline = ExtResource("3_cwkpw")
+Layer = 0
+Label = "Shovel"
+Main = ExtResource("2_obmd0")
+AvailableDependents = []

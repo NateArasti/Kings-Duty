@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dno44gfnh83rk"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerGlobalController.cs" id="1_muxci"]
+[ext_resource type="PackedScene" uid="uid://bq63l7m02j036" path="res://Subscenes/Characters/Player/Player.tscn" id="2_nceyi"]
+[ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_6d5jq"]
+[ext_resource type="Texture2D" uid="uid://c8ioxbfouojjc" path="res://Sprites/Characters/Player/king_v0.1.0.png" id="4_jde11"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5yuo5"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("3_6d5jq")
+shader_parameter/value = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/source_texture = ExtResource("4_jde11")
+
+[node name="PlayerGlobalController" type="Node" node_paths=PackedStringArray("Player", "PlayerInteraction")]
+script = ExtResource("1_muxci")
+Player = NodePath("Player")
+PlayerInteraction = NodePath("Player/Interaction")
+
+[node name="Player" parent="." instance=ExtResource("2_nceyi")]
+process_mode = 0
+
+[node name="Sprite" parent="Player/CharacterVisuals/BillboardPivot" index="0"]
+material_overlay = SubResource("ShaderMaterial_5yuo5")
+
+[node name="LevelUpScreen" parent="Player/Interaction" index="1"]
+visible = false
+
+[editable path="Player"]

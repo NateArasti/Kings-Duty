@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bhj3duck63oh0"]
+
+[ext_resource type="Texture2D" uid="uid://qdp7ja2ligw1" path="res://Sprites/Characters/Allies/Weapon/Axe/Axe_Cardboard.png" id="1_fa73j"]
+[ext_resource type="Texture2D" uid="uid://d3xfs5guqcwxk" path="res://Sprites/Characters/Allies/Weapon/Axe/Axe.png" id="2_krqj0"]
+[ext_resource type="Texture2D" uid="uid://bnekjwk0if3sk" path="res://Sprites/Characters/Allies/Weapon/Axe/Axe_Cardboard_Outline.png" id="3_vj61k"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="4_5o02r"]
+
+[resource]
+script = ExtResource("4_5o02r")
+Cardboard = ExtResource("1_fa73j")
+Outline = ExtResource("3_vj61k")
+Layer = 0
+Label = "Axe"
+Main = ExtResource("2_krqj0")
+AvailableDependents = []

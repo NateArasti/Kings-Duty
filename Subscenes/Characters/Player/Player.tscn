@@ -1,0 +1,216 @@
+[gd_scene load_steps=19 format=3 uid="uid://bq63l7m02j036"]
+
+[ext_resource type="PackedScene" uid="uid://c6bfb044jd67f" path="res://Subscenes/Characters/Character.tscn" id="1_up7c8"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerMovementController.cs" id="2_py02u"]
+[ext_resource type="Shader" path="res://Shaders/HitFlash.gdshader" id="3_62u1p"]
+[ext_resource type="PackedScene" uid="uid://bwafhnyut7l3f" path="res://Subscenes/PostProcessing.tscn" id="3_ri1l6"]
+[ext_resource type="Texture2D" uid="uid://c8ioxbfouojjc" path="res://Sprites/Characters/Player/king_v0.1.0.png" id="4_hrbcl"]
+[ext_resource type="Script" path="res://Scripts/UI/DeathScreen.cs" id="6_mbc2c"]
+[ext_resource type="FontFile" uid="uid://l7d6fnllspln" path="res://CustomResources/UI/Fonts/BlackOpsOne-Regular.ttf" id="6_v64bi"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/Interaction/PlayerInteraction.cs" id="12_hyle0"]
+[ext_resource type="Texture2D" uid="uid://0ghch2ke4hp7" path="res://Sprites/Icons/heal.png" id="13_470rw"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/Interaction/LevelUpInteraction.cs" id="13_x26sr"]
+[ext_resource type="Texture2D" uid="uid://bmqntmlkkq01b" path="res://Sprites/Icons/add-friend.png" id="14_u5ppb"]
+[ext_resource type="Texture2D" uid="uid://c0wrmaxadhv7j" path="res://Sprites/Icons/heal-aura.png" id="15_gowo2"]
+[ext_resource type="LabelSettings" uid="uid://dpsuoo76k2bij" path="res://CustomResources/UI/Fonts/HeaderFont.tres" id="16_18jlf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2yoa"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("3_62u1p")
+shader_parameter/value = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/source_texture = ExtResource("4_hrbcl")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2hkn"]
+bg_color = Color(0, 0, 0, 0.588235)
+
+[sub_resource type="LabelSettings" id="LabelSettings_toayu"]
+font = ExtResource("6_v64bi")
+font_size = 80
+font_color = Color(0.635294, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_170uy"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 30
+border_width_top = 10
+border_width_right = 30
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0gsqy"]
+height = 0.25
+radius = 0.3
+
+[node name="Character" node_paths=PackedStringArray("m_Visuals") instance=ExtResource("1_up7c8")]
+script = ExtResource("2_py02u")
+m_MoveSpeed = 1.25
+m_Visuals = NodePath("CharacterVisuals")
+
+[node name="CharacterVisuals" parent="." index="0" node_paths=PackedStringArray("m_CharacterSprites")]
+m_CharacterSprites = [NodePath("BillboardPivot/Sprite")]
+
+[node name="BillboardPivot" parent="CharacterVisuals" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="Sprite" type="Sprite3D" parent="CharacterVisuals/BillboardPivot" index="0"]
+material_overlay = SubResource("ShaderMaterial_v2yoa")
+offset = Vector2(0, 512)
+pixel_size = 0.001
+shaded = true
+alpha_cut = 2
+texture_filter = 4
+texture = ExtResource("4_hrbcl")
+
+[node name="Camera3D" type="Camera3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3.5, 3)
+projection = 1
+size = 5.0
+
+[node name="PostProcessing" parent="Camera3D" index="0" instance=ExtResource("3_ri1l6")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.991445, 0.130526, 0, -0.130526, 0.991445, 0, 0, 0)
+light_color = Color(1, 0.647059, 0.34902, 1)
+light_energy = 5.0
+light_size = 0.1
+light_specular = 1.0
+light_bake_mode = 0
+shadow_enabled = true
+shadow_opacity = 0.5
+spot_range = 15.0
+spot_attenuation = 0.5
+spot_angle = 25.0
+spot_angle_attenuation = 5.0
+
+[node name="DeathScreen" type="Panel" parent="." index="3"]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w2hkn")
+script = ExtResource("6_mbc2c")
+
+[node name="Label" type="Label" parent="DeathScreen" index="0"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 0.5
+anchor_bottom = 0.4
+grow_horizontal = 2
+grow_vertical = 2
+text = "DEATH"
+label_settings = SubResource("LabelSettings_toayu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="DeathScreen" index="1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_v64bi")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_170uy")
+text = "Restart"
+
+[node name="Interaction" type="Node3D" parent="." index="4" node_paths=PackedStringArray("m_Interactions", "InteractionArea")]
+script = ExtResource("12_hyle0")
+m_Interactions = [NodePath("LevelUpScreen")]
+InteractionArea = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="Interaction" index="0"]
+collision_layer = 65536
+collision_mask = 65536
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interaction/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("CylinderShape3D_0gsqy")
+
+[node name="LevelUpScreen" type="Panel" parent="Interaction" index="1" node_paths=PackedStringArray("m_AddAllyButton", "m_HealAlliesButton", "m_HealSelfButton")]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w2hkn")
+script = ExtResource("13_x26sr")
+m_AddAllyButton = NodePath("HBoxContainer/Add Ally Button")
+m_HealAlliesButton = NodePath("HBoxContainer/Heal Allies Button")
+m_HealSelfButton = NodePath("HBoxContainer/Heal Self Button")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interaction/LevelUpScreen" index="0"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Heal Allies Button" type="Button" parent="Interaction/LevelUpScreen/HBoxContainer" index="0"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/icon_max_width = 256
+theme_override_fonts/font = ExtResource("6_v64bi")
+theme_override_font_sizes/font_size = 45
+text = "Heal allies"
+icon = ExtResource("13_470rw")
+flat = true
+clip_text = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Add Ally Button" type="Button" parent="Interaction/LevelUpScreen/HBoxContainer" index="1"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/icon_max_width = 256
+theme_override_fonts/font = ExtResource("6_v64bi")
+theme_override_font_sizes/font_size = 45
+text = "Add ally"
+icon = ExtResource("14_u5ppb")
+flat = true
+clip_text = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Heal Self Button" type="Button" parent="Interaction/LevelUpScreen/HBoxContainer" index="2"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/icon_max_width = 256
+theme_override_fonts/font = ExtResource("6_v64bi")
+theme_override_font_sizes/font_size = 45
+text = "Heal self"
+icon = ExtResource("15_gowo2")
+flat = true
+clip_text = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Label" type="Label" parent="Interaction/LevelUpScreen" index="1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.15
+grow_horizontal = 2
+text = "Choose 1 effect"
+label_settings = ExtResource("16_18jlf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_up" from="DeathScreen/Button" to="DeathScreen" method="Restart"]

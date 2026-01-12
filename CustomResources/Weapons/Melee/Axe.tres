@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bacj6qdyr5r76"]
+
+[ext_resource type="Resource" uid="uid://bhj3duck63oh0" path="res://CustomResources/GenericLayersVariations/Weapon/Axe.tres" id="1_dofe1"]
+[ext_resource type="Script" path="res://Scripts/Characters/Weapons/MeleeWeapon.cs" id="2_r70nf"]
+
+[resource]
+resource_name = "Axe"
+script = ExtResource("2_r70nf")
+AttackDamage = 6
+AttackCooldown = 2.0
+AttackRange = 0.5
+Visuals = ExtResource("1_dofe1")

@@ -1,0 +1,45 @@
+[gd_resource type="Resource" load_steps=35 format=3 uid="uid://dirdb0tihuoar"]
+
+[ext_resource type="Texture2D" uid="uid://b5m5osmyd8chf" path="res://Sprites/Characters/Allies/Body/Body_3/Body_3_Cardboard.png" id="1_5uddd"]
+[ext_resource type="Texture2D" uid="uid://8g4a65o0j7f3" path="res://Sprites/Characters/Allies/Body/Body_3/Body_3_Light1.png" id="2_ht3nv"]
+[ext_resource type="Resource" uid="uid://cruxiu1l75l5h" path="res://CustomResources/GenericLayersVariations/Head/Head_1/Head_1_Light1.tres" id="2_jq0kt"]
+[ext_resource type="Texture2D" uid="uid://biexnmqt6uyfn" path="res://Sprites/Characters/Allies/Body/Body_3/Body_3_Cardboard_Outline.png" id="3_ik6pe"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/CardboardElementVariation.cs" id="4_hgqbj"]
+[ext_resource type="Resource" uid="uid://bp88q12epen68" path="res://CustomResources/GenericLayersVariations/Head/Head_2/Head_2_Light1.tres" id="6_senvd"]
+[ext_resource type="Resource" uid="uid://dep72qp45v48b" path="res://CustomResources/GenericLayersVariations/Head/Head_3/Head_3_Light1.tres" id="10_kmnq8"]
+[ext_resource type="Resource" uid="uid://dhqxrqp8fa8s6" path="res://CustomResources/GenericLayersVariations/Head/Head_4/Head_4_Light1.tres" id="14_u4ryl"]
+[ext_resource type="Resource" uid="uid://brwyut78s548b" path="res://CustomResources/GenericLayersVariations/Head/Head_5/Head_5_Light1.tres" id="18_t1lp0"]
+[ext_resource type="Resource" uid="uid://dplf86xhpsp3" path="res://CustomResources/GenericLayersVariations/Clothes/Apron/Apron_Blue.tres" id="21_oyatr"]
+[ext_resource type="Resource" uid="uid://sm5bduxtv3pc" path="res://CustomResources/GenericLayersVariations/Clothes/Apron/Apron_Green.tres" id="22_ww4ji"]
+[ext_resource type="Resource" uid="uid://ddwn70xffbgew" path="res://CustomResources/GenericLayersVariations/Clothes/Apron/Apron_Grey.tres" id="23_4irmu"]
+[ext_resource type="Resource" uid="uid://dufvuigk6oxbd" path="res://CustomResources/GenericLayersVariations/Clothes/Blouse/Blouse_Blue.tres" id="24_d788e"]
+[ext_resource type="Resource" uid="uid://duq86sdd2vtw0" path="res://CustomResources/GenericLayersVariations/Clothes/Blouse/Blouse_Red.tres" id="25_067bm"]
+[ext_resource type="Resource" uid="uid://c6gniej5m82pn" path="res://CustomResources/GenericLayersVariations/Clothes/Blouse/Blouse_Yellow.tres" id="26_dwp7f"]
+[ext_resource type="Resource" uid="uid://cqlpuir5xdnmt" path="res://CustomResources/GenericLayersVariations/Clothes/Jacket/Jacket_Blue.tres" id="27_i1qb2"]
+[ext_resource type="Resource" uid="uid://dpv1x8le6gnv6" path="res://CustomResources/GenericLayersVariations/Clothes/Jacket/Jacket_Brown.tres" id="28_y2pdh"]
+[ext_resource type="Resource" uid="uid://ba8od5nfep5bd" path="res://CustomResources/GenericLayersVariations/Clothes/Jacket/Jacket_Green.tres" id="29_42o8l"]
+[ext_resource type="Resource" uid="uid://c5r5nurxdu5qv" path="res://CustomResources/GenericLayersVariations/Clothes/Jacket/Jacket_Red.tres" id="30_rhhr1"]
+[ext_resource type="Resource" uid="uid://c5sx85guxkw1u" path="res://CustomResources/GenericLayersVariations/Clothes/Shirt/Shirt_Blue.tres" id="31_x00ow"]
+[ext_resource type="Resource" uid="uid://3mxxus558b6n" path="res://CustomResources/GenericLayersVariations/Clothes/Shirt/Shirt_Green.tres" id="32_cy8u8"]
+[ext_resource type="Resource" uid="uid://c2vghd5ifeqjt" path="res://CustomResources/GenericLayersVariations/Clothes/Shirt/Shirt_Red.tres" id="33_c5qt5"]
+[ext_resource type="Resource" uid="uid://ceww2flbqrji0" path="res://CustomResources/GenericLayersVariations/Clothes/Shirt/Shirt_White.tres" id="34_ur6el"]
+[ext_resource type="Resource" uid="uid://ctfyqqpt0jfwd" path="res://CustomResources/GenericLayersVariations/Legs/Legs_1.tres" id="35_34g8q"]
+[ext_resource type="Resource" uid="uid://dycj2dkswmqpe" path="res://CustomResources/GenericLayersVariations/Legs/Legs_2.tres" id="36_e0pdf"]
+[ext_resource type="Resource" uid="uid://be1cxwa8sof38" path="res://CustomResources/GenericLayersVariations/Legs/Legs_3.tres" id="37_s50pb"]
+[ext_resource type="Resource" uid="uid://c3h403p015vo2" path="res://CustomResources/GenericLayersVariations/Legs/Legs_4.tres" id="38_44byd"]
+[ext_resource type="Resource" uid="uid://c5n41xnotx8hj" path="res://CustomResources/GenericLayersVariations/Legs/Legs_5.tres" id="39_e75qb"]
+[ext_resource type="Resource" uid="uid://bhj3duck63oh0" path="res://CustomResources/GenericLayersVariations/Weapon/Axe.tres" id="40_oko4x"]
+[ext_resource type="Resource" uid="uid://cgltih167ymjb" path="res://CustomResources/GenericLayersVariations/Weapon/Hammer.tres" id="41_2dvsr"]
+[ext_resource type="Resource" uid="uid://bjw28uqd4erjw" path="res://CustomResources/GenericLayersVariations/Weapon/Hoe.tres" id="42_teamt"]
+[ext_resource type="Resource" uid="uid://c5fym47ihitjf" path="res://CustomResources/GenericLayersVariations/Weapon/Rake.tres" id="43_7s4vc"]
+[ext_resource type="Resource" uid="uid://bvx3a27vheshe" path="res://CustomResources/GenericLayersVariations/Weapon/Shovel.tres" id="44_epsk7"]
+[ext_resource type="Resource" uid="uid://cc3tujojng0ow" path="res://CustomResources/GenericLayersVariations/Weapon/Sickle.tres" id="45_j1dvi"]
+
+[resource]
+script = ExtResource("4_hgqbj")
+Cardboard = ExtResource("1_5uddd")
+Outline = ExtResource("3_ik6pe")
+Layer = 7
+Label = "Body_3_Light1"
+Main = ExtResource("2_ht3nv")
+AvailableDependents = [ExtResource("2_jq0kt"), ExtResource("6_senvd"), ExtResource("10_kmnq8"), ExtResource("14_u4ryl"), ExtResource("18_t1lp0"), ExtResource("21_oyatr"), ExtResource("22_ww4ji"), ExtResource("23_4irmu"), ExtResource("24_d788e"), ExtResource("25_067bm"), ExtResource("26_dwp7f"), ExtResource("27_i1qb2"), ExtResource("28_y2pdh"), ExtResource("29_42o8l"), ExtResource("30_rhhr1"), ExtResource("31_x00ow"), ExtResource("32_cy8u8"), ExtResource("33_c5qt5"), ExtResource("34_ur6el"), ExtResource("35_34g8q"), ExtResource("36_e0pdf"), ExtResource("37_s50pb"), ExtResource("38_44byd"), ExtResource("39_e75qb"), ExtResource("40_oko4x"), ExtResource("41_2dvsr"), ExtResource("42_teamt"), ExtResource("43_7s4vc"), ExtResource("44_epsk7"), ExtResource("45_j1dvi")]

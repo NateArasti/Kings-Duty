@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://yuck4c8kfsqx"]
+
+[ext_resource type="PackedScene" uid="uid://cxvhcs3rt362t" path="res://Subscenes/Characters/FightNPC.tscn" id="1_5honi"]
+[ext_resource type="Script" path="res://Scripts/Characters/Allies/AllyNPC.cs" id="2_fk1q2"]
+[ext_resource type="Shader" path="res://addons/genericlayeredcharacters/Shaders/GenericCharacter3D.gdshader" id="3_e2boj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_clpct"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_e2boj")
+
+[sub_resource type="QuadMesh" id="QuadMesh_x2e5q"]
+resource_local_to_scene = true
+size = Vector2(1.5, 1.5)
+center_offset = Vector3(0, 0.75, 0)
+
+[node name="Ally" node_paths=PackedStringArray("m_GenericVisuals") instance=ExtResource("1_5honi")]
+script = ExtResource("2_fk1q2")
+m_GenericVisuals = NodePath("CharacterVisuals/BillboardPivot/GenericVisuals")
+
+[node name="GenericVisuals" type="MeshInstance3D" parent="CharacterVisuals/BillboardPivot" index="0"]
+material_override = SubResource("ShaderMaterial_clpct")
+mesh = SubResource("QuadMesh_x2e5q")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dcynwcjoshagi"]
+
+[ext_resource type="Texture2D" uid="uid://un2c2vugehyx" path="res://Sprites/Characters/Allies/Face/Nose/Nose_5.png" id="1_smil6"]
+[ext_resource type="Script" path="res://addons/genericlayeredcharacters/Scripts/Base/ElementVariation.cs" id="2_m3325"]
+
+[resource]
+script = ExtResource("2_m3325")
+Layer = 3
+Label = "Nose_5"
+Main = ExtResource("1_smil6")
+AvailableDependents = []

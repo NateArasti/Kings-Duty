@@ -1,0 +1,135 @@
+using System.Collections.Generic;
+using System.Linq;
+using Godot;
+
+namespace WorldGeneration.Tiled
+{
+	public partial class PropsGenerator : Node, IWorldGenerationSubscriber
+	{
+		[Export] public bool Enabled { get; private set; } = true;
+		
+		[ExportGroup("Generation Data")]
+		[Export] private float m_PropsSpawnMinDistance = 1;
+		[Export] private int m_MaxChunkPropsCount = 100;
+		[Export] private Vector2I m_PropsTextureRange;
+		[Export] private Mesh m_PropsMeshData;
+		[Export] private Basis m_DefaultPropBasis;
+		[Export] private PackedScene m_ObstacleScene;
+		
+		private float m_CellSize;
+		private Vector2 m_ChunkRectSize;
+		private Vector2I m_ChunkGridSize;
+		private System.Func<Vector3, Vector2I> GetGridCoords;
+		private System.Func<Vector2I, Vector3> GetWorldCoords;
+		
+		private NodePool<Node3D> m_ObstaclesPool;
+		private readonly Queue<MultiMeshInstance3D> m_FreeMultimeshInstances = new();
+
+		public override void _Ready()
+		{
+			m_ObstaclesPool = new NodePool<Node3D>(CreateObstacle, 5000, PoolGetCallback, PoolReturnCallback);
+			
+			for (var i = 0; i < WorldController.k_RuntimeChunksCount; ++i)
+			{
+				var instance = new MultiMeshInstance3D();
+				var multiMesh = new MultiMesh
+				{
+					Mesh = m_PropsMeshData,
+					UseCustomData = true,
+					VisibleInstanceCount = 0,
+					TransformFormat = MultiMesh.TransformFormatEnum.Transform3D
+				};
+				instance.Multimesh = multiMesh;
+				m_FreeMultimeshInstances.Enqueue(instance);
+				multiMesh.InstanceCount = m_MaxChunkPropsCount;
+				AddChild(instance);
+			}
+		}
+		
+		public void Init(int maxRuntimeChunksCount, Vector2 rectSize, Vector2I chunkGridSize, float cellSize, System.Func<Vector3, Vector2I> getGridCoords, System.Func<Vector2I, Vector3> getWorldCoords)
+		{
+			GetGridCoords = getGridCoords;
+			GetWorldCoords = getWorldCoords;
+			
+			m_ChunkRectSize = rectSize;
+			m_ChunkGridSize = chunkGridSize;
+			m_CellSize = cellSize;
+		}
+
+		public void OnChunkGenerated(ChunkInstance chunkInstance, Vector3 chunkOffset)
+		{
+			var tiledChunkInstance = chunkInstance as TiledChunkInstance;
+			
+			var obstacles = new HashSet<Node3D>();
+			var multimeshInstance = m_FreeMultimeshInstances.Dequeue();
+			var multiMesh = multimeshInstance.Multimesh;
+
+			var possiblePropsPositions = PoissonSampler.SamplePositions(
+				new Rect2(0, -0.5f * m_ChunkRectSize.Y, m_ChunkRectSize),
+				m_PropsSpawnMinDistance,
+				maxSearchIterionsCount: 5
+			);
+			
+			var index = 0;
+			foreach (var position in possiblePropsPositions.OrderByDescending(pos => pos.Y))
+			{
+				var gridPosition = GetGridCoords(WorldController.Convert2DTo3D(position));
+				if(gridPosition.X.InRange(0, m_ChunkGridSize.X - 1)
+					&& gridPosition.Y.InRange(0, m_ChunkGridSize.Y - 1)
+					&& tiledChunkInstance.ChunkTiles[Utility.GetFlatIndex(gridPosition.X, gridPosition.Y, m_ChunkGridSize.X)] == TileType.Ground)
+				{
+					var obstacle = SpawnObstacle(position);
+					obstacle.Position += chunkOffset;
+					multiMesh.SetInstanceTransform(index, new Transform3D(m_DefaultPropBasis, obstacle.Position));
+					multiMesh.SetInstanceCustomData(index, new Color(m_PropsTextureRange.RandomInRange(), 0, 0, 0));
+					index++;
+					obstacles.Add(obstacle);
+					
+					if(index >= m_MaxChunkPropsCount) break;
+				}
+			}
+			
+			multiMesh.VisibleInstanceCount = index;
+			
+			chunkInstance.OnChunkDiscard += () => 
+			{
+				m_FreeMultimeshInstances.Enqueue(multimeshInstance);
+				foreach (var obstacle in obstacles)
+				{
+					m_ObstaclesPool.Return(obstacle);
+				}
+			};
+		}
+
+		public void UpdateAllChunks(ChunkInstance[] allChunksInstances, Vector3 globalOffset) { }
+		
+		private Node3D SpawnObstacle(Vector2 position)
+		{
+			if(m_ObstaclesPool.TryGet(out var instance))
+			{
+				instance.Position = WorldController.Convert2DTo3D(position);
+				instance.Show();
+			}
+			return instance;
+		}
+		
+		private Node3D CreateObstacle()
+		{
+			var instance = m_ObstacleScene.Instantiate<Node3D>();
+			AddChild(instance);
+			return instance;
+		}
+		
+		private void PoolGetCallback(Node3D instance)
+		{
+			instance.Show();
+			instance.ProcessMode = ProcessModeEnum.Inherit;
+		}
+		
+		private void PoolReturnCallback(Node3D instance)
+		{
+			instance.Hide();
+			instance.ProcessMode = ProcessModeEnum.Disabled;
+		}
+	}
+}
